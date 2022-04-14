@@ -1,0 +1,950 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/moon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="虽是一名后端的开发人员，但也不能一点前端都不懂，经典的前端三件套---html,css,js.带你从入门到精通(bushi)">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="虽是一名后端的开发人员，但也不能一点前端都不懂，经典的前端三件套---html,css,js.带你从入门到精通(bushi)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端三件套">
+<meta property="og:url" content="http://example.com/2021/09/17/%E5%89%8D%E7%AB%AF%E4%B8%89%E4%BB%B6%E5%A5%97/index.html">
+<meta property="og:site_name" content="Mercury&#39;s blog">
+<meta property="og:description" content="虽是一名后端的开发人员，但也不能一点前端都不懂，经典的前端三件套---html,css,js.带你从入门到精通(bushi)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e8abe7ed13694d4eaa8259b2078292ef.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/36c0992a132d4469b55562a9f904382e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/df37c2172d0145a3a6501f621b47c526.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/587b9239e55a4cf3b53fa7055c15eb7d.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/adce2c1de7e4428a957621f49791663e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/63cc86c3a32941ccaec3ee1b99f6a511.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d54145504dbf41fc9316287cf56523e0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d72ff099bf3b4578942b1d00cd303445.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/fba1ef02952b47a197c7fa89a8ea2ad9.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7f2133f9760a422a99dc1c2b4b600f4c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5cb23ef168c34be9ae9102229173be20.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9952a5ee78e44ac8bb25d29b2ab6b6a0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7c6d739892c5461ab2abafd74ba11103.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/643b3ee6891041f8b89a6143314a8c49.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/dfaaa47202b54d47a111217f7f1c7ac4.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7bec1496dccb4fe6b06cddfdab9c5b9a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3acf9fa4282844a5837ff5150f1e516f.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c8c80cf61a654720b69c2da846229a40.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c8020511b6554f3ebb6ae95c4d0c10a0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b8f5181661094fb4be3502e461efceb7.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9c60bfdd1fd246d8a658a217f460e905.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/29e56fdfc7be4859bbca288b2ffa73da.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/88c4c99911f548b5b20c24095188403a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1ecdd2d832a448a6ad15c0fd76906ab8.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2c3b28e29eec47ca80f1c1d5a26a676d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/83cd6cf0fc6d4727a07638ec928b9f20.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8dde41a883ec4a738fcc6907dfd77869.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/12a57ecf76584351ad9b41c5b9900aba.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b1712c7e55b7498999e7e50d0e6746d6.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8f1dac002d144a5a8bb063f590c6d89b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0938f8d17818450db0014d550d1809ac.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/745552193f914049a54c78a754d22bfe.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_19,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/de47083ed7254a72b90ab2c30aee1cd6.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3541981dfe43403eb7594b9e0e949900.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/41fd16909c1f44d6902d60b1a1da7abb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/065d74189bfe476cae478fbe20ae14c9.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a6e5fa1e3f9b4de4a28fd02b9ad4d696.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3980bdd536834a7ba121950650b1576a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a048ced8b6704edf8dfb1596a3207a73.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/749d228250d54dfc8b948a987a82cb1d.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/70e0518ad7d94a4bb57a8fe0ee5b0e27.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3a4decf868a34f8a8f6cbf50a0b99109.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6a2df96319a64c53819cbb2a22aa8227.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e35419b3ee3e48d7af41f78ca8687bd0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d3d7bb6c416d43d5bd5b01fb50bf9137.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_16,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9c6efbbc605d477b9831f75fa835bcc1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/30accc707079436dacccd637f90f7891.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8c44a2fc4552452899cca211aab8ed81.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/67bb39d02b604554af9bff4d1692aac0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="article:published_time" content="2021-09-17T12:12:46.000Z">
+<meta property="article:modified_time" content="2022-04-13T12:52:55.266Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="html">
+<meta property="article:tag" content="css">
+<meta property="article:tag" content="js">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/e8abe7ed13694d4eaa8259b2078292ef.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+  
+  <title>前端三件套 - Mercury&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/newloading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Mercury</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/Post%20Page.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="前端三件套">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-17 20:12" pubdate>
+        2021年9月17日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">前端三件套</h1>
+            
+            <div class="markdown-body">
+              <p>关于前端的学习，这里推荐mdn文档 ：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web">web开发技术</a></p>
+<h1 id="一、HTML"><a href="#一、HTML" class="headerlink" title="一、HTML"></a>一、HTML</h1><h2 id="1）初识html"><a href="#1）初识html" class="headerlink" title="1）初识html"></a>1）初识html</h2><p>ctrl + /     html    快捷注释</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html">换行   <span class="hljs-tag">&lt;<span class="hljs-name">br</span>/&gt;</span><br>粗体   <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>i love you <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span><br>斜体   <span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span>i love you<span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span> <br>空格   <span class="hljs-symbol">&amp;nbsp;</span><br>大于&gt;  <span class="hljs-symbol">&amp;gt;</span><br>小于&lt;  <span class="hljs-symbol">&amp;lt;</span><br><span class="hljs-comment">&lt;!--  特殊符号的样式 </span><br><span class="hljs-comment"> &amp;   ;</span><br><span class="hljs-comment">--&gt;</span><br></code></pre></td></tr></table></figure>
+<p>关于图片，视频和音频</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--img学习</span><br><span class="hljs-comment">src : 图片地址（必填）</span><br><span class="hljs-comment">相对地址（推荐）../  上一级的目录</span><br><span class="hljs-comment">alt : 图片的名字（必填）</span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;../resources/imge/1.jpg&quot;</span> <span class="hljs-attr">alt</span> = <span class="hljs-string">&quot;chen&quot;</span> <span class="hljs-attr">title</span> = <span class="hljs-string">&quot;悬停文字&quot;</span> <span class="hljs-attr">width</span> = <span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">height</span> = <span class="hljs-string">&quot;100&quot;</span>&gt;</span><br><br>视频和音频<br><br><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;../resources/video/chen.mp4&quot;</span> &gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;../resources/video/chen.mp4&quot;</span>  <span class="hljs-attr">controls</span>&gt;</span>  <span class="hljs-comment">&lt;!--加上进度条--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;../resources/video/chen.mp4&quot;</span> <span class="hljs-attr">controls</span> <span class="hljs-attr">autoplay</span>&gt;</span>   <span class="hljs-comment">&lt;!--自动播放--&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>超链接</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--a标签</span><br><span class="hljs-comment">href : 必填，表示要跳转到的那个页面</span><br><span class="hljs-comment">target ：表示窗口在哪里打开</span><br><span class="hljs-comment">             _blank : 在新标签打开</span><br><span class="hljs-comment">             _self: 在此窗口打开</span><br><span class="hljs-comment">             </span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span> = <span class="hljs-string">&quot;www.bilibili.com&quot;</span> <span class="hljs-attr">target</span> = <span class="hljs-string">&quot;_blank&quot;</span>&gt;</span>点我<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+
+<p>锚链接</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--锚链接</span><br><span class="hljs-comment">1. 需要一个锚标记</span><br><span class="hljs-comment">2. 跳转到标记</span><br><span class="hljs-comment"> #</span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span> = <span class="hljs-string">&quot;top&quot;</span> &gt;</span>回到顶部<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p>功能性链接</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;mailto:chenning_william@163.com&quot;</span>&gt;</span>点击联系我<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">hr</span>/&gt;</span> 此为分割线<br></code></pre></td></tr></table></figure>
+
+<p>qq链接（搜索qq推广）</p>
+<p><img src="https://img-blog.csdnimg.cn/e8abe7ed13694d4eaa8259b2078292ef.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p>列表</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--有序列表--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">ol</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>  java<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>  python<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>  c/c++<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>  运维<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">ol</span>&gt;</span><br><br><br><span class="hljs-comment">&lt;!--无序列表--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>  java<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>  python<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>  c/c++<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>  运维<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--自定义列表--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dl</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span>  学科<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>  c/c++<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>  java<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span>  位置<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>  成都<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>  西安<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dl</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>效果展示<br><img src="https://img-blog.csdnimg.cn/36c0992a132d4469b55562a9f904382e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>1-1<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>1-2<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>1-3<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>1-4<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-1<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-2<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-3<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-4<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-1<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-2<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-3<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-4<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>效果展示</p>
+<p><img src="https://img-blog.csdnimg.cn/df37c2172d0145a3a6501f621b47c526.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p>跨列</p>
+<p>colspan  跨列</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">border</span> = <span class="hljs-string">&quot;1px&quot;</span>&gt;</span> <span class="hljs-comment">&lt;!--添加边线--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">colspan</span> = <span class="hljs-string">&quot;4&quot;</span>&gt;</span> 1-1 <span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>  <span class="hljs-comment">&lt;!--跨四列--&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-1<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-2<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-3<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-4<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-1<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-2<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-3<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-4<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>rowspan 跨行</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">border</span> = <span class="hljs-string">&quot;1px&quot;</span>&gt;</span> <span class="hljs-comment">&lt;!--添加边线--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">colspan</span> = <span class="hljs-string">&quot;4&quot;</span>&gt;</span> 1-1 <span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>  <span class="hljs-comment">&lt;!--跨四列--&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>     <span class="hljs-comment">&lt;!--rowspan 跨行--&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">rowspan</span> = <span class="hljs-string">&quot;2&quot;</span>&gt;</span> 2-1 <span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>  <span class="hljs-comment">&lt;!--跨两行--&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-2<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-3<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-4<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-1<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-2<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-3<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="2）页面结构分析"><a href="#2）页面结构分析" class="headerlink" title="2）页面结构分析"></a>2）页面结构分析</h2><p><img src="https://img-blog.csdnimg.cn/587b9239e55a4cf3b53fa7055c15eb7d.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><img src="https://img-blog.csdnimg.cn/adce2c1de7e4428a957621f49791663e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="3）内联框架"><a href="#3）内联框架" class="headerlink" title="3）内联框架"></a>3）内联框架</h2><p><img src="https://img-blog.csdnimg.cn/63cc86c3a32941ccaec3ee1b99f6a511.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--iframe内联框架</span><br><span class="hljs-comment">src : 地址</span><br><span class="hljs-comment">w-h : 宽度 高度</span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">src</span>  = <span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">name</span> &quot;<span class="hljs-attr">hello</span>&quot; <span class="hljs-attr">frameborder</span> =<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">width</span> = <span class="hljs-string">&quot;1000px&quot;</span> <span class="hljs-attr">height</span> = <span class="hljs-string">&quot;800px&quot;</span> &gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span> = <span class="hljs-string">&quot;https://chenkong.com&quot;</span> <span class="hljs-attr">target</span> = <span class="hljs-string">&quot;hello&quot;</span>&gt;</span>点击跳转<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-comment">&lt;!--这里是将a标签嵌入在了这个内连里面,a标签可以往内联框架里面加东西--&gt;</span><br><br></code></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/d54145504dbf41fc9316287cf56523e0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="4）表单"><a href="#4）表单" class="headerlink" title="4）表单"></a>4）表单</h2><p><img src="https://img-blog.csdnimg.cn/d72ff099bf3b4578942b1d00cd303445.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--表单from</span><br><span class="hljs-comment">action : 表单提交的位置，可以是网站，也可以是一个请求处理额地址</span><br><span class="hljs-comment">method : post ,get的提交方式</span><br><span class="hljs-comment">post: 速度较慢，但url上不会显示提交的数据，相对较安全</span><br><span class="hljs-comment">get: 速度较快，但url上会显示提交的数据，不太安全  </span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span> = <span class="hljs-string">&quot;chenkong.html&quot;</span> <span class="hljs-attr">method</span> = <span class="hljs-string">&quot;get&quot;</span>&gt;</span><br>  <br>  <span class="hljs-comment">&lt;!--文本输入框 : input type = &quot;text&quot;--&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>名字：<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;username&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>  <br>   <br>   <span class="hljs-comment">&lt;!--密码输入框 : input type = &quot;password&quot;--&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span> 密码：<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;pwd&quot;</span> &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><br>     <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;submit&quot;</span>&gt;</span><br>     <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;reset&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/fba1ef02952b47a197c7fa89a8ea2ad9.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h3 id="1-表单元素的格式"><a href="#1-表单元素的格式" class="headerlink" title="1.表单元素的格式"></a>1.表单元素的格式</h3><p><img src="https://img-blog.csdnimg.cn/7f2133f9760a422a99dc1c2b4b600f4c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>radio 单选器</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--文本输入框:input type = &quot;text&quot;</span><br><span class="hljs-comment">value = &quot;陈William牛逼&quot; 默认初始值</span><br><span class="hljs-comment">maxlength = &quot;8&quot;  最长能写几个字符</span><br><span class="hljs-comment">size = &quot;30&quot;     文本框的长度</span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span> = <span class="hljs-string">&quot;chenkong.html&quot;</span> <span class="hljs-attr">method</span> = <span class="hljs-string">&quot;get&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>名字：<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;username&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>  <br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span> 密码：<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;pwd&quot;</span> &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--radio 单选器</span><br><span class="hljs-comment">input type = &quot;radio&quot;</span><br><span class="hljs-comment">value  单选框的值</span><br><span class="hljs-comment">name  表示组</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">--&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><br>     <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;radio&quot;</span> <span class="hljs-attr">value</span>  = <span class="hljs-string">&quot;boy&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;sex&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;radio&quot;</span> <span class="hljs-attr">value</span>  = <span class="hljs-string">&quot;girl&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;sex&quot;</span>&gt;</span><br>    <br>    <span class="hljs-comment">&lt;!--这里的name属性必须要一样，表示他们是一个组的，这样就只能选一个了--&gt;</span><br>    <br>  <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><br>     <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;submit&quot;</span>&gt;</span><br>     <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;reset&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br> <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>展示<br><img src="https://img-blog.csdnimg.cn/5cb23ef168c34be9ae9102229173be20.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><strong>多选框</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">value</span> = <span class="hljs-string">&quot;sleep&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">hobby</span>&gt;</span>睡觉<br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">value</span> = <span class="hljs-string">&quot;code&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">hobby</span>&gt;</span>敲代码<br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">value</span> = <span class="hljs-string">&quot;chat&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">hobby</span>&gt;</span>聊天<br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">value</span> = <span class="hljs-string">&quot;game&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">hobby</span>&gt;</span>游戏<br>   <br><span class="hljs-comment">&lt;!--这也是在from表单里的--&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>关于按钮</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--</span><br><span class="hljs-comment">input type = &quot;buttion&quot;  普通的按钮</span><br><span class="hljs-comment">input  type = &quot;image&quot;  图像按钮</span><br><span class="hljs-comment">input  type = &quot;submit&quot;  提交按钮</span><br><span class="hljs-comment">input  type = &quot;reset&quot;  重置按钮</span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;image&quot;</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;../resources/1.jpg&quot;</span>&gt;</span><br> <span class="hljs-comment">&lt;!--图像按钮--&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><br></code></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/9952a5ee78e44ac8bb25d29b2ab6b6a0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p>注意：上图中在后面加上check后就是默认选中，图片的是可以提交的</p>
+<p><strong>下拉框</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;列表名称&quot;</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span> = <span class="hljs-string">&quot;选项的值&quot;</span>&gt;</span>中国<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span> = <span class="hljs-string">&quot;选项的值&quot;</span>&gt;</span>美国<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span> = <span class="hljs-string">&quot;选项的值&quot;</span> <span class="hljs-attr">selected</span>&gt;</span>瑞士<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>  <span class="hljs-comment">&lt;!--加上selected就是下拉框的默认选项值--&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span> = <span class="hljs-string">&quot;选项的值&quot;</span>&gt;</span>印度<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://img-blog.csdnimg.cn/7c6d739892c5461ab2abafd74ba11103.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p>（看url）选择后就可以通过form表单传递数据<br><img src="https://img-blog.csdnimg.cn/643b3ee6891041f8b89a6143314a8c49.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>文本域</strong></p>
+<p>cols  列</p>
+<p>rows  行<br><img src="https://img-blog.csdnimg.cn/dfaaa47202b54d47a111217f7f1c7ac4.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>文件域（input必须要有name属性，不然上传不了）</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/7bec1496dccb4fe6b06cddfdab9c5b9a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>简单的邮件地址和url验证验证</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/3acf9fa4282844a5837ff5150f1e516f.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>数字验证</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/c8c80cf61a654720b69c2da846229a40.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>滑块</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;range&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;vocie&quot;</span> <span class="hljs-attr">min</span> = <span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">MAX</span> = <span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">step</span> = <span class="hljs-string">&quot;2&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/c8020511b6554f3ebb6ae95c4d0c10a0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>搜索框</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;search&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;search&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/b8f5181661094fb4be3502e461efceb7.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>只读标签</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/9c60bfdd1fd246d8a658a217f460e905.png" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>禁用标签</strong><br>加上 checked disabled<br><img src="https://img-blog.csdnimg.cn/29e56fdfc7be4859bbca288b2ffa73da.png" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>隐藏域</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/88c4c99911f548b5b20c24095188403a.png" srcset="/img/newloading.gif" lazyload></p>
+<p>设置默认值<br>在隐藏域中设置默认值<br><img src="https://img-blog.csdnimg.cn/1ecdd2d832a448a6ad15c0fd76906ab8.png" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>增强鼠标</strong><br>点一下你点我试试，就可以到文本框中，增强鼠标的可用性<br><img src="https://img-blog.csdnimg.cn/2c3b28e29eec47ca80f1c1d5a26a676d.png" srcset="/img/newloading.gif" lazyload></p>
+<h3 id="2-表单的初级验证"><a href="#2-表单的初级验证" class="headerlink" title="2.表单的初级验证"></a>2.表单的初级验证</h3><p><img src="https://img-blog.csdnimg.cn/83cd6cf0fc6d4727a07638ec928b9f20.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>placeholder</strong></p>
+<p>加上后会在框中有提示信息</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">placeholder</span> = <span class="hljs-string">&quot;请输入用户名&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>例如：<br><img src="https://img-blog.csdnimg.cn/8dde41a883ec4a738fcc6907dfd77869.png" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>非空判断</strong></p>
+<p>使用户不能提交空，加上required</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">placeholder</span> = <span class="hljs-string">&quot;请输入用户名&quot;</span> <span class="hljs-attr">required</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p>正则表达式的简单应用</p>
+<p><img src="https://img-blog.csdnimg.cn/12a57ecf76584351ad9b41c5b9900aba.png" srcset="/img/newloading.gif" lazyload></p>
+<p>在pattern中放入正则表达式</p>
+<h1 id="二、CSS"><a href="#二、CSS" class="headerlink" title="二、CSS"></a>二、CSS</h1><p>   <em>层叠样式表</em></p>
+<h2 id="1）-内联样式："><a href="#1）-内联样式：" class="headerlink" title="1） 内联样式："></a>1） 内联样式：</h2><pre><code>   *在标签内使用style属性指定css代码*
+</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">&lt;<span class="hljs-selector-tag">div</span> style = &quot;<span class="hljs-attribute">color</span> :red ;&quot;&gt;hello css&lt;/<span class="hljs-selector-tag">div</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<h2 id="2）内部样式："><a href="#2）内部样式：" class="headerlink" title="2）内部样式："></a>2）内部样式：</h2><p><em>在head标签内，定义style标签</em></p>
+<p>​         </p>
+<p>​        </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs css"> &lt;style&gt;<br><br>              <span class="hljs-selector-tag">div</span>&#123;<br><br>                     <span class="hljs-attribute">color</span>:blue;<br><br>               &#125;<br><br>         &lt;/style&gt;<br><br><br><br>&lt;<span class="hljs-selector-tag">div</span>&gt;hello css&lt;/<span class="hljs-selector-tag">div</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<h2 id="3）外部样式"><a href="#3）外部样式" class="headerlink" title="3）外部样式"></a>3）外部样式</h2><p>​          </p>
+<ul>
+<li><p>.定义css资源文件</p>
+<p>​       </p>
+</li>
+<li><p>.在head标签内，定义link标签，引入外部资源文件</p>
+</li>
+</ul>
+<p><em>a.css文件:</em></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span>&#123;<br><br><span class="hljs-attribute">color</span> : green;<br><br>&#125;<br><br> &lt;link rel = &quot;stylesheet&quot; href = &quot;css/<span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.css</span>&quot;&gt;<br><br>&lt;<span class="hljs-selector-tag">div</span>&gt;hello css&lt;/<span class="hljs-selector-tag">div</span>&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>或者</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css">&lt;style&gt;<br><br>    <span class="hljs-keyword">@import</span>  <span class="hljs-string">&quot;css/a.css&quot;</span>;    来引入<br><br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+
+<h2 id="4）css的语法"><a href="#4）css的语法" class="headerlink" title="4）css的语法"></a>4）css的语法</h2><p> 格式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css">    选择器&#123;<br><br>           属性名：属性值；<br><br>           属性名：属性值；<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>最后一个属性可以不加  ；</p>
+<h2 id="5）选择器"><a href="#5）选择器" class="headerlink" title="5）选择器"></a>5）选择器</h2><p>   <strong>基础选择器</strong></p>
+<p>​            </p>
+<ul>
+<li><p>id选择器：</p>
+<p>​          </p>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs css">&lt;style&gt;<br><br>              <span class="hljs-selector-id">#div</span>&#123;<br><br>                   <span class="hljs-attribute">color</span>:blue;<br><br>              &#125;<br><br>              &lt;/style&gt;<br><br><br><br>              &lt;<span class="hljs-selector-tag">div</span> id = &quot;div1&quot; &gt;hello css&lt;/<span class="hljs-selector-tag">div</span>&gt; <br></code></pre></td></tr></table></figure>
+
+<p>​            </p>
+<ul>
+<li><p>元素选择器</p>
+<p>​         </p>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs css">&lt;style&gt;<br><br>            <span class="hljs-selector-tag">div</span>&#123;<br><br>                <span class="hljs-attribute">color</span>:blue;<br><br>              &#125;<br><br>             &lt;/style&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+
+<ul>
+<li><p>类选择器</p>
+<p>​            </p>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.cls1</span>&#123;<br><br>                   <span class="hljs-attribute">color</span>:blue<br><br>               &#125;<br><br>              &lt;<span class="hljs-selector-tag">p</span> class = &quot;cls1&quot;&gt;陈宁牛逼&lt;/<span class="hljs-selector-tag">p</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>扩展选择器</p>
+<p>   *选择所有元素  <em>{}</em></p>
+</li>
+</ul>
+<ol>
+<li><p>并集选择器</p>
+<p>​      </p>
+</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span>,<span class="hljs-selector-tag">p</span>&#123;<br><br>               <span class="hljs-attribute">color</span>:blue;<br><br>          &#125;<br></code></pre></td></tr></table></figure>
+
+<p>​             </p>
+<ol start="2">
+<li><p>子选择器</p>
+<p>​          </p>
+</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span> <span class="hljs-selector-tag">p</span>&#123; <br><br>                   <span class="hljs-attribute">color</span>:blue;<br><br>                 &#125;<br><br>             选择<span class="hljs-selector-tag">div</span>下的<span class="hljs-selector-tag">p</span>标签<br></code></pre></td></tr></table></figure>
+
+<p>​                  </p>
+<ol start="3">
+<li><p>父选择器</p>
+<p>​         </p>
+</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span> &gt; <span class="hljs-selector-tag">p</span> &#123; <br><br>                 <span class="hljs-attribute">color</span>:blue;<br><br>               &#125;<br><br>            选择<span class="hljs-selector-tag">p</span>上的<span class="hljs-selector-tag">div</span>标签<br></code></pre></td></tr></table></figure>
+
+<p>​                </p>
+<ol>
+<li><p>属性选择器</p>
+<p>​           </p>
+</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">input</span><span class="hljs-selector-attr">[type = <span class="hljs-string">&quot;text&quot;</span>]</span>&#123;<br><br>                &#125;<br></code></pre></td></tr></table></figure>
+
+<p>​      </p>
+<ol>
+<li><p>伪类选择器</p>
+<p>​          </p>
+</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs css">元素：状态<br><br>                      link:初始化状态<br><br>                      visited:被访问过的状态<br><br>                      active:正在访问的状态<br><br>                      hover:鼠标悬浮的状态<br></code></pre></td></tr></table></figure>
+
+<h2 id="6）属性"><a href="#6）属性" class="headerlink" title="6）属性"></a>6）属性</h2><p> 字体：</p>
+<pre><code>  font-size:字体大小
+
+  color:文本颜色
+
+  text-align:对其方式
+
+  line-height:行高
+</code></pre>
+<p> 边框：</p>
+<pre><code>  border:设置边框，复合属性
+
+  border:1px solid red;
+</code></pre>
+<p> 背景：</p>
+<pre><code>  background:url(&quot;....&quot;) no-repeat center;
+</code></pre>
+<p> 尺寸：</p>
+<pre><code>   width: ..px;
+
+   height: ..px;
+</code></pre>
+<p>边距</p>
+<pre><code>margin :外边距
+
+padding:内边距
+
+float：浮动
+</code></pre>
+<h1 id="三、JavaScript"><a href="#三、JavaScript" class="headerlink" title="三、JavaScript"></a>三、JavaScript</h1><h2 id="1-快速入门"><a href="#1-快速入门" class="headerlink" title="1)快速入门"></a>1)快速入门</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script src = <span class="hljs-string">&quot;js1.js&quot;</span>&gt;<br><br>&lt;!--可以直接在这里面写--&gt;<br><br>&lt;/script&gt;<br><br><br><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;js1.js&quot;</span>&gt;</span><span class="handlebars"><span class="xml"></span></span></span><br><span class="xml"><span class="handlebars"><span class="xml"></span></span></span><br><span class="xml"><span class="handlebars"><span class="xml"><span class="hljs-comment">&lt;!--也可以新建一个js文件然后导入--&gt;</span></span></span></span><br><span class="xml"><span class="handlebars"><span class="xml"></span></span></span><br><span class="xml"><span class="handlebars"><span class="xml"></span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+<p>所有的变量直接使用var声明就行  如 var a = 1;<br>输出是console.log();</p>
+<h2 id="2-数据类型"><a href="#2-数据类型" class="headerlink" title="2)数据类型"></a>2)数据类型</h2><p><img src="https://img-blog.csdnimg.cn/b1712c7e55b7498999e7e50d0e6746d6.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>这里就是多了NaN  (not a number类型和Infinity 无限大的类型</p>
+<p>再说一下比较运算符有点不一样</p>
+<p>这里多了=== 表示类型一样且值也一样<br><img src="https://img-blog.csdnimg.cn/8f1dac002d144a5a8bb063f590c6d89b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>须知</strong></p>
+<ul>
+<li>NaN===NaN 这个于所有的之都不相等，包括自己</li>
+<li>只能通过isNaN(NaN)来判断是不是NaN</li>
+<li>还有就是老生长谈的精度问题,不要直接比较浮点数<h2 id="3-数组"><a href="#3-数组" class="headerlink" title="3)数组"></a>3)数组</h2>基本和Java类似,不详谈,不一样的就是什么类型都可以装,有点像集合<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-string">&quot;hello&quot;</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">true</span>];<br><span class="hljs-comment">//或者</span><br><span class="hljs-keyword">new</span> array(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-string">&quot;hello&quot;</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">true</span>);<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>数组越界会undefined</p>
+<p>同时数组还有一些方法如sort(),reverse(),concat();都是 数组名.方法名(); 来调用,就是多了一个join连接符<br><img src="https://img-blog.csdnimg.cn/0938f8d17818450db0014d550d1809ac.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="4-对象"><a href="#4-对象" class="headerlink" title="4)对象"></a>4)对象</h2><p>声明一个对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> person&#123;<br>  <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;niubi&quot;</span>,<br>  <span class="hljs-attr">age</span>:<span class="hljs-number">3</span>,<br>  <span class="hljs-attr">tags</span>:[<span class="hljs-string">&#x27;js&#x27;</span>,<span class="hljs-string">&#x27;is&#x27;</span>,<span class="hljs-string">&#x27;niubi&#x27;</span>]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>这里注意,对象是大括号,数组是中括号.而且对象的前几个属性使用逗号隔 ( , ) 开,最后一个不用符号</li>
+<li>调用的话直接person.age  就行了<h2 id="严格检查模式"><a href="#严格检查模式" class="headerlink" title="严格检查模式"></a>严格检查模式</h2>在&lt; script &gt; 标签里<strong>第一句</strong>写上  ‘use strict’就行<br>这样局部变量就只能使用let声明 (局部变量推荐使用let声明)<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2>和Java类似,不同的多了一个多行字符串的编写<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> msg = <span class="hljs-string">`chen</span><br><span class="hljs-string">shuai</span><br><span class="hljs-string">niu</span><br><span class="hljs-string">bi`</span><br></code></pre></td></tr></table></figure>
+这个符号声明的符号就是tab键上面的那个键<br>字符串是不可以变的,就像是Java里的String一样<h2 id="5-流程控制"><a href="#5-流程控制" class="headerlink" title="5)流程控制"></a>5)流程控制</h2>for-in循环<br><img src="https://img-blog.csdnimg.cn/745552193f914049a54c78a754d22bfe.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_19,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>例如<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> age = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>];<br><br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> num <span class="hljs-keyword">in</span> age)&#123;<br>   <span class="hljs-built_in">console</span>.log(num);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="6-map和set集合"><a href="#6-map和set集合" class="headerlink" title="6)map和set集合"></a>6)map和set集合</h2>和Java没啥区别</li>
+</ul>
+<p>map集合<br><img src="https://img-blog.csdnimg.cn/de47083ed7254a72b90ab2c30aee1cd6.png" srcset="/img/newloading.gif" lazyload><br>set集合<br><img src="https://img-blog.csdnimg.cn/3541981dfe43403eb7594b9e0e949900.png" srcset="/img/newloading.gif" lazyload><br><img src="https://img-blog.csdnimg.cn/41fd16909c1f44d6902d60b1a1da7abb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>同时遍历的方法多了个for-of循环….就是把in改成了of然后没有啥区别<br><img src="https://img-blog.csdnimg.cn/065d74189bfe476cae478fbe20ae14c9.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="7-函数来一点点"><a href="#7-函数来一点点" class="headerlink" title="7)函数来一点点"></a>7)函数来一点点</h2><p><strong>定义函数</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//第一种方式</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">abs</span>(<span class="hljs-params">x</span>)</span>&#123;<br>   <span class="hljs-keyword">if</span>()&#123;<br>   ...<br>      &#125;<span class="hljs-keyword">else</span>&#123;<br>   ...<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//第二种方式</span><br><span class="hljs-keyword">var</span> abs = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">x</span>)</span>&#123;<br>     <span class="hljs-keyword">if</span>()&#123;<br>   ...<br>      &#125;<span class="hljs-keyword">else</span>&#123;<br>   ...<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//两种定义的方式是等价的</span><br></code></pre></td></tr></table></figure>
+<p>调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript">abs(-<span class="hljs-number">10</span>)<br>abs(<span class="hljs-number">10</span>)<br></code></pre></td></tr></table></figure>
+
+<p><strong>rest</strong></p>
+<p>类似于Java中的可变参数<br><img src="https://img-blog.csdnimg.cn/a6e5fa1e3f9b4de4a28fd02b9ad4d696.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>ES6新特性中可以使用const定义常量</p>
+<h2 id="8-方法"><a href="#8-方法" class="headerlink" title="8)方法"></a>8)方法</h2><p>定义一个方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> chenshuai = &#123;<br>   <span class="hljs-attr">name</span>:chen,<br>   <span class="hljs-attr">age</span>:<span class="hljs-number">19</span>,<br>   <span class="hljs-attr">run</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>    ....<span class="hljs-comment">//一些方法体</span><br>   &#125;<br><span class="hljs-comment">//方法要写在对象里面</span><br><br>&#125;<br><br>chenshuai.name<span class="hljs-comment">//直接点就可以进行调用</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="9-date对象的使用"><a href="#9-date对象的使用" class="headerlink" title="9)date对象的使用"></a>9)date对象的使用</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> now = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();<span class="hljs-comment">//获取date对象</span><br>now.getFullyear();<span class="hljs-comment">//年</span><br>now.getMonth();<span class="hljs-comment">//月</span><br>now.getDate();<span class="hljs-comment">//日期</span><br>now.getDay();<span class="hljs-comment">//星期几</span><br>now.getHours();<span class="hljs-comment">//小时</span><br>now.getMinutes();<span class="hljs-comment">//分钟</span><br>now.getSeconds();<span class="hljs-comment">//秒</span><br><br>now.getTime();<span class="hljs-comment">//时间戳</span><br><br><span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">1595555665</span>))时间戳转换为时间<br></code></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/3980bdd536834a7ba121950650b1576a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="10-初识Json"><a href="#10-初识Json" class="headerlink" title="10)初识Json"></a>10)初识Json</h2><p>这里只是简单的了解一下json，后面我会出专门的json篇<br> <strong>简单的三点</strong></p>
+<ul>
+<li>对象都使用{}</li>
+<li>数组都使用[]</li>
+<li>所有的键值对都是用key:value</li>
+</ul>
+<p>来一点代码理解</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> user  = &#123;<br>   <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;chenshuai&quot;</span>,<br>   <span class="hljs-attr">age</span>:<span class="hljs-number">3</span>,<br>   <span class="hljs-attr">sex</span>:<span class="hljs-string">&#x27;男&#x27;</span><br>   <br>&#125;<br><br><span class="hljs-comment">//对象转换为json对象&#123;&quot;name&quot;:&quot;chenhsuai&quot;,&quot;age&quot;:3,&quot;sex&quot;:&quot;男&quot;&#125;</span><br><span class="hljs-keyword">var</span> jsonUser = <span class="hljs-built_in">JSON</span>.stringify(user);<br><br><span class="hljs-keyword">var</span> obj = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-string">&#x27;&#123;&quot;name&quot;:&quot;chenhsuai&quot;,&quot;age&quot;:3,&quot;sex&quot;:&quot;男&quot;&#125;&#x27;</span>)<br><br><span class="hljs-comment">//注意这里如果里面是双引号,外面就要用单引号.反之亦然</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/a048ced8b6704edf8dfb1596a3207a73.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p>关于js和Json的区别</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = &#123;<span class="hljs-attr">a</span>:<span class="hljs-string">&#x27;hello&#x27;</span>,<span class="hljs-attr">b</span>:<span class="hljs-string">&#x27;hellob&#x27;</span>&#125;;<span class="hljs-comment">//js</span><br><span class="hljs-keyword">var</span> obj = &#123;<span class="hljs-string">&quot;a&quot;</span>:<span class="hljs-string">&quot;hello&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>:<span class="hljs-string">&quot;hellob&quot;</span>&#125;;<span class="hljs-comment">//json</span><br></code></pre></td></tr></table></figure>
+<h2 id="11-原型"><a href="#11-原型" class="headerlink" title="11)原型"></a>11)原型</h2><p>相当于Java中的继承</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> student = &#123;<br>   <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;chenhsuai&quot;</span>,<br>   <span class="hljs-attr">age</span>:<span class="hljs-number">19</span>,<br>   <span class="hljs-attr">run</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;student&quot;</span>);<br>  &#125;<br><br>&#125; <br><br><span class="hljs-keyword">var</span> xiaoming = &#123;<br>   <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;xiaoming&quot;</span>,<br>   <span class="hljs-attr">age</span>:<span class="hljs-number">19</span>,<br>&#125; <br><br>xiaoming._proto_ = student;<br><span class="hljs-comment">//将xiaoming的原型设置为student，相当于继承，这个时候小明就可以调用student中的run方法</span><br></code></pre></td></tr></table></figure>
+
+<p>小明的原型是student 然后就可以使用student的方法了.在这里student也是一个对象</p>
+<p>原型链：不深入了解</p>
+<h2 id="12-操作bom对象-浏览器的对象模型"><a href="#12-操作bom对象-浏览器的对象模型" class="headerlink" title="12)操作bom对象  浏览器的对象模型"></a>12)操作bom对象  浏览器的对象模型</h2><p><strong>window对象</strong><br>代表浏览器窗口</p>
+<p><strong>Navigator对象</strong><br>封装了浏览器的信息（大多数时候不会使用这个对象，因为会被认为的修改<br>所以不建议使用这些属性来判断和编写代码<br>）</p>
+<p><strong>screen对象</strong></p>
+<p>screen.width  获取屏幕的宽度</p>
+<p>screen.height 获取长度</p>
+<p><strong>location</strong></p>
+<p>代表当前页面的URL信息<br><img src="https://img-blog.csdnimg.cn/749d228250d54dfc8b948a987a82cb1d.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>document</strong></p>
+<p>代表当前的页面</p>
+<p><img src="https://img-blog.csdnimg.cn/70e0518ad7d94a4bb57a8fe0ee5b0e27.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>获取cookie  例如：  document.cookie</p>
+<p><img src="https://img-blog.csdnimg.cn/3a4decf868a34f8a8f6cbf50a0b99109.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>history</strong></p>
+<p>操作</p>
+<p>history.back() //后退</p>
+<p>history.forward() //前进</p>
+<h2 id="13-操作DOM对象节点"><a href="#13-操作DOM对象节点" class="headerlink" title="13)操作DOM对象节点"></a>13)操作DOM对象节点</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><br><span class="hljs-comment">//你先要在html中设置那个标签的id是&#x27;h1&#x27;，以下相同</span><br><span class="hljs-keyword">var</span> h1 = <span class="hljs-built_in">document</span>.getElementByTagName(<span class="hljs-string">&#x27;h1&#x27;</span>);<br><span class="hljs-keyword">var</span> p1 = <br><br></code></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/6a2df96319a64c53819cbb2a22aa8227.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p><strong>更新节点</strong></p>
+<p>先获取一个节点</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;div id = <span class="hljs-string">&quot;id1&quot;</span>&gt;<br><br><br>&lt;/div&gt;<br><br><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="javascript"><span class="xml">   <span class="hljs-keyword">var</span> di1 = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;id1&quot;</span>);</span></span><br><span class="javascript"><span class="xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><br><br></code></pre></td></tr></table></figure>
+<p>id1.innerText = ‘456’         修改文本的值<br>id1.innerHTML = ‘&lt; strong&gt;123&lt; strong&gt;’    向标签中添加HTML语句</p>
+<p><strong>操作css</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">id1.style.color = <span class="hljs-string">&#x27;yellow&#x27;</span>;<br>id1.style.fronSize = <span class="hljs-string">&#x27;20px&#x27;</span>;<br>id1.style.padding = <span class="hljs-string">&#x27;2px&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<p><strong>删除节点</strong><br>需要通过父节点来删除子节点</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;div id = <span class="hljs-string">&quot;father&quot;</span>&gt;<br>   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span> 标题<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br>   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">id</span> = <span class="hljs-string">&quot;p1&quot;</span>&gt;</span>p1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br>   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span> = <span class="hljs-string">&quot;p2&quot;</span>&gt;</span>p2<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br>&lt;div&gt;<br><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-comment">//第一种    </span></span></span><br><span class="javascript"><span class="xml">    <span class="hljs-keyword">var</span> self = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;p1&#x27;</span>);<span class="hljs-comment">//获得p1这个节点</span></span></span><br><span class="javascript"><span class="xml">    <span class="hljs-keyword">var</span> father = p1.getElementById;<span class="hljs-comment">//获得p1的父亲节点</span></span></span><br><span class="javascript"><span class="xml">    father.removechild(p1);<span class="hljs-comment">//通过父亲节点来删除儿子节点</span></span></span><br><span class="javascript"><span class="xml"><span class="hljs-comment">//第二种</span></span></span><br><span class="javascript"><span class="xml">    father.removeChild(father.child[<span class="hljs-number">0</span>]);通过数组的形式来删除</span></span><br><span class="javascript"><span class="xml">    father.removeChild(father.child[<span class="hljs-number">1</span>]);</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-comment">//需要注意的是这种方式是动态的，删除了0号，1号就变成了0号；</span></span></span><br><span class="javascript"><span class="xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<p><strong>插入节点</strong></p>
+<ol>
+<li>追加</li>
+</ol>
+<p>可以通过append方法来追加<br><img src="https://img-blog.csdnimg.cn/e35419b3ee3e48d7af41f78ca8687bd0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>实现后的效果<br><img src="https://img-blog.csdnimg.cn/d3d7bb6c416d43d5bd5b01fb50bf9137.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_16,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>2. 通过js创建一个新的节点<br>主要的擦欧总就是</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> newp = <span class="hljs-built_in">document</span>.creatElement(<span class="hljs-string">&#x27;p&#x27;</span>)<span class="hljs-comment">//创建一个p标签</span><br>newp.id = <span class="hljs-string">&#x27;newp&#x27;</span>;<br>newp.innerText = <span class="hljs-string">&#x27;hello chengshuai&#x27;</span><br><br></code></pre></td></tr></table></figure>
+<p>更多的操作见下面的代码<br><img src="https://img-blog.csdnimg.cn/9c6efbbc605d477b9831f75fa835bcc1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p>插入到前面</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"> <span class="hljs-keyword">var</span> ee = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;ee&#x27;</span>);<br> <span class="hljs-keyword">var</span> js = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;js&#x27;</span>);<br> <span class="hljs-keyword">var</span> list = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;list&#x27;</span>);<br><br>list.insert(js,ee);<span class="hljs-comment">//将list插入到js,ee到中间</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>提交表单</strong></p>
+<p>这里主要是要记住可以在标签里加入 onclik 事件，然后在里面放函数，就会执行函数的内容</p>
+<p><img src="https://img-blog.csdnimg.cn/30accc707079436dacccd637f90f7891.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="14-jquery"><a href="#14-jquery" class="headerlink" title="14)jquery"></a>14)jquery</h2><p>导入在线的 或者本地的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//在线引用</span><br>&lt;script src = <span class="hljs-string">&quot;某某在线引用网址&quot;</span>&gt;&lt;/script&gt;<br><br><span class="hljs-comment">//本地引用</span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;文件的目录&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><br><br><span class="hljs-comment">//仔细一想这不是智障吗，我为什么还要拎出来写</span><br></code></pre></td></tr></table></figure>
+
+
+<p>这里最主要的就是记住一个公式  <strong>$(selector).action()</strong><br>下面主要就是这个公式的具体应用</p>
+<p>选择</p>
+<p><img src="https://img-blog.csdnimg.cn/8c44a2fc4552452899cca211aab8ed81.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>前面加   ‘ # ’</p>
+<p>使用选择器</p>
+<p><img src="https://img-blog.csdnimg.cn/67bb39d02b604554af9bff4d1692aac0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/html/">html</a>
+                    
+                      <a class="hover-with-bg" href="/tags/css/">css</a>
+                    
+                      <a class="hover-with-bg" href="/tags/js/">js</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/24/springboot/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">springboot</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/03/Java%E8%BF%9B%E9%98%B6/">
+                        <span class="hidden-mobile">Java进阶</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+ 
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/javascript">
+//只在桌面版网页启用特效
+var windowWidth = $(window).width();
+if (windowWidth > 768) {
+    document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+}
+</script>
+
+
+
+
+</body>
+</html>

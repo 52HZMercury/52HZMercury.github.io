@@ -1,0 +1,787 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/moon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="springboot是现在主流的后端框架之一。相较于spring，springboot将过程变得更加的精简、开发更高效。">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="springboot是现在主流的后端框架之一。相较于spring，springboot将过程变得更加的精简、开发更高效。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springboot">
+<meta property="og:url" content="http://example.com/2021/10/24/springboot/index.html">
+<meta property="og:site_name" content="Mercury&#39;s blog">
+<meta property="og:description" content="springboot是现在主流的后端框架之一。相较于spring，springboot将过程变得更加的精简、开发更高效。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/cb9ab8a3d43543849f3b99943bee9000.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/37911160829e4ddf8031e998b114b15c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/42b5d70b2c06457d9cdbb5e588c594fc.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/bb17c9cf3a8547639146187eb765bfe1.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/604fbd34eb62486587f3a6d8bde347ad.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/808c9f56c6b94255915b74f98fda238f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/fc2bfab5037c4a62ac5f1a8f3b353315.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_12,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/cb891492fd19434fbbc15b5768832385.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/128d7f927e674c558982aaf244bc8c26.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3b9261d3808f41459886d9ba7a437864.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_16,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/57e795efb2a34ffea55efb1fc19475e9.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e639db1cd8e142c9baf114c78688ad24.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_11,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2309a3700f664d71b43f0684ff25b041.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/55e108936b3c4ec9ad3024eb9e76d17b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9e8afeda4ade46c48524a431e4d8d050.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c25d5881db2443719781738e6b82670a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3346e158563e4e6cb87105b73e95bbc1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/91d9cddff4df47ea938b9110e56d9b48.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c1d74c71b7564e138f116aa2ebbf6df1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_18,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3339e9bc1c6640929271bbfd4efdeb31.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/07557ed6001c4697a26e9e346cdd29ea.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1addc28352f84c7c99a7de23f0cad44a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_12,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2b26c58a43b547c3a6fd45a96e0ac508.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a5e196246a9947c9b21c2010bbf4824f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/93a4b317a40a4d879b33448aa8894eb8.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d62ef09993dd405c96a59cbd6607db9e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/83ef857fa466462fa7bb40d8a76086f5.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b321b4be9ae94f26be563d95ebc16a22.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/80db75072ab64477adec2de5f0237c29.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0343486a3b6d4d4bb889c7b108a4debf.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2c9771f147a94db4871597876880397c.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5d7624b17c4648a7a859e4f8f71f2025.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/07a213bdc487485fbe89732349366f13.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7aa70e1207ab4683888715377fcf65f1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/888591744f7248dfa857be2a83aa6a43.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a8e7f44b8cba41e285d91a63c447cc0b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d0f52b456603435a80aa249a7bc792c2.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
+<meta property="article:published_time" content="2021-10-24T03:50:25.000Z">
+<meta property="article:modified_time" content="2022-04-13T12:52:40.716Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="springboot">
+<meta property="article:tag" content="spring">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/cb9ab8a3d43543849f3b99943bee9000.png">
+  
+  <title>springboot - Mercury&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/newloading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Mercury</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/Post%20Page.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="springboot">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-24 11:50" pubdate>
+        2021年10月24日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      24k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      76 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">springboot</h1>
+            
+            <div class="markdown-body">
+              <h1 id="一、初识boot"><a href="#一、初识boot" class="headerlink" title="一、初识boot"></a>一、初识boot</h1><p><img src="https://img-blog.csdnimg.cn/cb9ab8a3d43543849f3b99943bee9000.png" srcset="/img/newloading.gif" lazyload><br><img src="https://img-blog.csdnimg.cn/37911160829e4ddf8031e998b114b15c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p>可以从Spring或者idea上面直接创建boot项目</p>
+<p><strong>@RestController//返回字符串</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><span class="hljs-comment">//返回字符串</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">hellocontroller</span> </span>&#123;<br><br>    <span class="hljs-meta">@RequestMapping(&quot;/hello&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">hello</span><span class="hljs-params">()</span></span>&#123;<br><br>         <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello,world&quot;</span>;<br>     &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>在application中启动程序<br><img src="https://img-blog.csdnimg.cn/42b5d70b2c06457d9cdbb5e588c594fc.png" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="1-pom-xml分析"><a href="#1-pom-xml分析" class="headerlink" title="1. pom xml分析"></a>1. pom xml分析</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs xml"><br><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">parent</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.5.5<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">relativePath</span>/&gt;</span> <span class="hljs-comment">&lt;!-- lookup parent from repository --&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">parent</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.example<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>helloworld<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>helloworld<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">description</span>&gt;</span>helloworld<span class="hljs-tag">&lt;/<span class="hljs-name">description</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">java.version</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">java.version</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- 这个boot的依赖集成了tomcat dispatcherServlet xml     --&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <br><span class="hljs-comment">&lt;!--测试用的有依赖--&gt;</span><br><br><span class="hljs-comment">&lt;!--有一个共同的前缀就是spring-boot-starter--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <br><span class="hljs-comment">&lt;!--这里有时候需要收到导入一下这个web依赖--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <br>    <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--打包的依赖，打包成jar包--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-配置端口"><a href="#2-配置端口" class="headerlink" title="2. 配置端口"></a>2. 配置端口</h2><p><img src="https://img-blog.csdnimg.cn/bb17c9cf3a8547639146187eb765bfe1.png" srcset="/img/newloading.gif" lazyload></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">server.port = <span class="hljs-number">8081</span>   <span class="hljs-regexp">//</span>properties配置端口文件<br></code></pre></td></tr></table></figure>
+<h2 id="3-启动器"><a href="#3-启动器" class="headerlink" title="3. 启动器"></a>3. 启动器</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>启动器:就是boot的启动场景</li>
+<li>比如spring-boot-starter-web,他就会帮我们自动导入web环境的所有依赖</li>
+<li>springboot会将所有的场景功能,都变成一个个的启动器</li>
+<li>我们要使用什么功能,就只要找到对应的启动器就行了</li>
+</ul>
+<h2 id="4-自动配置"><a href="#4-自动配置" class="headerlink" title="4. 自动配置"></a>4. 自动配置</h2><p>boot所有的自动配置都是启动的时候扫描并加载, spring,factories所有的自动配置都在这里面,但是不一定生效,要判断条件是否成立,只要导入了对应的start,就有对应的启动器了,有了启动器,我们的自动装配就会生效,然后就会配置成功</p>
+<ol>
+<li>springboot在启动的时候,从类路径下/META/spring.factorirs 获取指定的值;</li>
+<li>将这些自动配置导入容器,自动配置就会生效,帮我进行自动配置</li>
+<li>整合JavaEE,解决方案和自动配置的东西都在spring-boot-autoconfigure-2.2.0.RELEASE.jar这个包下.</li>
+<li>它会把所有需要导入的组件,以类名的方式返回,这些组件就会被添加到容器</li>
+<li>容器也会存在非常多的xxxAutoConfiguration 的文件,  就是这些类给容器中导入了这个场景需要的所有组件</li>
+</ol>
+<h1 id="二、一些简单的boot操作"><a href="#二、一些简单的boot操作" class="headerlink" title="二、一些简单的boot操作"></a>二、一些简单的boot操作</h1><h2 id="1-yaml语句"><a href="#1-yaml语句" class="headerlink" title="1. yaml语句"></a>1. yaml语句</h2><p><strong>一定要记住有空格!!!  空格很重要  代表了他们之间的层级关系</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/604fbd34eb62486587f3a6d8bde347ad.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h3 id="1-基础语法"><a href="#1-基础语法" class="headerlink" title="1) 基础语法"></a>1) 基础语法</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">william</span><br><span class="hljs-comment">#对象</span><br><br><span class="hljs-attr">student:</span><br>  <span class="hljs-string">name:william</span><br>  <span class="hljs-string">age:3</span><br><span class="hljs-comment"># 行内写法</span><br><span class="hljs-string">student</span> &#123;<span class="hljs-string">name:william</span>,<span class="hljs-string">age:3</span>&#125;<br>     <br><span class="hljs-comment"># 数组</span><br><span class="hljs-string">pets</span><br> <span class="hljs-bullet">-</span> <span class="hljs-string">cat</span><br> <span class="hljs-bullet">-</span> <span class="hljs-string">dog</span><br> <span class="hljs-bullet">-</span> <span class="hljs-string">pig</span><br><br><span class="hljs-attr">pets:</span> [<span class="hljs-string">cat</span>,<span class="hljs-string">dog</span>,<span class="hljs-string">pig</span>]     <br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+<p>可以同时存在两个配置文件,但是他们有优先级<br><img src="https://img-blog.csdnimg.cn/808c9f56c6b94255915b74f98fda238f.png" srcset="/img/newloading.gif" lazyload></p>
+<h3 id="2-yaml可以直接个实体类赋值"><a href="#2-yaml可以直接个实体类赋值" class="headerlink" title="2) yaml可以直接个实体类赋值"></a>2) yaml可以直接个实体类赋值</h3><ol>
+<li>常规方法</li>
+</ol>
+<p>@Componet  标记为spring的组件  spring才会扫描</p>
+<p>@Value (“”)   为属性添加值</p>
+<p><img src="https://img-blog.csdnimg.cn/fc2bfab5037c4a62ac5f1a8f3b353315.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_12,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p>@Autowired自动装配过来</p>
+<ol start="2">
+<li>yaml方法<br><img src="https://img-blog.csdnimg.cn/cb891492fd19434fbbc15b5768832385.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></li>
+</ol>
+<p>配置了上图的configurationProperties()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@ConfigurationProperties(prefix = &quot;person&quot;)</span>;<br><span class="hljs-comment">//这里就将yaml里person和类绑定起来了,就可以给类进行赋值</span><br></code></pre></td></tr></table></figure>
+
+<p>再加上对应的名  和yaml中的一样就可以赋值成功了</p>
+<h2 id="2-ConfigurationProperties"><a href="#2-ConfigurationProperties" class="headerlink" title="2. ConfigurationProperties"></a>2. ConfigurationProperties</h2><p><img src="https://img-blog.csdnimg.cn/128d7f927e674c558982aaf244bc8c26.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<ol>
+<li>自定义配置文件</li>
+</ol>
+<p>也可以自定义自己的配置文件绑定一下就行了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PropertySouce(value = &quot;classpath:qinjiang.properties&quot;)</span><br>...类...<br></code></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/3b9261d3808f41459886d9ba7a437864.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_16,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<p><img src="https://img-blog.csdnimg.cn/57e795efb2a34ffea55efb1fc19475e9.png" srcset="/img/newloading.gif" lazyload></p>
+<ol start="2">
+<li>也可以使用el表达式 </li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/e639db1cd8e142c9baf114c78688ad24.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_11,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">person:</span><br> <span class="hljs-attr">name:</span> <span class="hljs-string">qinjiang$&#123;random.uuid&#125;</span><br> <span class="hljs-attr">age:</span> <span class="hljs-string">$&#123;random,int&#125;</span>  <span class="hljs-comment"># 给属性赋随机值</span><br> <span class="hljs-attr">happy:</span> <span class="hljs-literal">false</span><br> <span class="hljs-attr">birth:</span> <span class="hljs-number">2021</span><span class="hljs-string">/10/13</span><br> <span class="hljs-attr">maps:</span> &#123;<span class="hljs-attr">k1:</span> <span class="hljs-string">v1</span>,<span class="hljs-attr">k2:</span> <span class="hljs-string">v2</span>&#125;<br> <span class="hljs-attr">list:</span><br>   <span class="hljs-bullet">-</span> <span class="hljs-string">code</span><br>   <span class="hljs-bullet">-</span> <span class="hljs-string">music</span><br>   <span class="hljs-bullet">-</span> <span class="hljs-string">girl</span> <br><span class="hljs-attr">dog:</span><br> <span class="hljs-attr">name:</span> <span class="hljs-string">$&#123;person.hello:hello&#125;_旺财</span><br> <span class="hljs-attr">age:</span> <span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>或者dog.name 那里  使用该表达式，如果person里(就上面那个类)有person.hello  就赋值person.hello 的值,否则就赋值”hello”</p>
+<h2 id="4-松散绑定"><a href="#4-松散绑定" class="headerlink" title="4. 松散绑定"></a>4. 松散绑定</h2><p><img src="https://img-blog.csdnimg.cn/2309a3700f664d71b43f0684ff25b041.png" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="5-配置文件相关"><a href="#5-配置文件相关" class="headerlink" title="5. 配置文件相关"></a>5. 配置文件相关</h2><p><img src="https://img-blog.csdnimg.cn/55e108936b3c4ec9ad3024eb9e76d17b.png" srcset="/img/newloading.gif" lazyload></p>
+<p>几个能配置appliction的位置</p>
+<p><strong>配置多个端口</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">server:</span><br>  <span class="hljs-attr">port:</span> <span class="hljs-number">8080</span><br><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">profiles:</span><br>    <span class="hljs-attr">active:</span> <span class="hljs-string">dev</span>   <span class="hljs-comment">#激活yaml中的端口  active</span><br><span class="hljs-meta">---</span><br><span class="hljs-attr">server:</span><br>  <span class="hljs-attr">port:</span> <span class="hljs-number">8081</span><br><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">profiles:</span> <span class="hljs-string">dev</span><br><br><span class="hljs-meta">---</span><br><span class="hljs-attr">server:</span><br>  <span class="hljs-attr">port:</span> <span class="hljs-number">8082</span><br><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">profiles:</span> <span class="hljs-string">test</span><br><br></code></pre></td></tr></table></figure>
+
+<h1 id="三、web开发"><a href="#三、web开发" class="headerlink" title="三、web开发"></a>三、web开发</h1><p><img src="https://img-blog.csdnimg.cn/9e8afeda4ade46c48524a431e4d8d050.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="1-导入静态资源"><a href="#1-导入静态资源" class="headerlink" title="1. 导入静态资源"></a>1. 导入静态资源</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><br><span class="hljs-comment">//导入静态资源的源码，了解</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addResourceHandlers</span><span class="hljs-params">(ResourceHandlerRegistry registry)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.resourceProperties.isAddMappings()) &#123;<br>        logger.debug(<span class="hljs-string">&quot;Default resource handling disabled&quot;</span>);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">this</span>.addResourceHandler(registry, <span class="hljs-string">&quot;/webjars/**&quot;</span>, <span class="hljs-string">&quot;classpath:/META-INF/resources/webjars/&quot;</span>);<br>        <span class="hljs-keyword">this</span>.addResourceHandler(registry, <span class="hljs-keyword">this</span>.mvcProperties.getStaticPathPattern(), (registration) -&gt; &#123;<br>            registration.addResourceLocations(<span class="hljs-keyword">this</span>.resourceProperties.getStaticLocations());<br>            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.servletContext != <span class="hljs-keyword">null</span>) &#123;<br>                ServletContextResource resource = <span class="hljs-keyword">new</span> ServletContextResource(<span class="hljs-keyword">this</span>.servletContext, <span class="hljs-string">&quot;/&quot;</span>);<br>                registration.addResourceLocations(<span class="hljs-keyword">new</span> Resource[]&#123;resource&#125;);<br>            &#125;<br><br>        &#125;);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/c25d5881db2443719781738e6b82670a.png" srcset="/img/newloading.gif" lazyload><br>静态资源主要可以放在这三个资源目录下，就可以直接通过  8080/wenjian_name.html来访问</p>
+<p>如果存在相同名字的文件， 他们之间存在一个优先级为</p>
+<blockquote>
+<p>resources&gt;static&gt;public</p>
+<p><img src="https://img-blog.csdnimg.cn/3346e158563e4e6cb87105b73e95bbc1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+</blockquote>
+<h2 id="2-定制首页"><a href="#2-定制首页" class="headerlink" title="2. 定制首页"></a>2. 定制首页</h2><p>把index文件放到静态资源的那三个目录里面,注意一定要是index这个名字</p>
+<p>如果不放在那三个目录下，要放在template下则需要添加模板引擎，然后添加一个controller跳转<br>使用模板引擎thymeleaf</p>
+<p>在pom.xml中导入这个依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--thymeleaf--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>这样以后template里的html文件通过controller 的跳转就可以访问了</p>
+<p><strong>简单的controller和thymeleaf使用</strong><br><img src="https://img-blog.csdnimg.cn/91d9cddff4df47ea938b9110e56d9b48.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><img src="https://img-blog.csdnimg.cn/c1d74c71b7564e138f116aa2ebbf6df1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_18,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="3-mvc配置原理"><a href="#3-mvc配置原理" class="headerlink" title="3. mvc配置原理"></a>3. mvc配置原理</h2><p><img src="https://img-blog.csdnimg.cn/3339e9bc1c6640929271bbfd4efdeb31.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">*自定义一个视图解析器，并设置对应的url跳转到哪个位置</span><br><span class="hljs-comment">*/</span><br><br><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyMvcconfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">WebMvcConfigurer</span> </span>&#123;<span class="hljs-comment">//自定义视图解析器</span><br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addViewControllers</span><span class="hljs-params">(ViewControllerRegistry registry)</span> </span>&#123;<br>        registry.addViewController(<span class="hljs-string">&quot;/&quot;</span>).setViewName(<span class="hljs-string">&quot;index&quot;</span>);<span class="hljs-comment">//输入这两个 url时会跳转到 templates 下的 index</span><br>        registry.addViewController(<span class="hljs-string">&quot;/index.html&quot;</span>).setViewName(<span class="hljs-string">&quot;index&quot;</span>);<br>        registry.addViewController(<span class="hljs-string">&quot;/main.html&quot;</span>).setViewName(<span class="hljs-string">&quot;dashboard&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/07557ed6001c4697a26e9e346cdd29ea.png" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="4-使用Lombok"><a href="#4-使用Lombok" class="headerlink" title="4. 使用Lombok"></a>4. 使用Lombok</h2><p>Lombok注解快速注解一个标准类</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- lombok--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.projectlombok<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>lombok<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><br><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@AllArgsConstructor</span><br><span class="hljs-meta">@NoArgsConstructor</span><br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Department</span> </span>&#123;<br><br>    <span class="hljs-keyword">public</span> Integer id;<br>    <span class="hljs-keyword">public</span> String departName;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/1addc28352f84c7c99a7de23f0cad44a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_12,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>只需要几行代码，就已经配置好了上面所示的结构</p>
+<h2 id="5-thymeleaf使用"><a href="#5-thymeleaf使用" class="headerlink" title="5. thymeleaf使用"></a>5. thymeleaf使用</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs html"><br><span class="hljs-comment">&lt;!--在使用的时候都需要导入命名空间， thymeleaf的语法才会生效--&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span> <span class="hljs-attr">xmlns:th</span>=<span class="hljs-string">&quot;http://www.thymeleaf.org&quot;</span>&gt;</span>  <span class="hljs-comment">&lt;!-- 命名空间 --&gt;</span><br><span class="hljs-comment">&lt;!-- Bootstrap core CSS --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">th:href</span>=<span class="hljs-string">&quot;@&#123;/css/bootstrap.min.css&#125;&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span><br><span class="hljs-comment">&lt;!-- Custom styles for this template --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">th:href</span>=<span class="hljs-string">&quot;@&#123;/css/signin.css&#125;&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span><br><br><br><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mb-4&quot;</span> <span class="hljs-attr">th:src</span>=<span class="hljs-string">&quot;@&#123;/img/bootstrap-solid.svg&#125;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;72&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;72&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>注意导入命名空间和   @{  }  就是用来放链接的</p>
+<p>本地的链接 都需要改+th:<br>只要是被thymeleaf接管就需要加上th:</p>
+<p> <strong>给默认路径前面增加一个chen 的url</strong><br> 在配置文件(application)里面加上这段代码就行了<br>server.servlet.context-path=/chen</p>
+<h2 id="6-数据层的实现"><a href="#6-数据层的实现" class="headerlink" title="6. 数据层的实现"></a>6. 数据层的实现</h2><p><img src="https://img-blog.csdnimg.cn/2b26c58a43b547c3a6fd45a96e0ac508.png" srcset="/img/newloading.gif" lazyload></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">*</span><br><span class="hljs-comment">*员工数据层</span><br><span class="hljs-comment">*/</span><br><span class="hljs-meta">@Repository</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EmployeeDao</span> </span>&#123;<br><br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Map&lt;Integer, Employee&gt; employees = <span class="hljs-keyword">null</span>;<br><br>    <span class="hljs-meta">@Autowired</span><span class="hljs-comment">//这里从仓库中获取之后才可以使用，注意这里注入之后DepartmentDao就变成了紫色</span><br>    <span class="hljs-keyword">private</span>  DepartmentDao DepartmentDao;<br><br>    <span class="hljs-keyword">static</span> &#123;<br>        employees = <span class="hljs-keyword">new</span> HashMap&lt;Integer, Employee&gt;();<br><br>        employees.put(<span class="hljs-number">1001</span>,<span class="hljs-keyword">new</span> Employee( <span class="hljs-number">1001</span>,<span class="hljs-string">&quot;AA&quot;</span>,<span class="hljs-string">&quot;2230035341@qq.com&quot;</span>,<span class="hljs-number">0</span>,<span class="hljs-keyword">new</span> Department(<span class="hljs-number">101</span>,<span class="hljs-string">&quot;教学部&quot;</span>)));<br>        employees.put(<span class="hljs-number">1002</span>,<span class="hljs-keyword">new</span> Employee( <span class="hljs-number">1002</span>,<span class="hljs-string">&quot;BB&quot;</span>,<span class="hljs-string">&quot;6454564456@qq.com&quot;</span>,<span class="hljs-number">1</span>,<span class="hljs-keyword">new</span> Department(<span class="hljs-number">102</span>,<span class="hljs-string">&quot;市场部&quot;</span>)));<br>        employees.put(<span class="hljs-number">1003</span>,<span class="hljs-keyword">new</span> Employee( <span class="hljs-number">1003</span>,<span class="hljs-string">&quot;CC&quot;</span>,<span class="hljs-string">&quot;2230044447@qq.com&quot;</span>,<span class="hljs-number">0</span>,<span class="hljs-keyword">new</span> Department(<span class="hljs-number">103</span>,<span class="hljs-string">&quot;教研部&quot;</span>)));<br>        employees.put(<span class="hljs-number">1004</span>,<span class="hljs-keyword">new</span> Employee( <span class="hljs-number">1004</span>,<span class="hljs-string">&quot;DD&quot;</span>,<span class="hljs-string">&quot;2230454441@qq.com&quot;</span>,<span class="hljs-number">1</span>,<span class="hljs-keyword">new</span> Department(<span class="hljs-number">104</span>,<span class="hljs-string">&quot;运营部&quot;</span>)));<br>        employees.put(<span class="hljs-number">1005</span>,<span class="hljs-keyword">new</span> Employee( <span class="hljs-number">1005</span>,<span class="hljs-string">&quot;EE&quot;</span>,<span class="hljs-string">&quot;8599855697@qq.com&quot;</span>,<span class="hljs-number">0</span>,<span class="hljs-keyword">new</span> Department(<span class="hljs-number">105</span>,<span class="hljs-string">&quot;后勤部&quot;</span>)));<br><br>    &#125;<br><br>    <span class="hljs-comment">//主键自增</span><br>    <span class="hljs-keyword">private</span>  <span class="hljs-keyword">static</span>  Integer initId = <span class="hljs-number">1006</span>;<br>    <span class="hljs-comment">//增加一个员工</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">save</span> <span class="hljs-params">(Employee employee)</span></span>&#123;<br>        <span class="hljs-keyword">if</span>(employee.getId()==<span class="hljs-keyword">null</span>)&#123;<br>            employee.setId(initId++);<br>        &#125;<br>        employee.setDepartment(DepartmentDao.getDepartmentById(employee.getDepartment().getId()));<br>        employees.put(employee.getId(),employee);<br><br>    &#125;<br><br>    <span class="hljs-comment">//查询员工的信息</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Collection&lt;Employee&gt; <span class="hljs-title">getAll</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> employees.values();<span class="hljs-comment">//注意这里,map集合.value()的返回值是Collection集合</span><br>    &#125;                             <br><br>    <span class="hljs-comment">//通过id查询员工</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Employee <span class="hljs-title">getEmployeeById</span><span class="hljs-params">(Integer id)</span></span>&#123;<br>        <span class="hljs-keyword">return</span> employees.get(id);<span class="hljs-comment">// 通过key获取对应的value值</span><br>    &#125;<br><br>    <span class="hljs-comment">//删除员工</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">delete</span><span class="hljs-params">(Integer id)</span></span>&#123;<br>        employees.remove(id);<br>    &#125;<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/*</span><br><span class="hljs-comment">*部门数据层</span><br><span class="hljs-comment">*/</span><br><span class="hljs-meta">@Repository</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DepartmentDao</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Map&lt;Integer, Department&gt; departments = <span class="hljs-keyword">null</span>;<br><br><br>    <span class="hljs-keyword">static</span> &#123;<br>        departments = <span class="hljs-keyword">new</span> HashMap&lt;Integer, Department&gt;();<br>        departments.put(<span class="hljs-number">101</span>,<span class="hljs-keyword">new</span> Department(<span class="hljs-number">101</span>,<span class="hljs-string">&quot;教学部&quot;</span>));<br>        departments.put(<span class="hljs-number">102</span>,<span class="hljs-keyword">new</span> Department(<span class="hljs-number">102</span>,<span class="hljs-string">&quot;市场部&quot;</span>));<br>        departments.put(<span class="hljs-number">103</span>,<span class="hljs-keyword">new</span> Department(<span class="hljs-number">103</span>,<span class="hljs-string">&quot;教研部&quot;</span>));<br>        departments.put(<span class="hljs-number">104</span>,<span class="hljs-keyword">new</span> Department(<span class="hljs-number">104</span>,<span class="hljs-string">&quot;运营部&quot;</span>));<br>        departments.put(<span class="hljs-number">105</span>,<span class="hljs-keyword">new</span> Department(<span class="hljs-number">105</span>,<span class="hljs-string">&quot;后勤部&quot;</span>));<br><br>    &#125;<br><br>    <span class="hljs-comment">//获得所有部门的信息</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Collection&lt;Department&gt; <span class="hljs-title">getDepartment</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> departments.values();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Department <span class="hljs-title">getDepartmentById</span><span class="hljs-params">(Integer id)</span></span>&#123;<br>        <span class="hljs-keyword">return</span> departments.get(id);<br>    &#125;<br><br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>map集合.value()的返回值是Collection集合,并且<strong>一定</strong>要在该类的上面写上 <strong>@Repository</strong>注解,告诉spring这是一个dao的数据的层,封装一个bean,方便调用</p>
+<h2 id="7-登录功能的实现"><a href="#7-登录功能的实现" class="headerlink" title="7. 登录功能的实现"></a>7. 登录功能的实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//登录的controller</span><br><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">loginController</span> </span>&#123;<br><br>    <span class="hljs-meta">@RequestMapping(&quot;/user/login&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">login</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(&quot;username&quot;)</span> String username, <span class="hljs-meta">@RequestParam(&quot;password&quot;)</span> String password, Model model, HttpSession session)</span></span>&#123;<br>        <span class="hljs-keyword">if</span>(!StringUtils.isEmpty(username)&amp;&amp;<span class="hljs-string">&quot;123456&quot;</span>.equals(password))&#123;<br>             session.setAttribute(<span class="hljs-string">&quot;loginuser&quot;</span>,username);<br>             <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;redirect:/main.html&quot;</span>;<br><br>        &#125;<span class="hljs-keyword">else</span>&#123;<br><br>            model.addAttribute(<span class="hljs-string">&quot;msg&quot;</span>,<span class="hljs-string">&quot;用户名或密码错误&quot;</span>);<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;index&quot;</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-meta">@RequestMapping(&quot;/user/logout&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">logout</span><span class="hljs-params">(HttpSession session)</span></span>&#123;<br>        session.invalidate();<span class="hljs-comment">//注销session</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;redirect:index.html&quot;</span>;<br>    &#125;<br><br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+<ol>
+<li><p>同样的道理，也需要在controller的类上加上@Controller注解，方法里面返回字符串，spring才会<strong>执行</strong>字符串里的内容，如果是@Restcontroller的话，就只会把它当作普通的字符串返回给前端</p>
+</li>
+<li><p>@RequestParam简单的来讲就是把参数绑定在了url上 </p>
+<blockquote>
+<p>详情请见     <a target="_blank" rel="noopener" href="https://blog.csdn.net/sswqzx/article/details/84195043?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163473054216780366541664%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163473054216780366541664&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-84195043.pc_search_es_clickV2&amp;utm_term=@RequestParam&amp;spm=1018.2226.3001.4187">https://blog.csdn.net/sswqzx/article/details/84195043?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163473054216780366541664%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163473054216780366541664&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-84195043.pc_search_es_clickV2&amp;utm_term=%40RequestParam&amp;spm=1018.2226.3001.4187</a></p>
+</blockquote>
+</li>
+<li><p>并且设置了一个session将用户的名字以 “loginuser” 的名字保存了下来<br><img src="https://img-blog.csdnimg.cn/a5e196246a9947c9b21c2010bbf4824f.png" srcset="/img/newloading.gif" lazyload><br>然后前端在接收一波就可以在dashboard的界面中获取到登录的信息了，这里的这种写法[[${…}]]等同于th:text:” ${ …}”</p>
+</li>
+<li><p>最后重定向到”main.html”这个url，因为前面 自定义了一个视图解析器，”main.html”这个url会跳转到dashboard这个html文件中。这样会比较安全</p>
+</li>
+<li><p>如果登录错误就将一个msg的数据通过model回传到前端<br><img src="https://img-blog.csdnimg.cn/93a4b317a40a4d879b33448aa8894eb8.png" srcset="/img/newloading.gif" lazyload><br>前端在刚刚的表单中用thymeleaf接收输出一下，就可以提示错误信息了</p>
+</li>
+<li><p>退出登录就是将session注销就行了 session.invalidate();</p>
+<h2 id="8-拦截器的配置"><a href="#8-拦截器的配置" class="headerlink" title="8. 拦截器的配置"></a>8. 拦截器的配置</h2><p>这个时候可以登录了，发现一个问题，你直接输入mian的url照样可以进入登录的后的界面，这又问题啊，这里就需要用到我们的拦截器了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoginHanderInterceptor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">HandlerInterceptor</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">preHandle</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br><br>        Object loginuser = request.getSession().getAttribute(<span class="hljs-string">&quot;loginuser&quot;</span>);<br>        <span class="hljs-keyword">if</span>(loginuser==<span class="hljs-keyword">null</span>)&#123;<br>            request.setAttribute(<span class="hljs-string">&quot;msg&quot;</span>,<span class="hljs-string">&quot;没有权限，请您先登录！&quot;</span>);<span class="hljs-comment">//</span><br>            request.getRequestDispatcher(<span class="hljs-string">&quot;/index.html&quot;</span>).forward(request,response);<span class="hljs-comment">//把这个请求专发到index页面</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<span class="hljs-comment">//设置拦截</span><br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<span class="hljs-comment">//设置放行</span><br>        &#125;<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>写拦截器首先需要实现一下HandlerInterceptor</p>
+</li>
+<li><p>然后重写preHandle</p>
+</li>
+<li><p>这里采用的是获取刚刚登录时发送的session 数据，要数据匹配才能登录</p>
+</li>
+<li><p>然后设置一个request的请求，设置一段话</p>
+</li>
+<li><p>通过转发的方法将这句话返回到登录的界面</p>
+<blockquote>
+<p>request.getRequestDispatcher(“/index.html”).forward(request,response);//把这个请求专发到index页面</p>
+</blockquote>
+</li>
+</ol>
+<p>登录失败的时候就会显示这段话提醒<br>6. 最后还有一步<img src="https://img-blog.csdnimg.cn/d62ef09993dd405c96a59cbd6607db9e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 添加刚刚配置的那个视图解析器</span><br>   <span class="hljs-meta">@Override</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addInterceptors</span><span class="hljs-params">(InterceptorRegistry registry)</span> </span>&#123;<br>       registry.addInterceptor(<span class="hljs-keyword">new</span> LoginHanderInterceptor()).addPathPatterns(<span class="hljs-string">&quot;/**&quot;</span>)<br>               .excludePathPatterns(<span class="hljs-string">&quot;/index.html&quot;</span>,<span class="hljs-string">&quot;/&quot;</span>,<span class="hljs-string">&quot;/user/login&quot;</span>,<span class="hljs-string">&quot;/css/*&quot;</span>,<span class="hljs-string">&quot;/js/**&quot;</span>,<span class="hljs-string">&quot;/img/**&quot;</span>);<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+<p> 最后一步就是将刚刚写好的拦截器配置一下，到刚刚继承了configurer的类里面重写一个addInterceptors的方法，配置他的拦截路径，new一个刚刚写好的拦截器，这里的addPathPatterns就是添加拦截路径，excludePathPatterns就是放行的路径。<br> 然后一个拦截器就配置好了</p>
+<h2 id="9-增删改查的实现"><a href="#9-增删改查的实现" class="headerlink" title="9. 增删改查的实现"></a>9. 增删改查的实现</h2><p> 最重要的功能–增删改查</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EmployeeController</span> </span>&#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    EmployeeDao employeeDao;<br><br>    <span class="hljs-meta">@Autowired</span><br>    DepartmentDao departmentDao;<br><br>    <span class="hljs-meta">@RequestMapping(&quot;/emps&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">list</span><span class="hljs-params">(Model model)</span></span>&#123;<br>        Collection&lt;Employee&gt; employees = employeeDao.getAll();<br>        <span class="hljs-comment">//这里map.value返回的是Collection的集合</span><br>        model.addAttribute(<span class="hljs-string">&quot;emps&quot;</span>,employees);<br>        <span class="hljs-comment">//通过model将数据返回给前端,前端通过使用循环一下,展现出所有的数据</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;list&quot;</span>;<br>    &#125;<br><br>    <span class="hljs-meta">@GetMapping(&quot;/add&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">add</span><span class="hljs-params">(Model model)</span> </span>&#123;<br>        Collection&lt;Department&gt; departments = departmentDao.getDepartment();<br>        model.addAttribute(<span class="hljs-string">&quot;departments&quot;</span>,departments);<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;add&quot;</span>;<span class="hljs-comment">//和前面同样的道理</span><br>    &#125;<br><br>    <span class="hljs-meta">@PostMapping(&quot;/add&quot;)</span><span class="hljs-comment">//这里使用是post请求</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toadd</span><span class="hljs-params">(Employee employee)</span> </span>&#123;<br>        employeeDao.save(employee);<span class="hljs-comment">//将数据存储到假的数据库中</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;redirect:/emps&quot;</span>;<span class="hljs-comment">//重定向到emps</span><br>    &#125;<br><br>    <span class="hljs-meta">@GetMapping(&quot;/emp/&#123;id&#125;&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">update</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;id&quot;)</span> Integer id,Model model)</span> </span>&#123;<br>        Employee employee = employeeDao.getEmployeeById(id);<br>        model.addAttribute(<span class="hljs-string">&quot;emp&quot;</span>,employee);<br><br>        Collection&lt;Department&gt; departments = departmentDao.getDepartment();<br>        model.addAttribute(<span class="hljs-string">&quot;departments&quot;</span>,departments);<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;update&quot;</span>;<br>    &#125;<br><br>    <span class="hljs-meta">@PostMapping(&quot;/updateEmp&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toupdate</span><span class="hljs-params">(Employee employee)</span> </span>&#123;<br>        employeeDao.save(employee);<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;redirect:/emps&quot;</span>;<br>    &#125;<br><br>    <span class="hljs-meta">@GetMapping(&quot;/delete/&#123;id&#125;&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">delete</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;id&quot;)</span> Integer id,Model model)</span> </span>&#123;<br>        employeeDao.delete(id);<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;redirect:/emps&quot;</span>;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>这一部分主要是对数据库的操作,原理都差不多的.<br>构建一个简单的网站就差不多到这儿了</p>
+<h1 id="四、springboot♂♀数据库"><a href="#四、springboot♂♀数据库" class="headerlink" title="四、springboot♂♀数据库"></a>四、springboot♂♀数据库</h1><h2 id="1-springboot整合JDBC"><a href="#1-springboot整合JDBC" class="headerlink" title="1. springboot整合JDBC"></a>1. springboot整合JDBC</h2><p>首先最重要的就是链接数据库</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">datasource:</span><br>    <span class="hljs-attr">username:</span> <span class="hljs-string">root</span><br>    <span class="hljs-attr">password:</span> <span class="hljs-string">root</span><br>    <span class="hljs-comment"># 设置时区和编码等</span><br>    <span class="hljs-attr">url:</span> <span class="hljs-string">jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF-8</span><br>    <span class="hljs-attr">driver-class-name:</span> <span class="hljs-string">com.mysql.cj.jdbc.Driver</span><br></code></pre></td></tr></table></figure>
+<p>这里使用的yaml配置,当然你使用properties也是差不多的<br>这里链接的是一个叫做mybatis的数据库,里面有一张叫做user的表<img src="https://img-blog.csdnimg.cn/83ef857fa466462fa7bb40d8a76086f5.png" srcset="/img/newloading.gif" lazyload><br>接着就是写jdbcController了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-comment">//因为没有写对应的页面,所以就是直接返回字符串了</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JDBCcontroller</span> </span>&#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    JdbcTemplate jdbcTemplate;<br>    <span class="hljs-comment">//只要配置了数据库就有这个类了</span><br><br>    <span class="hljs-meta">@GetMapping(&quot;/select&quot;)</span><br>    <span class="hljs-keyword">public</span> List&lt;Map&lt;String, Object&gt;&gt; userList()&#123;<br>        String sql = <span class="hljs-string">&quot;select *from user&quot;</span>;<br>        List&lt;Map&lt;String, Object&gt;&gt; maps = jdbcTemplate.queryForList(sql);<span class="hljs-comment">//返回list的值</span><br>        <span class="hljs-keyword">return</span> maps;<br>    &#125;<br><br><br>    <span class="hljs-meta">@GetMapping(&quot;/adduser&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String  <span class="hljs-title">adduserList</span><span class="hljs-params">()</span></span>&#123;<br>        String sql = <span class="hljs-string">&quot;insert into mybatis.user(id,name,pwd) values (4,&#x27;小明&#x27;,&#x27;123456&#x27;)&quot;</span>;<br>        jdbcTemplate.update(sql);<span class="hljs-comment">//返回list的值</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;add_ok&quot;</span>;<br>    &#125;<br><br>    <span class="hljs-meta">@GetMapping(&quot;/update/&#123;id&#125;&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">updateuserList</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;id&quot;)</span> <span class="hljs-keyword">int</span> id)</span></span>&#123;<br>        String sql = <span class="hljs-string">&quot;update mybatis.user set name= ?,pwd = ? where id = &quot;</span>+id;<br>        <span class="hljs-comment">//拼接sql</span><br>        Object[] objects = <span class="hljs-keyword">new</span> Object[<span class="hljs-number">2</span>];<br>        objects[<span class="hljs-number">0</span>] = <span class="hljs-string">&quot;小明&quot;</span>;<br>        objects[<span class="hljs-number">1</span>] = <span class="hljs-string">&quot;123445&quot;</span>;<br><br>        jdbcTemplate.update(sql,objects);<span class="hljs-comment">//这里是提供了重载的方法的,传入进取取代两个?,使用数组注入</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;update_ok&quot;</span>;<br>    &#125;<br><br><br>    <span class="hljs-meta">@GetMapping(&quot;/deleteuser/&#123;id&#125;&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">deleteuserList</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;id&quot;)</span> <span class="hljs-keyword">int</span> id)</span></span>&#123;<br>        String sql = <span class="hljs-string">&quot;delete from mybatis.user where id = ?&quot;</span>;<br>        jdbcTemplate.update(sql,id);<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;update_ok&quot;</span>;<br>    &#125;<br><br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这里唯一需要特别注意的就是第一个获取所有的数据的时候,jdbcTemplate.queryForList(sql)这里返回的是一个 List&lt;Map&lt;String, Object&gt;&gt;的数据类型</p>
+<h2 id="2-springboot集成Druid数据源"><a href="#2-springboot集成Druid数据源" class="headerlink" title="2. springboot集成Druid数据源"></a>2. springboot集成Druid数据源</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">datasource:</span><br>    <span class="hljs-attr">username:</span> <span class="hljs-string">root</span><br>    <span class="hljs-attr">password:</span> <span class="hljs-string">root</span><br>    <span class="hljs-comment"># 设置时区和编码等</span><br>    <span class="hljs-attr">url:</span> <span class="hljs-string">jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF-8</span><br>    <span class="hljs-attr">driver-class-name:</span> <span class="hljs-string">com.mysql.cj.jdbc.Driver</span><br>    <span class="hljs-attr">type:</span> <span class="hljs-string">com.alibaba.druid.pool.DruidDataSource</span> <span class="hljs-comment">#配置这个druid数据源</span><br><br>      <span class="hljs-comment">#SpringBoot默认是不注入这些的，需要自己绑定</span><br>      <span class="hljs-comment">#druid数据源专有配置</span><br><br>    <span class="hljs-attr">initialSize:</span> <span class="hljs-number">5</span><br>    <span class="hljs-attr">minIdle:</span> <span class="hljs-number">5</span><br>    <span class="hljs-attr">maxActive:</span> <span class="hljs-number">20</span><br>    <span class="hljs-attr">maxWait:</span> <span class="hljs-number">60000</span><br>    <span class="hljs-attr">timeBetweenEvictionRunsMillis:</span> <span class="hljs-number">60000</span><br>    <span class="hljs-attr">minEvictableIdleTimeMillis:</span> <span class="hljs-number">300000</span><br>    <span class="hljs-attr">validationQuery:</span> <span class="hljs-string">SELECT</span> <span class="hljs-number">1</span> <span class="hljs-string">FROM</span> <span class="hljs-string">DUAL</span><br>    <span class="hljs-attr">testWhileIdle:</span> <span class="hljs-literal">true</span><br>    <span class="hljs-attr">testOnBorrow:</span> <span class="hljs-literal">false</span><br>    <span class="hljs-attr">testOnReturn:</span> <span class="hljs-literal">false</span><br>    <span class="hljs-attr">poolPreparedStatements:</span> <span class="hljs-literal">true</span><br><br>    <span class="hljs-comment">#配置监控统计拦截的filters，stat：监控统计、log4j：日志记录、wall：防御sql注入</span><br>    <span class="hljs-comment">#如果允许报错，java.lang.ClassNotFoundException: org.apache.log4j.Priority</span><br>    <span class="hljs-comment">#则导入log4j 依赖就行</span><br>    <span class="hljs-attr">filters:</span> <span class="hljs-string">stat,wall,log4j2</span> <span class="hljs-comment">#要使用这个日志功能需要导入log4j</span><br>    <span class="hljs-attr">maxPoolPreparedStatementPerConnectionSize:</span> <span class="hljs-number">20</span><br>    <span class="hljs-attr">useGlobalDataSourceStat:</span> <span class="hljs-literal">true</span><br>    <span class="hljs-attr">connectionProperties:</span> <span class="hljs-string">druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500</span><br></code></pre></td></tr></table></figure>
+<p>前面的数据源的配置和前面的jdbc都是一样的,就是多了后一大堆,多了记录日志的功能,要使用这个功能需要再在xml里面导入log4j的依赖;</p>
+<p><img src="https://img-blog.csdnimg.cn/b321b4be9ae94f26be563d95ebc16a22.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>并且添加一个Druid的config</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DruidConfig</span> </span>&#123;<br><br><br>    <span class="hljs-meta">@ConfigurationProperties(prefix = &quot;spring.datasource&quot;)</span><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> DataSource <span class="hljs-title">druidDatasource</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> DruidDataSource();<br>    &#125;<br><br>    <span class="hljs-comment">//后台监控</span><br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> ServletRegistrationBean <span class="hljs-title">a</span><span class="hljs-params">()</span> </span>&#123;<br><br>        <span class="hljs-comment">//因为boot内置了servlet的容器  所以么有web.xml  取而代之的时ServletRegistrationBean，想注册什么new 就欧克</span><br>        ServletRegistrationBean&lt;StatViewServlet&gt; bean = <span class="hljs-keyword">new</span> ServletRegistrationBean&lt;&gt;(<span class="hljs-keyword">new</span> StatViewServlet(), <span class="hljs-string">&quot;/druid/*&quot;</span>);<br><br>        <span class="hljs-comment">//后台的账号密码</span><br>        HashMap&lt;String, String&gt; InitParameter = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();<br><br>        InitParameter.put(<span class="hljs-string">&quot;loginUsername&quot;</span>, <span class="hljs-string">&quot;admin&quot;</span>);  <span class="hljs-comment">//这里需要使用固定的key  loginUsername  loginPassword</span><br>        InitParameter.put(<span class="hljs-string">&quot;loginPassword&quot;</span>, <span class="hljs-string">&quot;123456&quot;</span>);<br><span class="hljs-comment">//自己设置一个密码和账号</span><br><br>        <span class="hljs-comment">//允许谁可以访问</span><br>        InitParameter.put(<span class="hljs-string">&quot;allow&quot;</span>, <span class="hljs-string">&quot;&quot;</span>);<br><br><br>        bean.setInitParameters(InitParameter);<br>        <span class="hljs-keyword">return</span> bean;<br>    &#125;<br><br><br>    <span class="hljs-comment">//filter,,配置一个过滤器</span><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> FilterRegistrationBean <span class="hljs-title">webStatFilter</span><span class="hljs-params">()</span> </span>&#123;<br><br>        FilterRegistrationBean bean = <span class="hljs-keyword">new</span> FilterRegistrationBean();<br>        bean.setFilter(<span class="hljs-keyword">new</span> WebStatFilter());<br>        <span class="hljs-comment">//可以过滤哪些请求呢?</span><br>        Map&lt;String, String&gt; initParameters = <span class="hljs-keyword">new</span> HashMap&lt;&gt;(); <span class="hljs-comment">//这些东西不进行统计</span><br>        initParameters.put(<span class="hljs-string">&quot;exclusions&quot;</span>,<span class="hljs-string">&quot;*.js ,*.css,/druid/*&quot;</span>);<br>        bean.setInitParameters(initParameters);<br>        <span class="hljs-keyword">return</span> bean;<br><br><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>配置好了以后,你在url中输入druid就可以进入一个登录界面<br><img src="https://img-blog.csdnimg.cn/80db75072ab64477adec2de5f0237c29.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>输入刚刚配置的账号和密码后就可以进入页面了；<br><img src="https://img-blog.csdnimg.cn/0343486a3b6d4d4bb889c7b108a4debf.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>里面有各种日志信息<br>比如查询一下刚刚数据库里面的数据<br><img src="https://img-blog.csdnimg.cn/2c9771f147a94db4871597876880397c.png" srcset="/img/newloading.gif" lazyload><br>就会有对应的sql信息<br><img src="https://img-blog.csdnimg.cn/5d7624b17c4648a7a859e4f8f71f2025.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h1 id="五、SpringSecurity"><a href="#五、SpringSecurity" class="headerlink" title="五、SpringSecurity"></a>五、SpringSecurity</h1><p>SpringSecurity是针对Spring项目的安全框架，也是Spring Boot底层安全模块默认的技术选型，它可以实现强大的Web安全控制，对于安全控制，我们仅需要引入spring-boot-security模块，进行少量的配置，即可实现强大的安全管理</p>
+<p>记住几个类</p>
+<ul>
+<li>WebSecurityConfigurerAdapter: 自定义Security策略</li>
+<li>AuthenticationManagerBuilder：自定义认证策略</li>
+<li>@EnableWebSecurity:开启WebSecurity模式<br>SpringSecurity的两个主要目标是“认证”和“授权”(访问控制)。<br> “认证”（Authentication）<br> “授权”（Authorization）<br> 这个概念是通用的，而不是只在Spring Security中存在</li>
+</ul>
+<h2 id="1-设置页面的访问权限"><a href="#1-设置页面的访问权限" class="headerlink" title="1. 设置页面的访问权限"></a>1. 设置页面的访问权限</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@EnableWebSecurity</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SecurityConfig</span>  <span class="hljs-keyword">extends</span> <span class="hljs-title">WebSecurityConfigurerAdapter</span> </span>&#123;<br><br><br>    <span class="hljs-comment">//链式编程</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">configure</span><span class="hljs-params">(HttpSecurity http)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-comment">//首页所有人可以访问，功能页只有对应有权限的人才能访问</span><br><br>        http.authorizeHttpRequests()<br>                .antMatchers(<span class="hljs-string">&quot;/&quot;</span>).permitAll()            <span class="hljs-comment">//首页所有人都可以访问</span><br>                .antMatchers(<span class="hljs-string">&quot;/level1/**&quot;</span>).hasRole(<span class="hljs-string">&quot;vip1&quot;</span>)  <span class="hljs-comment">//只有vip1 的用户才可以访问level1下面的页面</span><br>                .antMatchers(<span class="hljs-string">&quot;/level2/**&quot;</span>).hasRole(<span class="hljs-string">&quot;vip2&quot;</span>)  <span class="hljs-comment">//只有vip2 的用户才可以访问level2下面的页面</span><br>                .antMatchers(<span class="hljs-string">&quot;/level3/**&quot;</span>).hasRole(<span class="hljs-string">&quot;vip3&quot;</span>); <span class="hljs-comment">//只有vip3 的用户才可以访问level3下面的页面</span><br>                <br>        <span class="hljs-comment">//没有权限默认到那个登录页，需要 写这个代码进行开启  加上后面的.loginPage后就可以定制登录页</span><br>        http.formLogin().loginPage(<span class="hljs-string">&quot;/tologin&quot;</span>);<br><br>    &#125;<br></code></pre></td></tr></table></figure>
+<p>通过继承和重写authorizeHttpRequests方法用以实现页面的访问权限，有点类似于拦截器配置路径</p>
+<h2 id="2-设置认证授权"><a href="#2-设置认证授权" class="headerlink" title="2.设置认证授权"></a>2.设置认证授权</h2><p>通过对用户的认证授权，赋予用户不同的访问权限</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//认证授权</span><br>    <span class="hljs-comment">//这里密码需要加密一下才能够使用</span><br>    <span class="hljs-comment">//这里使用的是BCryptPasswordEncoder</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">configure</span><span class="hljs-params">(AuthenticationManagerBuilder auth)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        auth.inMemoryAuthentication().passwordEncoder(<span class="hljs-keyword">new</span> BCryptPasswordEncoder())<br>                .withUser(<span class="hljs-string">&quot;kuangshen&quot;</span>).password( <span class="hljs-keyword">new</span> BCryptPasswordEncoder().encode(<span class="hljs-string">&quot;123456&quot;</span>) ).roles(<span class="hljs-string">&quot;vip2&quot;</span>,<span class="hljs-string">&quot;vip3&quot;</span>)<br>                .and()<br>                .withUser(<span class="hljs-string">&quot;root&quot;</span>).password( <span class="hljs-keyword">new</span> BCryptPasswordEncoder().encode(<span class="hljs-string">&quot;123456&quot;</span>) ).roles(<span class="hljs-string">&quot;vip1&quot;</span>,<span class="hljs-string">&quot;vip2&quot;</span>,<span class="hljs-string">&quot;vip3&quot;</span>)<br>                .and()<br>                .withUser(<span class="hljs-string">&quot;guest&quot;</span>).password( <span class="hljs-keyword">new</span> BCryptPasswordEncoder().encode(<span class="hljs-string">&quot;123456&quot;</span>) ).roles(<span class="hljs-string">&quot;vip1&quot;</span>);<br>    &#125;<br></code></pre></td></tr></table></figure>
+<p>这里需要注意的是直接写密码是会报错的，因为spring会认为这不安全，需要加密一下，这里采用的是BCryptPasswordEncoder加密的方式，如果需要增加用户只需要加上and就行。</p>
+<h2 id="3-注销和记住我功能"><a href="#3-注销和记住我功能" class="headerlink" title="3.注销和记住我功能"></a>3.注销和记住我功能</h2><p>emmmm,,,然后第三个功能注销和记住我功能的配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//链式编程</span><br>   <span class="hljs-meta">@Override</span><br>   <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">configure</span><span class="hljs-params">(HttpSecurity http)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>       <span class="hljs-comment">//首页所有人可以访问，功能页只有对应有权限的人才能访问</span><br><br>       http.authorizeHttpRequests()<br>               .antMatchers(<span class="hljs-string">&quot;/&quot;</span>).permitAll()<br>               .antMatchers(<span class="hljs-string">&quot;/level1/**&quot;</span>).hasRole(<span class="hljs-string">&quot;vip1&quot;</span>)<br>               .antMatchers(<span class="hljs-string">&quot;/level2/**&quot;</span>).hasRole(<span class="hljs-string">&quot;vip2&quot;</span>)<br>               .antMatchers(<span class="hljs-string">&quot;/level3/**&quot;</span>).hasRole(<span class="hljs-string">&quot;vip3&quot;</span>);<br>       <span class="hljs-comment">//没有权限默认到那个登录页，需要 写这个代码进行开启  加上后面的.loginPage后就可以定制登录页</span><br>       http.formLogin().loginPage(<span class="hljs-string">&quot;/tologin&quot;</span>);<br><br>       <span class="hljs-comment">//开启注销的功能  并且设置注销后的跳转地址</span><br>       http.logout().logoutSuccessUrl(<span class="hljs-string">&quot;/&quot;</span>);<br><br>       <span class="hljs-comment">//开启记住我功能  就是使用cookie实现的  默认保存两周</span><br>       http.rememberMe();<br><br>   &#125;<br></code></pre></td></tr></table></figure>
+<p>   感觉没有啥写的，主要就是在那个方法里面配置这两行代码就行</p>
+<h2 id="4-SpringSecurity集成thymeleaf"><a href="#4-SpringSecurity集成thymeleaf" class="headerlink" title="4.SpringSecurity集成thymeleaf"></a>4.SpringSecurity集成thymeleaf</h2><p>   虽然一直觉得thymeleaf拉跨得一批，但是该学得还是要学</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span> <span class="hljs-attr">xmlns:th</span>=<span class="hljs-string">&quot;http://www.thymeleaf.org&quot;</span> <span class="hljs-attr">xmlns:sec</span>=<span class="hljs-string">&quot;http://www.thymeleaf.org/thymeleaf-extras-springsecurity4&quot;</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--这里自动配置得命名空间是不是这个地址，需要手动修改一下--&gt;</span><br><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;column&quot;</span> <span class="hljs-attr">sec:authorize</span> = <span class="hljs-string">&quot;hasRole(&#x27;vip1&#x27;)&quot;</span>&gt;</span> <span class="hljs-comment">&lt;!--这里得sec 就是security--&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ui raised segment&quot;</span>&gt;</span><br>                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ui&quot;</span>&gt;</span><br>                        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;content&quot;</span>&gt;</span><br>                            <span class="hljs-tag">&lt;<span class="hljs-name">h5</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;content&quot;</span>&gt;</span>Level 1<span class="hljs-tag">&lt;/<span class="hljs-name">h5</span>&gt;</span><br>                            <span class="hljs-tag">&lt;<span class="hljs-name">hr</span>&gt;</span><br>                            <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">th:href</span>=<span class="hljs-string">&quot;@&#123;/level1/1&#125;&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;bullhorn icon&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span> Level-1-1<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>                            <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">th:href</span>=<span class="hljs-string">&quot;@&#123;/level1/2&#125;&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;bullhorn icon&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span> Level-1-2<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>                            <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">th:href</span>=<span class="hljs-string">&quot;@&#123;/level1/3&#125;&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;bullhorn icon&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span> Level-1-3<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>                        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>                    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>这里的   sec:authorize = “hasRole(‘vip1’)”  的意思就是只有登录的用户的权限是vip1的时候这短前端代码才会展示出来</p>
+<h1 id="六、一些常用的任务"><a href="#六、一些常用的任务" class="headerlink" title="六、一些常用的任务"></a>六、一些常用的任务</h1><h2 id="1-异步任务"><a href="#1-异步任务" class="headerlink" title="1.异步任务"></a>1.异步任务</h2><p>首先我们来看看普通的方法</p>
+<p>使用多线程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Serice</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AsyncService</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">hello</span><span class="hljs-params">()</span></span>&#123;<br>       <span class="hljs-keyword">try</span>&#123;<br>           Thread.sleep(<span class="hljs-number">3000</span>);<span class="hljs-comment">//使用线程使他停止三秒钟</span><br>       &#125;<span class="hljs-keyword">catch</span>(InterruptedException e)&#123;<br>           e.printStackTrace()<br>       &#125;<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;系统正在处理。。。。。&quot;</span>);<span class="hljs-comment">//然后再打印这个</span><br>&#125; <br><br><br><span class="hljs-comment">/*---------------------------------------------------------*/</span><br><br><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AsyncController</span></span>&#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    AsyncService asyncService;<br>    <br>    <span class="hljs-meta">@RequestMapping(&quot;/hello&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">hello</span><span class="hljs-params">()</span></span>&#123;<br>       asyncService.hello();<span class="hljs-comment">//停止三秒</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+<p>使用springboot实现，只需要两步就可以实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Serice</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AsyncService</span></span>&#123;<br><br><span class="hljs-comment">//首先告诉spring这是一个异步的方法,加上一个注解就行</span><br>    <span class="hljs-meta">@Async</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">hello</span><span class="hljs-params">()</span></span>&#123;<br>       <span class="hljs-keyword">try</span>&#123;<br>           Thread.sleep(<span class="hljs-number">3000</span>);<br>       &#125;<span class="hljs-keyword">catch</span>(InterruptedException e)&#123;<br>           e.printStackTrace()<br>       &#125;<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;系统正在处理。。。。。&quot;</span>);<br>&#125; <br><br><br><span class="hljs-comment">/*---------------------------------------------------------*/</span><br><br><span class="hljs-comment">//第二步就是开启功能</span><br><span class="hljs-comment">//这个只需要使用Enable那个注解在主类上面加上就ok</span><br><br><span class="hljs-meta">@EnableAsync</span><br><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">YibuApplication</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        SpringApplication.run(YibuApplication.class, args);<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>大功告成，这样就可以实现异步任务了。</p>
+<h2 id="2-邮件任务"><a href="#2-邮件任务" class="headerlink" title="2.邮件任务"></a>2.邮件任务</h2><p>邮件任务也是经常需要写的任务。</p>
+<ol>
+<li><p>导入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>           <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>           <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-mail<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br></code></pre></td></tr></table></figure></li>
+<li><p> 获取你邮箱的POP3/SMTP的码<br><img src="https://img-blog.csdnimg.cn/07a213bdc487485fbe89732349366f13.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="这里以QQ邮箱为例"></p>
+</li>
+<li><p>在配置文件里面配置相关信息</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">spring.mail.username=2108796780@qq.com</span><br><span class="hljs-string">spring.mail.password=刚刚的那个码</span><br><span class="hljs-string">spring.mail.host=smtp.qq.com</span><br><span class="hljs-comment"># 开启加密验证</span><br><span class="hljs-string">spring.mail.properties.mail.smtp.ssl.enable=true</span><br></code></pre></td></tr></table></figure>
+<p>这里需要注意：<br>host主机是qq就写qq，是163就写163<br>qq的才有开启加密验证，163没有</p>
+</li>
+<li><p> 好的，现在来一个简单的邮件<br><img src="https://img-blog.csdnimg.cn/7aa70e1207ab4683888715377fcf65f1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="简单的邮件"></p>
+</li>
+<li><p>一个复杂的邮件<br><img src="https://img-blog.csdnimg.cn/888591744f7248dfa857be2a83aa6a43.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="复杂的邮件"></p>
+</li>
+<li><p>你也可以把这个发邮件的方法封装一下<br><img src="https://img-blog.csdnimg.cn/a8e7f44b8cba41e285d91a63c447cc0b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="封装的的邮件方法"><br>ok,邮件任务没了</p>
+</li>
+</ol>
+<h2 id="3-定时任务"><a href="#3-定时任务" class="headerlink" title="3.定时任务"></a>3.定时任务</h2><p>定时任务的实现也很简单，主要就是cron表达式有点难理解</p>
+<ul>
+<li>首先需要开启定时功能，这个和之前的一样，只需要Enable就可以<br>这里使用的是 <strong>@EnableScheduling</strong> 注解，也是直接加到主类上面就可以了。</li>
+<li>第二步就是编写一个方法，在方法的上面加上 <strong>@Scheduled()</strong> 就行，注解里面需要填写表达式，这个不需要记忆，需要的时候去查就行，附上一个链接<a target="_blank" rel="noopener" href="https://cron.qqe2.com/">在线的cron生成器</a>,为了方便理解，附上一张图，如下图。<br><img src="https://img-blog.csdnimg.cn/d0f52b456603435a80aa249a7bc792c2.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="简单的cron"><h2 id="4-文件上传"><a href="#4-文件上传" class="headerlink" title="4.文件上传"></a>4.文件上传</h2>最近在写一个项目的时候，需要用到文件的上传的任务，因此把代码粘在这里，以便后面继续回顾和使用<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileController</span> </span>&#123;<br><br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> DynamicService dynamicService;<br><br>    <span class="hljs-meta">@PostMapping(value = &quot;/fileload&quot;)</span><br> <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fileUpload</span><span class="hljs-params">(<span class="hljs-meta">@RequestPart(&quot;file&quot;)</span> MultipartFile file, HttpServletRequest request )</span> </span>&#123;<br><br>        String fileName = file.getOriginalFilename();<span class="hljs-comment">//获取文件的原始的名字</span><br>        String suffixName = fileName.substring(fileName.lastIndexOf(<span class="hljs-string">&quot;.&quot;</span>));<span class="hljs-comment">//文件后缀</span><br>        String filePath = <span class="hljs-string">&quot;D:/文档/新鲜出炉的程序/SpringBoot/LostandFound/src/main/resources/static/img/dynamic/&quot;</span>;<br>        fileName = UUID.randomUUID() + suffixName;<span class="hljs-comment">//通过uuid生成唯一标识符</span><br>        File dest = <span class="hljs-keyword">new</span> File(filePath + fileName);<br>        <span class="hljs-keyword">if</span> (!dest.getParentFile().exists()) &#123;<br>            dest.getParentFile().mkdirs();<br>        &#125;<br>        <span class="hljs-keyword">try</span> &#123;<br>            file.transferTo(dest);<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            e.printStackTrace();<br>        &#125;<span class="hljs-keyword">finally</span> &#123;<br>            HttpSession session = request.getSession();<br>            System.out.println(session.getId() +<span class="hljs-string">&quot; &quot;</span>+session.getAttribute(<span class="hljs-string">&quot;uid&quot;</span>)+(String)session.getAttribute(<span class="hljs-string">&quot;dtext&quot;</span>)+session.getAttribute(<span class="hljs-string">&quot;dtag&quot;</span>));<br>            dynamicService.addImg(<span class="hljs-string">&quot;img/dynamic/&quot;</span>+fileName, (Integer) session.getAttribute(<span class="hljs-string">&quot;uid&quot;</span>),(String)session.getAttribute(<span class="hljs-string">&quot;dtext&quot;</span>),(String)session.getAttribute(<span class="hljs-string">&quot;dtag&quot;</span>));<br><br>        &#125;<br><br>    &#125;<br><br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/spring/">spring</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/springboot/">springboot</a>
+                    
+                      <a class="hover-with-bg" href="/tags/spring/">spring</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/23/Swagger/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Swagger</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/17/%E5%89%8D%E7%AB%AF%E4%B8%89%E4%BB%B6%E5%A5%97/">
+                        <span class="hidden-mobile">前端三件套</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+ 
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script type="text/javascript">
+//只在桌面版网页启用特效
+var windowWidth = $(window).width();
+if (windowWidth > 768) {
+    document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+}
+</script>
+
+
+
+
+</body>
+</html>
