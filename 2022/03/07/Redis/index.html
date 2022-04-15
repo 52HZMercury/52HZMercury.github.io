@@ -44,8 +44,23 @@
 <meta property="og:image" content="https://s2.loli.net/2022/04/14/V9qPSWK72ebiouh.png">
 <meta property="og:image" content="https://s2.loli.net/2022/04/14/bC7i5e9qy3Y6AoT.png">
 <meta property="og:image" content="https://img.mercuryblog.site/img/image-20220414174009767.png">
+<meta property="og:image" content="https://img.mercuryblog.site/img/20220415223451.png">
+<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127205">
+<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127206">
+<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127207">
+<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127266">
+<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127291">
+<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127292">
+<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127293">
+<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127299">
+<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127303">
+<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127309">
+<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127310">
+<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127335">
+<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127371">
+<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127373">
 <meta property="article:published_time" content="2022-03-07T11:57:14.000Z">
-<meta property="article:modified_time" content="2022-04-15T02:57:21.458Z">
+<meta property="article:modified_time" content="2022-04-15T14:49:12.469Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="database">
 <meta property="article:tag" content="NoSQL">
@@ -231,7 +246,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      47k 字
+      52k 字
     </span>
   
 
@@ -240,7 +255,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      147 分钟
+      163 分钟
     </span>
   
 
@@ -657,6 +672,238 @@
 </ol>
 <h2 id="6、append-only-模式-aof配置"><a href="#6、append-only-模式-aof配置" class="headerlink" title="6、append only 模式 aof配置"></a>6、append only 模式 aof配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 默认使用rdb 因为完全够用 不开启aof  </span><br>appendonly no  <br><br><span class="hljs-comment"># aof文件的名字</span><br>appendfilename <span class="hljs-string">&quot;appendonly.aof&quot;</span><br><br><br><span class="hljs-comment">#下面三个只选择一个开</span><br><span class="hljs-comment"># appendfsync always  # 每次修改都会同步，但过于消耗性能</span><br><br>appendfsync everysec  <span class="hljs-comment"># 每秒执行一次同步，但会丢失这1s的数据</span><br><br><span class="hljs-comment"># appendfsync no      # 不执行同步，操作系统自己同步数据，速度最快</span><br></code></pre></td></tr></table></figure>
 
+<p>—————————————————–4.15</p>
+<h1 id="十、持久化"><a href="#十、持久化" class="headerlink" title="十、持久化"></a>十、持久化</h1><p>持久化是 <p class="label label-danger">重点</p></p>
+<p class="note note-primary">为什么需要持久化</p>
+
+<p>redis是一个内存数据库，如果不将数据库里面的数据保存到磁盘，服务一旦停止，那么数据就会全部丢失!因此redis需要通过持久化将数据都保存下来,redis的持久化有两种方式，RDB和AOF</p>
+<h2 id="1、RDB"><a href="#1、RDB" class="headerlink" title="1、RDB"></a>1、RDB</h2><p> RDB的全程就是redis database，它通过再指定的时间间隔内将内存种的数据集快照写入磁盘，也就是snapshot快照，他恢复时是将快照文件直接读取到内存里面(感觉像是我以前写的租车管理系统😐)，Redis会单独创建(fork)一个子进程来进行持久化，会先将数据写入到一个临时文件种，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。整个过程中，主进程时是不进行任何IO操作的。这就确保了极高的性能。如果要进行大规模数据的恢复，且对于数据恢复的完整性不是特别的敏感，那么RDB方式要比AOF方式更加的高效。RDB的缺点是最后一次持久化的数据可能会丢失，Redis默认的就是RDB，一般需要修改。</p>
+<h3 id="触发机制"><a href="#触发机制" class="headerlink" title="触发机制"></a>触发机制</h3><p>RDB的触发机制有下面三种</p>
+<ol>
+<li><p>save规则满足（save的配置上一节有） </p>
+</li>
+<li><p>执行flushAll 命令</p>
+</li>
+<li><p>退出redis</p>
+</li>
+</ol>
+<h3 id="如何恢复"><a href="#如何恢复" class="headerlink" title="如何恢复"></a>如何恢复</h3><p>这个比较容易，只需要将rdb文件放在我们的启动目录下就行，redis启动的时候会自动检查dump.rdb恢复其中的数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">127.0.0.1:6379&gt; config get dir  <span class="hljs-comment">#输入这个指令就可以得到启动目录，将rdb放里面就行</span><br>1) <span class="hljs-string">&quot;dir&quot;</span><br>2) <span class="hljs-string">&quot;/usr/local/bin&quot;</span> <br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p class="label label-success">优点</p>
+
+<ol>
+<li><p>适合大规模的数据恢复</p>
+</li>
+<li><p>对数据的完整性要不高</p>
+</li>
+</ol>
+<p class="label label-danger">缺点</p>
+
+<ol>
+<li><p>需要一定的时间间隔进程操作，如果redis意外宕机，最后一次的数据就无了</p>
+</li>
+<li><p>fork进程的时候，会占用一定的内容空间</p>
+</li>
+</ol>
+<h2 id="2、AOF"><a href="#2、AOF" class="headerlink" title="2、AOF"></a>2、AOF</h2><p>AOF全称appendonly file，只追加保存，默认是不保存的，需要手动配置然后 重启redis就行了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">appendonly no <span class="hljs-comment"># 把这里改成yes就行</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="AOF文件受损恢复"><a href="#AOF文件受损恢复" class="headerlink" title="AOF文件受损恢复"></a>AOF文件受损恢复</h3><p>redis提供了一个修复aof的工具 “redis-check-aof –fix”</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">redis-check-aof --fix appendonly.aof     <span class="hljs-comment"># 输入这个指令进行AOf修复</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://img.mercuryblog.site/img/20220415223451.png" srcset="/img/newloading.gif" lazyload alt="修复截图"></p>
+<p>修复之后可能会损失一些数据,但总比全部丢了好</p>
+<h3 id="优点以及缺点"><a href="#优点以及缺点" class="headerlink" title="优点以及缺点"></a>优点以及缺点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">appendoly no   <span class="hljs-comment"># 默认不开启</span><br>appendfilename <span class="hljs-string">&quot;appendoly.aof&quot;</span> <span class="hljs-comment">#aof文件的名字 </span><br><br>appendfsync always   <span class="hljs-comment"># 每次修改都执行同步操作，消耗性能</span><br>appendfsync everysec <span class="hljs-comment"># 每秒执行一次，可能会丢失那一秒的数据</span><br>appendfsync no       <span class="hljs-comment"># 不执行同步，操作系统进行同步，速度最快</span><br></code></pre></td></tr></table></figure>
+
+<p class="label label-success">优点</p>
+
+<ol>
+<li></li>
+<li></li>
+</ol>
+<p class="label label-danger">缺点</p>
+
+<ol>
+<li></li>
+<li></li>
+</ol>
+<p>rewrite</p>
+<p>aof默认就是文件无限制的追加</p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=127205" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p>重写规则说明</p>
+<p>如果文件太大 fork一个新的进程惊醒重写</p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=127206" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=127207" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p>发布订阅</p>
+<p>订阅一个频道</p>
+<p>127.0.0.1:6379&gt; SUBSCRIBE chenning</p>
+<p>Reading messages… (press Ctrl-C to quit)</p>
+<p>\1) “subscribe”</p>
+<p>\2) “chenning”</p>
+<p>\3) (integer) 1</p>
+<p>\1) “message”</p>
+<p>\2) “chenning”</p>
+<p>\3) “hell chenning”</p>
+<p>发送端</p>
+<p>127.0.0.1:6379&gt; PUBLISH chenning “hell chenning”</p>
+<p>(integer) 1</p>
+<p>127.0.0.1:6379&gt; </p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=127266" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p>主从复制</p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=127291" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=127292" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p>环境配置</p>
+<p>只配置从库 不配置主库</p>
+<p>因为默认自己为主库</p>
+<p>127.0.0.1:6379&gt; info replication</p>
+<p># Replication</p>
+<p>role:master</p>
+<p>connected_slaves:0</p>
+<p>master_failover_state:no-failover</p>
+<p>master_replid:4fbf9a6eb1fa637393710a004aa2839976897b2c</p>
+<p>master_replid2:0000000000000000000000000000000000000000</p>
+<p>master_repl_offset:0</p>
+<p>second_repl_offset:-1</p>
+<p>repl_backlog_active:0</p>
+<p>repl_backlog_size:1048576</p>
+<p>repl_backlog_first_byte_offset:0</p>
+<p>repl_backlog_histlen:0</p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=127293" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p>[root@Mercury Nconfig]# cp redis.conf redis79.conf </p>
+<p>[root@Mercury Nconfig]# cp redis.conf redis80.conf </p>
+<p>[root@Mercury Nconfig]# cp redis.conf redis81.conf </p>
+<p>[root@Mercury Nconfig]# ll</p>
+<p>total 368</p>
+<p>-rw-r–r– 1 root root 93725 Apr 15 18:56 redis79.conf</p>
+<p>-rw-r–r– 1 root root 93725 Apr 15 18:56 redis80.conf</p>
+<p>-rw-r–r– 1 root root 93725 Apr 15 18:56 redis81.conf</p>
+<p>-rw-r–r– 1 root root 93725 Apr 14 17:22 redis.conf</p>
+<p>[root@Mercury bin]# ps -ef|grep redis</p>
+<p>root  6093  1 0 19:05 ?  00:00:00 redis-server 127.0.0.1:6380</p>
+<p>root  6108  1 0 19:05 ?  00:00:00 redis-server 127.0.0.1:6381</p>
+<p>root  6277 19173 0 19:06 pts/1 00:00:00 grep –color=auto redis</p>
+<p>root  27191  1 0 Apr14 ?  00:02:28 redis-server 127.0.0.1:6379</p>
+<p>一主二从</p>
+<p>127.0.0.1:6380&gt; SLAVEOF 127.0.0.1 6379</p>
+<p>OK</p>
+<p>127.0.0.1:6380&gt; info replication</p>
+<p># Replication</p>
+<p>role:slave</p>
+<p>master_host:127.0.0.1</p>
+<p>master_port:6379</p>
+<p>master_link_status:up</p>
+<p>master_last_io_seconds_ago:5</p>
+<p>master_sync_in_progress:0</p>
+<p>slave_read_repl_offset:14</p>
+<p>slave_repl_offset:14</p>
+<p>slave_priority:100</p>
+<p>slave_read_only:1</p>
+<p>replica_announced:1</p>
+<p>connected_slaves:0</p>
+<p>master_failover_state:no-failover</p>
+<p>master_replid:1f474dfc54aedd694b971cefafd50927b55f97a4</p>
+<p>master_replid2:0000000000000000000000000000000000000000</p>
+<p>master_repl_offset:14</p>
+<p>second_repl_offset:-1</p>
+<p>repl_backlog_active:1</p>
+<p>repl_backlog_size:1048576</p>
+<p>repl_backlog_first_byte_offset:1</p>
+<p>repl_backlog_histlen:14</p>
+<p>[root@Mercury bin]# redis-cli -p 6379</p>
+<p>127.0.0.1:6379&gt; info replication</p>
+<p># Replication</p>
+<p>role:master</p>
+<p>connected_slaves:1</p>
+<p>slave0:ip=127.0.0.1,port=6380,state=online,offset=84,lag=1</p>
+<p>master_failover_state:no-failover</p>
+<p>master_replid:1f474dfc54aedd694b971cefafd50927b55f97a4</p>
+<p>master_replid2:0000000000000000000000000000000000000000</p>
+<p>master_repl_offset:84</p>
+<p>second_repl_offset:-1</p>
+<p>repl_backlog_active:1</p>
+<p>repl_backlog_size:1048576</p>
+<p>repl_backlog_first_byte_offset:1</p>
+<p>repl_backlog_histlen:84</p>
+<p>127.0.0.1:6379&gt; info replication</p>
+<p># Replication</p>
+<p>role:master</p>
+<p>connected_slaves:2</p>
+<p>slave0:ip=127.0.0.1,port=6380,state=online,offset=280,lag=0</p>
+<p>slave1:ip=127.0.0.1,port=6381,state=online,offset=280,lag=1</p>
+<p>master_failover_state:no-failover</p>
+<p>master_replid:1f474dfc54aedd694b971cefafd50927b55f97a4</p>
+<p>master_replid2:0000000000000000000000000000000000000000</p>
+<p>master_repl_offset:280</p>
+<p>second_repl_offset:-1</p>
+<p>repl_backlog_active:1</p>
+<p>repl_backlog_size:1048576</p>
+<p>repl_backlog_first_byte_offset:1</p>
+<p>repl_backlog_histlen:280</p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=127299" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p>配置文件里面</p>
+<p>replicaof <masterip>   <masterport></p>
+<p>细节了解</p>
+<p>主机可以设置值，从机不能写只能读</p>
+<p>127.0.0.1:6379&gt; set k1 “v1”</p>
+<p>OK</p>
+<p>127.0.0.1:6379&gt; get k1</p>
+<p>“v1”</p>
+<p>127.0.0.1:6380&gt; get k1</p>
+<p>“v1”</p>
+<p>127.0.0.1:6380&gt; set k2 “v2”</p>
+<p>(error) READONLY You can’t write against a read only replica.</p>
+<p>主机断开</p>
+<p>127.0.0.1:6379&gt; SHUTDOWN</p>
+<p>not connected&gt;</p>
+<p>127.0.0.1:6380&gt; info replication</p>
+<p># Replication</p>
+<p>role:slave</p>
+<p>master_host:127.0.0.1</p>
+<p>master_port:6379</p>
+<p>master_link_status:down</p>
+<p>master_last_io_seconds_ago:-1</p>
+<p>master_sync_in_progress:0</p>
+<p>slave_read_repl_offset:962</p>
+<p>slave_repl_offset:962</p>
+<p>master_link_down_since_seconds:33</p>
+<p>slave_priority:100</p>
+<p>slave_read_only:1</p>
+<p>replica_announced:1</p>
+<p>connected_slaves:0</p>
+<p>master_failover_state:no-failover</p>
+<p>master_replid:1f474dfc54aedd694b971cefafd50927b55f97a4</p>
+<p>master_replid2:0000000000000000000000000000000000000000</p>
+<p>master_repl_offset:962</p>
+<p>second_repl_offset:-1</p>
+<p>repl_backlog_active:1</p>
+<p>repl_backlog_size:1048576</p>
+<p>repl_backlog_first_byte_offset:1</p>
+<p>repl_backlog_histlen:962</p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=127303" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p>[root@Mercury bin]# redis-server Nconfig/redis79.conf </p>
+<p>[root@Mercury bin]# redis-cli -p 6379</p>
+<p>127.0.0.1:6379&gt; set k2 “v2”</p>
+<p>OK</p>
+<p>127.0.0.1:6380&gt; get k2</p>
+<p>“v2”</p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=127309" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p>全量复制</p>
+<p>增量复制</p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=127310" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p>层层链路</p>
+<p>79———–80———81 </p>
+<p> M            M S          S</p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=127335" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=127371" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p><img src="https://api.bilibili.com/x/note/image?image_id=127373" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p>哨兵模式</p>
 
             </div>
             <hr>
