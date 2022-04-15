@@ -60,7 +60,7 @@
 <meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127371">
 <meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127373">
 <meta property="article:published_time" content="2022-03-07T11:57:14.000Z">
-<meta property="article:modified_time" content="2022-04-15T14:49:12.469Z">
+<meta property="article:modified_time" content="2022-04-15T14:53:11.223Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="database">
 <meta property="article:tag" content="NoSQL">
@@ -673,7 +673,7 @@
 <h2 id="6、append-only-模式-aof配置"><a href="#6、append-only-模式-aof配置" class="headerlink" title="6、append only 模式 aof配置"></a>6、append only 模式 aof配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 默认使用rdb 因为完全够用 不开启aof  </span><br>appendonly no  <br><br><span class="hljs-comment"># aof文件的名字</span><br>appendfilename <span class="hljs-string">&quot;appendonly.aof&quot;</span><br><br><br><span class="hljs-comment">#下面三个只选择一个开</span><br><span class="hljs-comment"># appendfsync always  # 每次修改都会同步，但过于消耗性能</span><br><br>appendfsync everysec  <span class="hljs-comment"># 每秒执行一次同步，但会丢失这1s的数据</span><br><br><span class="hljs-comment"># appendfsync no      # 不执行同步，操作系统自己同步数据，速度最快</span><br></code></pre></td></tr></table></figure>
 
 <p>—————————————————–4.15</p>
-<h1 id="十、持久化"><a href="#十、持久化" class="headerlink" title="十、持久化"></a>十、持久化</h1><p>持久化是 <p class="label label-danger">重点</p></p>
+<h1 id="十、持久化"><a href="#十、持久化" class="headerlink" title="十、持久化"></a>十、持久化</h1><p>持久化是 <span class="label label-danger">重点</span></p>
 <p class="note note-primary">为什么需要持久化</p>
 
 <p>redis是一个内存数据库，如果不将数据库里面的数据保存到磁盘，服务一旦停止，那么数据就会全部丢失!因此redis需要通过持久化将数据都保存下来,redis的持久化有两种方式，RDB和AOF</p>
