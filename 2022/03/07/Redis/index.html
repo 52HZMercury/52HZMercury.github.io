@@ -45,9 +45,6 @@
 <meta property="og:image" content="https://s2.loli.net/2022/04/14/bC7i5e9qy3Y6AoT.png">
 <meta property="og:image" content="https://img.mercuryblog.site/img/image-20220414174009767.png">
 <meta property="og:image" content="https://img.mercuryblog.site/img/20220415223451.png">
-<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127205">
-<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127206">
-<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127207">
 <meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127266">
 <meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127291">
 <meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127292">
@@ -60,7 +57,7 @@
 <meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127371">
 <meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127373">
 <meta property="article:published_time" content="2022-03-07T11:57:14.000Z">
-<meta property="article:modified_time" content="2022-04-15T14:55:14.048Z">
+<meta property="article:modified_time" content="2022-04-16T06:06:42.529Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="database">
 <meta property="article:tag" content="NoSQL">
@@ -246,7 +243,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      52k 字
+      53k 字
     </span>
   
 
@@ -255,7 +252,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      163 分钟
+      166 分钟
     </span>
   
 
@@ -721,29 +718,45 @@
 
 <p><img src="https://img.mercuryblog.site/img/20220415223451.png" srcset="/img/newloading.gif" lazyload alt="修复截图"></p>
 <p>修复之后可能会损失一些数据,但总比全部丢了好</p>
+<h3 id="AOF的rewrite"><a href="#AOF的rewrite" class="headerlink" title="AOF的rewrite"></a>AOF的rewrite</h3><p>aof默认就是文件无限制的追加，因此如果一个文件太大之后，AOF会fork一个新的进程进行重写</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">auto-aof-rewrite-percentage 100<br>auto-aof-rewrite-min-size 64mb<br></code></pre></td></tr></table></figure>
+
+
+
 <h3 id="优点以及缺点"><a href="#优点以及缺点" class="headerlink" title="优点以及缺点"></a>优点以及缺点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">appendoly no   <span class="hljs-comment"># 默认不开启</span><br>appendfilename <span class="hljs-string">&quot;appendoly.aof&quot;</span> <span class="hljs-comment">#aof文件的名字 </span><br><br>appendfsync always   <span class="hljs-comment"># 每次修改都执行同步操作，消耗性能</span><br>appendfsync everysec <span class="hljs-comment"># 每秒执行一次，可能会丢失那一秒的数据</span><br>appendfsync no       <span class="hljs-comment"># 不执行同步，操作系统进行同步，速度最快</span><br></code></pre></td></tr></table></figure>
 
 <p class="label label-success">优点</p>
 
 <ol>
-<li></li>
-<li></li>
+<li>每一次修改都同步，文件完整性会更加的好</li>
+<li>每秒同步一次，可能会丢失一秒的数据</li>
+<li>从来不同步，速度最快</li>
 </ol>
 <p class="label label-danger">缺点</p>
 
 <ol>
-<li></li>
-<li></li>
+<li><p>相对于数据文件来说，aof远远大于rdb，修复的速度也比rdb慢</p>
+</li>
+<li><p>AOF运行效率也要比rdb慢，所以redis默认的配置就是rdb持久化</p>
+</li>
 </ol>
-<p>rewrite</p>
-<p>aof默认就是文件无限制的追加</p>
-<p><img src="https://api.bilibili.com/x/note/image?image_id=127205" srcset="/img/newloading.gif" lazyload alt="img"></p>
-<p>重写规则说明</p>
-<p>如果文件太大 fork一个新的进程惊醒重写</p>
-<p><img src="https://api.bilibili.com/x/note/image?image_id=127206" srcset="/img/newloading.gif" lazyload alt="img"></p>
-<p><img src="https://api.bilibili.com/x/note/image?image_id=127207" srcset="/img/newloading.gif" lazyload alt="img"></p>
-<p>发布订阅</p>
-<p>订阅一个频道</p>
+<h2 id="3、总结以及拓展"><a href="#3、总结以及拓展" class="headerlink" title="3、总结以及拓展"></a>3、总结以及拓展</h2><ol>
+<li>RDB持久化方式能够再指定的时间间隔内对你的数据进行快照存储</li>
+<li>AOF持久化方式记录每次对服务器写的操作，当服务器重启的时候会重新执行这些命令来会恢复原始的数据，AOF命令以Redis协议追加保存每次写的操作到文件末尾，Redis还能对AOF文件进行后台重写，使得AOF文件的额体积不至于太大</li>
+<li>只做缓存，如果你只希望你的数据再服务器运行的时候存在，你也可以不使用持久化</li>
+<li>同时开启两种持久化模式<ul>
+<li>在这种情况下，当redis重启的时候会优先载入AOF文件来恢复原始的数据，因为在通常的情况下AOF文件保存的数据集要比RDB文件保存的数据集更加的完整</li>
+<li>RDB的数据不实时，同时使用两种服务器重启也只会找AOF文件，那要不要只使用AOF呢🙌？答案是建议不要，因为RDB更加的适合用于备份数据库(AOF在不断变化不好备份)，快速重启，而且不会有AOF可能潜在的BUG，作为一个留着以防万一的手段</li>
+</ul>
+</li>
+<li>性能建议<ul>
+<li>因为RDB文件只用作后备用途，建议旨在Slave（附机）持久化RDB文件，而且只要15分钟备份一次就行了，只需要保留save 900 1  这条规则</li>
+<li>如果Enable AOF，好处是在最恶劣情况下也只会失去不超过两秒的数据，启动脚本只load自己的文件就可以了，代价一是带来了持续的IO，二是AOF rewrite 的最后将 rewrite 过程中产生的新数据写到新文件造成的阻塞时不可避免的，只要硬盘许可，应该尽量减少AOF rewrite的频率，AOF重写的基础大小默认值太小了，可以设置到5G以上，默认超过原大小100%大小重写可以改到适当的数值</li>
+<li>如果不Enable AOF，仅靠 Master-Slave实现高可用性也可以，能够省掉一大笔的IO，也减少了rewrite时带来的系统波动，代价时如果Master/Slave同时倒掉，会丢失十几分钟的数据，启动脚本也要比较两个Master/Slave中的RDB文件，载入较新的那个，微博就是这种架构</li>
+</ul>
+</li>
+</ol>
+<h1 id="十一、发布订阅"><a href="#十一、发布订阅" class="headerlink" title="十一、发布订阅"></a>十一、发布订阅</h1><p>订阅一个频道</p>
 <p>127.0.0.1:6379&gt; SUBSCRIBE chenning</p>
 <p>Reading messages… (press Ctrl-C to quit)</p>
 <p>\1) “subscribe”</p>
