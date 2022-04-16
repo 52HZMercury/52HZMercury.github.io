@@ -45,18 +45,8 @@
 <meta property="og:image" content="https://s2.loli.net/2022/04/14/bC7i5e9qy3Y6AoT.png">
 <meta property="og:image" content="https://img.mercuryblog.site/img/image-20220414174009767.png">
 <meta property="og:image" content="https://img.mercuryblog.site/img/20220415223451.png">
-<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127291">
-<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127292">
-<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127293">
-<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127299">
-<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127303">
-<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127309">
-<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127310">
-<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127335">
-<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127371">
-<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127373">
 <meta property="article:published_time" content="2022-03-07T11:57:14.000Z">
-<meta property="article:modified_time" content="2022-04-16T06:57:13.577Z">
+<meta property="article:modified_time" content="2022-04-16T08:15:33.056Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="database">
 <meta property="article:tag" content="NoSQL">
@@ -242,7 +232,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      54k 字
+      56k 字
     </span>
   
 
@@ -251,7 +241,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      170 分钟
+      175 分钟
     </span>
   
 
@@ -675,7 +665,7 @@
 
 <p>redis是一个内存数据库，如果不将数据库里面的数据保存到磁盘，服务一旦停止，那么数据就会全部丢失!因此redis需要通过持久化将数据都保存下来,redis的持久化有两种方式，RDB和AOF</p>
 <h2 id="1、RDB"><a href="#1、RDB" class="headerlink" title="1、RDB"></a>1、RDB</h2><p> RDB的全程就是redis database，它通过再指定的时间间隔内将内存种的数据集快照写入磁盘，也就是snapshot快照，他恢复时是将快照文件直接读取到内存里面(感觉像是我以前写的租车管理系统😐)，Redis会单独创建(fork)一个子进程来进行持久化，会先将数据写入到一个临时文件种，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。整个过程中，主进程时是不进行任何IO操作的。这就确保了极高的性能。如果要进行大规模数据的恢复，且对于数据恢复的完整性不是特别的敏感，那么RDB方式要比AOF方式更加的高效。RDB的缺点是最后一次持久化的数据可能会丢失，Redis默认的就是RDB，一般需要修改。</p>
-<h3 id="触发机制"><a href="#触发机制" class="headerlink" title="触发机制"></a>触发机制</h3><p>RDB的触发机制有下面三种</p>
+<h3 id="1-1-触发机制"><a href="#1-1-触发机制" class="headerlink" title="1.1 触发机制"></a>1.1 触发机制</h3><p>RDB的触发机制有下面三种</p>
 <ol>
 <li><p>save规则满足（save的配置上一节有） </p>
 </li>
@@ -684,12 +674,12 @@
 <li><p>退出redis</p>
 </li>
 </ol>
-<h3 id="如何恢复"><a href="#如何恢复" class="headerlink" title="如何恢复"></a>如何恢复</h3><p>这个比较容易，只需要将rdb文件放在我们的启动目录下就行，redis启动的时候会自动检查dump.rdb恢复其中的数据</p>
+<h3 id="1-2-如何恢复"><a href="#1-2-如何恢复" class="headerlink" title="1.2 如何恢复"></a>1.2 如何恢复</h3><p>这个比较容易，只需要将rdb文件放在我们的启动目录下就行，redis启动的时候会自动检查dump.rdb恢复其中的数据</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">127.0.0.1:6379&gt; config get dir  <span class="hljs-comment">#输入这个指令就可以得到启动目录，将rdb放里面就行</span><br>1) <span class="hljs-string">&quot;dir&quot;</span><br>2) <span class="hljs-string">&quot;/usr/local/bin&quot;</span> <br></code></pre></td></tr></table></figure>
 
 
 
-<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p class="label label-success">优点</p>
+<h3 id="1-3-优缺点"><a href="#1-3-优缺点" class="headerlink" title="1.3 优缺点"></a>1.3 优缺点</h3><p class="label label-success">优点</p>
 
 <ol>
 <li><p>适合大规模的数据恢复</p>
@@ -710,19 +700,19 @@
 
 
 
-<h3 id="AOF文件受损恢复"><a href="#AOF文件受损恢复" class="headerlink" title="AOF文件受损恢复"></a>AOF文件受损恢复</h3><p>redis提供了一个修复aof的工具 “redis-check-aof –fix”</p>
+<h3 id="2-1-AOF文件受损恢复"><a href="#2-1-AOF文件受损恢复" class="headerlink" title="2.1 AOF文件受损恢复"></a>2.1 AOF文件受损恢复</h3><p>redis提供了一个修复aof的工具 “redis-check-aof –fix”</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">redis-check-aof --fix appendonly.aof     <span class="hljs-comment"># 输入这个指令进行AOf修复</span><br></code></pre></td></tr></table></figure>
 
 
 
 <p><img src="https://img.mercuryblog.site/img/20220415223451.png" srcset="/img/newloading.gif" lazyload alt="修复截图"></p>
 <p>修复之后可能会损失一些数据,但总比全部丢了好</p>
-<h3 id="AOF的rewrite"><a href="#AOF的rewrite" class="headerlink" title="AOF的rewrite"></a>AOF的rewrite</h3><p>aof默认就是文件无限制的追加，因此如果一个文件太大之后，AOF会fork一个新的进程进行重写</p>
+<h3 id="2-2-AOF的rewrite"><a href="#2-2-AOF的rewrite" class="headerlink" title="2.2 AOF的rewrite"></a>2.2 AOF的rewrite</h3><p>aof默认就是文件无限制的追加，因此如果一个文件太大之后，AOF会fork一个新的进程进行重写</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">auto-aof-rewrite-percentage 100<br>auto-aof-rewrite-min-size 64mb<br></code></pre></td></tr></table></figure>
 
 
 
-<h3 id="优点以及缺点"><a href="#优点以及缺点" class="headerlink" title="优点以及缺点"></a>优点以及缺点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">appendoly no   <span class="hljs-comment"># 默认不开启</span><br>appendfilename <span class="hljs-string">&quot;appendoly.aof&quot;</span> <span class="hljs-comment">#aof文件的名字 </span><br><br>appendfsync always   <span class="hljs-comment"># 每次修改都执行同步操作，消耗性能</span><br>appendfsync everysec <span class="hljs-comment"># 每秒执行一次，可能会丢失那一秒的数据</span><br>appendfsync no       <span class="hljs-comment"># 不执行同步，操作系统进行同步，速度最快</span><br></code></pre></td></tr></table></figure>
+<h3 id="2-2-优点以及缺点"><a href="#2-2-优点以及缺点" class="headerlink" title="2.2 优点以及缺点"></a>2.2 优点以及缺点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">appendoly no   <span class="hljs-comment"># 默认不开启</span><br>appendfilename <span class="hljs-string">&quot;appendoly.aof&quot;</span> <span class="hljs-comment">#aof文件的名字 </span><br><br>appendfsync always   <span class="hljs-comment"># 每次修改都执行同步操作，消耗性能</span><br>appendfsync everysec <span class="hljs-comment"># 每秒执行一次，可能会丢失那一秒的数据</span><br>appendfsync no       <span class="hljs-comment"># 不执行同步，操作系统进行同步，速度最快</span><br></code></pre></td></tr></table></figure>
 
 <p class="label label-success">优点</p>
 
@@ -756,7 +746,7 @@
 </li>
 </ol>
 <h1 id="十一、发布订阅"><a href="#十一、发布订阅" class="headerlink" title="十一、发布订阅"></a>十一、发布订阅</h1><p>redis中提供了类似消息队列的功能–发布订阅，但是更加专业的功能仍然需要消息队列来做，比如Kafaka等</p>
-<h2 id="简单的来实现一下"><a href="#简单的来实现一下" class="headerlink" title="简单的来实现一下"></a>简单的来实现一下</h2><p>订阅一个频道</p>
+<h2 id="1-简单的来实现一下"><a href="#1-简单的来实现一下" class="headerlink" title="1. 简单的来实现一下"></a>1. 简单的来实现一下</h2><p>订阅一个频道</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">127.0.0.1:6379&gt; SUBSCRIBE chenning<br><br>Reading messages... (press Ctrl-C to quit)<br><br>1) <span class="hljs-string">&quot;subscribe&quot;</span><br><br>2) <span class="hljs-string">&quot;chenning&quot;</span><br><br>3) (<span class="hljs-built_in">integer</span>) 1<br></code></pre></td></tr></table></figure>
 
 <p>发送端</p>
@@ -768,164 +758,73 @@
 
 
 <p>上述就是一个简单的发布订阅</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>Redis 是使用c实现的，通过分析 Redis 源码里的 pubsub.c 文件，了解发布和订阅机制的底层实现，籍此加加深对 Redis 的理解。Redis 通过 PUBLISH 、 SUBSCRIBE 和 PSUBSCRIBE 等命令实现发布和订阅功能。</p>
+<h2 id="2-原理"><a href="#2-原理" class="headerlink" title="2. 原理"></a>2. 原理</h2><p>Redis 是使用c实现的，通过分析 Redis 源码里的 pubsub.c 文件，了解发布和订阅机制的底层实现，籍此加加深对 Redis 的理解。Redis 通过 PUBLISH 、 SUBSCRIBE 和 PSUBSCRIBE 等命令实现发布和订阅功能。</p>
 <p>通过 SUBSCRIBE 命令订阅某频道后， redis - server 里维护了一个字典，字典的键就是一个个 channel 而字典的值则是一个链表，链表中保存了所有订阅这个 channel 的客户端。 SUBSCRIBE 命令的关键，就是将客户端添加到给定 channel 的订阅链表中。 </p>
 <p>通过PUBLSH 命令向订订阅者发送消息， redis-server 会使用给定的频道作为键，在它所维护的 channel 字典中查找记录了订阅这个频道的所有客户的链表，遍历这个链表，将消息发布给所有订阅者。</p>
 <p> Pub / Sub 从字面上理解就是发布（ Publish ）与订阅（ Subscribe )，在 Redis 中，你可以设定对某一个 key 值进行消息发布及消息订阅，当一个 key 值上进行了消息发布后，所有订阅它的客户端都会收到相应的消息。这一功能最明显的用法就是用作实时消息系统，比如普通的即时聊天，群聊等功能。</p>
-<h1 id="十二、主从复制"><a href="#十二、主从复制" class="headerlink" title="十二、主从复制"></a>十二、主从复制</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>主从复制，是指将一台 Redis 服务器的数据，复制到其他的 Redis 服务器。前者称为主节点（ master / leader )，后者称为从节点( slave / folower )；数据的复制是单向的，只能由主节点到从节点。 Master 以写为主， Slave 以读为主。</p>
+<h1 id="十二、主从复制"><a href="#十二、主从复制" class="headerlink" title="十二、主从复制"></a>十二、主从复制</h1><h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>主从复制，是指将一台 Redis 服务器的数据，复制到其他的 Redis 服务器。前者称为主节点（ master / leader )，后者称为从节点( slave / folower )；数据的复制是单向的，只能由主节点到从节点。 Master 以写为主， Slave 以读为主。</p>
 <p>默认情况下，每台 Redis 服务器都是王节点；且一个王节点可以有多个从节点（或没有从节点），但一个从节点只能有一个主节点。</p>
 <p><span class = "label label-success">主从复制的作用主要包括：</span></p>
 <p>1、数据冗余：主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式。2、故障恢复：当主节点出现问题时，可以由从节点提供服务，实现快速的故障恢复；实际上是一种服务的冗余。<br>3、负载均衡：在主从复制的基础上，配合读写分离，可以由主节点提供写服务，由从节点提供读服务（即写 Redis 数据时应用连接主节点，读 Redis 数据时应用连接从节点），分担服务器负载；尤其是在写少读多的场景下，通过多个从节点分担读负载，可以大大提高 Redis 服务器的并发量。<br>4、高可用基石：除了上述作用以外，主从复制还是哨兵和集群能够实施的基础，因此说主从复制是 Redis 高可用的基础。</p>
 <p>一般来说，要将 Redis 运用于工程项目中，只使用一台 Redis 是万万不能的，原因如下：</p>
 <p>1、从结构上，单个 Redis 服务器会发生单点故障，并且一台服务器需要处理所有的请求负载，压力较大；<br>2、从容量上，单个 Redis 服务器内存容量有限，就算一台 Redis 服务器内存容量为256G，也不能将所有内存用作 Redis 存储内存，<br>一般来说，单台 Redis 最大使用内存不应该超过20G。</p>
-<p><img src="https://api.bilibili.com/x/note/image?image_id=127291" srcset="/img/newloading.gif" lazyload alt="img"></p>
-<p><img src="https://api.bilibili.com/x/note/image?image_id=127292" srcset="/img/newloading.gif" lazyload alt="img"></p>
-<p>环境配置</p>
-<p>只配置从库 不配置主库</p>
-<p>因为默认自己为主库</p>
-<p>127.0.0.1:6379&gt; info replication</p>
-<p># Replication</p>
-<p>role:master</p>
-<p>connected_slaves:0</p>
-<p>master_failover_state:no-failover</p>
-<p>master_replid:4fbf9a6eb1fa637393710a004aa2839976897b2c</p>
-<p>master_replid2:0000000000000000000000000000000000000000</p>
-<p>master_repl_offset:0</p>
-<p>second_repl_offset:-1</p>
-<p>repl_backlog_active:0</p>
-<p>repl_backlog_size:1048576</p>
-<p>repl_backlog_first_byte_offset:0</p>
-<p>repl_backlog_histlen:0</p>
-<p><img src="https://api.bilibili.com/x/note/image?image_id=127293" srcset="/img/newloading.gif" lazyload alt="img"></p>
-<p>[root@Mercury Nconfig]# cp redis.conf redis79.conf </p>
-<p>[root@Mercury Nconfig]# cp redis.conf redis80.conf </p>
-<p>[root@Mercury Nconfig]# cp redis.conf redis81.conf </p>
-<p>[root@Mercury Nconfig]# ll</p>
-<p>total 368</p>
-<p>-rw-r–r– 1 root root 93725 Apr 15 18:56 redis79.conf</p>
-<p>-rw-r–r– 1 root root 93725 Apr 15 18:56 redis80.conf</p>
-<p>-rw-r–r– 1 root root 93725 Apr 15 18:56 redis81.conf</p>
-<p>-rw-r–r– 1 root root 93725 Apr 14 17:22 redis.conf</p>
-<p>[root@Mercury bin]# ps -ef|grep redis</p>
-<p>root  6093  1 0 19:05 ?  00:00:00 redis-server 127.0.0.1:6380</p>
-<p>root  6108  1 0 19:05 ?  00:00:00 redis-server 127.0.0.1:6381</p>
-<p>root  6277 19173 0 19:06 pts/1 00:00:00 grep –color=auto redis</p>
-<p>root  27191  1 0 Apr14 ?  00:02:28 redis-server 127.0.0.1:6379</p>
-<p>一主二从</p>
-<p>127.0.0.1:6380&gt; SLAVEOF 127.0.0.1 6379</p>
-<p>OK</p>
-<p>127.0.0.1:6380&gt; info replication</p>
-<p># Replication</p>
-<p>role:slave</p>
-<p>master_host:127.0.0.1</p>
-<p>master_port:6379</p>
-<p>master_link_status:up</p>
-<p>master_last_io_seconds_ago:5</p>
-<p>master_sync_in_progress:0</p>
-<p>slave_read_repl_offset:14</p>
-<p>slave_repl_offset:14</p>
-<p>slave_priority:100</p>
-<p>slave_read_only:1</p>
-<p>replica_announced:1</p>
-<p>connected_slaves:0</p>
-<p>master_failover_state:no-failover</p>
-<p>master_replid:1f474dfc54aedd694b971cefafd50927b55f97a4</p>
-<p>master_replid2:0000000000000000000000000000000000000000</p>
-<p>master_repl_offset:14</p>
-<p>second_repl_offset:-1</p>
-<p>repl_backlog_active:1</p>
-<p>repl_backlog_size:1048576</p>
-<p>repl_backlog_first_byte_offset:1</p>
-<p>repl_backlog_histlen:14</p>
-<p>[root@Mercury bin]# redis-cli -p 6379</p>
-<p>127.0.0.1:6379&gt; info replication</p>
-<p># Replication</p>
-<p>role:master</p>
-<p>connected_slaves:1</p>
-<p>slave0:ip=127.0.0.1,port=6380,state=online,offset=84,lag=1</p>
-<p>master_failover_state:no-failover</p>
-<p>master_replid:1f474dfc54aedd694b971cefafd50927b55f97a4</p>
-<p>master_replid2:0000000000000000000000000000000000000000</p>
-<p>master_repl_offset:84</p>
-<p>second_repl_offset:-1</p>
-<p>repl_backlog_active:1</p>
-<p>repl_backlog_size:1048576</p>
-<p>repl_backlog_first_byte_offset:1</p>
-<p>repl_backlog_histlen:84</p>
-<p>127.0.0.1:6379&gt; info replication</p>
-<p># Replication</p>
-<p>role:master</p>
-<p>connected_slaves:2</p>
-<p>slave0:ip=127.0.0.1,port=6380,state=online,offset=280,lag=0</p>
-<p>slave1:ip=127.0.0.1,port=6381,state=online,offset=280,lag=1</p>
-<p>master_failover_state:no-failover</p>
-<p>master_replid:1f474dfc54aedd694b971cefafd50927b55f97a4</p>
-<p>master_replid2:0000000000000000000000000000000000000000</p>
-<p>master_repl_offset:280</p>
-<p>second_repl_offset:-1</p>
-<p>repl_backlog_active:1</p>
-<p>repl_backlog_size:1048576</p>
-<p>repl_backlog_first_byte_offset:1</p>
-<p>repl_backlog_histlen:280</p>
-<p><img src="https://api.bilibili.com/x/note/image?image_id=127299" srcset="/img/newloading.gif" lazyload alt="img"></p>
-<p>配置文件里面</p>
-<p>replicaof <masterip>   <masterport></p>
-<p>细节了解</p>
-<p>主机可以设置值，从机不能写只能读</p>
-<p>127.0.0.1:6379&gt; set k1 “v1”</p>
-<p>OK</p>
-<p>127.0.0.1:6379&gt; get k1</p>
-<p>“v1”</p>
-<p>127.0.0.1:6380&gt; get k1</p>
-<p>“v1”</p>
-<p>127.0.0.1:6380&gt; set k2 “v2”</p>
-<p>(error) READONLY You can’t write against a read only replica.</p>
-<p>主机断开</p>
-<p>127.0.0.1:6379&gt; SHUTDOWN</p>
-<p>not connected&gt;</p>
-<p>127.0.0.1:6380&gt; info replication</p>
-<p># Replication</p>
-<p>role:slave</p>
-<p>master_host:127.0.0.1</p>
-<p>master_port:6379</p>
-<p>master_link_status:down</p>
-<p>master_last_io_seconds_ago:-1</p>
-<p>master_sync_in_progress:0</p>
-<p>slave_read_repl_offset:962</p>
-<p>slave_repl_offset:962</p>
-<p>master_link_down_since_seconds:33</p>
-<p>slave_priority:100</p>
-<p>slave_read_only:1</p>
-<p>replica_announced:1</p>
-<p>connected_slaves:0</p>
-<p>master_failover_state:no-failover</p>
-<p>master_replid:1f474dfc54aedd694b971cefafd50927b55f97a4</p>
-<p>master_replid2:0000000000000000000000000000000000000000</p>
-<p>master_repl_offset:962</p>
-<p>second_repl_offset:-1</p>
-<p>repl_backlog_active:1</p>
-<p>repl_backlog_size:1048576</p>
-<p>repl_backlog_first_byte_offset:1</p>
-<p>repl_backlog_histlen:962</p>
-<p><img src="https://api.bilibili.com/x/note/image?image_id=127303" srcset="/img/newloading.gif" lazyload alt="img"></p>
-<p>[root@Mercury bin]# redis-server Nconfig/redis79.conf </p>
-<p>[root@Mercury bin]# redis-cli -p 6379</p>
-<p>127.0.0.1:6379&gt; set k2 “v2”</p>
-<p>OK</p>
-<p>127.0.0.1:6380&gt; get k2</p>
-<p>“v2”</p>
-<p><img src="https://api.bilibili.com/x/note/image?image_id=127309" srcset="/img/newloading.gif" lazyload alt="img"></p>
-<p>全量复制</p>
-<p>增量复制</p>
-<p><img src="https://api.bilibili.com/x/note/image?image_id=127310" srcset="/img/newloading.gif" lazyload alt="img"></p>
-<p>层层链路</p>
+<h2 id="2-环境配置"><a href="#2-环境配置" class="headerlink" title="2. 环境配置"></a>2. 环境配置</h2><p>只配置从库 不配置主库,因为默认自己为主库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs bash">127.0.0.1:6379&gt; info replication<br><br><span class="hljs-comment"># Replication</span><br><br>role:master                                     <span class="hljs-comment"># 可以看到这里默认自己是主机</span><br><br>connected_slaves:0<br><br>master_failover_state:no-failover<br><br>master_replid:4fbf9a6eb1fa637393710a004aa2839976897b2c<br><br>master_replid2:0000000000000000000000000000000000000000<br><br>master_repl_offset:0<br><br>second_repl_offset:-1<br><br>repl_backlog_active:0<br><br>repl_backlog_size:1048576<br><br>repl_backlog_first_byte_offset:0<br><br>repl_backlog_histlen:0<br></code></pre></td></tr></table></figure>
+
+
+
+<p>接下来我们使用三个端口启动三个redis服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@Mercury Nconfig]<span class="hljs-comment"># cp redis.conf redis79.conf </span><br><br>[root@Mercury Nconfig]<span class="hljs-comment"># cp redis.conf redis80.conf </span><br><br>[root@Mercury Nconfig]<span class="hljs-comment"># cp redis.conf redis81.conf    # 复制了三份配置文件</span><br><br>[root@Mercury Nconfig]<span class="hljs-comment"># ll</span><br><br>total 368<br><br>-rw-r--r-- 1 root root 93725 Apr 15 18:56 redis79.conf<br><br>-rw-r--r-- 1 root root 93725 Apr 15 18:56 redis80.conf<br><br>-rw-r--r-- 1 root root 93725 Apr 15 18:56 redis81.conf<br><br>-rw-r--r-- 1 root root 93725 Apr 14 17:22 redis.conf<br><br><span class="hljs-comment"># 为保证不重名，配置文件里需要修改 端口 pid名字 log文件名字 dump.rdb名字</span><br><br>[root@Mercury bin]<span class="hljs-comment"># redis-server Nconfig/redis79.conf</span><br>[root@Mercury bin]<span class="hljs-comment"># redis-server Nconfig/redis80.conf</span><br>[root@Mercury bin]<span class="hljs-comment"># redis-server Nconfig/redis81.conf     #分别指定配置文件进行启动</span><br><br><br>[root@Mercury bin]<span class="hljs-comment"># ps -ef|grep redis</span><br><br>root  6093  1 0 19:05 ?  00:00:00 redis-server 127.0.0.1:6380<br><br>root  6108  1 0 19:05 ?  00:00:00 redis-server 127.0.0.1:6381<br><br>root  6277 19173 0 19:06 pts/1 00:00:00 grep --color=auto redis<br><br>root  27191  1 0 Apr14 ?  00:02:28 redis-server 127.0.0.1:6379    <span class="hljs-comment"># 可以看到已经分别启动了</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="3-一主二从"><a href="#3-一主二从" class="headerlink" title="3. 一主二从"></a>3. 一主二从</h2><p>所谓一主二从就是一台主机两台从机</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs bash">127.0.0.1:6380&gt; SLAVEOF 127.0.0.1 6379          <span class="hljs-comment"># 通过这个命令将6380设为6379的从机</span><br><br>OK<br><br>127.0.0.1:6380&gt; info replication<br><br><span class="hljs-comment"># Replication</span><br><br>role:slave                                      <span class="hljs-comment"># 可以看到已经变为从机</span><br><br>master_host:127.0.0.1<br><br>master_port:6379<br><br>master_link_status:up<br><br>master_last_io_seconds_ago:5<br><br>master_sync_in_progress:0<br><br>slave_read_repl_offset:14<br><br>slave_repl_offset:14<br><br>slave_priority:100<br><br>slave_read_only:1<br><br>replica_announced:1<br><br>connected_slaves:0<br><br>master_failover_state:no-failover<br><br>master_replid:1f474dfc54aedd694b971cefafd50927b55f97a4<br><br>master_replid2:0000000000000000000000000000000000000000<br><br>master_repl_offset:14<br><br>second_repl_offset:-1<br><br>repl_backlog_active:1<br><br>repl_backlog_size:1048576<br><br>repl_backlog_first_byte_offset:1<br><br>repl_backlog_histlen:14<br></code></pre></td></tr></table></figure>
+
+
+
+<p>再次查看6379</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@Mercury bin]<span class="hljs-comment"># redis-cli -p 6379</span><br><br>127.0.0.1:6379&gt; info replication<br><br><span class="hljs-comment"># Replication</span><br><br>role:master<br><br>connected_slaves:1                            <span class="hljs-comment"># 显示已连接从机数量</span><br><br>slave0:ip=127.0.0.1,port=6380,state=online,offset=84,lag=1  <span class="hljs-comment"># 显示从机状态     </span><br><br>master_failover_state:no-failover<br><br>master_replid:1f474dfc54aedd694b971cefafd50927b55f97a4<br><br>master_replid2:0000000000000000000000000000000000000000<br><br>master_repl_offset:84<br><br>second_repl_offset:-1<br><br>repl_backlog_active:1<br><br>repl_backlog_size:1048576<br><br>repl_backlog_first_byte_offset:1<br><br>repl_backlog_histlen:84<br></code></pre></td></tr></table></figure>
+
+
+
+<p>以同样的步骤连接上6381</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs bash">127.0.0.1:6379&gt; info replication<br><br><span class="hljs-comment"># Replication</span><br><br>role:master<br><br>connected_slaves:2                <span class="hljs-comment"># 两个从机</span><br><br>slave0:ip=127.0.0.1,port=6380,state=online,offset=280,lag=0<br><br>slave1:ip=127.0.0.1,port=6381,state=online,offset=280,lag=1<br><br>master_failover_state:no-failover<br><br>master_replid:1f474dfc54aedd694b971cefafd50927b55f97a4<br><br>master_replid2:0000000000000000000000000000000000000000<br><br>master_repl_offset:280<br><br>second_repl_offset:-1<br><br>repl_backlog_active:1<br><br>repl_backlog_size:1048576<br><br>repl_backlog_first_byte_offset:1<br><br>repl_backlog_histlen:280<br><br><br></code></pre></td></tr></table></figure>
+
+<p>因为这里我们是通过指令操作的，所以关闭服务后就不再是从机了，而是会变回主机，如果想一直是从机，我们可以在配置文件里面修改</p>
+<p><span lable label-success>配置文件里面</span></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">replicaof   &lt;masterip&gt;   &lt;masterport&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-1-细节了解"><a href="#3-1-细节了解" class="headerlink" title="3.1 细节了解"></a>3.1 细节了解</h3><p>主机可以设置值，从机不能写只能读</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs bash">127.0.0.1:6379&gt; <span class="hljs-built_in">set</span> k1 <span class="hljs-string">&quot;v1&quot;</span><br><br>OK<br><br>127.0.0.1:6379&gt; get k1<br><br><span class="hljs-string">&quot;v1&quot;</span><br><br><span class="hljs-comment"># 主机设置 key-value</span><br><br><br><br>127.0.0.1:6380&gt; get k1<br><br><span class="hljs-string">&quot;v1&quot;</span><br><br><span class="hljs-comment"># 从机可以拿到</span><br><br><br>127.0.0.1:6380&gt; <span class="hljs-built_in">set</span> k2 <span class="hljs-string">&quot;v2&quot;</span><br><br>(error) READONLY You can<span class="hljs-string">&#x27;t write against a read only replica.</span><br><span class="hljs-string"></span><br><span class="hljs-string"># 从机不可以写</span><br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 主机断开</span><br><br>127.0.0.1:6379&gt; SHUTDOWN  <br><br>not connected&gt;<br><br><br><br>127.0.0.1:6380&gt; info replication<br><br><span class="hljs-comment"># Replication</span><br><br>role:slave                 <span class="hljs-comment"># 依然是从机</span><br><br>master_host:127.0.0.1<br><br>master_port:6379<br><br>master_link_status:down<br><br>master_last_io_seconds_ago:-1<br><br>master_sync_in_progress:0<br><br>slave_read_repl_offset:962<br><br>slave_repl_offset:962<br><br>master_link_down_since_seconds:33<br><br>slave_priority:100<br><br>slave_read_only:1<br><br>replica_announced:1<br><br>connected_slaves:0<br><br>master_failover_state:no-failover<br><br>master_replid:1f474dfc54aedd694b971cefafd50927b55f97a4<br><br>master_replid2:0000000000000000000000000000000000000000<br><br>master_repl_offset:962<br><br>second_repl_offset:-1<br><br>repl_backlog_active:1<br><br>repl_backlog_size:1048576<br><br>repl_backlog_first_byte_offset:1<br><br>repl_backlog_histlen:962<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 主机重新启动</span><br><br>[root@Mercury bin]<span class="hljs-comment"># redis-server Nconfig/redis79.conf </span><br><br>[root@Mercury bin]<span class="hljs-comment"># redis-cli -p 6379</span><br><br>127.0.0.1:6379&gt; <span class="hljs-built_in">set</span> k2 <span class="hljs-string">&quot;v2&quot;</span><br><br>OK<br><br><span class="hljs-comment">#再次设置值</span><br><br>127.0.0.1:6380&gt; get k2<br><br><span class="hljs-string">&quot;v2&quot;</span><br><br><span class="hljs-comment"># 依然可以拿到</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>主机断开连接，从机依然连接到主机的，但是没有写操作，这个时候，主机如果回来了，从机依旧可以直接获取到主机写的信息，但如果是使用命令行来配置的从机，重启后就会变回主机，不再和原来的主机同步，无法获取之后写入的信息，但只要再变回从机，立刻就可以从主机中获取值。</p>
+<h2 id="4-复制原理"><a href="#4-复制原理" class="headerlink" title="4. 复制原理"></a>4. 复制原理</h2><p>Slave 启动成功连接到 master 后会发送一个 sync 命令</p>
+<p>Master 接到命令，启动后台的存盘进程，同时收集所有接收到的用于修改数据集命令，在后台进程执行完毕之后， master 将传送整个数据文件到 slave ，并完成一次完全同步。</p>
+<p>全量复制：而 slave 服务在接收到数据库文件数据后，将其存盘并加载到内存中。<br>增量复制： Master 继续将新的所有收集到的修改命令依次传给 slave ，完成同步但是只要是重新连接 master ，一次完全同步（全量复制）将被自动执行🚗</p>
+<h2 id="5-层层链路"><a href="#5-层层链路" class="headerlink" title="5. 层层链路"></a>5. 层层链路</h2><p>使用下面的方式将三个 redis 服务连接起来</p>
 <p>79———–80———81 </p>
 <p> M            M S          S</p>
-<p><img src="https://api.bilibili.com/x/note/image?image_id=127335" srcset="/img/newloading.gif" lazyload alt="img"></p>
-<p><img src="https://api.bilibili.com/x/note/image?image_id=127371" srcset="/img/newloading.gif" lazyload alt="img"></p>
-<p><img src="https://api.bilibili.com/x/note/image?image_id=127373" srcset="/img/newloading.gif" lazyload alt="img"></p>
-<p>哨兵模式</p>
-
+<p> 此时的80端口依旧是从节点，输入命令可以看到依然显示为Salve</p>
+<p>一般层层链路不常用</p>
+<h2 id="6-谋朝篡位-🤪"><a href="#6-谋朝篡位-🤪" class="headerlink" title="6. 谋朝篡位 🤪"></a>6. 谋朝篡位 🤪</h2><p>如果主机断开了连接，我们可以使用<span label label-danger>SLAVEOF no one</span>命令使自己变成主机，其他主机可以手动连接到这个主节点</p>
+<h1 id="十三、哨兵模式"><a href="#十三、哨兵模式" class="headerlink" title="十三、哨兵模式"></a>十三、哨兵模式</h1>
             </div>
             <hr>
             <div>
