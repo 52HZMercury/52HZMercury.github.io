@@ -1972,18 +1972,3 @@ note-default {
     margin-left: 1rem;
   }
 }
-.chara{
-  width: 130px;
-    height: 190px;
-    background: url(https://patchwiki.biligame.com/images/arknights/e/e0/5jq0o7rm7rj90qxsvreu0m6moaplgdg.gif) no-repeat;
-    background-size: contain
-}
-.animechara {
-  display: block;
-  width: 130px;
-  height: 190px;
-  position: fixed;
-  bottom: 0px;
-  left: 10px;
-  z-index: 9999;
-}

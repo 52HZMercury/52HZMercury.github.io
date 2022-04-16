@@ -45,7 +45,6 @@
 <meta property="og:image" content="https://s2.loli.net/2022/04/14/bC7i5e9qy3Y6AoT.png">
 <meta property="og:image" content="https://img.mercuryblog.site/img/image-20220414174009767.png">
 <meta property="og:image" content="https://img.mercuryblog.site/img/20220415223451.png">
-<meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127266">
 <meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127291">
 <meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127292">
 <meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127293">
@@ -57,7 +56,7 @@
 <meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127371">
 <meta property="og:image" content="https://api.bilibili.com/x/note/image?image_id=127373">
 <meta property="article:published_time" content="2022-03-07T11:57:14.000Z">
-<meta property="article:modified_time" content="2022-04-16T06:06:42.529Z">
+<meta property="article:modified_time" content="2022-04-16T06:57:13.577Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="database">
 <meta property="article:tag" content="NoSQL">
@@ -243,7 +242,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      53k 字
+      54k 字
     </span>
   
 
@@ -252,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      166 分钟
+      170 分钟
     </span>
   
 
@@ -756,21 +755,29 @@
 </ul>
 </li>
 </ol>
-<h1 id="十一、发布订阅"><a href="#十一、发布订阅" class="headerlink" title="十一、发布订阅"></a>十一、发布订阅</h1><p>订阅一个频道</p>
-<p>127.0.0.1:6379&gt; SUBSCRIBE chenning</p>
-<p>Reading messages… (press Ctrl-C to quit)</p>
-<p>\1) “subscribe”</p>
-<p>\2) “chenning”</p>
-<p>\3) (integer) 1</p>
-<p>\1) “message”</p>
-<p>\2) “chenning”</p>
-<p>\3) “hell chenning”</p>
+<h1 id="十一、发布订阅"><a href="#十一、发布订阅" class="headerlink" title="十一、发布订阅"></a>十一、发布订阅</h1><p>redis中提供了类似消息队列的功能–发布订阅，但是更加专业的功能仍然需要消息队列来做，比如Kafaka等</p>
+<h2 id="简单的来实现一下"><a href="#简单的来实现一下" class="headerlink" title="简单的来实现一下"></a>简单的来实现一下</h2><p>订阅一个频道</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">127.0.0.1:6379&gt; SUBSCRIBE chenning<br><br>Reading messages... (press Ctrl-C to quit)<br><br>1) <span class="hljs-string">&quot;subscribe&quot;</span><br><br>2) <span class="hljs-string">&quot;chenning&quot;</span><br><br>3) (<span class="hljs-built_in">integer</span>) 1<br></code></pre></td></tr></table></figure>
+
 <p>发送端</p>
-<p>127.0.0.1:6379&gt; PUBLISH chenning “hell chenning”</p>
-<p>(integer) 1</p>
-<p>127.0.0.1:6379&gt; </p>
-<p><img src="https://api.bilibili.com/x/note/image?image_id=127266" srcset="/img/newloading.gif" lazyload alt="img"></p>
-<p>主从复制</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">127.0.0.1:6379&gt; PUBLISH chenning <span class="hljs-string">&quot;hell chenning&quot;</span>  <span class="hljs-comment"># 发送一则消息</span><br><br>(<span class="hljs-built_in">integer</span>) 1<br><br>127.0.0.1:6379&gt; <br></code></pre></td></tr></table></figure>
+
+<p>再次回到刚刚订阅的那个窗口，可以看到以下信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">1) <span class="hljs-string">&quot;message&quot;</span><br><br>2) <span class="hljs-string">&quot;chenning&quot;</span><br><br>3) <span class="hljs-string">&quot;hell chenning&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>上述就是一个简单的发布订阅</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>Redis 是使用c实现的，通过分析 Redis 源码里的 pubsub.c 文件，了解发布和订阅机制的底层实现，籍此加加深对 Redis 的理解。Redis 通过 PUBLISH 、 SUBSCRIBE 和 PSUBSCRIBE 等命令实现发布和订阅功能。</p>
+<p>通过 SUBSCRIBE 命令订阅某频道后， redis - server 里维护了一个字典，字典的键就是一个个 channel 而字典的值则是一个链表，链表中保存了所有订阅这个 channel 的客户端。 SUBSCRIBE 命令的关键，就是将客户端添加到给定 channel 的订阅链表中。 </p>
+<p>通过PUBLSH 命令向订订阅者发送消息， redis-server 会使用给定的频道作为键，在它所维护的 channel 字典中查找记录了订阅这个频道的所有客户的链表，遍历这个链表，将消息发布给所有订阅者。</p>
+<p> Pub / Sub 从字面上理解就是发布（ Publish ）与订阅（ Subscribe )，在 Redis 中，你可以设定对某一个 key 值进行消息发布及消息订阅，当一个 key 值上进行了消息发布后，所有订阅它的客户端都会收到相应的消息。这一功能最明显的用法就是用作实时消息系统，比如普通的即时聊天，群聊等功能。</p>
+<h1 id="十二、主从复制"><a href="#十二、主从复制" class="headerlink" title="十二、主从复制"></a>十二、主从复制</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>主从复制，是指将一台 Redis 服务器的数据，复制到其他的 Redis 服务器。前者称为主节点（ master / leader )，后者称为从节点( slave / folower )；数据的复制是单向的，只能由主节点到从节点。 Master 以写为主， Slave 以读为主。</p>
+<p>默认情况下，每台 Redis 服务器都是王节点；且一个王节点可以有多个从节点（或没有从节点），但一个从节点只能有一个主节点。</p>
+<p><span class = "label label-success">主从复制的作用主要包括：</span></p>
+<p>1、数据冗余：主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式。2、故障恢复：当主节点出现问题时，可以由从节点提供服务，实现快速的故障恢复；实际上是一种服务的冗余。<br>3、负载均衡：在主从复制的基础上，配合读写分离，可以由主节点提供写服务，由从节点提供读服务（即写 Redis 数据时应用连接主节点，读 Redis 数据时应用连接从节点），分担服务器负载；尤其是在写少读多的场景下，通过多个从节点分担读负载，可以大大提高 Redis 服务器的并发量。<br>4、高可用基石：除了上述作用以外，主从复制还是哨兵和集群能够实施的基础，因此说主从复制是 Redis 高可用的基础。</p>
+<p>一般来说，要将 Redis 运用于工程项目中，只使用一台 Redis 是万万不能的，原因如下：</p>
+<p>1、从结构上，单个 Redis 服务器会发生单点故障，并且一台服务器需要处理所有的请求负载，压力较大；<br>2、从容量上，单个 Redis 服务器内存容量有限，就算一台 Redis 服务器内存容量为256G，也不能将所有内存用作 Redis 存储内存，<br>一般来说，单台 Redis 最大使用内存不应该超过20G。</p>
 <p><img src="https://api.bilibili.com/x/note/image?image_id=127291" srcset="/img/newloading.gif" lazyload alt="img"></p>
 <p><img src="https://api.bilibili.com/x/note/image?image_id=127292" srcset="/img/newloading.gif" lazyload alt="img"></p>
 <p>环境配置</p>
