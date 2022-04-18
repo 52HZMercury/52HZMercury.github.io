@@ -13,32 +13,17 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="redis作为一个NoSQL可以作为数据库，缓存或者消息中间件，已经是这个大数据时代的后端程序员所必须要掌握的一项技术了">
+  <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <meta name="description" content="redis作为一个NoSQL可以作为数据库，缓存或者消息中间件，已经是这个大数据时代的后端程序员所必须要掌握的一项技术了">
+  <meta name="description" content="title: Redisdate: 2022-03-07 19:57:14tags:   database NoSQLcategories: databaseindex_img: https:&#x2F;&#x2F;img.mercuryblog.site&#x2F;img&#x2F;mmexport1649953059484.jpgexcerpt: redis作为一个NoSQL可以作为数据库，缓存或者消息中间件，已经是这个大数据时代的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis">
+<meta property="og:title" content="Mercury&#39;s blog">
 <meta property="og:url" content="http://example.com/2022/03/07/Redis/index.html">
 <meta property="og:site_name" content="Mercury&#39;s blog">
-<meta property="og:description" content="redis作为一个NoSQL可以作为数据库，缓存或者消息中间件，已经是这个大数据时代的后端程序员所必须要掌握的一项技术了">
+<meta property="og:description" content="title: Redisdate: 2022-03-07 19:57:14tags:   database NoSQLcategories: databaseindex_img: https:&#x2F;&#x2F;img.mercuryblog.site&#x2F;img&#x2F;mmexport1649953059484.jpgexcerpt: redis作为一个NoSQL可以作为数据库，缓存或者消息中间件，已经是这个大数据时代的">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/a13cff236102447e99a52fa50a512053.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/c86795e2fda8444db7309efeaa84da2c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/3b22048ca1ec435597c9ed1aa527c53f.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/f16644665dba4983a31c23d3b83c5702.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/5c52be25b5534e1080e965913d366888.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_12,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/8838edb0280b4b5abfaab4135c8ca2be.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/0c38b2cd72424b60addccdbca212e677.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/d6f64e5f9cd6411893909c831e89e075.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/fe6876fa0c584c27b9af08ba0ee58a6d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_13,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/21bed7fe9a36431a932ab3b7648a4411.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/b86b3bd297354b5cb3c0c17deafe6d3b.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/f90de701640e4b93a4e422ef46e86ebe.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/397733849c1f4523afb63c2352e3d5ee.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/43dac1969690459b981f2a8a44745c51.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/969abc7898034775a8d97412eb2ca797.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/a76359f377774fd8a683c4805d57d2eb.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/ec8e9de43ea542e89eb0bfff344a6702.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/ccf1491997604555802786a4838fb3e6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="og:image" content="https://s2.loli.net/2022/04/14/V9qPSWK72ebiouh.png">
@@ -48,15 +33,13 @@
 <meta property="og:image" content="https://img.mercuryblog.site/img/image-20220417190613545.png">
 <meta property="og:image" content="https://img.mercuryblog.site/img/image-20220417194623551.png">
 <meta property="og:image" content="https://img.mercuryblog.site/img/image-20220417194749943.png">
-<meta property="article:published_time" content="2022-03-07T11:57:14.000Z">
-<meta property="article:modified_time" content="2022-04-17T12:15:08.788Z">
+<meta property="article:published_time" content="2022-03-07T11:57:14.940Z">
+<meta property="article:modified_time" content="2022-04-18T05:45:45.140Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="database">
-<meta property="article:tag" content="NoSQL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/a13cff236102447e99a52fa50a512053.png">
   
-  <title>Redis - Mercury&#39;s blog</title>
+  <title>Mercury&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -214,7 +197,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Redis">
+            <span class="h2" id="subtitle" title="">
               
             </span>
 
@@ -273,20 +256,57 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Redis</h1>
+            <h1 style="display: none"></h1>
             
             <div class="markdown-body">
-              <p class="note note-success">前言:依据狂神说视频整理</p>
+              <p>title: Redis<br>date: 2022-03-07 19:57:14<br>tags: </p>
+<ul>
+<li>database</li>
+<li>NoSQL<br>categories:</li>
+<li>database<br>index_img: <a target="_blank" rel="noopener" href="https://img.mercuryblog.site/img/mmexport1649953059484.jpg">https://img.mercuryblog.site/img/mmexport1649953059484.jpg</a><br>excerpt: redis作为一个NoSQL可以作为数据库，缓存或者消息中间件，已经是这个大数据时代的后端程序员所必须要掌握的一项技术了</li>
+</ul>
+<p class="note note-success">前言:依据狂神说视频整理</p>
 
 <h1 id="一、Nosql概述"><a href="#一、Nosql概述" class="headerlink" title="一、Nosql概述"></a>一、Nosql概述</h1><h2 id="1、初识Nosql"><a href="#1、初识Nosql" class="headerlink" title="1、初识Nosql"></a>1、初识Nosql</h2><p>为什么会使用Nosql呢？我们现在所处于大数据时代，用户的个人信息，社交网络，地理位置，用户自己产生的数据等，数据量十分的庞大，而一般的数据库无法进行分析处理。当访问量过大后，一个服务器承受不了，当出现这种情况后，于是Nosql便应运而生了，Nosql 的全程是Not only sql 不仅仅是sql，因此，他能做的sql 更多。</p>
 <h2 id="2、Nosql的特点"><a href="#2、Nosql的特点" class="headerlink" title="2、Nosql的特点"></a>2、Nosql的特点</h2><ul>
-<li>方便扩展</li>
-<li>大数据量的高性能</li>
-<li>数据类型是多样性的</li>
-<li>传统RDBMS和Nosql</li>
+<li><p>方便扩展</p>
+</li>
+<li><p>大数据量的高性能</p>
+</li>
+<li><p>数据类型是多样性的</p>
+</li>
 </ul>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">传统的RDBMS<br><span class="hljs-bullet">- </span>结构化的组织<br><span class="hljs-bullet">- </span>SQL<br><span class="hljs-bullet">- </span>数据和关系都存在单独的表中<br><span class="hljs-bullet">- </span>数据定义语言<br><span class="hljs-bullet">- </span>严格的一致性<br><span class="hljs-bullet">- </span>基础的事务<br>Nosql<br><span class="hljs-bullet">- </span>不仅仅是数据<br><span class="hljs-bullet">- </span>没有固定的查询语言<br><span class="hljs-bullet">- </span>键值对存储，列存储、文档存储、图形数据库<br><span class="hljs-bullet">- </span>最终一致性<br><span class="hljs-bullet">- </span>CAP定理和BASE(异地多活)<br><span class="hljs-bullet">- </span>高性能、高可用、高可扩<br></code></pre></td></tr></table></figure>
+<p class  = "note note-success">传统RDBMS和Nosql</p>
 
+
+
+<p class = "label label-success">传统的RDBMS</p>
+
+<ul>
+<li><p>结构化的组织</p>
+</li>
+<li><p>SQL</p>
+</li>
+<li><p>数据和关系都存在单独的表中</p>
+</li>
+<li><p>数据定义语言</p>
+</li>
+<li><p>严格的一致性</p>
+</li>
+<li><p>基础的事务</p>
+</li>
+</ul>
+<p class = "label label-success">Nosql</p>
+
+<ul>
+<li>不仅仅是数据</li>
+<li>没有固定的查询语言</li>
+<li>键值对存储，列存储、文档存储、图形数据库</li>
+<li>最终一致性</li>
+<li>CAP定理和BASE(异地多活)</li>
+<li>高性能、高可用、高可扩</li>
+<li></li>
+</ul>
 <h2 id="3、3V-3高"><a href="#3、3V-3高" class="headerlink" title="3、3V+3高"></a>3、3V+3高</h2><p>大数据时代的3V：主要是描述问题的<br>1、海量的Volume<br>2、多样的Variety<br>3、实时的Velocity<br>大数据时代的3高：主要是对程序的要求<br>1、高并发<br>2、高可拓<br>3、高性能</p>
 <h2 id="4、Nosql的四大分类"><a href="#4、Nosql的四大分类" class="headerlink" title="4、Nosql的四大分类"></a>4、Nosql的四大分类</h2><ul>
 <li><p> KV键值对    例如：redis</p>
@@ -302,13 +322,7 @@
 <p>链接: <a target="_blank" rel="noopener" href="https://redis.io/">redis官网</a>  | <a target="_blank" rel="noopener" href="https://github.com/redis">GitHub上的开源地址</a></p>
 <p>不建议windows ，windows端的github上面已经停更很久了，redis推荐linux</p>
 <p><img src="https://img-blog.csdnimg.cn/a13cff236102447e99a52fa50a512053.png" srcset="/img/newloading.gif" lazyload alt="redis官网上的"></p>
-<h2 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h2><p> <strong>Windows端的</strong><br> 下载安装包，解压即可，点server那个exe启动<br><img src="https://img-blog.csdnimg.cn/c86795e2fda8444db7309efeaa84da2c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="成功启动"><br>点击cli 测试,输入ping 输出pong 即是连接成功<br><img src="https://img-blog.csdnimg.cn/3b22048ca1ec435597c9ed1aa527c53f.png" srcset="/img/newloading.gif" lazyload alt="pong"><br><strong>Linux端</strong></p>
-<p>下载安装包<br><img src="https://img-blog.csdnimg.cn/f16644665dba4983a31c23d3b83c5702.png" srcset="/img/newloading.gif" lazyload alt="压缩包"><br>解压完成<br><img src="https://img-blog.csdnimg.cn/5c52be25b5534e1080e965913d366888.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_12,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="解压完成"><br>安装运行所需的c环境<br><img src="https://img-blog.csdnimg.cn/8838edb0280b4b5abfaab4135c8ca2be.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="安装环境"><br>安装完成<br><img src="https://img-blog.csdnimg.cn/0c38b2cd72424b60addccdbca212e677.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="查看安装成功没"><br>执行make命令<br><img src="https://img-blog.csdnimg.cn/d6f64e5f9cd6411893909c831e89e075.png" srcset="/img/newloading.gif" lazyload alt="make完成后"><br>make install查看是否完成安装<br><img src="https://img-blog.csdnimg.cn/fe6876fa0c584c27b9af08ba0ee58a6d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_13,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="看看都install没有"></p>
-<p class="note note-success">默认路径 /usr/local/bin</p>
-
-<p><img src="https://img-blog.csdnimg.cn/21bed7fe9a36431a932ab3b7648a4411.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="查看bin"><br>将配置文件从安装目录拷贝到bin下的Nconfig<br><img src="https://img-blog.csdnimg.cn/b86b3bd297354b5cb3c0c17deafe6d3b.png" srcset="/img/newloading.gif" lazyload alt="将配置文件拷贝到Nconfig "><br>修改配置文件<br><img src="https://img-blog.csdnimg.cn/f90de701640e4b93a4e422ef46e86ebe.png" srcset="/img/newloading.gif" lazyload alt="修改这个配置文件"><br>把这里改为yes即可开机启动</p>
-<p><img src="https://img-blog.csdnimg.cn/397733849c1f4523afb63c2352e3d5ee.png" srcset="/img/newloading.gif" lazyload alt="开机启动"></p>
-<p>这里通过指定的配置文件启动服务，我们刚刚拷贝的那个<br><img src="https://img-blog.csdnimg.cn/43dac1969690459b981f2a8a44745c51.png" srcset="/img/newloading.gif" lazyload alt="指定配置文件"><br>测试连接是否成功<br><img src="https://img-blog.csdnimg.cn/969abc7898034775a8d97412eb2ca797.png" srcset="/img/newloading.gif" lazyload alt="成功"><br>关机指令<br><img src="https://img-blog.csdnimg.cn/a76359f377774fd8a683c4805d57d2eb.png" srcset="/img/newloading.gif" lazyload alt="关机"></p>
+<h2 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h2><p>CSDN上面有很多教程，这里不再赘述</p>
 <h1 id="三、基本指令"><a href="#三、基本指令" class="headerlink" title="三、基本指令"></a>三、基本指令</h1><h2 id="1、切换数据库"><a href="#1、切换数据库" class="headerlink" title="1、切换数据库"></a>1、切换数据库</h2><p>redis 默认有16个数据库<br><img src="https://img-blog.csdnimg.cn/ec8e9de43ea542e89eb0bfff344a6702.png" srcset="/img/newloading.gif" lazyload alt="配置文件里面的"></p>
 <p>可以使用select进行切换数据库</p>
 <figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">127.0.0.1:6379</span>&gt; select <span class="hljs-number">3</span>                 # 切换数据库<br><br>OK<br><br><span class="hljs-number">127.0.0.1:6379</span><span class="hljs-string">[3]</span>&gt; dbsize                #查看数据库所占的大小 <br><br>(integer) <span class="hljs-number">0</span><br><br><span class="hljs-number">127.0.0.1:6379</span><span class="hljs-string">[3]</span>&gt;<br></code></pre></td></tr></table></figure>
@@ -902,22 +916,6 @@
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/database/">database</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/database/">database</a>
-                    
-                      <a class="hover-with-bg" href="/tags/NoSQL/">NoSQL</a>
-                    
-                  </div>
                 
               </div>
               
