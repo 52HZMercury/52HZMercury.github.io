@@ -24,7 +24,7 @@
 <meta property="og:description" content="关于前端三件套CSS的一个简单的笔记">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-17T12:12:46.000Z">
-<meta property="article:modified_time" content="2022-04-19T08:52:42.910Z">
+<meta property="article:modified_time" content="2022-04-19T10:56:41.237Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="css">
 <meta name="twitter:card" content="summary_large_image">
@@ -258,16 +258,16 @@
 </div>
 
 <h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><p>   <em>层叠样式表</em></p>
-<h2 id="1）-内联样式："><a href="#1）-内联样式：" class="headerlink" title="1） 内联样式："></a>1） 内联样式：</h2><pre><code>   *在标签内使用style属性指定css代码*
+<h2 id="1-内联样式："><a href="#1-内联样式：" class="headerlink" title="1. 内联样式："></a>1. 内联样式：</h2><pre><code>   *在标签内使用style属性指定css代码*
 </code></pre>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">&lt;<span class="hljs-selector-tag">div</span> style = &quot;<span class="hljs-attribute">color</span> :red ;&quot;&gt;hello css&lt;/<span class="hljs-selector-tag">div</span>&gt;<br></code></pre></td></tr></table></figure>
 
-<h2 id="2）内部样式："><a href="#2）内部样式：" class="headerlink" title="2）内部样式："></a>2）内部样式：</h2><p><em>在head标签内，定义style标签</em></p>
+<h2 id="2-内部样式："><a href="#2-内部样式：" class="headerlink" title="2. 内部样式："></a>2. 内部样式：</h2><p><em>在head标签内，定义style标签</em></p>
 <p>​         </p>
 <p>​        </p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs css"> &lt;style&gt;<br><br>              <span class="hljs-selector-tag">div</span>&#123;<br><br>                     <span class="hljs-attribute">color</span>:blue;<br><br>               &#125;<br><br>         &lt;/style&gt;<br><br><br><br>&lt;<span class="hljs-selector-tag">div</span>&gt;hello css&lt;/<span class="hljs-selector-tag">div</span>&gt;<br></code></pre></td></tr></table></figure>
 
-<h2 id="3）外部样式"><a href="#3）外部样式" class="headerlink" title="3）外部样式"></a>3）外部样式</h2><p>​          </p>
+<h2 id="3-外部样式"><a href="#3-外部样式" class="headerlink" title="3. 外部样式"></a>3. 外部样式</h2><p>​          </p>
 <ul>
 <li><p>.定义css资源文件</p>
 <p>​       </p>
@@ -283,11 +283,11 @@
 <p>或者</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css">&lt;style&gt;<br><br>    <span class="hljs-keyword">@import</span>  <span class="hljs-string">&quot;css/a.css&quot;</span>;    来引入<br><br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
 
-<h2 id="4）css的语法"><a href="#4）css的语法" class="headerlink" title="4）css的语法"></a>4）css的语法</h2><p> 格式</p>
+<h2 id="4-css的语法"><a href="#4-css的语法" class="headerlink" title="4. css的语法"></a>4. css的语法</h2><p> 格式</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css">    选择器&#123;<br><br>           属性名：属性值；<br><br>           属性名：属性值；<br><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>最后一个属性可以不加  ；</p>
-<h2 id="5）选择器"><a href="#5）选择器" class="headerlink" title="5）选择器"></a>5）选择器</h2><p>   <strong>基础选择器</strong></p>
+<h2 id="5-选择器"><a href="#5-选择器" class="headerlink" title="5. 选择器"></a>5. 选择器</h2><p>   <strong>基础选择器</strong></p>
 <p>​            </p>
 <ul>
 <li><p>id选择器：</p>
@@ -358,7 +358,7 @@
 </ol>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs css">元素：状态<br><br>                      link:初始化状态<br><br>                      visited:被访问过的状态<br><br>                      active:正在访问的状态<br><br>                      hover:鼠标悬浮的状态<br></code></pre></td></tr></table></figure>
 
-<h2 id="6）属性"><a href="#6）属性" class="headerlink" title="6）属性"></a>6）属性</h2><p> 字体：</p>
+<h2 id="6-属性"><a href="#6-属性" class="headerlink" title="6. 属性"></a>6. 属性</h2><p> 字体：</p>
 <pre><code>  font-size:字体大小
 
   color:文本颜色
