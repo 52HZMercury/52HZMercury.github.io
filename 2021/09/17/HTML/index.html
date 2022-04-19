@@ -24,7 +24,7 @@
 <meta property="og:description" content="虽是一名后端的开发人员，但也不能一点前端都不懂，经典的前端三件套---html,css,js.带你从入门到精通(bushi)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-17T12:12:46.000Z">
-<meta property="article:modified_time" content="2022-04-18T13:55:56.624Z">
+<meta property="article:modified_time" content="2022-04-19T10:52:47.739Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="html">
 <meta name="twitter:card" content="summary_large_image">
@@ -208,7 +208,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.3k 字
+      6.1k 字
     </span>
   
 
@@ -217,7 +217,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14 分钟
+      19 分钟
     </span>
   
 
@@ -253,33 +253,59 @@
     <p>更新日志:<p>
     <ul> 
       <p>2021.9.17：根据狂神说的视频整理出该笔记</p>
-      <p>2022.4.18：由于学校前端选修课要考试了，根据沈大佬的笔记以及菜鸟教程和mdn文档做了一些修订和补充</p>
+      <p>2022.4.18：由于学校前端选修课要考试了，根据沈大佬的笔记以及教学PPT做了一些修订和补充</p>
     </ul>
 </div>
 
 
 
 
+
 <p class = "note note-info">关于前端的学习，这里推荐<a herf = "https://developer.mozilla.org/zh-CN/docs/Web">mdn文档 </a></p>
 
-<h1 id="一、HTML"><a href="#一、HTML" class="headerlink" title="一、HTML"></a>一、HTML</h1><h2 id="1-初识html"><a href="#1-初识html" class="headerlink" title="1. 初识html"></a>1. 初识html</h2><p>全称是Hyper Text Market Language（超文本标记语言) , 而超文本指的是流媒体、图片、声音、视频等等.</p>
+<h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><h2 id="1-初识html"><a href="#1-初识html" class="headerlink" title="1. 初识html"></a>1. 初识html</h2><p>全称是Hyper Text Market Language（超文本标记语言) , 而超文本指的是流媒体、图片、声音、视频等等.</p>
 <h3 id="1-1-特殊符号的表达"><a href="#1-1-特殊符号的表达" class="headerlink" title="1.1 特殊符号的表达"></a>1.1 特殊符号的表达</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs html"> <span class="hljs-comment">&lt;!--  特殊符号的样式  &amp;   ; --&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span>/&gt;</span>                           <span class="hljs-comment">&lt;!--换行--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>i love you <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>     <span class="hljs-comment">&lt;!--粗体--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span>i love you<span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span>              <span class="hljs-comment">&lt;!--斜体--&gt;</span><br><span class="hljs-symbol">&amp;nbsp;</span>                          <span class="hljs-comment">&lt;!--空格--&gt;</span><br><span class="hljs-symbol">&amp;gt;</span>                            <span class="hljs-comment">&lt;!--大于&gt;--&gt;</span><br><span class="hljs-symbol">&amp;lt;</span>                            <span class="hljs-comment">&lt;!--小于&lt;--&gt;</span><br></code></pre></td></tr></table></figure>
-<h3 id="1-2-关于图片，视频和音频"><a href="#1-2-关于图片，视频和音频" class="headerlink" title="1.2 关于图片，视频和音频"></a>1.2 关于图片，视频和音频</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--img </span><br><span class="hljs-comment">src : 图片地址  相对地址 绝对地址 或者 图片的链接</span><br><span class="hljs-comment">alt : 图片的名字</span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;../resources/imge/1.jpg&quot;</span> <span class="hljs-attr">alt</span> = <span class="hljs-string">&quot;chen&quot;</span> <span class="hljs-attr">title</span> = <span class="hljs-string">&quot;悬停文字&quot;</span> <span class="hljs-attr">width</span> = <span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">height</span> = <span class="hljs-string">&quot;100&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;https://s2.loli.net/2022/04/13/qzsEFCRXW89Vc7I.jpg&quot;</span> <span class="hljs-attr">alt</span> = <span class="hljs-string">&quot;chen&quot;</span> <span class="hljs-attr">title</span> = <span class="hljs-string">&quot;悬停文字&quot;</span> <span class="hljs-attr">width</span> = <span class="hljs-string">&quot;200&quot;</span> <span class="hljs-attr">height</span> = <span class="hljs-string">&quot;250&quot;</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--视频和音频--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;../resources/video/chen.mp4&quot;</span> &gt;</span>                    <span class="hljs-comment">&lt;!--同理这里也可以放链接--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;../resources/video/chen.mp4&quot;</span>  <span class="hljs-attr">controls</span>&gt;</span>           <span class="hljs-comment">&lt;!--加上进度条--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;../resources/video/chen.mp4&quot;</span> <span class="hljs-attr">controls</span> <span class="hljs-attr">autoplay</span>&gt;</span>   <span class="hljs-comment">&lt;!--自动播放--&gt;</span><br><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="1-2-行级元素和块级元素"><a href="#1-2-行级元素和块级元素" class="headerlink" title="1.2 行级元素和块级元素"></a>1.2 行级元素和块级元素</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>效果</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>块级元素</td>
+<td>独占一行</td>
+<td>div h p ul teble</td>
+</tr>
+<tr>
+<td>行级元素</td>
+<td>只占据内容的大小</td>
+<td>span td a img</td>
+</tr>
+</tbody></table>
+<p><span class = "label label-success" >示例</span></p>
+<div style="background-color: #FFCCFF">HTML</div>
+
+<p><span style="background-color: #FFCCFF">HTML</span></p>
+<h3 id="1-3-关于图片，视频和音频"><a href="#1-3-关于图片，视频和音频" class="headerlink" title="1.3 关于图片，视频和音频"></a>1.3 关于图片，视频和音频</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--img </span><br><span class="hljs-comment">src : 图片地址  相对地址 绝对地址 或者 图片的链接</span><br><span class="hljs-comment">alt : 图片的名字</span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;../resources/imge/1.jpg&quot;</span> <span class="hljs-attr">alt</span> = <span class="hljs-string">&quot;chen&quot;</span> <span class="hljs-attr">title</span> = <span class="hljs-string">&quot;悬停文字&quot;</span> <span class="hljs-attr">width</span> = <span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">height</span> = <span class="hljs-string">&quot;100&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;https://s2.loli.net/2022/04/13/qzsEFCRXW89Vc7I.jpg&quot;</span> <span class="hljs-attr">alt</span> = <span class="hljs-string">&quot;chen&quot;</span> <span class="hljs-attr">title</span> = <span class="hljs-string">&quot;悬停文字&quot;</span> <span class="hljs-attr">width</span> = <span class="hljs-string">&quot;200&quot;</span> <span class="hljs-attr">height</span> = <span class="hljs-string">&quot;250&quot;</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--视频和音频--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;../resources/video/chen.mp4&quot;</span> &gt;</span>                    <span class="hljs-comment">&lt;!--同理这里也可以放链接--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;../resources/video/chen.mp4&quot;</span>  <span class="hljs-attr">controls</span>&gt;</span>           <span class="hljs-comment">&lt;!--加上进度条--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;../resources/video/chen.mp4&quot;</span> <span class="hljs-attr">controls</span> <span class="hljs-attr">autoplay</span>&gt;</span>   <span class="hljs-comment">&lt;!--自动播放--&gt;</span><br><br></code></pre></td></tr></table></figure>
 
 <p><span class = "label label-success" >示例</span></p>
 <center><img src = "https://s2.loli.net/2022/04/13/qzsEFCRXW89Vc7I.jpg" alt = "chen" title = "悬停文字" width = "200" height = "250"></center>
 
 
 
-<h3 id="1-3-超链接"><a href="#1-3-超链接" class="headerlink" title="1.3 超链接"></a>1.3 超链接</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--a标签</span><br><span class="hljs-comment">href : 必填，表示要跳转到的那个页面</span><br><span class="hljs-comment">target ：表示窗口在哪里打开</span><br><span class="hljs-comment">          _blank : 在新标签打开</span><br><span class="hljs-comment">          _self: 在此窗口打开             </span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span> = <span class="hljs-string">&quot;https://space.bilibili.com/399488488&quot;</span> <span class="hljs-attr">target</span> = <span class="hljs-string">&quot;_blank&quot;</span>&gt;</span>点我<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h3 id="1-4-超链接"><a href="#1-4-超链接" class="headerlink" title="1.4 超链接"></a>1.4 超链接</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--a标签</span><br><span class="hljs-comment">href : 必填，表示要跳转到的那个页面</span><br><span class="hljs-comment">target ：表示窗口在哪里打开</span><br><span class="hljs-comment">          _blank : 在新标签打开</span><br><span class="hljs-comment">          _self: 在此窗口打开             </span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span> = <span class="hljs-string">&quot;https://space.bilibili.com/399488488&quot;</span> <span class="hljs-attr">target</span> = <span class="hljs-string">&quot;_blank&quot;</span>&gt;</span>点我<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p><span class = "label label-success" >示例</span></p>
 <p> <a href = "https://space.bilibili.com/399488488" target = "_blank">点我</a></p>
-<h3 id="1-4-锚链接"><a href="#1-4-锚链接" class="headerlink" title="1.4 锚链接"></a>1.4 锚链接</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--锚链接</span><br><span class="hljs-comment">1. 需要一个锚标记</span><br><span class="hljs-comment">2. 跳转到标记</span><br><span class="hljs-comment"> #</span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span> = <span class="hljs-string">&quot;#&quot;</span> &gt;</span>回到顶部<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><br></code></pre></td></tr></table></figure>
+<h3 id="1-5-锚链接"><a href="#1-5-锚链接" class="headerlink" title="1.5 锚链接"></a>1.5 锚链接</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--锚链接</span><br><span class="hljs-comment">1. 需要一个锚标记</span><br><span class="hljs-comment">2. 跳转到标记</span><br><span class="hljs-comment"> #</span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span> = <span class="hljs-string">&quot;#&quot;</span> &gt;</span>回到顶部<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><br></code></pre></td></tr></table></figure>
 
 <p><span class = "label label-success" >示例</span></p>
 <p><a href = "#" >回到顶部</a></p>
-<h3 id="1-5-功能性链接"><a href="#1-5-功能性链接" class="headerlink" title="1.5 功能性链接"></a>1.5 功能性链接</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;mailto:chenning_william@163.com&quot;</span>&gt;</span>点击联系我<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">hr</span>/&gt;</span> 此为分割线<br></code></pre></td></tr></table></figure>
+<h3 id="1-6-功能性链接"><a href="#1-6-功能性链接" class="headerlink" title="1.6 功能性链接"></a>1.6 功能性链接</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;mailto:chenning_william@163.com&quot;</span>&gt;</span>点击联系我<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">hr</span>/&gt;</span> 此为分割线<br></code></pre></td></tr></table></figure>
 
 <p><span class = "label label-success" >示例</span></p>
 <p><a href="mailto:chenning_william@163.com">点击联系我</a></p>
@@ -287,7 +313,7 @@
 
 
 
-<h3 id="1-6-列表"><a href="#1-6-列表" class="headerlink" title="1.6 列表"></a>1.6 列表</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--有序列表--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">ol</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>java<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>python<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>c/c++<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>运维<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">ol</span>&gt;</span><br><br><br><span class="hljs-comment">&lt;!--无序列表--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>java<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>python<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>c/c++<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>运维<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--自定义列表--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dl</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span>学科<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>c/c++<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>java<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span>位置<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>成都<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>西安<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dl</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h3 id="1-7-列表"><a href="#1-7-列表" class="headerlink" title="1.7 列表"></a>1.7 列表</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--有序列表--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">ol</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>java<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>python<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>c/c++<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>运维<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">ol</span>&gt;</span><br><br><br><span class="hljs-comment">&lt;!--无序列表--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>java<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>python<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>c/c++<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>运维<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--自定义列表--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dl</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span>学科<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>c/c++<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>java<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span>位置<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>成都<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>西安<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dl</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p><span class = "label label-success">效果展示</span></p>
 <!--有序列表-->
@@ -323,28 +349,30 @@
 
 
 
-<h3 id="1-7-表格"><a href="#1-7-表格" class="headerlink" title="1.7 表格"></a>1.7 表格</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>1-1<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>1-2<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>1-3<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>1-4<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-1<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-2<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-3<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-4<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-1<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-2<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-3<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-4<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h3 id="1-8-表格"><a href="#1-8-表格" class="headerlink" title="1.8 表格"></a>1.8 表格</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">caption</span>&gt;</span>表格标题<span class="hljs-tag">&lt;/<span class="hljs-name">caption</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>1-1<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>1-2<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>1-3<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>1-4<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-1<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-2<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-3<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2-4<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-1<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-2<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-3<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>3-4<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <p><span class = "label label-success">效果展示</span></p>
 <table>
+    <caption>表格标题</caption>
     <tr>
       <td>1-1</td>
-        <td>1-2</td>
-        <td>1-3</td>
-        <td>1-4</td>
+      <td>1-2<td>
+      <td>1-3<td>
+      <td>1-4<td>
     </tr>
     <tr>
       <td>2-1</td>
-      <td>2-2</td>
-        <td>2-3</td>
-        <td>2-4</td>
+      <td>2-2<td>
+      <td>2-3<td>
+      <td>2-4<td>
     </tr>
     <tr>
       <td>3-1</td>
-        <td>3-2</td>
-        <td>3-3</td>
-        <td>3-4</td>
+      <td>3-2<td>
+      <td>3-3<td>
+      <td>3-4<td>
     </tr>
 </table>
+
 
 
 
@@ -413,10 +441,49 @@
 
 <h2 id="2-页面结构分析"><a href="#2-页面结构分析" class="headerlink" title="2. 页面结构分析"></a>2. 页面结构分析</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span> = <span class="hljs-string">&quot;en&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span> = <span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>页面结构分析<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">header</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>网页头部<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">section</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>网页主体<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">footer</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>网页脚部<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">footer</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
+<h3 id="head部分"><a href="#head部分" class="headerlink" title="head部分"></a>head部分</h3><p>HTML文档的头部标记主要包含页面标题标记、元信息标记、样式标记、脚本标记、链接标记等。头部标记所包含的信息一般不会显示在网页上</p>
+<h4 id="页面标题title"><a href="#页面标题title" class="headerlink" title="页面标题title"></a>页面标题title</h4><p> title标题信息显示在浏览器的标题栏上</p>
+<h4 id="元信息meta"><a href="#元信息meta" class="headerlink" title="元信息meta"></a>元信息meta</h4><p>META标记用来描述一个HTML网页文档的属性，也称为元信息（meta-information），这些信息并不会显示在浏览器的页面中。例如作者、日期和时间、网页描述、关键词、页面刷新等。<code>&lt;meta&gt;</code>标记位于文档的头部，其属性定义了与文档相关联的“名称/值”对。</p>
+<p class = "note note-success">name属性与content属性<p>    
 
+<p>name属性用于描述网页，它是以“名称/值”形式的名称，name属性的值所描述的内容(值)通过content属性表示，便于搜索引擎机器人查找、分类。其中最重要的是description、keywords和robots。</p>
+<p class = "note note-success">http-equiv属性与content属性<p>    
 
-
+<p>​    http-equiv属性用于提供HTTP协议的响应头报文(MIME文档头)，它是以“名称/值”形式的名称，http-equiv属性的值所描述的内容(值)通过content属性表示，通常为网页加载前提供给浏览器等设备使用。其中最重要的是content-type charset提供编码信息，refresh刷新与跳转页面，no-cache页面缓存，expires网页缓存过期时间。</p>
 <table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">content</td>
+<td align="left">some_text</td>
+<td>定义与http-equiv或name属性相关的元信息</td>
+</tr>
+<tr>
+<td align="left">http-equiv</td>
+<td align="left">content-type   expires refresh   set-cookie</td>
+<td>把content属性关联到HTTP头部。内容类型网页缓存过期时间刷新与跳转(重定向)页面  如果网页过期，那么存盘的cookie将被删除</td>
+</tr>
+<tr>
+<td align="left">name</td>
+<td align="left">author  description  keywords generator</td>
+<td>把content属性关联到一个名称。定义网页作者  定义网页简短描述  定义网页关键词 定义编辑器</td>
+</tr>
+<tr>
+<td align="left">scheme</td>
+<td align="left">some_text</td>
+<td>定义用于翻译content属性值的格式。</td>
+</tr>
+</tbody></table>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;keywords&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;信息参数&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;description&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;信息参数&quot;</span> /&gt;</span> <br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;content-type&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;text/html; charset=信息参数&quot;</span> /&gt;</span> <br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;generator&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;信息参数&quot;</span> /&gt;</span> <br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;author&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;信息参数&quot;</span>&gt;</span> <br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;refresh&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;时间； url=网址参数&quot;</span>&gt;</span> <br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;robots&quot;</span> <span class="hljs-attr">contect</span>=<span class="hljs-string">&quot;信息参数&quot;</span>&gt;</span> <br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="body部分"><a href="#body部分" class="headerlink" title="body部分"></a>body部分</h3><table>
 <thead>
 <tr>
 <th>元素名</th>
@@ -448,6 +515,14 @@
 <td>导航类辅助内容</td>
 </tr>
 </tbody></table>
+<p class = "note note-info">在网页设计中，HTML提供了4种颜色设置方法：<p> 
+
+<ul>
+<li>使用RGB（R，G，B），其中R、G、B是整数，取值范围：0～255；</li>
+<li>使用RGB（R%，G%，B%），其中R、G、B是整数，取值范围：0～100；</li>
+<li>使用3位或6位十六进制数#RGB或#RRGGBB，R、G、B为十六进制数，取值范围：0～9、A～F，每一种颜色用2位十六进制数表示，RR：红色部分，GG：绿色部分，BB：蓝色部分。红色为#FF0000；#RGB可以转换为#RRGGBB 。例如红色 分别 表示为#F00、#FF0000。</li>
+<li>使用颜色英文名称，如red表示红色，green表示绿色，blue表示蓝色等。</li>
+</ul>
 <h2 id="3-内联框架"><a href="#3-内联框架" class="headerlink" title="3. 内联框架"></a>3. 内联框架</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--</span><br><span class="hljs-comment">src : 引用页面的地址</span><br><span class="hljs-comment">name : 框架标识名</span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;path&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;mainFrame&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="嵌套网页"><a href="#嵌套网页" class="headerlink" title="嵌套网页"></a>嵌套网页</h3><iframe src="https://52hzmercury.github.io/" width="100%" height="500" name="topFrame" scrolling="yes"  noresize="noresize" frameborder="0" id="topFrame"></iframe>
@@ -513,7 +588,7 @@
 </tr>
 <tr>
 <td>size</td>
-<td>指定表单元素的吃屎宽度，当type为text或password时，表单元素的大小易字符为单位。对于其他类型，宽度以像素为单位</td>
+<td>指定表单元素的宽度，当type为text或password时，表单元素的大小易字符为单位。对于其他类型，宽度以像素为单位</td>
 </tr>
 <tr>
 <td>maxlength</td>
@@ -742,6 +817,140 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;diyemail&quot;</span> <span class="hljs-attr">pattern</span> = <span class="hljs-string">&quot;/^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]&#123;2,4&#125;)$/&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>上述正则的意思是：以数字字母开头中间可以是多个数字字符下划线或 ‘ - ’，然后是字符 ‘@’ ，后面是数字字符，最后是字符 ‘ . ’ 加上2-4个字母结尾。</p>
+<h2 id="5-文本处理"><a href="#5-文本处理" class="headerlink" title="5. 文本处理"></a>5. 文本处理</h2><h3 id="5-1-标题字标记"><a href="#5-1-标题字标记" class="headerlink" title="5.1 标题字标记"></a>5.1 标题字标记</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--使用h1-h6和align控制--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">align</span>=<span class="hljs-string">&quot;center&quot;</span>  &gt;</span>Web前端开发技术<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">align</span>=<span class="hljs-string">&quot;left&quot;</span>  &gt;</span>Web前端开发技术<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">align</span>=<span class="hljs-string">&quot;center&quot;</span>  &gt;</span>Web前端开发技术<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h4</span> <span class="hljs-attr">align</span>=<span class="hljs-string">&quot;right&quot;</span>  &gt;</span>Web前端开发技术<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h5</span> <span class="hljs-attr">align</span>=<span class="hljs-string">&quot;justify&quot;</span>  &gt;</span>Web前端开发技术<span class="hljs-tag">&lt;/<span class="hljs-name">h5</span>&gt;</span>   <span class="hljs-comment">&lt;!--均等对齐。有些浏览器不支持--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h6</span> <span class="hljs-attr">align</span>=<span class="hljs-string">&quot;center&quot;</span>  &gt;</span>Web前端开发技术<span class="hljs-tag">&lt;/<span class="hljs-name">h6</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><span class = "label label-success">示例</span></p>
+  <h1 align="center"  >Web前端开发技术</h1>
+  <h2 align="left"  >Web前端开发技术</h2>
+  <h3 align="center"  >Web前端开发技术</h3>
+  <h4 align="right"  >Web前端开发技术</h4>
+  <h5 align="justify"  >Web前端开发技术</h5>
+  <h6 align="center"  >Web前端开发技术</h6>
+
+
+
+<h3 id="5-2-特殊符号"><a href="#5-2-特殊符号" class="headerlink" title="5.2 特殊符号"></a>5.2 特殊符号</h3><table>
+<thead>
+<tr>
+<th>显示结果</th>
+<th>说明</th>
+<th>Entity  Name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>显示一个空格</td>
+<td><code>&amp;nbsp;</code></td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+<td><code>&amp;lt; </code></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>大于</td>
+<td><code>&amp;gt; </code></td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>&amp;符号</td>
+<td><code>&amp;amp; </code></td>
+</tr>
+<tr>
+<td>“</td>
+<td>双引号</td>
+<td><code>&amp;quot;</code></td>
+</tr>
+<tr>
+<td>©</td>
+<td>版权</td>
+<td><code>&amp;copy;</code></td>
+</tr>
+<tr>
+<td>®</td>
+<td>注册商标</td>
+<td><code>&amp;reg; </code></td>
+</tr>
+<tr>
+<td>×</td>
+<td>乘号</td>
+<td><code>&amp;times; </code></td>
+</tr>
+<tr>
+<td>÷</td>
+<td>除号</td>
+<td><code>&amp;divide; </code></td>
+</tr>
+</tbody></table>
+<h3 id="5-3-物理样式标记"><a href="#5-3-物理样式标记" class="headerlink" title="5.3 物理样式标记"></a>5.3 物理样式标记</h3><table>
+<thead>
+<tr>
+<th>标记</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;b&gt;软件工程专业！&lt;/b&gt;</code></td>
+<td>黑体</td>
+</tr>
+<tr>
+<td><code>&lt;i&gt;软件工程专业！&lt;/i&gt; </code></td>
+<td>斜体</td>
+</tr>
+<tr>
+<td><code> &lt;u&gt;软件工程专业！&lt;/u&gt;</code></td>
+<td>下划线</td>
+</tr>
+<tr>
+<td><code>&lt;del&gt;软件工程专业！&lt;/del&gt;</code></td>
+<td>删除线</td>
+</tr>
+<tr>
+<td><code>&lt;small&gt;软件工程专业！&lt;/samll&gt;</code></td>
+<td>变小字号</td>
+</tr>
+<tr>
+<td><code>&lt;big&gt;软件工程专业！&lt;/big&gt;</code></td>
+<td>变大字号</td>
+</tr>
+<tr>
+<td><code>&lt;sup&gt;软件工程专业！&lt;/sup&gt;   </code></td>
+<td>上标</td>
+</tr>
+<tr>
+<td><code>&lt;sub&gt;软件工程专业！&lt;/sub&gt;   </code></td>
+<td>下标</td>
+</tr>
+<tr>
+<td><code>&lt;tt&gt;软件工程专业！&lt;/tt&gt; </code></td>
+<td>打字机字体</td>
+</tr>
+</tbody></table>
+<h3 id="5-4-换行"><a href="#5-4-换行" class="headerlink" title="5.4 换行"></a>5.4 换行</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span> 换行<br><span class="hljs-tag">&lt;<span class="hljs-name">nobr</span>&gt;</span> 不换行 <span class="hljs-tag">&lt;/<span class="hljs-name">nobr</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">wbr</span>&gt;</span>  强制换行 <span class="hljs-tag">&lt;/<span class="hljs-name">wbr</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="5-5-段落缩进"><a href="#5-5-段落缩进" class="headerlink" title="5.5 段落缩进"></a>5.5 段落缩进</h3><p>一对blockquote标记能够向右缩进5个西方字符的位置。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">h5</span> <span class="hljs-attr">align</span>=<span class="hljs-string">&quot;center&quot;</span>&gt;</span>段落缩进标记的应用<span class="hljs-tag">&lt;/<span class="hljs-name">h5</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">hr</span> <span class="hljs-attr">color</span>=<span class="hljs-string">&quot;green&quot;</span>&gt;</span><br>没有缩进的文字内容<br><span class="hljs-tag">&lt;<span class="hljs-name">blockquote</span>&gt;</span>缩进的文字内容<span class="hljs-tag">&lt;/<span class="hljs-name">blockquote</span>&gt;</span>   <br><span class="hljs-tag">&lt;<span class="hljs-name">blockquote</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">blockquote</span>&gt;</span>缩进的文字内容<span class="hljs-tag">&lt;/<span class="hljs-name">blockquote</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">blockquote</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><span class = "label label-success">示例</span></p>
+ <h5 align="center">段落缩进标记的应用</h5>
+ <hr color="green">
+ 没有缩进的文字内容
+ <blockquote>缩进的文字内容</blockquote>   
+ <blockquote><blockquote>缩进的文字内容</blockquote></blockquote>
+
+<h3 id="5-6-预格式化标记"><a href="#5-6-预格式化标记" class="headerlink" title="5.6 预格式化标记"></a>5.6 预格式化标记</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs <pre></pre>```标记对网页中的文字段落进行预格式化，浏览器会完整保留设计者在源文件中所定义的格式，包括各种空格、缩进以及其他特殊格式。"><br>```html<br>&lt;pre&gt;预格式化文本 &lt;/pre &gt; <br>&lt;pre&gt;<br>		  春 晓 			    <br>		    孟浩然 <br>         春眠不觉晓，<br>         处处闻啼鸟。<br>         夜来风雨声，<br>         花落知多少。<br>&lt;/pre&gt;<br></code></pre></td></tr></table></figure>
+
+<p><span class = "label label-success">示例</span></p>
+<pre>预格式化文本 </pre > 
+<pre>
+          春 晓                 
+            孟浩然 
+         春眠不觉晓，
+         处处闻啼鸟。
+         夜来风雨声，
+         花落知多少。
+</pre>
 
             </div>
             <hr>
