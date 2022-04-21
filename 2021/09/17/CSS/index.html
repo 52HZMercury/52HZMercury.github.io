@@ -24,7 +24,7 @@
 <meta property="og:description" content="关于前端三件套CSS的一个简单的笔记">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-17T12:12:46.000Z">
-<meta property="article:modified_time" content="2022-04-20T13:41:41.551Z">
+<meta property="article:modified_time" content="2022-04-21T09:10:41.159Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="css">
 <meta name="twitter:card" content="summary_large_image">
@@ -208,7 +208,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.7k 字
+      4.8k 字
     </span>
   
 
@@ -217,7 +217,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8 分钟
+      15 分钟
     </span>
   
 
@@ -333,14 +333,12 @@
 
 
 
-<h4 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h4><p>一种特殊的类选择符，最大的作用就是对链接<a>的不同状态定义不同的样式效果</p>
+<h4 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h4><p>一种特殊的类选择符，最大的作用就是对链接<code>&lt;a&gt;</code>的不同状态定义不同的样式效果</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:link</span>&#123;<span class="hljs-attribute">color</span>:<span class="hljs-number">#339999</span>;text-decration:none;&#125;<br><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:visited</span>&#123;<span class="hljs-attribute">color</span>:<span class="hljs-number">#33cc00</span>;text-decration:none&#125;<br><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:hover</span>&#123;<span class="hljs-attribute">color</span>:red;text-decration:underline;&#125;<br><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:active</span>&#123;<span class="hljs-attribute">color</span>:blue;text-decration:underline;&#125;<br><br>&lt;!--<br><br>link:初始化状态<br><br>visited:被访问过的状态<br><br>active:正在访问的状态<br><br>hover:鼠标悬浮的状态<br><br>--&gt;<br></code></pre></td></tr></table></figure>
 
 <p>在支持CSS的浏览器中，链接的不同状态都可以不同的方式显示，这些状态包括：未被访问状态,  已被访问状态，鼠标悬停状态,  活动状态。</p>
 <div class = "note note-warning"> 注意：</div>
- a:hover 必须被置于a:link 和a:visited 之后，才是有效的。a:active必须被置于a:hover之后，才是有效的
-
-<div class = "note note-warning">注意</div>
+- a:hover 必须被置于a:link 和a:visited 之后，才是有效的。a:active必须被置于a:hover之后，才是有效的
 
 <ul>
 <li>CSS规定样式的优先级 <span class = "label label-danger">行内样式 &gt; id样式 &gt; 类样式 &gt; 标记样式 </span></li>
@@ -351,23 +349,38 @@
 <tr>
 <th>属性</th>
 <th>作用</th>
+<th>属性值</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>font-size</td>
 <td>字体大小</td>
+<td>40px|2.5em   （px/16=em）</td>
 </tr>
 <tr>
 <td>color</td>
 <td>文本颜色</td>
+<td>#FFCCFF</td>
 </tr>
 <tr>
 <td>text-align</td>
 <td>对其方式</td>
+<td>center | left | right | justify</td>
 </tr>
 <tr>
 <td>line-height</td>
 <td>行高</td>
+<td>px</td>
+</tr>
+<tr>
+<td>font-style</td>
+<td>字体样式 正常|斜体</td>
+<td>normal|italic</td>
+</tr>
+<tr>
+<td>font-weight</td>
+<td>指定字体的粗细</td>
+<td>px</td>
 </tr>
 </tbody></table>
 <h3 id="6-2-边框"><a href="#6-2-边框" class="headerlink" title="6.2 边框"></a>6.2 边框</h3><table>
@@ -380,20 +393,22 @@
 </thead>
 <tbody><tr>
 <td>border</td>
-<td>设置边框，复合属性</td>
-<td>1px solid red</td>
+<td>设置边框粗细 、实虚线 、颜色</td>
+<td>1px  solid | dashed   red</td>
 </tr>
 </tbody></table>
 <h3 id="6-3-背景"><a href="#6-3-背景" class="headerlink" title="6.3  背景"></a>6.3  背景</h3><table>
 <thead>
 <tr>
 <th>属性</th>
+<th>作用</th>
 <th>属性值</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>background</td>
-<td>url(“….”)  no-repeat  center</td>
+<td>控制背景图片、不重复、居中</td>
+<td>url(“….”)     no-repeat     center</td>
 </tr>
 </tbody></table>
 <h3 id="6-4-尺寸"><a href="#6-4-尺寸" class="headerlink" title="6.4  尺寸"></a>6.4  尺寸</h3><table>
@@ -412,27 +427,125 @@
 <td>..px</td>
 </tr>
 </tbody></table>
-<h3 id="6-5-边距"><a href="#6-5-边距" class="headerlink" title="6.5 边距"></a>6.5 边距</h3><table>
+<h2 id="7-布局"><a href="#7-布局" class="headerlink" title="7. 布局"></a>7. 布局</h2><h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><ul>
+<li><p>inline：此元素将显示为行内元素（行内元素默认的 display属性值）</p>
+</li>
+<li><p>block：此元素将显示为块元素（块元素默认的 display属性值）。</p>
+</li>
+<li><p>inline- block：此元素将显示为行内块元素，可以对其设置宽度、高度和对齐等属性，但是该元素不会独占一行。</p>
+</li>
+<li><p>none：此元素将被隐藏，不显示，也不占用页面空间，相当于该元素不存在。</p>
+</li>
+</ul>
+<h3 id="position"><a href="#position" class="headerlink" title="position"></a>position</h3><h4 id="静态定位-static"><a href="#静态定位-static" class="headerlink" title="静态定位 static"></a>静态定位 static</h4><ol>
+<li>静态定位是元素默认的定位方式，是各个元素在HTML文档流中默认的位置。</li>
+<li>块级元素生成一个矩形框，作为文档流的一部分，行内元素则会创建一个或多个行框，置于其父元素中。</li>
+<li>在静态定位方式中，无法通过位置偏移属性（top、bottom、left或right）来改变元素的位置</li>
+</ol>
+<h4 id="相对定位-relative"><a href="#相对定位-relative" class="headerlink" title="相对定位 relative"></a>相对定位 relative</h4><ol>
+<li>相对定位是普通文档流的一部分，相当于本元素在文档流原来出现位置的左上角进行定位。</li>
+<li>可以通过位置偏移属性（top、bottom、left或right）来改变元素的位置。</li>
+<li>虽然其移动到其他位置，但该元素仍占据原来未移动时的位置，该元素移动后会导致其覆盖其他的框元素。</li>
+</ol>
+<h4 id="绝对定位-absolute"><a href="#绝对定位-absolute" class="headerlink" title="绝对定位 absolute"></a>绝对定位 <strong>absolute</strong></h4><ol>
+<li>绝对定位是脱离文档流的，不占据其原来未移动时的位置,是相对于父级元素或更高的祖先级中有relative（相对）定位,并且离本元素层级关系上最近元素的左上角进行定位,如果在祖先元素中没有relative定位的，就默认相对于body进行定位。</li>
+<li>使用绝对定位的时候，一般要给出上一个相对定位的元素作为参考点。</li>
+</ol>
+<h4 id="固定定位-fixed"><a href="#固定定位-fixed" class="headerlink" title="固定定位 fixed"></a>固定定位 fixed</h4><ol>
+<li>当元素被设置为固定定位的时候，该元素将脱离标准文档流的控制，始终依据浏览器窗口的左上角位置来定义自己的显示位置。</li>
+</ol>
+<div class = "note note-info">总结：</div>   
+
+<table>
 <thead>
 <tr>
-<th>属性</th>
+<th>属性值</th>
 <th>作用</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>margin</td>
-<td>外边距</td>
+<td><strong>absolute</strong></td>
+<td>生成绝对定位的元素，相对于  static 定位以外的第一个父元素进行定位。元素的位置通过 “left”, “top”,  “right” 以及 “bottom” 属性进行规定。</td>
 </tr>
 <tr>
-<td>padding</td>
-<td>内边距</td>
+<td><strong>fixed</strong></td>
+<td>生成固定定位的元素，相对于浏览器窗口左上角进行定位。元素的位置通过  “left”, “top”, “right” 以及 “bottom”  属性进行规定。</td>
 </tr>
 <tr>
-<td>float</td>
-<td>浮动</td>
+<td><strong>relative</strong></td>
+<td>生成相对定位的元素，相对于其正常位置进行定位。因此，”left:20”  会向元素的 LEFT 位置添加 20 像素。</td>
+</tr>
+<tr>
+<td><strong>static</strong></td>
+<td>默认值。没有定位，元素出现在正常的流中（忽略  top, bottom, left, right 或者 z-index 声明）。</td>
+</tr>
+<tr>
+<td><strong>inherit</strong></td>
+<td>规定应该从父元素继承  position 属性的值。</td>
 </tr>
 </tbody></table>
-<h2 id="7-布局"><a href="#7-布局" class="headerlink" title="7. 布局"></a>7. 布局</h2>
+<h3 id="z-index-层叠次序"><a href="#z-index-层叠次序" class="headerlink" title="z-index(层叠次序)"></a>z-index(层叠次序)</h3><p><strong>z 轴</strong>定义为<strong>垂直</strong>延伸到显示区(垂直于你的显示器)的<strong>轴</strong>。如果为<strong>正数</strong>，则离用户更<strong>近</strong>，为<strong>负数</strong>则表示离用户更<strong>远</strong></p>
+<ul>
+<li><p>元素可拥有负的z-index 属性值</p>
+</li>
+<li><p>z-index 仅能在绝对定位元素（例如 position:absolute;）上起作用</p>
+</li>
+</ul>
+<h3 id="float"><a href="#float" class="headerlink" title="float"></a>float</h3><p>所谓的float就是CSS浮动，需要注意的是浮动脱离<strong>文档流</strong>，并且可以<strong>左</strong>浮动、<strong>右</strong>浮动</p>
+<ul>
+<li><p>元素左浮动后，则元素将会脱离文档流，直到其左边缘碰到包含框的左边缘。</p>
+</li>
+<li><p>三个框都左浮动，那么第一个框其左边缘碰到包含框的左边缘，另外两个框左浮动直到碰到前一个浮动框的右边框。</p>
+</li>
+<li><p>如果包含框太窄，无法容纳水平排列，则会向下进行浮动。</p>
+</li>
+</ul>
+<div class = "note note-info">说明：</div>   
+
+<p>以往这个属性总应用于图像，使文本围绕在图像周围，不过在 CSS 中，任何元素都可以浮动。浮动元素会生成一个块级框，而不论它本身是何种元素</p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>left</strong></td>
+<td>元素向左浮动。</td>
+</tr>
+<tr>
+<td><strong>right</strong></td>
+<td>元素向右浮动。</td>
+</tr>
+<tr>
+<td><strong>none</strong></td>
+<td>默认值。元素不浮动，并会显示在其在文本中出现的位置。</td>
+</tr>
+<tr>
+<td><strong>inherit</strong></td>
+<td>规定应该从父元素继承  float属性的值。</td>
+</tr>
+</tbody></table>
+<div class = "note note-warning">注意：</div>
+元素浮动之后，周围的元素会重新排列，为了避免这种情况，使用 clear 属性。clear 属性指定元素两侧不能出现浮动元素。使用 clear 属性往文本中添加图片廊
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.text_line</span><br>&#123;<br>    <span class="hljs-attribute">clear</span>:both;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="CSS溢出"><a href="#CSS溢出" class="headerlink" title="CSS溢出"></a>CSS溢出</h3><p>在盒子模型中的代表块元素的矩形对象，可以通过CSS样式来定义内容区域的高度与宽度，当这个内容无法容纳子矩形对象时，对于这些子矩形对象必须决定怎么显示，显示什么，这样的处理规则就称为溢出处理</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">overflow</span>：visible｜hidden｜scroll｜<span class="hljs-attribute">auto</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="visibility属性"><a href="#visibility属性" class="headerlink" title="visibility属性"></a>visibility属性</h3><p>在CSS中可以使用 <strong>visibility</strong>（可见性）来设置对象是否<strong>可见</strong>，该属性的语法格式如下所示：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">visibility</span>: visible | hidden<br></code></pre></td></tr></table></figure>
+
+<p>visibility属性设置隐藏，但隐藏后其原来位置仍然被占用。注意与display:none的区别</p>
+<p>　　</p>
+<h3 id="边框"><a href="#边框" class="headerlink" title="边框"></a>边框</h3><p>元素的边框（border）是围绕元素内容和内边距的一条或多条线。CSS中使用border属性设置元素边框的样式、宽度和颜色。</p>
+<p>边框线定义方式如下：</p>
+<p>border: 宽度、样式，颜色;</p>
+<p>border-width，border-color</p>
+<p>border-top….</p>
+
             </div>
             <hr>
             <div>
