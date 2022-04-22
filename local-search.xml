@@ -4,13 +4,25 @@
   
   
   <entry>
-    <title></title>
+    <title>jQuery</title>
     <link href="/2022/04/22/jQuery/"/>
     <url>/2022/04/22/jQuery/</url>
     
-    <content type="html"><![CDATA[<h2 id="jquery"><a href="#jquery" class="headerlink" title="jquery"></a>jquery</h2><p>导入在线的 或者本地的</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//在线引用</span><br>&lt;script src = <span class="hljs-string">&quot;某某在线引用网址&quot;</span>&gt;&lt;/script&gt;<br><br><span class="hljs-comment">//本地引用</span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;文件的目录&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><br><br><span class="hljs-comment">//仔细一想这不是智障吗，我为什么还要拎出来写</span><br></code></pre></td></tr></table></figure><p>这里最主要的就是记住一个公式  <strong>$(selector).action()</strong><br>下面主要就是这个公式的具体应用</p><p>选择</p><p><img src="https://img-blog.csdnimg.cn/8c44a2fc4552452899cca211aab8ed81.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16"><br>前面加   ‘ # ’</p><p>使用选择器</p><p><img src="https://img-blog.csdnimg.cn/67bb39d02b604554af9bff4d1692aac0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16"></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h2><p>导入在线的 或者本地的</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//在线引用</span><br>&lt;script src = <span class="hljs-string">&quot;某某在线引用网址&quot;</span>&gt;&lt;/script&gt;<br><br><span class="hljs-comment">//本地引用</span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span> = <span class="hljs-string">&quot;文件的目录&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><br><br><span class="hljs-comment">//仔细一想这不是智障吗，我为什么还要拎出来写</span><br></code></pre></td></tr></table></figure><p>这里最主要的就是记住一个公式  <strong>$(selector).action()</strong><br>下面主要就是这个公式的具体应用</p><p>选择</p><p><img src="https://img-blog.csdnimg.cn/8c44a2fc4552452899cca211aab8ed81.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16"><br>前面加   ‘ # ’</p><p>使用选择器</p><p><img src="https://img-blog.csdnimg.cn/67bb39d02b604554af9bff4d1692aac0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16"></p>]]></content>
     
     
+    <categories>
+      
+      <category>前端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>jQuery</tag>
+      
+    </tags>
     
   </entry>
   
