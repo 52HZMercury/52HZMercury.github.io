@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.mercuryblog.site/img/image-20220422214828118.png">
 <meta property="article:published_time" content="2021-09-17T12:12:46.000Z">
-<meta property="article:modified_time" content="2022-04-22T14:07:58.579Z">
+<meta property="article:modified_time" content="2022-04-26T12:01:13.348Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary_large_image">
@@ -539,6 +539,9 @@
 <p>bom对象就是浏览器的对象模型，核心是对window的操作，主要针对浏览器窗口交互，BOM包含了DOM</p>
 <p><img src="https://img.mercuryblog.site/img/image-20220422214828118.png" srcset="/img/newloading.gif" lazyload alt="bom对象模型图"></p>
 <h3 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h3><p>代表浏览器窗口</p>
+<p>页面跳转和重定向</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">window</span>.location.href = <span class="hljs-string">&quot;url&quot;</span>;<br><span class="hljs-built_in">window</span>.location.replace(<span class="hljs-string">&quot;url&quot;</span>);<br></code></pre></td></tr></table></figure>
+
 <h3 id="Navigator对象"><a href="#Navigator对象" class="headerlink" title="Navigator对象"></a>Navigator对象</h3><p>封装了浏览器的信息（大多数时候不会使用这个对象，因为会被认为的修改<br>所以不建议使用这些属性来判断和编写代码<br>）</p>
 <h3 id="screen对象"><a href="#screen对象" class="headerlink" title="screen对象"></a>screen对象</h3><p>screen.width  获取屏幕的宽度</p>
 <p>screen.height 获取长度</p>
