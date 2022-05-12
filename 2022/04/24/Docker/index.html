@@ -24,7 +24,7 @@
 <meta property="og:description" content="Docker是一个开源的应用容器引擎">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-24T09:31:46.000Z">
-<meta property="article:modified_time" content="2022-05-08T10:59:21.096Z">
+<meta property="article:modified_time" content="2022-05-12T11:24:56.338Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary_large_image">
@@ -208,7 +208,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      19k 字
+      21k 字
     </span>
   
 
@@ -217,7 +217,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      59 分钟
+      66 分钟
     </span>
   
 
@@ -394,6 +394,33 @@
 
 <h3 id="3-6-从容器拷贝文件到主机上"><a href="#3-6-从容器拷贝文件到主机上" class="headerlink" title="3.6 从容器拷贝文件到主机上"></a>3.6 从容器拷贝文件到主机上</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> docker cp 容器id : 容器内的路径   目的主机地址</span><br>[root@Mercury ~]# docker cp 3968ef35633d:/home/test.java /home<br></code></pre></td></tr></table></figure>
 
+<h2 id="4-小小的来实战一波"><a href="#4-小小的来实战一波" class="headerlink" title="4. 小小的来实战一波"></a>4. 小小的来实战一波</h2><h3 id="4-1-安装nginx"><a href="#4-1-安装nginx" class="headerlink" title="4.1 安装nginx"></a>4.1 安装nginx</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 首先docekr pull nginx 就不说了</span><br><span class="hljs-meta">#</span><span class="bash"> 下载好后就开始运行</span><br><span class="hljs-meta">#</span><span class="bash">  -d 后台运行</span><br><span class="hljs-meta">#</span><span class="bash">  -p 映射端口</span><br><span class="hljs-meta">#</span><span class="bash">  --name 起个名字</span><br><br>[root@Mercury ~]# docker run -d --name nginx01 -p 3344:80 nginx<br><br>7dfb5ccc4ee6146ca43cfecb66eeb52ad8ee01202e6cf5020b18e5d94e9048f3<br><br>[root@Mercury ~]# docker ps<br><br>CONTAINER ID   IMAGE    COMMAND                  CREATED           STATUS         PORTS                  NAMES<br><br>7dfb5ccc4ee6   nginx    &quot;/docker-entrypoint.…&quot;   11 seconds ago    Up 9 seconds   0.0.0.0:3344-&gt;80/tcp   nginx01<br>s<br>3968ef35633d   centos   &quot;/bin/bash&quot;              2 days ago        Up 2 days                             quirky_lewin<br></code></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs shell">[root@Mercury ~]# curl localhost:3344<br><br>&lt;!DOCTYPE html&gt;<br><br>&lt;html&gt;<br><br>&lt;head&gt;<br><br>&lt;title&gt;Welcome to nginx!&lt;/title&gt;<br><br>&lt;style&gt;<br><br>html &#123; color-scheme: light dark; &#125;<br><br>body &#123; width: 35em; margin: 0 auto;<br><br>font-family: Tahoma, Verdana, Arial, sans-serif; &#125;<br><br>&lt;/style&gt;<br><br>&lt;/head&gt;<br><br>&lt;body&gt;<br><br>&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;<br><br>&lt;p&gt;If you see this page, the nginx web server is successfully installed and<br><br>working. Further configuration is required.&lt;/p&gt;<br><br><br><br>&lt;p&gt;For online documentation and support please refer to<br><br>&lt;a href=&quot;http://nginx.org/&quot;&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;<br><br>Commercial support is available at<br><br>&lt;a href=&quot;http://nginx.com/&quot;&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;<br><br><br><br>&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;<br><br>&lt;/body&gt;<br><br>&lt;/html&gt;<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 测试成功！</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-2-安装可视化操作面板portainer"><a href="#4-2-安装可视化操作面板portainer" class="headerlink" title="4.2 安装可视化操作面板portainer"></a>4.2 安装可视化操作面板portainer</h3> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">[root@Mercury ~]# docker run -d -p 8080:9000 \<br><span class="hljs-meta"></span><br><span class="hljs-meta">&gt;</span><span class="bash"> --restart=always -v /var/run/docker.sock:/var/run/docker.sock --privileged=<span class="hljs-literal">true</span> portainer/portainer</span><br></code></pre></td></tr></table></figure>
+
+<p>没什么讲的，尽量不适用可视化面板</p>
+<h1 id="四-Docker镜像讲解"><a href="#四-Docker镜像讲解" class="headerlink" title="四. Docker镜像讲解"></a>四. Docker镜像讲解</h1><h2 id="1-镜像是什么"><a href="#1-镜像是什么" class="headerlink" title="1. 镜像是什么"></a>1. 镜像是什么</h2><p>镜像是一种轻量级，可执行的独立软件包，用来打包软件运行环境开发的软件，它包含运行某个软件所需的所有内容，包括代码，运行时的库环境变量和配置文件。所有的应用，直接打包docker镜像，就可以直接跑起来</p>
+<div class = "note note-warning">那么如何得到镜像呢？</div>
+
+<ul>
+<li>从远程仓库下载</li>
+<li>拷贝</li>
+<li>自己制作一个DockerFile</li>
+</ul>
+<h3 id="2-Docker镜像加载原理"><a href="#2-Docker镜像加载原理" class="headerlink" title="2. Docker镜像加载原理"></a>2. Docker镜像加载原理</h3><div class = "note note-success">UnionFS联合文件系统</div>
+
+<p>UnionFS(联合文件系统)是一种分层，轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下，Union文件系统是docker镜像的基础。镜像可以通过分层来进行继承，基于基础镜像(没有父镜像)，可以制作各种集体的应用镜像</p>
+<p>特性：一次同时加载多个文件系统，但从外面看起来，只能看到文件系统，联合加载会把各层文件叠加起来，这样最终的文件系统会包含所有的文件和目录</p>
+<div class = "note note-success">Docker镜像加载原理</div>
+
+<p>docker的镜像实际上哟一层一层的文件系统组成，这种层级的文件系统UnionFS.</p>
+<p>bootfs(boot file system) 主要包含bootloader和kernal，bootloader主要是引导加载kernal，linux刚启动时会加载bootfs文件系统，在docker镜像的最底层是bootfs。这一层与我们典型的Linux/Unix 系统是一样的，包含boot加载器和内核。当boot加载完成之后整个内核就都在内存中了，此时额你存的使用权已由bootfs转交给内核，此时系统也会卸载bootfs</p>
+<p>rootfs(root file system),在bootfs之上。包含的就是典型Linux系统的 /dev,/proc/,/bin,/etc等标准目录和文件。rootf就是各种不同操作系统发行版。比如Ubuntu,Centos等等</p>
 
             </div>
             <hr>
