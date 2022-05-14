@@ -24,7 +24,7 @@
 <meta property="og:description" content="Docker是一个开源的应用容器引擎">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-24T09:31:46.000Z">
-<meta property="article:modified_time" content="2022-05-12T11:24:56.338Z">
+<meta property="article:modified_time" content="2022-05-14T03:30:30.488Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary_large_image">
@@ -208,7 +208,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      21k 字
+      23k 字
     </span>
   
 
@@ -217,7 +217,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      66 分钟
+      71 分钟
     </span>
   
 
@@ -382,8 +382,16 @@
 
 <h3 id="2-4-启动和停止容器的操作"><a href="#2-4-启动和停止容器的操作" class="headerlink" title="2.4 启动和停止容器的操作"></a>2.4 启动和停止容器的操作</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker start 容器id               # 启动容器<br>docker restart 容器id             # 重启容器<br>docker stop 容器id                # 停止容器<br>docker kill 容器id                # 强制停止当前的容器<br></code></pre></td></tr></table></figure>
 
+<div note note-warning>区别</div>
+
+<p>docker run 后面指定的是一个镜像，而docker start指定的是一个容器，docker run是利用镜像生成容器，并启动容器，而docker start是启动一个之前生成过的容器</p>
 <h2 id="3-常用的其他命令"><a href="#3-常用的其他命令" class="headerlink" title="3. 常用的其他命令"></a>3. 常用的其他命令</h2><h3 id="3-1-后台启动容器"><a href="#3-1-后台启动容器" class="headerlink" title="3.1 后台启动容器"></a>3.1 后台启动容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 命令 docker run -d 镜像名</span><br>[root@Mercury /]# docker run -d centos <br><span class="hljs-meta">#</span><span class="bash"> 这里有个坑</span><br><span class="hljs-meta">#</span><span class="bash"> 容器使用后台运行，就必须要一个后台进程，docker发现没有应用，就会自动停止</span><br></code></pre></td></tr></table></figure>
 
+
+
+<div note note-warning> docker run -it centos /bin/bash 后面的 bin/bash的作用</div>
+
+<p>首先，docker run -it centos 的意思是，为centos这个镜像创建一个容器， -i和-t这两个参数的作用是，为该docker创建一个伪终端，这样就可以进入到容器的交互模式？（也就是直接进入到容器里面）后面的/bin/bash的作用是表示载入容器后运行bash ,docker中必须要保持一个进程的运行，要不然整个容器启动后就会马上kill itself，这样当你使用docker ps 查看启动的容器时，就会发现你刚刚创建的那个容器并不在已启动的容器队列中。这个/bin/bash就表示启动容器后启动bash，但是有些镜像不适合bash shell风格，会报错。</p>
 <h3 id="3-2-查看日志"><a href="#3-2-查看日志" class="headerlink" title="3.2 查看日志"></a>3.2 查看日志</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker logs -f -t --tail 容器id<br><br>-tf              # 显示日志<br>--tail number    # 要显示的日志数<br><br>docker logs -f -t --tail 10 dce7b86172bf     # 显示十条日志<br></code></pre></td></tr></table></figure>
 
 <h3 id="3-3-查看进程信息"><a href="#3-3-查看进程信息" class="headerlink" title="3.3 查看进程信息"></a>3.3 查看进程信息</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 命令docker top 容器id</span><br>[root@Mercury ~]# docker top 3968ef35633d<br>UID       PID           PPID             C              STIME               TTY             TIME          CMD           <br>root      10899         10880            0              May07               pts/0           00:00:00      /bin/bash<br></code></pre></td></tr></table></figure>
@@ -412,7 +420,7 @@
 <li>拷贝</li>
 <li>自己制作一个DockerFile</li>
 </ul>
-<h3 id="2-Docker镜像加载原理"><a href="#2-Docker镜像加载原理" class="headerlink" title="2. Docker镜像加载原理"></a>2. Docker镜像加载原理</h3><div class = "note note-success">UnionFS联合文件系统</div>
+<h2 id="2-Docker镜像加载原理"><a href="#2-Docker镜像加载原理" class="headerlink" title="2. Docker镜像加载原理"></a>2. Docker镜像加载原理</h2><div class = "note note-success">UnionFS联合文件系统</div>
 
 <p>UnionFS(联合文件系统)是一种分层，轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下，Union文件系统是docker镜像的基础。镜像可以通过分层来进行继承，基于基础镜像(没有父镜像)，可以制作各种集体的应用镜像</p>
 <p>特性：一次同时加载多个文件系统，但从外面看起来，只能看到文件系统，联合加载会把各层文件叠加起来，这样最终的文件系统会包含所有的文件和目录</p>
@@ -421,6 +429,43 @@
 <p>docker的镜像实际上哟一层一层的文件系统组成，这种层级的文件系统UnionFS.</p>
 <p>bootfs(boot file system) 主要包含bootloader和kernal，bootloader主要是引导加载kernal，linux刚启动时会加载bootfs文件系统，在docker镜像的最底层是bootfs。这一层与我们典型的Linux/Unix 系统是一样的，包含boot加载器和内核。当boot加载完成之后整个内核就都在内存中了，此时额你存的使用权已由bootfs转交给内核，此时系统也会卸载bootfs</p>
 <p>rootfs(root file system),在bootfs之上。包含的就是典型Linux系统的 /dev,/proc/,/bin,/etc等标准目录和文件。rootf就是各种不同操作系统发行版。比如Ubuntu,Centos等等</p>
+<div note note-success>为什么平时安装虚拟机的Centos都是好几个G，但是Docker才200多M?</div>
+
+<p>简单的来说就是，这个centos只有最基本的一些命令，是不完全的centos，是被阉割过的(刀法精准)，因此才会比较小</p>
+<h2 id="3-分层理解"><a href="#3-分层理解" class="headerlink" title="3. 分层理解"></a>3. 分层理解</h2><p>从之前的下载就可以看出，docker下载的时候是分层下载的</p>
+<div note note-danger>为什么要采用分层下载这种方式呢？</div>
+
+<p>最大的好处就是资源共享，比如这里有多个镜像都从相同的Base镜像构建而来，那么宿主机只需要在磁盘上面保留一份base镜像，同时内存中也只需要加载一份base镜像，这样就可以为所有的容器服务了，而且镜像的每一层都可以被共享。</p>
+<div note note-success>特点</div>
+
+<p>Docker的镜像都是只读的，当容器启动的时候，一个新的可写层被加载到镜像的顶部，这一层就是我们通常所讲的容器层，而容器之下的都叫镜像层。</p>
+<h1 id="五-容器数据卷"><a href="#五-容器数据卷" class="headerlink" title="五. 容器数据卷"></a>五. 容器数据卷</h1><p>总的来说就是容器的持久化和同步操作，容器之间也是可以数据共享的，这里就需要把容器内的内容同步一下</p>
+<p>挂载命令：docker run -it -v  主机目录: 容器内的目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -it -v  /home/test:/home  centos /bin/bash<br></code></pre></td></tr></table></figure>
+
+<div note note-warning>注意:</div>
+
+<p>这里的挂载是双向同步，哪一边修改了，都会进行同步</p>
+<p>可以使用inspect命令查看挂载，里面的mount即是挂载相关的配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">&quot;Mounts&quot;: [<br>   &#123;<br>    &quot;Type&quot;: &quot;bind&quot;,<br>    &quot;Source&quot;: &quot;/home/test&quot;,<br>    &quot;Destination&quot;: &quot;/home&quot;,<br>    &quot;Mode&quot;: &quot;&quot;,<br>    &quot;RW&quot;: true,<br>    &quot;Propagation&quot;: &quot;rprivate&quot;<br>   &#125;<br>  ]<br></code></pre></td></tr></table></figure>
+
+
+
+<p>我们这里就可以想到一个实际的用途(不然发明挂载干什么🤣) ，比如修改容器内的nginx的配置文件，</p>
+<h3 id="持久化mysql数据实战"><a href="#持久化mysql数据实战" class="headerlink" title="持久化mysql数据实战"></a>持久化mysql数据实战</h3><p>安装mysql</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull mysql:5.7<br></code></pre></td></tr></table></figure>
+
+<p>启动和配置</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs diff">docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag<br># 这个是官方的配置代码<br><br><span class="hljs-deletion">-d 后台运行</span><br><br><span class="hljs-deletion">-p 端口映射</span><br><br><span class="hljs-deletion">-v 卷挂载</span><br><br><span class="hljs-deletion">-e 环境配置</span><br><br><span class="hljs-deletion">--name 容器的名字</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>我们再额外配置一下端口映射</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d -p 3310:3306 -v /home/mysql:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name mysql01 mysql:5.7<br></code></pre></td></tr></table></figure>
+
+
+
+<p>假设将容器删除，挂载到本地的数据卷依旧并不会丢失，实现持久化功能</p>
 
             </div>
             <hr>
