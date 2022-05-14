@@ -23,11 +23,13 @@
 <meta property="og:site_name" content="Mercury&#39;s blog">
 <meta property="og:description" content="Docker是一个开源的应用容器引擎">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.mercuryblog.site/img/image-20220514195654277.png">
 <meta property="article:published_time" content="2022-04-24T09:31:46.000Z">
-<meta property="article:modified_time" content="2022-05-14T03:30:30.488Z">
+<meta property="article:modified_time" content="2022-05-14T12:32:45.574Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img.mercuryblog.site/img/image-20220514195654277.png">
   
   <title>Docker - Mercury&#39;s blog</title>
 
@@ -208,7 +210,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      23k 字
+      28k 字
     </span>
   
 
@@ -217,7 +219,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      71 分钟
+      87 分钟
     </span>
   
 
@@ -452,7 +454,7 @@
 
 
 <p>我们这里就可以想到一个实际的用途(不然发明挂载干什么🤣) ，比如修改容器内的nginx的配置文件，</p>
-<h3 id="持久化mysql数据实战"><a href="#持久化mysql数据实战" class="headerlink" title="持久化mysql数据实战"></a>持久化mysql数据实战</h3><p>安装mysql</p>
+<h2 id="1-持久化mysql数据实战"><a href="#1-持久化mysql数据实战" class="headerlink" title="1. 持久化mysql数据实战"></a>1. 持久化mysql数据实战</h2><p>安装mysql</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull mysql:5.7<br></code></pre></td></tr></table></figure>
 
 <p>启动和配置</p>
@@ -466,6 +468,99 @@
 
 
 <p>假设将容器删除，挂载到本地的数据卷依旧并不会丢失，实现持久化功能</p>
+<h2 id="2-具名挂载和匿名挂载"><a href="#2-具名挂载和匿名挂载" class="headerlink" title="2. 具名挂载和匿名挂载"></a>2. 具名挂载和匿名挂载</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 匿名挂载</span><br>-v 容器内路径<br>[root@Mercury dockerfile]# docker run -d -p --name nginx01 -v /et/nginx nginx<br><span class="hljs-meta">#</span><span class="bash"> 就是-v的时候只写了容器内的路径没有写容器外的路径，就是匿名挂载</span><br><span class="hljs-meta"></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 查看所有volume 的情况</span><br>docker volume ls<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 具名挂载</span><br>[root@Mercury dockerfile]# docker run -d -P --name nginx02 -v jumping-nginx:/etc/nginx nginx<br>[root@Mercury dockerfile]# docker volume ls<br>DRIVER    VOLUME NAME<br>local     2e6932c90fc933391e4481d1360ee083eb3477ceb7a097b1123d3370f43a7611<br>local     45d9e1935720bdab02775b3131bffe2a26bacda3090e2ad807d4a94385f52974<br>local     jumping-nginx<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 可以看到最下面的那个有了我们赋值的名字</span><br></code></pre></td></tr></table></figure>
+
+<p>查看一下这个卷</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell">[root@Mercury dockerfile]# docker volume inspect jumping-nginx<br>[<br>    &#123;<br>        &quot;CreatedAt&quot;: &quot;2022-05-14T19:35:12+08:00&quot;,<br>        &quot;Driver&quot;: &quot;local&quot;,<br>        &quot;Labels&quot;: null,<br>        &quot;Mountpoint&quot;: &quot;/var/lib/docker/volumes/jumping-nginx/_data&quot;,<br>        &quot;Name&quot;: &quot;jumping-nginx&quot;,<br>        &quot;Options&quot;: null,<br>        &quot;Scope&quot;: &quot;local&quot;<br>    &#125;<br>]<br></code></pre></td></tr></table></figure>
+
+
+
+<p>所有的docker容器内的卷，没有指定目录情况下都是在<span class = "label label-danger">/var/lib/docker/volumes/xxxx/_data</span></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">-v 容器内路径           # 匿名挂载<br>-v 卷名：容器内路径      # 具名挂载<br>-v 宿主机路径：容器内路径 # 指定路径挂载<br></code></pre></td></tr></table></figure>
+
+<div class = "note note-success">拓展</div>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 通过-v 容器内路径 ro rw 改变读写权限</span><br>ro         read only <br>rw         read write<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 只要有ro就说明这个路径只能通过宿主机来操作，容器内是无法操作的,默认都是rw</span><br>docker run -d -P --name nginx02 -v jumping-nginx:/etc/nginx:ro nginx<br>docker run -d -P --name nginx02 -v jumping-nginx:/etc/nginx:rw nginx<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-多个容器数据同步"><a href="#3-多个容器数据同步" class="headerlink" title="3. 多个容器数据同步"></a>3. 多个容器数据同步</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">[root@Mercury dockerfile]# docker run -d -p 3310:3306 -v /etc/mysql/conf.d -v /var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name mysql01 mysql:5.7<br><br>[root@Mercury dockerfile]# docker run -d -p 3310:3306  -e MYSQL_ROOT_PASSWORD=123456 --name mysql02 --volume-from mysql01 mysql:5.7<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 以上</span><br></code></pre></td></tr></table></figure>
+
+<p>容器之间的数据传递，数据卷容器的生命周期一直持续到容器停止使用为止，但如果持久化到了本地，便不会丢失</p>
+<h1 id="六-DockerFile"><a href="#六-DockerFile" class="headerlink" title="六. DockerFile"></a>六. DockerFile</h1><h2 id="1-初识Docker"><a href="#1-初识Docker" class="headerlink" title="1. 初识Docker"></a>1. 初识Docker</h2><p>介绍：</p>
+<p>构建步骤</p>
+<ol>
+<li>编写dockerfile文件</li>
+<li>docker build构建成为一个镜像</li>
+<li>docker run 运行镜像</li>
+<li>docker push 发布镜像</li>
+</ol>
+<p>基础知识</p>
+<p>每个关键字 （指令）都必须是大写字母</p>
+<p>执行从上到下顺序执行</p>
+<p># 表示注释</p>
+<p>每一个指令都会创建提交一个新的镜像层，并提交</p>
+<p><img src="https://img.mercuryblog.site/img/image-20220514195654277.png" srcset="/img/newloading.gif" lazyload alt="image-20220514195654277"></p>
+<h2 id="2-dockerfile命令"><a href="#2-dockerfile命令" class="headerlink" title="2. dockerfile命令"></a>2. dockerfile命令</h2><ul>
+<li><p>FROM 基础镜像，一切从这里构建</p>
+</li>
+<li><p>MAINTAINER  镜像是谁写的，姓名+邮箱</p>
+</li>
+<li><p>RUN 镜像构建的时候需要运行的命令</p>
+</li>
+<li><p>ADD 步骤，添加镜像内容</p>
+</li>
+<li><p>WORKDIR 镜像的工作目录</p>
+</li>
+<li><p>VOLUME 挂载的目录</p>
+</li>
+<li><p>EXPOSE 暴露端口</p>
+</li>
+<li><p>CMD 指定这个容器启动的时候需要的命令 只有最后一个会生效可以被替代</p>
+</li>
+<li><p>ENTRYPOINT 指定这个容器启动的时候需要的命令可以追加命令</p>
+</li>
+<li><p>ONBUILD 当构建一个被继承DockerFile 这个时候就会运行ONBUILD 的指令</p>
+</li>
+<li><p>COPY 类似ADD 将我们文件拷贝到镜像中</p>
+</li>
+<li><p>ENV 构建的时候设置环境变量</p>
+</li>
+</ul>
+<p>通过这个脚本生成镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell">FROM centos<br><br><br>VOLUME [&quot;volume01&quot;, &quot;volume02 &quot;]<br><br><br>CMD echo &quot;-----end-----&quot;<br><br>CMD /bin/bash<br><br><br>docker build -f dockerfilel -t /kuangshen/centos .<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-构建一个自己的centos"><a href="#3-构建一个自己的centos" class="headerlink" title="3. 构建一个自己的centos"></a>3. 构建一个自己的centos</h2><p>从源码中可以发现dockerhub中大部分的镜像都是从scratch 过来的，然后配置需要的软件来进行构建</p>
+<ol>
+<li>编写一个dockerfile文件</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim mydockerfile-centos<br></code></pre></td></tr></table></figure>
+
+<p>编写脚本安装 vim 和 net-tools</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs shell">FROM centos:7<br><br>MAINTAINER chenning&lt;chenning_william@163.com&gt;<br><br><br>ENV MYPATH /usr/local<br><br>WORKDIR $MYPATH<br><br><br>RUN yum -y install vim<br><br>RUN yum -y install net-tools<br><br> <br>EXPOSE 80<br><br><br>CMD echo $MYPATH <br><br>CMD echo &quot;----end----&quot;<br><br>CMD /bin/bash<br></code></pre></td></tr></table></figure>
+
+
+
+<p>2.build</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">[root@Mercury dockerfile]# docker build -f mydockerfile-centos -t mycentos:0.1 .<br><span class="hljs-meta"></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 成功后返回</span><br><br>Successfully built 76804282c147<br><br>Successfully tagged mycentos:0.1<br></code></pre></td></tr></table></figure>
+
+
+
+<p>3.测试运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 进入容器</span><br>[root@4859366666ba local]# pwd<br>/usr/local<br>[root@4859366666ba local]# ifconfig<br>eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt; mtu 1500<br>  inet 172.17.0.6 netmask 255.255.0.0 broadcast 172.17.255.255<br>  ether 02:42:ac:11:00:06 txqueuelen 0 (Ethernet)<br>  RX packets 0 bytes 0 (0.0 B)<br>  RX errors 0 dropped 0 overruns 0 frame 0<br>  TX packets 0 bytes 0 (0.0 B)<br>  TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0<br><br>lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt; mtu 65536<br>  inet 127.0.0.1 netmask 255.0.0.0<br>  loop txqueuelen 1000 (Local Loopback)<br>  RX packets 0 bytes 0 (0.0 B)<br>  RX errors 0 dropped 0 overruns 0 frame 0<br>  TX packets 0 bytes 0 (0.0 B)<br>  TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0<br><span class="hljs-meta">#</span><span class="bash"> 可以看到工作路径变成了  /usr/<span class="hljs-built_in">local</span> 而且ipconfig也能正常使用，说明成功了</span><br></code></pre></td></tr></table></figure>
+
+
+
+<ol start="4">
+<li>我们可以列出变更的历史</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell">[root@Mercury dockerfile]# docker history 76804282c147<br>IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT<br>76804282c147   7 minutes ago   /bin/sh -c #(nop)  CMD [&quot;/bin/sh&quot; &quot;-c&quot; &quot;/bin…   0B        <br>ef56285a896a   7 minutes ago   /bin/sh -c #(nop)  CMD [&quot;/bin/sh&quot; &quot;-c&quot; &quot;echo…   0B        <br>f43334273bac   7 minutes ago   /bin/sh -c #(nop)  CMD [&quot;/bin/sh&quot; &quot;-c&quot; &quot;echo…   0B        <br>9aee7126d86d   7 minutes ago   /bin/sh -c #(nop)  EXPOSE 80                    0B        <br>ec21bf9df499   7 minutes ago   /bin/sh -c yum -y install net-tools             166MB     <br>61dc5db67561   7 minutes ago   /bin/sh -c yum -y install vim                   221MB     <br>95e5b666e6fc   8 minutes ago   /bin/sh -c #(nop) WORKDIR /usr/local            0B        <br>3febcbabfc09   8 minutes ago   /bin/sh -c #(nop)  ENV MYPATH=/usr/local        0B        <br>d08da42f9b1f   8 minutes ago   /bin/sh -c #(nop)  MAINTAINER chenning&lt;chenn…   0B        <br>eeb6ee3f44bd   8 months ago    /bin/sh -c #(nop)  CMD [&quot;/bin/bash&quot;]            0B        <br>&lt;missing&gt;      8 months ago    /bin/sh -c #(nop)  LABEL org.label-schema.sc…   0B        <br>&lt;missing&gt;      8 months ago    /bin/sh -c #(nop) ADD file:b3ebbe8bd304723d4…   204MB<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-CMD和ENTRYPOINT区别"><a href="#4-CMD和ENTRYPOINT区别" class="headerlink" title="4. CMD和ENTRYPOINT区别"></a>4. CMD和ENTRYPOINT区别</h2><p>CMD </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 编写dockerfile文件</span><br>[root@Mercury dockerfile]# vim dockerfile-cmd-test<br>FROM centos<br>CMD [&quot;ls&quot;,&quot;-a&quot;]<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 构建镜像</span><br>[root@Mercury dockerfile]# docker build -f dockerfile-cmd-test -t cmdtest<br>[root@Mercury dockerfile]# docker run dd8e4401d47f   <br>...<br><span class="hljs-meta">#</span><span class="bash"> ls -a命令生效</span><br><br>[root@Mercury dockerfile]# docker run dd8e4401d47f -l<br>docker:error<br><span class="hljs-meta">#</span><span class="bash"> 但是如果追加命令docker run dd8e4401d47f -l 便会报错，因为-l取代了CMD [<span class="hljs-string">&quot;ls&quot;</span>,<span class="hljs-string">&quot;-a&quot;</span>]命令</span><br></code></pre></td></tr></table></figure>
+
+<p>ENTRYPOINT</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 编写dockerfile文件</span><br>[root@Mercury dockerfile]# vim dockerfile-cmd-test<br>FROM centos<br>ENTRYPOINT [&quot;ls&quot;,&quot;-a&quot;]<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 构建镜像</span><br>[root@Mercury dockerfile]# docker build -f dockerfile-cmd-test -t cmdtest<br>[root@Mercury dockerfile]# docker run dd8e4401d47f   <br>...<br><span class="hljs-meta">#</span><span class="bash"> ls -a命令生效</span><br><br>[root@Mercury dockerfile]# docker run dd8e4401d47f -l<br>...<br><span class="hljs-meta">#</span><span class="bash"> 如果追加命令docker run dd8e4401d47f -l 可以正常追加命令执行。</span><br><br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
