@@ -13,10 +13,10 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <meta property="og:type" content="website">
+  
+    <meta property="og:type" content="website">
 <meta property="og:title" content="分类">
 <meta property="og:url" content="http://example.com/categories/index.html">
 <meta property="og:site_name" content="Mercury&#39;s blog">
@@ -24,15 +24,22 @@
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
   <title>分类 - Mercury&#39;s blog</title>
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
 
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
 
@@ -41,21 +48,40 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/newloading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/newloading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
+
+  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-  <header style="height: 60vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
       <strong>Mercury</strong>
@@ -149,6 +175,7 @@
               &nbsp;<i class="iconfont icon-search"></i>&nbsp;
             </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
@@ -161,29 +188,35 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/Category%20Page.jpg') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="分类">
-              
-            </span>
+  
 
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/Category%20Page.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="分类"></span>
           
         </div>
+
+        
       </div>
+
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
     
       <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
+        <div id="board"
           >
           
           <div class="container">
@@ -198,24 +231,27 @@
 <div class="category-list">
   
   
-  
-  
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="前端"
         id="heading-9abfe4a03928eb88a75a5cd95822dfef" role="tab" data-toggle="collapse" href="#collapse-9abfe4a03928eb88a75a5cd95822dfef"
         aria-expanded="false"
       >
         前端
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/%E5%89%8D%E7%AB%AF/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>5</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-9abfe4a03928eb88a75a5cd95822dfef" role="tabpanel" aria-labelledby="heading-9abfe4a03928eb88a75a5cd95822dfef">
+      
+        <a href="/categories/%E5%89%8D%E7%AB%AF/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>5</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-9abfe4a03928eb88a75a5cd95822dfef"
+           role="tabpanel" aria-labelledby="heading-9abfe4a03928eb88a75a5cd95822dfef">
         
         
           
@@ -224,36 +260,46 @@
     
       
       
-        <a href="/2022/04/23/Ajax/" class="list-group-item list-group-item-action">
+        <a href="/2022/04/23/Ajax/" title="Ajax"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Ajax</span>
         </a>
       
     
       
       
-        <a href="/2022/04/22/jQuery/" class="list-group-item list-group-item-action">
+        <a href="/2022/04/22/jQuery/" title="jQuery"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">jQuery</span>
         </a>
       
     
       
       
-        <a href="/2021/09/17/JavaScript/" class="list-group-item list-group-item-action">
-          <span class="category-post">JavaScript基础</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2021/09/17/CSS/" class="list-group-item list-group-item-action">
+        <a href="/2021/09/17/CSS/" title="CSS"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">CSS</span>
         </a>
       
     
       
       
-        <a href="/2021/09/17/HTML/" class="list-group-item list-group-item-action">
+        <a href="/2021/09/17/HTML/" title="HTML"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">HTML</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/09/17/JavaScript/" title="JavaScript基础"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">JavaScript基础</span>
         </a>
       
     
@@ -265,20 +311,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="运维"
         id="heading-60eec86da0dbf4c99b14a66d4a37c1e3" role="tab" data-toggle="collapse" href="#collapse-60eec86da0dbf4c99b14a66d4a37c1e3"
         aria-expanded="false"
       >
         运维
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/%E8%BF%90%E7%BB%B4/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>4</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-60eec86da0dbf4c99b14a66d4a37c1e3" role="tabpanel" aria-labelledby="heading-60eec86da0dbf4c99b14a66d4a37c1e3">
+      
+        <a href="/categories/%E8%BF%90%E7%BB%B4/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>4</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-60eec86da0dbf4c99b14a66d4a37c1e3"
+           role="tabpanel" aria-labelledby="heading-60eec86da0dbf4c99b14a66d4a37c1e3">
         
         
           
@@ -287,28 +338,36 @@
     
       
       
-        <a href="/2022/04/24/Docker/" class="list-group-item list-group-item-action">
+        <a href="/2022/04/24/Docker/" title="Docker"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Docker</span>
         </a>
       
     
       
       
-        <a href="/2022/04/13/github%E5%8A%A0%E9%80%9F/" class="list-group-item list-group-item-action">
+        <a href="/2022/04/13/github%E5%8A%A0%E9%80%9F/" title="github加速"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">github加速</span>
         </a>
       
     
       
       
-        <a href="/2022/03/05/Git/" class="list-group-item list-group-item-action">
+        <a href="/2022/03/05/Git/" title="Git"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Git</span>
         </a>
       
     
       
       
-        <a href="/2022/02/21/Nginx/" class="list-group-item list-group-item-action">
+        <a href="/2022/02/21/Nginx/" title="Nginx"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Nginx</span>
         </a>
       
@@ -321,20 +380,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="spring"
         id="heading-2a2d595e6ed9a0b24f027f2b63b134d6" role="tab" data-toggle="collapse" href="#collapse-2a2d595e6ed9a0b24f027f2b63b134d6"
         aria-expanded="false"
       >
         spring
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/spring/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>3</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-2a2d595e6ed9a0b24f027f2b63b134d6" role="tabpanel" aria-labelledby="heading-2a2d595e6ed9a0b24f027f2b63b134d6">
+      
+        <a href="/categories/spring/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>3</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-2a2d595e6ed9a0b24f027f2b63b134d6"
+           role="tabpanel" aria-labelledby="heading-2a2d595e6ed9a0b24f027f2b63b134d6">
         
         
           
@@ -343,21 +407,27 @@
     
       
       
-        <a href="/2021/11/23/Swagger/" class="list-group-item list-group-item-action">
+        <a href="/2021/11/23/Swagger/" title="Swagger"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Swagger</span>
         </a>
       
     
       
       
-        <a href="/2021/10/24/springboot/" class="list-group-item list-group-item-action">
+        <a href="/2021/10/24/springboot/" title="springboot"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">springboot</span>
         </a>
       
     
       
       
-        <a href="/2021/07/15/SSM/" class="list-group-item list-group-item-action">
+        <a href="/2021/07/15/SSM/" title="SSM"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">SSM</span>
         </a>
       
@@ -370,20 +440,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Java"
         id="heading-d52387880e1ea22817a72d3759213819" role="tab" data-toggle="collapse" href="#collapse-d52387880e1ea22817a72d3759213819"
         aria-expanded="false"
       >
         Java
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/Java/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>2</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-d52387880e1ea22817a72d3759213819" role="tabpanel" aria-labelledby="heading-d52387880e1ea22817a72d3759213819">
+      
+        <a href="/categories/Java/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>2</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-d52387880e1ea22817a72d3759213819"
+           role="tabpanel" aria-labelledby="heading-d52387880e1ea22817a72d3759213819">
         
         
           
@@ -392,14 +467,18 @@
     
       
       
-        <a href="/2021/09/03/Java%E8%BF%9B%E9%98%B6/" class="list-group-item list-group-item-action">
+        <a href="/2021/09/03/Java%E8%BF%9B%E9%98%B6/" title="Java进阶"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Java进阶</span>
         </a>
       
     
       
       
-        <a href="/2021/09/01/JavaSE/" class="list-group-item list-group-item-action">
+        <a href="/2021/09/01/JavaSE/" title="JavaSE"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">JavaSE</span>
         </a>
       
@@ -412,20 +491,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="database"
         id="heading-11e0eed8d3696c0a632f822df385ab3c" role="tab" data-toggle="collapse" href="#collapse-11e0eed8d3696c0a632f822df385ab3c"
         aria-expanded="false"
       >
         database
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/database/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>2</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-11e0eed8d3696c0a632f822df385ab3c" role="tabpanel" aria-labelledby="heading-11e0eed8d3696c0a632f822df385ab3c">
+      
+        <a href="/categories/database/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>2</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-11e0eed8d3696c0a632f822df385ab3c"
+           role="tabpanel" aria-labelledby="heading-11e0eed8d3696c0a632f822df385ab3c">
         
         
           
@@ -434,14 +518,18 @@
     
       
       
-        <a href="/2022/05/20/Mybatis-Plus/" class="list-group-item list-group-item-action">
+        <a href="/2022/05/20/Mybatis-Plus/" title="Mybatis-Plus"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Mybatis-Plus</span>
         </a>
       
     
       
       
-        <a href="/2022/03/07/Redis/" class="list-group-item list-group-item-action">
+        <a href="/2022/03/07/Redis/" title="Redis"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Redis</span>
         </a>
       
@@ -454,20 +542,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="data structure"
         id="heading-37305dfb5e3ae8ec66b10a691aedead8" role="tab" data-toggle="collapse" href="#collapse-37305dfb5e3ae8ec66b10a691aedead8"
         aria-expanded="false"
       >
         data structure
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/data-structure/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-37305dfb5e3ae8ec66b10a691aedead8" role="tabpanel" aria-labelledby="heading-37305dfb5e3ae8ec66b10a691aedead8">
+      
+        <a href="/categories/data-structure/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>1</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-37305dfb5e3ae8ec66b10a691aedead8"
+           role="tabpanel" aria-labelledby="heading-37305dfb5e3ae8ec66b10a691aedead8">
         
         
           
@@ -476,7 +569,9 @@
     
       
       
-        <a href="/2021/12/17/Tree/" class="list-group-item list-group-item-action">
+        <a href="/2021/12/17/Tree/" title="Tree"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Tree</span>
         </a>
       
@@ -489,55 +584,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-17bc10091293fdc562a6db69940ee924" role="tab" data-toggle="collapse" href="#collapse-17bc10091293fdc562a6db69940ee924"
-        aria-expanded="false"
-      >
-        OS
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/OS/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-17bc10091293fdc562a6db69940ee924" role="tabpanel" aria-labelledby="heading-17bc10091293fdc562a6db69940ee924">
-        
-        
-          
-  <div class="category-post-list">
     
-    
-      
-      
-        <a href="/2022/02/17/linux/" class="list-group-item list-group-item-action">
-          <span class="category-post">linux</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="天文"
         id="heading-f4a56bc0c5c5852bd587610b45b233fa" role="tab" data-toggle="collapse" href="#collapse-f4a56bc0c5c5852bd587610b45b233fa"
         aria-expanded="false"
       >
         天文
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/%E5%A4%A9%E6%96%87/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-f4a56bc0c5c5852bd587610b45b233fa" role="tabpanel" aria-labelledby="heading-f4a56bc0c5c5852bd587610b45b233fa">
+      
+        <a href="/categories/%E5%A4%A9%E6%96%87/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>1</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-f4a56bc0c5c5852bd587610b45b233fa"
+           role="tabpanel" aria-labelledby="heading-f4a56bc0c5c5852bd587610b45b233fa">
         
         
           
@@ -546,7 +611,9 @@
     
       
       
-        <a href="/2022/05/06/%E6%98%9F%E7%A9%BA%E6%91%84%E5%BD%B1/" class="list-group-item list-group-item-action">
+        <a href="/2022/05/06/%E6%98%9F%E7%A9%BA%E6%91%84%E5%BD%B1/" title="星空摄影"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">星空摄影</span>
         </a>
       
@@ -557,7 +624,50 @@
       </div>
     </div>
   
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="OS"
+        id="heading-17bc10091293fdc562a6db69940ee924" role="tab" data-toggle="collapse" href="#collapse-17bc10091293fdc562a6db69940ee924"
+        aria-expanded="false"
+      >
+        OS
+        <span class="list-group-count"></span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+        <a href="/categories/OS/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>1</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-17bc10091293fdc562a6db69940ee924"
+           role="tabpanel" aria-labelledby="heading-17bc10091293fdc562a6db69940ee924">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/02/17/linux/" title="linux"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">linux</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
 </div>
+
 
               </div>
             </div>
@@ -586,59 +696,61 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-  <div class="statistics">
-    
-    
-
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
-  </div>
-
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
   
 
   
-</footer>
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
 
+  
+  
+  
+</div>
 
-  <!-- SCRIPTS -->
- 
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":100})
@@ -649,42 +761,23 @@
   </script>
 
 
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
 
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-  
-
-
-
-
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
       
-      typing(title)
+        typing(text);
       
     })(window, document);
   </script>
@@ -694,30 +787,30 @@
 
 
 
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
 
 
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
 
-<script type="text/javascript">
-//只在桌面版网页启用特效
-var windowWidth = $(window).width();
-if (windowWidth > 768) {
-    document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
-}
-</script>
-
-
-
-
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>
