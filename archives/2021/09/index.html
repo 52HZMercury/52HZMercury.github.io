@@ -239,15 +239,15 @@
     </a>
   
     
-    <a href="/2021/09/17/HTML/" class="list-group-item list-group-item-action">
-      <time>09-17</time>
-      <div class="list-group-item-title">HTML</div>
-    </a>
-  
-    
     <a href="/2021/09/17/JavaScript/" class="list-group-item list-group-item-action">
       <time>09-17</time>
       <div class="list-group-item-title">JavaScript基础</div>
+    </a>
+  
+    
+    <a href="/2021/09/17/HTML/" class="list-group-item list-group-item-action">
+      <time>09-17</time>
+      <div class="list-group-item-title">HTML</div>
     </a>
   
     
@@ -411,5 +411,14 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+
+  <!-- 樱花特效 -->
+  <script type="text/javascript">
+    var windowWidth = $(window).width();
+    if (windowWidth > 480) {
+      document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+    }
+  </script>
+
 </body>
 </html>
