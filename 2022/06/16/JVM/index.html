@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.mercuryblog.site/img/1654429960727.jpg">
 <meta property="article:published_time" content="2022-06-16T02:31:46.000Z">
-<meta property="article:modified_time" content="2022-06-19T03:16:21.463Z">
+<meta property="article:modified_time" content="2022-06-19T09:35:32.661Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="虚拟机">
@@ -235,7 +235,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3.4k 字
+          4.8k 字
         
       </span>
     
@@ -247,7 +247,7 @@
         
         
           <!-- compatible with older versions-->
-          11 分钟
+          16 分钟
         
       </span>
     
@@ -305,12 +305,18 @@
 <li>内存快照如何抓取，怎么分析Dump文件</li>
 <li>谈谈JVM中，你对于类加载器的认识</li>
 </ol>
-<p>java -&gt; class file -&gt; class loader</p>
-<p>三种jvm</p>
-<p>SUN公司 hotpot</p>
-<p>BEA JRockit</p>
-<p>IBM J9VM</p>
-<h1 id="2-JVM-结构"><a href="#2-JVM-结构" class="headerlink" title="2. JVM 结构"></a>2. JVM 结构</h1><p><img src="https://img.mercuryblog.site/img/image-20220617184022048.png" srcset="/img/newloading.gif" lazyload alt="image-20220617184022048"></p>
+<div class = "note note-success">三种jvm</div>
+
+<ul>
+<li><p>SUN公司 hotpot</p>
+</li>
+<li><p>BEA JRockit</p>
+</li>
+<li><p>IBM J9VM</p>
+</li>
+</ul>
+<h1 id="2-JVM-结构"><a href="#2-JVM-结构" class="headerlink" title="2. JVM 结构"></a>2. JVM 结构</h1><p><img src="https://img.mercuryblog.site/img/image-20220619152717928.png" srcset="/img/newloading.gif" lazyload alt="image-20220619152717928"></p>
+<p><img src="https://img.mercuryblog.site/img/image-20220617184022048.png" srcset="/img/newloading.gif" lazyload alt="image-20220617184022048"></p>
 <h1 id="3-类加载器"><a href="#3-类加载器" class="headerlink" title="3. 类加载器"></a>3. 类加载器</h1><p>类加载器分为四类</p>
 <ul>
 <li><p>虚拟机自带的加载器</p>
@@ -329,17 +335,17 @@
 <li>启动加载器检查是否能够加载当前这个类，能加载就结束，使用当前的加载器，否则，抛出异常，通知自家在其进行加载</li>
 <li>重复步骤3</li>
 </ol>
-<h2 id="3-2-沙箱安全机制"><a href="#3-2-沙箱安全机制" class="headerlink" title="3.2 沙箱安全机制"></a>3.2 沙箱安全机制</h2><p>沙箱机制就是讲Java代码限定在<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%99%9A%E6%8B%9F%E6%9C%BA&spm=1001.2101.3001.7020">虚拟机</a>JVM特定的运行范围中，并且严格限制代码对本地资源的访问，通过这样的措施来保证对代码的有效隔离，防止对本地系统造成破坏。通俗来说就是虚拟机把代码加载到拥有不同权限的域里，然后代码就拥有了该域的所有权限。这样就能控制不同代码拥有不同调用操作系统和本地资源的权限</p>
+<h2 id="3-2-沙箱安全机制"><a href="#3-2-沙箱安全机制" class="headerlink" title="3.2 沙箱安全机制"></a>3.2 沙箱安全机制</h2><p>沙箱机制就是讲Java代码限定在虚拟机JVM特定的运行范围中，并且严格限制代码对本地资源的访问，通过这样的措施来保证对代码的有效隔离，防止对本地系统造成破坏。通俗来说就是虚拟机把代码加载到拥有不同权限的域里，然后代码就拥有了该域的所有权限。这样就能控制不同代码拥有不同调用操作系统和本地资源的权限</p>
 <p>组成沙箱的基本组件：<br>1.字节码校验器（bytecode verifier）：确保Java类文件遵循Java语言规范。可以帮助Java程序实现内存保护 。核心类不经过字节码校验<br>2.类装载器：其中类装载器在3个方面对Java沙箱起作用</p>
 <p>防止恶意代码干涉善意代码（双亲委派机制）<br>守护被信任的类库边界<br>它将代码归入保护域，确定了代码可以进行哪些操作</p>
-<h1 id="4-Native和方法区"><a href="#4-Native和方法区" class="headerlink" title="4. Native和方法区"></a>4. Native和方法区</h1><p>有时候我们会在Java的源码里面看见如下代码</p>
+<h1 id="4-Native和方法区"><a href="#4-Native和方法区" class="headerlink" title="4. Native和方法区"></a>4. Native和方法区</h1><h2 id="4-1-Native"><a href="#4-1-Native" class="headerlink" title="4.1 Native"></a>4.1 Native</h2><p>有时候我们会在Java的源码里面看见如下代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">native</span> <span class="hljs-keyword">void</span> <span class="hljs-title">start0</span><span class="hljs-params">()</span></span>;<br></code></pre></td></tr></table></figure>
 
 <p>凡是带了native关键字的方法，说明Java的作用范围达不到了  需要去调用底层C语言的库，会进入本地方法栈，然后调用本地方法接口 JNI</p>
 <p>本地方法接口就是为了去调本地方法库 扩展Java的使用 融合不同的编程语言为Java所用</p>
-<p>方法区是被所有线程共享，所有字段和方法字节码，以及一些特殊方法，如构造函数，接口代码也在此定义，简单的来说，所有定义的方法的信息都保存在该区域，此区域书于共享区间；</p>
-<p>静态变量、常量、类信息(构造方法，接口定义)，运行时的常量池存在方法区中，但是实例变量存在堆内存中，和方法区无关</p>
-<h1 id="5-栈"><a href="#5-栈" class="headerlink" title="5. 栈"></a>5. 栈</h1><p>栈内存，主管程序的运行、生命周期和线程同步。线程结束，栈内存也释放。对于栈来说，不存在垃圾回收问题， 一旦线程结束栈就结束</p>
+<h2 id="4-2-方法区"><a href="#4-2-方法区" class="headerlink" title="4.2 方法区"></a>4.2 方法区</h2><p>方法区是被所有线程共享，所有字段和方法字节码，以及一些特殊方法，如构造函数，接口代码也在此定义，简单的来说，所有定义的方法的信息都保存在该区域，此区域书于共享区间；方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等数据。虽然《Java虚拟机规范》中把方法区描述为堆的一个<strong>逻辑部分</strong>，但是它却有一个别名叫作“非堆”（Non-Heap），目的是与Java堆区分开来。</p>
+<p>常量池（Runtime Constant Pool）是方法区的一部分。Class文件中除了有类的版本、字段、方法、接口等描述信息外，还有一项信息是常量池表（Constant Pool Table），用于存放编译期生成的各种字面量与符号引用，这部分内容将在类加载后存放到方法区的运行时常量池中。静态变量、常量、类信息(构造方法，接口定义)，运行时的常量池存在方法区中，但是实例变量存在<strong>堆内存</strong>中，和方法区无关</p>
+<h1 id="5-栈"><a href="#5-栈" class="headerlink" title="5. 栈"></a>5. 栈</h1><p>“栈”通常就是指上面讲的虚拟机栈，或者更多的情况下只是指虚拟机栈中局部变量表部分。栈内存，主管程序的运行、生命周期和线程同步。线程结束，栈内存也释放。对于栈来说，不存在垃圾回收问题， 一旦线程结束栈就结束</p>
 <p>栈的运行原理  : 栈帧(栈帧也叫过程活动记录，是编译器用来实现过程函数调用的一种数据结构”。实际上，可以简单理解为：栈帧就是存储在用户栈上的（当然内核栈同样适用）每一次函数调用涉及的相关信息的记录单元。</p>
 <div class = "note note-success">一个对象在内存中实例化的过程</div>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">People</span></span>&#123;<br>    String name; <span class="hljs-comment">// 定义一个成员变量 name</span><br>    <span class="hljs-keyword">int</span> age; <span class="hljs-comment">// 成员变量 age</span><br>    Double height; <span class="hljs-comment">// 成员变量 height</span><br>     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span></span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;人的姓名：&quot;</span>+name);<br>        System.out.println(<span class="hljs-string">&quot;人的年龄：&quot;</span>+age);<br>        System.out.println(<span class="hljs-string">&quot;人的身高：&quot;</span>+height);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        String name; <span class="hljs-comment">// 定义一个局部变量 name</span><br>        <span class="hljs-keyword">int</span> age; <span class="hljs-comment">// 局部变量 age</span><br>        Double height; <span class="hljs-comment">// 局部变量 height</span><br>    <br>        People people = <span class="hljs-keyword">new</span> People() ; <span class="hljs-comment">//实例化对象people</span><br>        people.name = <span class="hljs-string">&quot;张三&quot;</span> ;       <span class="hljs-comment">//赋值</span><br>        people.age = <span class="hljs-number">18</span>;             <span class="hljs-comment">//赋值</span><br>        people.height = <span class="hljs-number">180.0</span> ;   <span class="hljs-comment">//赋值</span><br>        people.print();              <span class="hljs-comment">//调用方法sing</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -412,19 +418,31 @@
 
 
 
-<h1 id="7-垃圾回收"><a href="#7-垃圾回收" class="headerlink" title="7. 垃圾回收"></a>7. 垃圾回收</h1><h2 id="7-1-什么是垃圾回收"><a href="#7-1-什么是垃圾回收" class="headerlink" title="7.1. 什么是垃圾回收"></a>7.1. 什么是垃圾回收</h2><p>GC(Garbage Collection )垃圾回收,分为轻量级垃圾回收和重量级垃圾回收 主要是在伊甸园区和养老区</p>
-<p>jvm 在进行GC时，并不是对这三个区域统一回收 回收的都是新生代</p>
-<div class = "note note-success">GC两种类型</div>
-
+<h1 id="7-垃圾回收"><a href="#7-垃圾回收" class="headerlink" title="7. 垃圾回收"></a>7. 垃圾回收</h1><h2 id="7-1-什么是垃圾回收"><a href="#7-1-什么是垃圾回收" class="headerlink" title="7.1. 什么是垃圾回收"></a>7.1. 什么是垃圾回收</h2><p>GC(Garbage Collection )垃圾回收,分为轻量级垃圾回收和重量级垃圾回收 主要是在伊甸园区和年老区</p>
+<p>jvm 在进行GC时，并不是对这三个区域统一回收 回收的都是年轻代</p>
+<p>将对象分为三种状态：年轻代、年老代、持久代。JVM将堆内存划分为 Eden、Survivor 和 Tenured/Old 空间。</p>
+<p>年轻代：所有新生成的对象首先都是放在Eden区。</p>
+<p>年老代：在年轻代中经历了N(默认15)次垃圾回收后仍然存活的对象，就会被放到年老代中。</p>
+<p>持久代：用于存放静态文件，如Java类、方法等。持久代对垃圾回收没有显著影响。</p>
+<p>Minor GC:</p>
+<p>用于清理年轻代区域。Eden区满了就会触发一次Minor GC。清理无用对象，将有用对象复制到 Survivor1、Survivor2 区中(这两个区，大小空间也相同，同一时刻Survivor1和Survivor2 只有一个在用，一个为空)</p>
+<p>Major GC:</p>
+<p>用于清理老年代区域。</p>
+<p>Full GC：</p>
+<p>用于清理年轻代、年老代区域。 成本较高，会对系统性能产生影响。</p>
+<p>垃圾回收过程</p>
 <ul>
-<li><p>轻GC  普通的GC</p>
-</li>
-<li><p>重GC  全局的GC</p>
-</li>
+<li>新创建的对象，绝大多数都会存储在Eden中</li>
+<li>当Eden满了，不能创建新对象，则触发Minor GC，将无用对象清理掉，将剩余对象复制到某个Survivor(S1)中，同时清空Eden区</li>
+<li>当Eden再次满了，会将S1中不能清空的对象存到另一个Survivor(S2)，同时将Eden中不能清空的复制到S1，保证Eden、S1均被清空</li>
+<li>重复15次Survivor中未被清理的对象，则复制到老年代区</li>
+<li>当年老代区满了，则会触发一个一次完整的垃圾回收（Full GC）</li>
 </ul>
-<h2 id="7-2-GC-的算法"><a href="#7-2-GC-的算法" class="headerlink" title="7.2 GC 的算法"></a>7.2 GC 的算法</h2><h3 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h3><p>(待完善)</p>
-<h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p>新生代主要用</p>
-<p>新生区中谁空谁是to</p>
+<h2 id="7-2-GC-的算法"><a href="#7-2-GC-的算法" class="headerlink" title="7.2 GC 的算法"></a>7.2 GC 的算法</h2><h3 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h3><p>此种算法会在每一个对象上记录这个对象被引用的次数，只要有任何一个对象引用了次对象，这个对象的计数器就+1，取消对这个对象的引用时，计数器就-1。任何一个时刻，如果该对象的计数器为0，那么这个对象就是可以回收的。</p>
+<h3 id="标记清除法-Mark-Sweep"><a href="#标记清除法-Mark-Sweep" class="headerlink" title="标记清除法(Mark-Sweep)"></a>标记清除法(Mark-Sweep)</h3><p>这是最基础的垃圾回收算法，之所以说它是最基础的是因为它最容易实现，思想也是最简单的。标记-清除算法分为两个阶段：标记阶段和清除阶段。标记阶段的任务是标记出所有需要被回收的对象，清除阶段就是回收被标记的对象所占用的空间</p>
+<p>优点 不需要额外的空间</p>
+<p>缺点 两次扫描 严重浪费时间 会产生内存碎片</p>
+<h3 id="复制算法-Copying"><a href="#复制算法-Copying" class="headerlink" title="复制算法(Copying)"></a>复制算法(Copying)</h3><p>为了解决Mark-Sweep算法的缺陷，Copying算法就被提了出来。它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，然后再把已使用的内存空间一次清理掉，这样一来就不容易出现内存碎片的问题</p>
 <p>没有内存碎片</p>
 <p>浪费了内存空间</p>
 <p>复制算法最佳的使用场景 对象存活度较低的时候 </p>
@@ -433,12 +451,7 @@
 <p>复制算法最佳的使用场景 对象存活度较低的时候 </p>
 <p>当一个对象经历了15次(默认)GC，都还没有死亡</p>
 <p>(待完善)</p>
-<h3 id="标记清除法"><a href="#标记清除法" class="headerlink" title="标记清除法"></a>标记清除法</h3><p>扫描这些对象</p>
-<p>对对象进行标记</p>
-<p>对没有标记的对象进行清除</p>
-<p>优点 不需要额外的空间</p>
-<p>缺点 两次扫描 严重浪费时间 会产生内存碎片</p>
-<p>压缩防止内存碎片产生 再次扫描 向一段一段存活的对象多了一次移动成本</p>
+<h3 id="标记-整理算法（Mark-Compact）"><a href="#标记-整理算法（Mark-Compact）" class="headerlink" title="标记-整理算法（Mark-Compact）"></a>标记-整理算法（Mark-Compact）</h3><p>也称标记-压缩法为了解决Copying算法的缺陷，充分利用内存空间，提出了Mark-Compact算法。该算法标记阶段和Mark-Sweep一样，但是在完成标记之后，它不是直接清理可回收对象，而是将存活对象都向一端移动，然后清理掉端边界以外的内存. 压缩防止内存碎片产生 再次扫描 向一段一段存活的对象多了一次移动成本</p>
 <p>(待完善)</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>内存效率 :复制算法  &gt;  标记清除算法  &gt;  标记压缩算法</p>
 <p>内存整齐度  复制算法  =  标记压缩算法  &gt;  标记清除算法</p>
@@ -447,7 +460,7 @@
 <p>GC  分代收集算法</p>
 <p>年轻代存活率低所以用复制算法</p>
 <p>老年代存活率高用标记清除算法+标记压缩混合实现</p>
-<h3 id="7-3-垃圾回收的作用"><a href="#7-3-垃圾回收的作用" class="headerlink" title="7.3 垃圾回收的作用"></a>7.3 垃圾回收的作用</h3><p>(待完善)</p>
+<h2 id="7-3-垃圾回收的作用"><a href="#7-3-垃圾回收的作用" class="headerlink" title="7.3 垃圾回收的作用"></a>7.3 垃圾回收的作用</h2><p>垃圾回收是在内存中中存在没有引用的对象或超过作用域的对象时进行垃圾回收，垃圾回收的目的是识别并且丢弃不再使用的对象来释放和重用资源。查找和回收（清理）无用的对象。以便让JVM更有效的使用内存。</p>
 <h1 id="8-JMM"><a href="#8-JMM" class="headerlink" title="8. JMM"></a>8. JMM</h1><p>Java Mermory Model</p>
 <p>(待完善)</p>
 
