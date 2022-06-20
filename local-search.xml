@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Java数据结构与算法</title>
+    <link href="/2022/06/20/Java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    <url>/2022/06/20/Java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<div class = "note note-class">前言</div><ul>    <div>本博客主要是学习《大话数据结构》以及<a herf = "https://www.bilibili.com/video/BV1E4411H73v" target = "_blank">尚硅谷的Java数据结构及算法所作的笔记</a></div></ul><h1 id="1-算法"><a href="#1-算法" class="headerlink" title="1. 算法"></a>1. 算法</h1><h2 id="1-1-算法的时间复杂度"><a href="#1-1-算法的时间复杂度" class="headerlink" title="1.1 算法的时间复杂度"></a>1.1 算法的时间复杂度</h2><p>我们一般使用O()来表示算法的时间复杂度</p><p>推导时间复杂度</p><ol><li>用1取代所有的加法常数</li><li>只保留最高阶项</li><li>去掉最高阶项的常数(非常数的时候)</li></ol><p><strong>常数阶</strong></p><p>比如一般的分支结构都是O(1)</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br>System.out.println(sum);<br></code></pre></td></tr></table></figure><p><strong>线性阶</strong></p><p>循环结构就是O(n)</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>    System.out.println(i);<br>&#125;<br></code></pre></td></tr></table></figure><p><strong>对数阶</strong></p><p>下面的这写代码，每次循环count就变为两倍，则运行的次数就是$2^x=n$,所以$x=log_2 n$,时间复杂度就是O(log n)</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">int</span> count = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span>(count&lt;n)&#123;<br>    count = count*<span class="hljs-number">2</span>;<br>&#125;<br></code></pre></td></tr></table></figure><p><strong>平方阶</strong></p><p>简单来说就是双重循环就是平方阶了，当然还是得按照推导方法来推导</p><h2 id="1-2-常见的时间度"><a href="#1-2-常见的时间度" class="headerlink" title="1.2 常见的时间度"></a>1.2 常见的时间度</h2><p>O(1) &lt; O(logn)&lt; O(n)&lt; O(nlogn)&lt; O($n^2$)&lt; O($n^3$)&lt; O($2^n$)&lt; O(n!)&lt; O($n^n$)</p><h2 id="1-3-算法的空间复杂度"><a href="#1-3-算法的空间复杂度" class="headerlink" title="1.3 算法的空间复杂度"></a>1.3 算法的空间复杂度</h2><p>衡量算法性能的另一个指示标准，算法的空间复杂度的计算公式记作<strong>S(n) = O(f(n))</strong>;  n为问题的规模，f(n)为语句关于n所占存储空间的函数</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>data structure</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>data structure</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>JVM(chu)</title>
     <link href="/2022/06/16/JVM/"/>
     <url>/2022/06/16/JVM/</url>
@@ -343,9 +368,9 @@
     
     <tags>
       
-      <tag>springboot</tag>
-      
       <tag>spring</tag>
+      
+      <tag>springboot</tag>
       
     </tags>
     
