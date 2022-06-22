@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.mercuryblog.site/img/1654429960727.jpg">
 <meta property="article:published_time" content="2022-06-16T02:31:46.000Z">
-<meta property="article:modified_time" content="2022-06-20T05:34:01.328Z">
+<meta property="article:modified_time" content="2022-06-22T03:40:24.571Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="虚拟机">
@@ -235,7 +235,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          4.8k 字
+          5.6k 字
         
       </span>
     
@@ -247,7 +247,7 @@
         
         
           <!-- compatible with older versions-->
-          16 分钟
+          18 分钟
         
       </span>
     
@@ -317,7 +317,7 @@
 </ul>
 <h1 id="2-JVM-结构"><a href="#2-JVM-结构" class="headerlink" title="2. JVM 结构"></a>2. JVM 结构</h1><p><img src="https://img.mercuryblog.site/img/image-20220619152717928.png" srcset="/img/newloading.gif" lazyload alt="image-20220619152717928"></p>
 <p><img src="https://img.mercuryblog.site/img/image-20220617184022048.png" srcset="/img/newloading.gif" lazyload alt="image-20220617184022048"></p>
-<h1 id="3-类加载器"><a href="#3-类加载器" class="headerlink" title="3. 类加载器"></a>3. 类加载器</h1><p>类加载器分为四类</p>
+<h2 id="1-类加载器"><a href="#1-类加载器" class="headerlink" title="1. 类加载器"></a>1. 类加载器</h2><p>类加载器分为四类</p>
 <ul>
 <li><p>虚拟机自带的加载器</p>
 </li>
@@ -328,29 +328,75 @@
 <li><p>应用程序加载器</p>
 </li>
 </ul>
-<h2 id="3-1-双亲委派机制"><a href="#3-1-双亲委派机制" class="headerlink" title="3.1 双亲委派机制"></a>3.1 双亲委派机制</h2><p>主要的作用就是保证安全，一般来说一个类启动的时候会按照这个顺序(APP– EXC –BOOT)寻找加载器,而最终执行的加载器则是从上到下的,BOOT-&gt; EXC-&gt;APP,只有没有找到上面一层的类加载器的时候，才会执行下一层的加载器。.从最内层JVM自带的类加载器开始加载，外层恶意同名类得不到加载从而无法调用</p>
+<h3 id="1-1-双亲委派机制"><a href="#1-1-双亲委派机制" class="headerlink" title="1.1 双亲委派机制"></a>1.1 双亲委派机制</h3><p>主要的作用就是保证安全，一般来说一个类启动的时候会按照这个顺序(APP– EXC –BOOT)寻找加载器,而最终执行的加载器则是从上到下的,BOOT-&gt; EXC-&gt;APP,只有没有找到上面一层的类加载器的时候，才会执行下一层的加载器。.从最内层JVM自带的类加载器开始加载，外层恶意同名类得不到加载从而无法调用</p>
 <ol>
 <li>类加载器收到类的加载的请求</li>
 <li>将这个请求向上委托给父类加载器去完成，一直向上委托，直到启动类加载器</li>
 <li>启动加载器检查是否能够加载当前这个类，能加载就结束，使用当前的加载器，否则，抛出异常，通知自家在其进行加载</li>
 <li>重复步骤3</li>
 </ol>
-<h2 id="3-2-沙箱安全机制"><a href="#3-2-沙箱安全机制" class="headerlink" title="3.2 沙箱安全机制"></a>3.2 沙箱安全机制</h2><p>沙箱机制就是讲Java代码限定在虚拟机JVM特定的运行范围中，并且严格限制代码对本地资源的访问，通过这样的措施来保证对代码的有效隔离，防止对本地系统造成破坏。通俗来说就是虚拟机把代码加载到拥有不同权限的域里，然后代码就拥有了该域的所有权限。这样就能控制不同代码拥有不同调用操作系统和本地资源的权限</p>
+<h3 id="1-2-沙箱安全机制"><a href="#1-2-沙箱安全机制" class="headerlink" title="1.2 沙箱安全机制"></a>1.2 沙箱安全机制</h3><p>沙箱机制就是讲Java代码限定在虚拟机JVM特定的运行范围中，并且严格限制代码对本地资源的访问，通过这样的措施来保证对代码的有效隔离，防止对本地系统造成破坏。通俗来说就是虚拟机把代码加载到拥有不同权限的域里，然后代码就拥有了该域的所有权限。这样就能控制不同代码拥有不同调用操作系统和本地资源的权限</p>
 <p>组成沙箱的基本组件：<br>1.字节码校验器（bytecode verifier）：确保Java类文件遵循Java语言规范。可以帮助Java程序实现内存保护 。核心类不经过字节码校验<br>2.类装载器：其中类装载器在3个方面对Java沙箱起作用</p>
 <p>防止恶意代码干涉善意代码（双亲委派机制）<br>守护被信任的类库边界<br>它将代码归入保护域，确定了代码可以进行哪些操作</p>
-<h1 id="4-Native和方法区"><a href="#4-Native和方法区" class="headerlink" title="4. Native和方法区"></a>4. Native和方法区</h1><h2 id="4-1-Native"><a href="#4-1-Native" class="headerlink" title="4.1 Native"></a>4.1 Native</h2><p>有时候我们会在Java的源码里面看见如下代码</p>
+<h2 id="2-程序计数器"><a href="#2-程序计数器" class="headerlink" title="2. 程序计数器"></a>2. 程序计数器</h2><p>程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。在Java虚拟机的概念模型里 ，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，它是程序控制流的指示器，分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖这个计数器来完成。</p>
+<h2 id="3-Native和方法区"><a href="#3-Native和方法区" class="headerlink" title="3. Native和方法区"></a>3. Native和方法区</h2><h3 id="3-1-Native"><a href="#3-1-Native" class="headerlink" title="3.1 Native"></a>3.1 Native</h3><p>有时候我们会在Java的源码里面看见如下代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">native</span> <span class="hljs-keyword">void</span> <span class="hljs-title">start0</span><span class="hljs-params">()</span></span>;<br></code></pre></td></tr></table></figure>
 
 <p>凡是带了native关键字的方法，说明Java的作用范围达不到了  需要去调用底层C语言的库，会进入本地方法栈，然后调用本地方法接口 JNI</p>
 <p>本地方法接口就是为了去调本地方法库 扩展Java的使用 融合不同的编程语言为Java所用</p>
-<h2 id="4-2-方法区"><a href="#4-2-方法区" class="headerlink" title="4.2 方法区"></a>4.2 方法区</h2><p>方法区是被所有线程共享，所有字段和方法字节码，以及一些特殊方法，如构造函数，接口代码也在此定义，简单的来说，所有定义的方法的信息都保存在该区域，此区域书于共享区间；方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等数据。虽然《Java虚拟机规范》中把方法区描述为堆的一个<strong>逻辑部分</strong>，但是它却有一个别名叫作“非堆”（Non-Heap），目的是与Java堆区分开来。</p>
+<h3 id="3-2-方法区"><a href="#3-2-方法区" class="headerlink" title="3.2 方法区"></a>3.2 方法区</h3><p>方法区是被所有线程共享，所有字段和方法字节码，以及一些特殊方法，如构造函数，接口代码也在此定义，简单的来说，所有定义的方法的信息都保存在该区域，此区域书于共享区间；方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等数据。虽然《Java虚拟机规范》中把方法区描述为堆的一个<strong>逻辑部分</strong>，但是它却有一个别名叫作“非堆”（Non-Heap），目的是与Java堆区分开来。</p>
 <p>常量池（Runtime Constant Pool）是方法区的一部分。Class文件中除了有类的版本、字段、方法、接口等描述信息外，还有一项信息是常量池表（Constant Pool Table），用于存放编译期生成的各种字面量与符号引用，这部分内容将在类加载后存放到方法区的运行时常量池中。静态变量、常量、类信息(构造方法，接口定义)，运行时的常量池存在方法区中，但是实例变量存在<strong>堆内存</strong>中，和方法区无关</p>
-<h1 id="5-栈"><a href="#5-栈" class="headerlink" title="5. 栈"></a>5. 栈</h1><p>“栈”通常就是指上面讲的虚拟机栈，或者更多的情况下只是指虚拟机栈中局部变量表部分。栈内存，主管程序的运行、生命周期和线程同步。线程结束，栈内存也释放。对于栈来说，不存在垃圾回收问题， 一旦线程结束栈就结束</p>
+<h2 id="4-栈"><a href="#4-栈" class="headerlink" title="4. 栈"></a>4. 栈</h2><p>“栈”通常就是指上面讲的虚拟机栈，或者更多的情况下只是指虚拟机栈中局部变量表部分。栈内存，主管程序的运行、生命周期和线程同步。线程结束，栈内存也释放。对于栈来说，不存在垃圾回收问题， 一旦线程结束栈就结束</p>
 <p>栈的运行原理  : 栈帧(栈帧也叫过程活动记录，是编译器用来实现过程函数调用的一种数据结构”。实际上，可以简单理解为：栈帧就是存储在用户栈上的（当然内核栈同样适用）每一次函数调用涉及的相关信息的记录单元。</p>
-<div class = "note note-success">一个对象在内存中实例化的过程</div>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">People</span></span>&#123;<br>    String name; <span class="hljs-comment">// 定义一个成员变量 name</span><br>    <span class="hljs-keyword">int</span> age; <span class="hljs-comment">// 成员变量 age</span><br>    Double height; <span class="hljs-comment">// 成员变量 height</span><br>     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span></span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;人的姓名：&quot;</span>+name);<br>        System.out.println(<span class="hljs-string">&quot;人的年龄：&quot;</span>+age);<br>        System.out.println(<span class="hljs-string">&quot;人的身高：&quot;</span>+height);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        String name; <span class="hljs-comment">// 定义一个局部变量 name</span><br>        <span class="hljs-keyword">int</span> age; <span class="hljs-comment">// 局部变量 age</span><br>        Double height; <span class="hljs-comment">// 局部变量 height</span><br>    <br>        People people = <span class="hljs-keyword">new</span> People() ; <span class="hljs-comment">//实例化对象people</span><br>        people.name = <span class="hljs-string">&quot;张三&quot;</span> ;       <span class="hljs-comment">//赋值</span><br>        people.age = <span class="hljs-number">18</span>;             <span class="hljs-comment">//赋值</span><br>        people.height = <span class="hljs-number">180.0</span> ;   <span class="hljs-comment">//赋值</span><br>        people.print();              <span class="hljs-comment">//调用方法sing</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-1. 在还没开始时
+<h2 id="5-堆"><a href="#5-堆" class="headerlink" title="5. 堆"></a>5. 堆</h2><p>heap一个jvm只有一个堆内存 堆内存的大小是可以调节的</p>
+<p>堆内存中还要细分三个区域</p>
+<ul>
+<li><p>新生区(伊甸园区 eden space  幸存0区 幸存1区)</p>
+</li>
+<li><p>养老区</p>
+</li>
+<li><p>永久区(1.8后称为元空间)</p>
+</li>
+</ul>
+<p><img src="https://img.mercuryblog.site/img/image-20220617191448788.png" srcset="/img/newloading.gif" lazyload alt="堆内存"></p>
+<ol>
+<li>新生区  </li>
+</ol>
+<p>类诞生和成长的地方 甚至死亡，伊甸园区：所有的对象都是在伊甸园区new出来的</p>
+<ol start="2">
+<li>永久区(元空间)</li>
+</ol>
+<p>这个区域常驻内存 用来存放自身携带的class对象 interface元数据 存储的是Java运行的一些环境或类信息 这个区域不存在垃圾回收 关闭vm虚拟机就会释放这个区域的内存</p>
+<p>元空间逻辑上存在 物理上不存在</p>
+<h3 id="5-1-堆内存错误"><a href="#5-1-堆内存错误" class="headerlink" title="5.1 堆内存错误"></a>5.1 堆内存错误</h3><p>假设内存满了 OOM  堆内存错误</p>
+<p>java.lang.OutOfMemoryError:Java heap space</p>
+<p>当出现这种错误的时候我们该怎么办呢？</p>
+<p>答案就是JProfiler,可以通过JProfiler进行调优</p>
+<ol>
+<li>下载该插件</li>
+</ol>
+<p><img src="https://img.mercuryblog.site/img/image-20220617192619772.png" srcset="/img/newloading.gif" lazyload alt="image-20220617192619772"></p>
+<ol start="2">
+<li>下载应用，然后在idea中配置</li>
+</ol>
+<p><img src="https://img.mercuryblog.site/img/image-20220617192638260.png" srcset="/img/newloading.gif" lazyload alt="image-20220617192638260"></p>
+<ol start="3">
+<li>通过命令生成dump文件，然后进行分析</li>
+</ol>
+<p><img src="https://img.mercuryblog.site/img/image-20220617192656192.png" srcset="/img/newloading.gif" lazyload alt="image-20220617192656192"></p>
+<p>常用的一些命令</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//- Xms 设置初始化内存分配大小 1/64</span><br><span class="hljs-comment">//- Xmx 谈置最大分配’内存，默认1/4</span><br><span class="hljs-comment">//- XX :+ PrintGCDetails // 打印GC垃圾回收信息</span><br><span class="hljs-comment">//- XX :+HeapDumpOn0utOfMemoryError// oom DUMP</span><br><br><span class="hljs-comment">//-Xms1m-Xmx8m- XX :+ HeapDumpOnOutOfMemoryError </span><br></code></pre></td></tr></table></figure>
 
+<h1 id="3-Hotpot虚拟机对象探秘"><a href="#3-Hotpot虚拟机对象探秘" class="headerlink" title="3. Hotpot虚拟机对象探秘"></a>3. Hotpot虚拟机对象探秘</h1><h2 id="3-1-对象的创建"><a href="#3-1-对象的创建" class="headerlink" title="3.1 对象的创建"></a>3.1 对象的创建</h2><p>当Java遇到一个新的new指令的时候，它首先会去检查指令的参数能否在常量池中定位到 一个类的符号引用，并且检查这个符号所引用的类是否已经被加载，解析和初始化过，如果没有，则会先进行加载，接下来就会为这个新的对象分配内存，如果Java堆中的内存是规整的，那么分配内存的方法就是把指针向空闲空间的方向挪动一段距离，这种分配方式被称为：“指针碰撞”。如果内存不是规整的，那么就需要建立一个“空闲列表”，用来记录那些内存块分给了哪些对象。</p>
+<p>​    在分配内存的过程中，又会遇到一个问题，就是如果正在给对象A分配内存，但是对象B又同时使用了原来的指针来分配内存的情况。这种时候有两种可选择的方案–一种是堆分配内存的操作进行同步处理，第二种就是建立本地线程分配缓冲</p>
+<p>​    接下来，Java虚拟机还需要对对象进行一些必要的设置，比如这个对象是哪个类的实例，如何找回类的元数据信息，对象的哈希码，对象的GC年龄分代信息。最后执行构造函数等方法，一个完整的对象才被创建出来。</p>
+<div class = "note note-success">一个对象在内存中实例化的过程</div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">People</span></span>&#123;<br>    String name; <span class="hljs-comment">// 定义一个成员变量 name</span><br>    <span class="hljs-keyword">int</span> age; <span class="hljs-comment">// 成员变量 age</span><br>    Double height; <span class="hljs-comment">// 成员变量 height</span><br>     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span></span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;人的姓名：&quot;</span>+name);<br>        System.out.println(<span class="hljs-string">&quot;人的年龄：&quot;</span>+age);<br>        System.out.println(<span class="hljs-string">&quot;人的身高：&quot;</span>+height);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        String name; <span class="hljs-comment">// 定义一个局部变量 name</span><br>        <span class="hljs-keyword">int</span> age; <span class="hljs-comment">// 局部变量 age</span><br>        Double height; <span class="hljs-comment">// 局部变量 height</span><br>    <br>        People people = <span class="hljs-keyword">new</span> People() ; <span class="hljs-comment">//实例化对象people</span><br>        people.name = <span class="hljs-string">&quot;张三&quot;</span> ;       <span class="hljs-comment">//赋值</span><br>        people.age = <span class="hljs-number">18</span>;             <span class="hljs-comment">//赋值</span><br>        people.height = <span class="hljs-number">180.0</span> ;   <span class="hljs-comment">//赋值</span><br>        people.print();              <span class="hljs-comment">//调用方法sing</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>在还没开始时</li>
+</ol>
 <p><img src="https://img.mercuryblog.site/img/image-20220619102309453.png" srcset="/img/newloading.gif" lazyload alt="image-20220619102309453"></p>
 <ol start="2">
 <li>开始执行，类中的成员变量和方法会先进入到方法区</li>
@@ -374,51 +420,12 @@
 </ol>
 </li>
 </ol>
-<h1 id="6-堆"><a href="#6-堆" class="headerlink" title="6. 堆"></a>6. 堆</h1><p>heap一个jvm只有一个堆内存 堆内存的大小是可以调节的</p>
-<p>堆内存中还要细分三个区域</p>
-<ul>
-<li><p>新生区(伊甸园区 eden space  幸存0区 幸存1区)</p>
-</li>
-<li><p>养老区</p>
-</li>
-<li><p>永久区(1.8后称为元空间)</p>
-</li>
-</ul>
-<p><img src="https://img.mercuryblog.site/img/image-20220617191448788.png" srcset="/img/newloading.gif" lazyload alt="堆内存"></p>
-<ol>
-<li>新生区  类诞生和成长的地方 甚至死亡</li>
-</ol>
-<p>伊甸园区 所有的对象都是在伊甸园区new出来的，经过研究 99%的对象都是临时对象</p>
-<ol start="2">
-<li>永久区</li>
-</ol>
-<p>这个区域常驻内存 用来存放自身携带的class对象 interface元数据 存储的是Java运行的一些环境或类信息 这个区域不存在垃圾回收 关闭vm虚拟机就会释放这个区域的内存</p>
-<p>一个启动类加载了大量的第三方jar包 tomcat部署了太多的应用 大量动态生成反射类 不断的被加载 知道内存堆 就会出现OOM</p>
-<p>元空间逻辑上存在 物理上不存在</p>
-<h2 id="6-1-堆内存错误"><a href="#6-1-堆内存错误" class="headerlink" title="6.1 堆内存错误"></a>6.1 堆内存错误</h2><p>假设内存满了 OOM  堆内存错误</p>
-<p>java.lang.OutOfMemoryError:Java heap space</p>
-<p>当出现这种错误的时候我们该怎么办呢？</p>
-<p>答案就是JProfiler,可以通过JProfiler进行调优</p>
-<ol>
-<li>下载该插件</li>
-</ol>
-<p><img src="https://img.mercuryblog.site/img/image-20220617192619772.png" srcset="/img/newloading.gif" lazyload alt="image-20220617192619772"></p>
-<ol start="2">
-<li>下载应用，然后在idea中配置</li>
-</ol>
-<p><img src="https://img.mercuryblog.site/img/image-20220617192638260.png" srcset="/img/newloading.gif" lazyload alt="image-20220617192638260"></p>
-<ol start="3">
-<li>通过命令生成dump文件，然后进行分析</li>
-</ol>
-<p><img src="https://img.mercuryblog.site/img/image-20220617192656192.png" srcset="/img/newloading.gif" lazyload alt="image-20220617192656192"></p>
-<p>常用的一些命令</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//- Xms 设置初始化内存分配大小 1/64</span><br><span class="hljs-comment">//- Xmx 谈置最大分配’内存，默认1/4</span><br><span class="hljs-comment">//- XX :+ PrintGCDetails // 打印GC垃圾回收信息</span><br><span class="hljs-comment">//- XX :+HeapDumpOn0utOfMemoryError// oom DUMP</span><br><br><span class="hljs-comment">//-Xms1m-Xmx8m- XX :+ HeapDumpOnOutOfMemoryError </span><br></code></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="7-垃圾回收"><a href="#7-垃圾回收" class="headerlink" title="7. 垃圾回收"></a>7. 垃圾回收</h1><h2 id="7-1-什么是垃圾回收"><a href="#7-1-什么是垃圾回收" class="headerlink" title="7.1. 什么是垃圾回收"></a>7.1. 什么是垃圾回收</h2><p>GC(Garbage Collection )垃圾回收,分为轻量级垃圾回收和重量级垃圾回收 主要是在伊甸园区和年老区</p>
+<h2 id="3-2-对象的内存布局"><a href="#3-2-对象的内存布局" class="headerlink" title="3.2 对象的内存布局"></a>3.2 对象的内存布局</h2><p>Hotpot虚拟机对象的头部包含两类信息，第一类是存储对象本身运行时的数据，比如哈希码，GC年龄分代，锁状态标志，偏向线程ID，偏向时间戳等，这部分数据被官方称为”Mark word”.如下图所示<img src="https://img.mercuryblog.site/img/image-20220622112951852.png" srcset="/img/newloading.gif" lazyload alt="image-20220622112951852"></p>
+<p>还有一类就是类型指针，Java虚拟机通过这个指针来判断该对象是哪个类的实例，如果对象是数组，还会有一个数据来记录数组的长度。</p>
+<h2 id="3-3-对象的访问定位"><a href="#3-3-对象的访问定位" class="headerlink" title="3.3 对象的访问定位"></a>3.3 对象的访问定位</h2><p>简单的来说，访问主要有句柄访问和指针访问，直接使用指针访问的话，可以节省一次指针定位的时间，累积下来，也是比较可观的，在hotpot中，主要使用指针访问，而在各种语言和框架中，使用句柄访问也很常见</p>
+<p><img src="https://img.mercuryblog.site/img/image-20220622113532052.png" srcset="/img/newloading.gif" lazyload alt="句柄访问"></p>
+<p><img src="https://img.mercuryblog.site/img/image-20220622113607252.png" srcset="/img/newloading.gif" lazyload alt="直接指针访问"></p>
+<h1 id="4-垃圾回收"><a href="#4-垃圾回收" class="headerlink" title="4. 垃圾回收"></a>4. 垃圾回收</h1><h2 id="4-1-什么是垃圾回收"><a href="#4-1-什么是垃圾回收" class="headerlink" title="4.1. 什么是垃圾回收"></a>4.1. 什么是垃圾回收</h2><p>GC(Garbage Collection )垃圾回收,分为轻量级垃圾回收和重量级垃圾回收 主要是在伊甸园区和年老区</p>
 <p>jvm 在进行GC时，并不是对这三个区域统一回收 回收的都是年轻代</p>
 <p>将对象分为三种状态：年轻代、年老代、持久代。JVM将堆内存划分为 Eden、Survivor 和 Tenured/Old 空间。</p>
 <p>年轻代：所有新生成的对象首先都是放在Eden区。</p>
@@ -438,7 +445,7 @@
 <li>重复15次Survivor中未被清理的对象，则复制到老年代区</li>
 <li>当年老代区满了，则会触发一个一次完整的垃圾回收（Full GC）</li>
 </ul>
-<h2 id="7-2-GC-的算法"><a href="#7-2-GC-的算法" class="headerlink" title="7.2 GC 的算法"></a>7.2 GC 的算法</h2><h3 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h3><p>此种算法会在每一个对象上记录这个对象被引用的次数，只要有任何一个对象引用了次对象，这个对象的计数器就+1，取消对这个对象的引用时，计数器就-1。任何一个时刻，如果该对象的计数器为0，那么这个对象就是可以回收的。</p>
+<h2 id="4-2-GC-的算法"><a href="#4-2-GC-的算法" class="headerlink" title="4.2 GC 的算法"></a>4.2 GC 的算法</h2><h3 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h3><p>此种算法会在每一个对象上记录这个对象被引用的次数，只要有任何一个对象引用了次对象，这个对象的计数器就+1，取消对这个对象的引用时，计数器就-1。任何一个时刻，如果该对象的计数器为0，那么这个对象就是可以回收的。</p>
 <h3 id="标记清除法-Mark-Sweep"><a href="#标记清除法-Mark-Sweep" class="headerlink" title="标记清除法(Mark-Sweep)"></a>标记清除法(Mark-Sweep)</h3><p>这是最基础的垃圾回收算法，之所以说它是最基础的是因为它最容易实现，思想也是最简单的。标记-清除算法分为两个阶段：标记阶段和清除阶段。标记阶段的任务是标记出所有需要被回收的对象，清除阶段就是回收被标记的对象所占用的空间</p>
 <p>优点 不需要额外的空间</p>
 <p>缺点 两次扫描 严重浪费时间 会产生内存碎片</p>
@@ -460,7 +467,7 @@
 <p>GC  分代收集算法</p>
 <p>年轻代存活率低所以用复制算法</p>
 <p>老年代存活率高用标记清除算法+标记压缩混合实现</p>
-<h2 id="7-3-垃圾回收的作用"><a href="#7-3-垃圾回收的作用" class="headerlink" title="7.3 垃圾回收的作用"></a>7.3 垃圾回收的作用</h2><p>垃圾回收是在内存中中存在没有引用的对象或超过作用域的对象时进行垃圾回收，垃圾回收的目的是识别并且丢弃不再使用的对象来释放和重用资源。查找和回收（清理）无用的对象。以便让JVM更有效的使用内存。</p>
+<h2 id="3-3-垃圾回收的作用"><a href="#3-3-垃圾回收的作用" class="headerlink" title="3.3 垃圾回收的作用"></a>3.3 垃圾回收的作用</h2><p>垃圾回收是在内存中中存在没有引用的对象或超过作用域的对象时进行垃圾回收，垃圾回收的目的是识别并且丢弃不再使用的对象来释放和重用资源。查找和回收（清理）无用的对象。以便让JVM更有效的使用内存。</p>
 <h1 id="8-JMM"><a href="#8-JMM" class="headerlink" title="8. JMM"></a>8. JMM</h1><p>Java Mermory Model</p>
 <p>(待完善)</p>
 
