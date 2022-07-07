@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.mercuryblog.site/img/1654429960727.jpg">
 <meta property="article:published_time" content="2022-06-16T02:31:46.000Z">
-<meta property="article:modified_time" content="2022-06-22T12:01:24.894Z">
+<meta property="article:modified_time" content="2022-07-04T03:01:15.479Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="虚拟机">
@@ -235,7 +235,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          5.6k 字
+          7k 字
         
       </span>
     
@@ -247,7 +247,7 @@
         
         
           <!-- compatible with older versions-->
-          18 分钟
+          22 分钟
         
       </span>
     
@@ -425,7 +425,7 @@
 <h2 id="3-3-对象的访问定位"><a href="#3-3-对象的访问定位" class="headerlink" title="3.3 对象的访问定位"></a>3.3 对象的访问定位</h2><p>简单的来说，访问主要有句柄访问和指针访问，直接使用指针访问的话，可以节省一次指针定位的时间，累积下来，也是比较可观的，在hotpot中，主要使用指针访问，而在各种语言和框架中，使用句柄访问也很常见</p>
 <p><img src="https://img.mercuryblog.site/img/image-20220622113532052.png" srcset="/img/newloading.gif" lazyload alt="句柄访问"></p>
 <p><img src="https://img.mercuryblog.site/img/image-20220622113607252.png" srcset="/img/newloading.gif" lazyload alt="直接指针访问"></p>
-<h1 id="4-垃圾回收"><a href="#4-垃圾回收" class="headerlink" title="4. 垃圾回收"></a>4. 垃圾回收</h1><h2 id="4-1-什么是垃圾回收"><a href="#4-1-什么是垃圾回收" class="headerlink" title="4.1. 什么是垃圾回收"></a>4.1. 什么是垃圾回收</h2><p>GC(Garbage Collection )垃圾回收,分为轻量级垃圾回收和重量级垃圾回收 主要是在伊甸园区和年老区</p>
+<h1 id="4-垃圾回收"><a href="#4-垃圾回收" class="headerlink" title="4. 垃圾回收"></a>4. 垃圾回收</h1><h2 id="4-1-什么是垃圾回收"><a href="#4-1-什么是垃圾回收" class="headerlink" title="4.1 什么是垃圾回收"></a>4.1 什么是垃圾回收</h2><p>GC(Garbage Collection )垃圾回收,分为轻量级垃圾回收和重量级垃圾回收 主要是在伊甸园区和年老区</p>
 <p>jvm 在进行GC时，并不是对这三个区域统一回收 回收的都是年轻代</p>
 <p>将对象分为三种状态：年轻代、年老代、持久代。JVM将堆内存划分为 Eden、Survivor 和 Tenured/Old 空间。</p>
 <p>年轻代：所有新生成的对象首先都是放在Eden区。</p>
@@ -437,7 +437,7 @@
 <p>用于清理老年代区域。</p>
 <p>Full GC：</p>
 <p>用于清理年轻代、年老代区域。 成本较高，会对系统性能产生影响。</p>
-<p>垃圾回收过程</p>
+<p>垃圾回收过程(不是所有的收集器)</p>
 <ul>
 <li>新创建的对象，绝大多数都会存储在Eden中</li>
 <li>当Eden满了，不能创建新对象，则触发Minor GC，将无用对象清理掉，将剩余对象复制到某个Survivor(S1)中，同时清空Eden区</li>
@@ -445,29 +445,45 @@
 <li>重复15次Survivor中未被清理的对象，则复制到老年代区</li>
 <li>当年老代区满了，则会触发一个一次完整的垃圾回收（Full GC）</li>
 </ul>
-<h2 id="4-2-GC-的算法"><a href="#4-2-GC-的算法" class="headerlink" title="4.2 GC 的算法"></a>4.2 GC 的算法</h2><h3 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h3><p>此种算法会在每一个对象上记录这个对象被引用的次数，只要有任何一个对象引用了次对象，这个对象的计数器就+1，取消对这个对象的引用时，计数器就-1。任何一个时刻，如果该对象的计数器为0，那么这个对象就是可以回收的。</p>
+<div class = "note note-success">对象已死？</div>
+
+<ol>
+<li>引用计数法</li>
+</ol>
+<p>​    在对象中添加一个引用计数器，在一个地方引用它的时候，计数器就加一，当引用失效的时候，计数器就减一，任何时候当计数器为零的时候，这个对象就是不可能再使用的，就坐等被回收吧</p>
+<ol start="2">
+<li><p>可达性分析</p>
+<p>这个算法的基本思路就是通过一系列称为“GC Roots” 的根对象作为起始节点，向下搜索，所搜走过的路径称为“引用链”，如果某个对象与Roots之间没有任何的链相连接，那么就称这个对象不可达，即对象已死。</p>
+</li>
+</ol>
+<h2 id="4-2-GC-的算法"><a href="#4-2-GC-的算法" class="headerlink" title="4.2 GC 的算法"></a>4.2 GC 的算法</h2><h3 id="分代收集理论"><a href="#分代收集理论" class="headerlink" title="分代收集理论"></a>分代收集理论</h3><p>这个理论建立在弱分代学说和强分代学说的基础之上，认为收集器应该将内存区域分为几个区域，然后依据其年龄分开进行存储，分别进行回收</p>
 <h3 id="标记清除法-Mark-Sweep"><a href="#标记清除法-Mark-Sweep" class="headerlink" title="标记清除法(Mark-Sweep)"></a>标记清除法(Mark-Sweep)</h3><p>这是最基础的垃圾回收算法，之所以说它是最基础的是因为它最容易实现，思想也是最简单的。标记-清除算法分为两个阶段：标记阶段和清除阶段。标记阶段的任务是标记出所有需要被回收的对象，清除阶段就是回收被标记的对象所占用的空间</p>
-<p>优点 不需要额外的空间</p>
-<p>缺点 两次扫描 严重浪费时间 会产生内存碎片</p>
-<h3 id="复制算法-Copying"><a href="#复制算法-Copying" class="headerlink" title="复制算法(Copying)"></a>复制算法(Copying)</h3><p>为了解决Mark-Sweep算法的缺陷，Copying算法就被提了出来。它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，然后再把已使用的内存空间一次清理掉，这样一来就不容易出现内存碎片的问题</p>
-<p>没有内存碎片</p>
-<p>浪费了内存空间</p>
-<p>复制算法最佳的使用场景 对象存活度较低的时候 </p>
-<p>没有内存碎片</p>
-<p>浪费了内存空间</p>
-<p>复制算法最佳的使用场景 对象存活度较低的时候 </p>
-<p>当一个对象经历了15次(默认)GC，都还没有死亡</p>
-<p>(待完善)</p>
+<p>优点： 不需要额外的空间</p>
+<p>缺点：两次扫描 严重浪费时间 会产生大量的内存碎片</p>
+<p><img src="https://img.mercuryblog.site/img/image-20220704101326795.png" srcset="/img/newloading.gif" lazyload alt="image-20220704101326795"></p>
+<h3 id="标记-复制算法-Mark-Copying"><a href="#标记-复制算法-Mark-Copying" class="headerlink" title="标记-复制算法(Mark-Copying)"></a>标记-复制算法(Mark-Copying)</h3><p>为了解决Mark-Sweep算法的缺陷，Copying算法就被提了出来。它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，然后再把已使用的内存空间一次清理掉，这样一来就不容易出现内存碎片的问题，复制算法最佳的使用场景 对象存活度较低的时候 ，现在的商用Java虚拟机大多都优先采用了这个算法去收集新生代。</p>
+<p>优缺点：没有内存碎片，浪费了一半的内存空间</p>
+<p><img src="https://img.mercuryblog.site/img/image-20220704101610542.png" srcset="/img/newloading.gif" lazyload alt="image-20220704101610542"></p>
 <h3 id="标记-整理算法（Mark-Compact）"><a href="#标记-整理算法（Mark-Compact）" class="headerlink" title="标记-整理算法（Mark-Compact）"></a>标记-整理算法（Mark-Compact）</h3><p>也称标记-压缩法为了解决Copying算法的缺陷，充分利用内存空间，提出了Mark-Compact算法。该算法标记阶段和Mark-Sweep一样，但是在完成标记之后，它不是直接清理可回收对象，而是将存活对象都向一端移动，然后清理掉端边界以外的内存. 压缩防止内存碎片产生 再次扫描 向一段一段存活的对象多了一次移动成本</p>
-<p>(待完善)</p>
+<p><img src="https://img.mercuryblog.site/img/image-20220704101709355.png" srcset="/img/newloading.gif" lazyload alt="image-20220704101709355"></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>内存效率 :复制算法  &gt;  标记清除算法  &gt;  标记压缩算法</p>
 <p>内存整齐度  复制算法  =  标记压缩算法  &gt;  标记清除算法</p>
 <p>内存利用率  标记压缩算法  =  标记清除算法  &gt;  复制算法</p>
-<p>没有最高好的算法 只有做合适的算法</p>
-<p>GC  分代收集算法</p>
+<div class = "note note-danger">没有最好的算法</div>
+
 <p>年轻代存活率低所以用复制算法</p>
 <p>老年代存活率高用标记清除算法+标记压缩混合实现</p>
-<h2 id="3-3-垃圾回收的作用"><a href="#3-3-垃圾回收的作用" class="headerlink" title="3.3 垃圾回收的作用"></a>3.3 垃圾回收的作用</h2><p>垃圾回收是在内存中中存在没有引用的对象或超过作用域的对象时进行垃圾回收，垃圾回收的目的是识别并且丢弃不再使用的对象来释放和重用资源。查找和回收（清理）无用的对象。以便让JVM更有效的使用内存。</p>
+<h2 id="4-3-垃圾回收的作用"><a href="#4-3-垃圾回收的作用" class="headerlink" title="4.3 垃圾回收的作用"></a>4.3 垃圾回收的作用</h2><p>垃圾回收是在内存中中存在没有引用的对象或超过作用域的对象时进行垃圾回收，垃圾回收的目的是识别并且丢弃不再使用的对象来释放和重用资源。查找和回收（清理）无用的对象。以便让JVM更有效的使用内存。</p>
+<h2 id="4-3-经典的垃圾收集器"><a href="#4-3-经典的垃圾收集器" class="headerlink" title="4.3 经典的垃圾收集器"></a>4.3 经典的垃圾收集器</h2><h3 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h3><p>采用标记-复制算法。这个收集器是最基础，历史最悠久的收集器，看名字就知道，这是一个单线程的收集器，因为是单线程，他在进行垃圾收集的时候必须暂停其他所有的工作，直到它收集完毕，这个过程被称为”stop the world”(砸瓦鲁多！🤔),但是它现在仍然是hotpot虚拟机在客户端模式下的默认新生代收集器。</p>
+<h3 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h3><p>采用标记-复制算法。这个收集器是Serial收集器的多线程并行版本，它是不少运行在服务端的虚拟机首选新生代收集器(JDK7之前)，很大的原因就是只有他才能跟CMS配合工作(老年代收集器)，从JDK9开始，ParNew+CMS收集器就不再是官方最推荐的服务器端收集器组合了，因为G1出现了。</p>
+<h3 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h3><p>同样是基于标记-复制算法实现的新生代多线程并发收集器，这个收集器主要关注的是达到一个可控制的吞吐量</p>
+<p><img src="https://img.mercuryblog.site/img/image-20220704103520606.png" srcset="/img/newloading.gif" lazyload alt="image-20220704103520606"></p>
+<p>它也提供了一些参数用来控制吞吐量，这里不再详述，因为和吞吐量密切相关，因此也被称为“吞吐量优先收集器”</p>
+<h3 id="Serial-Old-收集器"><a href="#Serial-Old-收集器" class="headerlink" title="Serial Old 收集器"></a>Serial Old 收集器</h3><p>Serial收集器的老年代版本，一个采用标记-整理算法的单线程收集器。主要也是提供给客户端模式下的hotpot虚拟机使用。它也可能有两种用途：一种是在JDK 5以及之前的版本中与Parallel Scavenge收集器搭配使用，另外一种就是作为CMS收集器发生失败时的后备预案，在并发收集发生Concurrent Mode Failure时使用</p>
+<h3 id="Parallel-Old-收集器"><a href="#Parallel-Old-收集器" class="headerlink" title="Parallel Old 收集器"></a>Parallel Old 收集器</h3><p>Parallel Scavenge收集器的老年代版本，支持多线程并发收集，基于标记-整理算法实现。用来和Parallel Scavenge收集器搭配，一起专注于吞吐量的组合。适合注重吞吐量和处理器资源稀缺的场景</p>
+<h3 id="CMS-收集器"><a href="#CMS-收集器" class="headerlink" title="CMS 收集器"></a>CMS 收集器</h3><p>全称Concurrent Mark Sweep收集器，基于标记-清除算法的老年代收集器，是以获取最短回收停顿时间为目标的收集器，但它不是简单的标记-清除。主要分为了  <strong>初识标记</strong>， <strong>并发标记</strong>，<strong>重新标记</strong> ，<strong>并发清除</strong> 四个步骤 ，这个收集器主要特点就是并发收集，低停顿。由于标记-清除算法很容易产生内存碎片，所以CMS收集器予以解决(JDK9后被废除)</p>
+<h3 id="Garbage-First-收集器"><a href="#Garbage-First-收集器" class="headerlink" title="Garbage First 收集器"></a>Garbage First 收集器</h3><p>G1是一款主要面向服务端应用的垃圾收集器。JDK 9发布之日，G1宣告取代Parallel Scavenge加Parallel Old组合，成为服务端模式下的默认垃圾收集器。它可以面向堆内存任何部分来组成回收集（Collection Set，一般简称CSet）进行回收，衡量标准不再是它属于哪个分代，而是哪块内存中存放的垃圾数量最多，回收收益最大，这就是G1收集器的Mixed GC模式。每一个Region都可以根据需要，扮演新生代的Eden空间、Survivor空间，或者老年代空间。收集器能够对扮演不同角色的Region采用不同的策略去处理，这样无论是新创建的对象还是已经存活了一段时间、熬过多次收集的旧对象都能获取很好的收集效果。</p>
+<h2 id="4-4-低延迟垃圾收集器"><a href="#4-4-低延迟垃圾收集器" class="headerlink" title="4.4 低延迟垃圾收集器"></a>4.4 低延迟垃圾收集器</h2><p>略</p>
 <h1 id="8-JMM"><a href="#8-JMM" class="headerlink" title="8. JMM"></a>8. JMM</h1><p>Java Mermory Model</p>
 <p>(待完善)</p>
 
