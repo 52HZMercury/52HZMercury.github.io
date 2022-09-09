@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.mercuryblog.site/img/1654429960727.jpg">
 <meta property="article:published_time" content="2022-06-16T02:31:46.000Z">
-<meta property="article:modified_time" content="2022-07-04T03:01:15.479Z">
+<meta property="article:modified_time" content="2022-09-09T02:25:25.239Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="虚拟机">
@@ -235,7 +235,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          7k 字
+          8.1k 字
         
       </span>
     
@@ -247,7 +247,7 @@
         
         
           <!-- compatible with older versions-->
-          22 分钟
+          26 分钟
         
       </span>
     
@@ -321,23 +321,13 @@
 <ul>
 <li><p>虚拟机自带的加载器</p>
 </li>
-<li><p>启动类（根）加载器</p>
+<li><p>启动类（根）加载器（使用C++）</p>
 </li>
 <li><p>扩展类加载器</p>
 </li>
 <li><p>应用程序加载器</p>
 </li>
 </ul>
-<h3 id="1-1-双亲委派机制"><a href="#1-1-双亲委派机制" class="headerlink" title="1.1 双亲委派机制"></a>1.1 双亲委派机制</h3><p>主要的作用就是保证安全，一般来说一个类启动的时候会按照这个顺序(APP– EXC –BOOT)寻找加载器,而最终执行的加载器则是从上到下的,BOOT-&gt; EXC-&gt;APP,只有没有找到上面一层的类加载器的时候，才会执行下一层的加载器。.从最内层JVM自带的类加载器开始加载，外层恶意同名类得不到加载从而无法调用</p>
-<ol>
-<li>类加载器收到类的加载的请求</li>
-<li>将这个请求向上委托给父类加载器去完成，一直向上委托，直到启动类加载器</li>
-<li>启动加载器检查是否能够加载当前这个类，能加载就结束，使用当前的加载器，否则，抛出异常，通知自家在其进行加载</li>
-<li>重复步骤3</li>
-</ol>
-<h3 id="1-2-沙箱安全机制"><a href="#1-2-沙箱安全机制" class="headerlink" title="1.2 沙箱安全机制"></a>1.2 沙箱安全机制</h3><p>沙箱机制就是讲Java代码限定在虚拟机JVM特定的运行范围中，并且严格限制代码对本地资源的访问，通过这样的措施来保证对代码的有效隔离，防止对本地系统造成破坏。通俗来说就是虚拟机把代码加载到拥有不同权限的域里，然后代码就拥有了该域的所有权限。这样就能控制不同代码拥有不同调用操作系统和本地资源的权限</p>
-<p>组成沙箱的基本组件：<br>1.字节码校验器（bytecode verifier）：确保Java类文件遵循Java语言规范。可以帮助Java程序实现内存保护 。核心类不经过字节码校验<br>2.类装载器：其中类装载器在3个方面对Java沙箱起作用</p>
-<p>防止恶意代码干涉善意代码（双亲委派机制）<br>守护被信任的类库边界<br>它将代码归入保护域，确定了代码可以进行哪些操作</p>
 <h2 id="2-程序计数器"><a href="#2-程序计数器" class="headerlink" title="2. 程序计数器"></a>2. 程序计数器</h2><p>程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。在Java虚拟机的概念模型里 ，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，它是程序控制流的指示器，分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖这个计数器来完成。</p>
 <h2 id="3-Native和方法区"><a href="#3-Native和方法区" class="headerlink" title="3. Native和方法区"></a>3. Native和方法区</h2><h3 id="3-1-Native"><a href="#3-1-Native" class="headerlink" title="3.1 Native"></a>3.1 Native</h3><p>有时候我们会在Java的源码里面看见如下代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">native</span> <span class="hljs-keyword">void</span> <span class="hljs-title">start0</span><span class="hljs-params">()</span></span>;<br></code></pre></td></tr></table></figure>
@@ -484,7 +474,38 @@
 <h3 id="CMS-收集器"><a href="#CMS-收集器" class="headerlink" title="CMS 收集器"></a>CMS 收集器</h3><p>全称Concurrent Mark Sweep收集器，基于标记-清除算法的老年代收集器，是以获取最短回收停顿时间为目标的收集器，但它不是简单的标记-清除。主要分为了  <strong>初识标记</strong>， <strong>并发标记</strong>，<strong>重新标记</strong> ，<strong>并发清除</strong> 四个步骤 ，这个收集器主要特点就是并发收集，低停顿。由于标记-清除算法很容易产生内存碎片，所以CMS收集器予以解决(JDK9后被废除)</p>
 <h3 id="Garbage-First-收集器"><a href="#Garbage-First-收集器" class="headerlink" title="Garbage First 收集器"></a>Garbage First 收集器</h3><p>G1是一款主要面向服务端应用的垃圾收集器。JDK 9发布之日，G1宣告取代Parallel Scavenge加Parallel Old组合，成为服务端模式下的默认垃圾收集器。它可以面向堆内存任何部分来组成回收集（Collection Set，一般简称CSet）进行回收，衡量标准不再是它属于哪个分代，而是哪块内存中存放的垃圾数量最多，回收收益最大，这就是G1收集器的Mixed GC模式。每一个Region都可以根据需要，扮演新生代的Eden空间、Survivor空间，或者老年代空间。收集器能够对扮演不同角色的Region采用不同的策略去处理，这样无论是新创建的对象还是已经存活了一段时间、熬过多次收集的旧对象都能获取很好的收集效果。</p>
 <h2 id="4-4-低延迟垃圾收集器"><a href="#4-4-低延迟垃圾收集器" class="headerlink" title="4.4 低延迟垃圾收集器"></a>4.4 低延迟垃圾收集器</h2><p>略</p>
-<h1 id="8-JMM"><a href="#8-JMM" class="headerlink" title="8. JMM"></a>8. JMM</h1><p>Java Mermory Model</p>
+<h1 id="5-类文件结构"><a href="#5-类文件结构" class="headerlink" title="5. 类文件结构"></a>5. 类文件结构</h1><p>Class 文件格式采用一种类似于C语言结构体的伪结构来存储数据，这种伪结构中只有两种数据结构：“无符号数”和“表”。</p>
+<h2 id="5-1-魔数和Java版本"><a href="#5-1-魔数和Java版本" class="headerlink" title="5.1 魔数和Java版本"></a>5.1 魔数和Java版本</h2><p>每个class版本的头四个字节被称为魔数，Class文件的魔数被早期的开发者取为“0xCAFEBABY”,紧接的四个字节存储的Java的版本信息，高版本的JDK能够兼容低版本的版本。</p>
+<h2 id="5-2-常量池"><a href="#5-2-常量池" class="headerlink" title="5.2 常量池"></a>5.2 常量池</h2><p>紧接着版本号之后，就是Java的常量池入口，由于常量池的数量大多是不固定的，因此，在常量池的入口需要放置一个u2类型的数据，代表常量池的容器计数器。常量池主要存放两大类常量，字面量和符号引用。常量池中每一项常量都是一个表，常量池中一共有17种数据类型的结构。</p>
+<h2 id="5-3-访问标志"><a href="#5-3-访问标志" class="headerlink" title="5.3 访问标志"></a>5.3 访问标志</h2><p>在常量池结束后紧接的两个字节代表着访问标志，这个标志用于识别一些类或者接口层次的访问信息，包括，这个class是类还是接口，是否是public，是否是abstract类，</p>
+<h2 id="5-4-类索引，父类索引与接口索引集合"><a href="#5-4-类索引，父类索引与接口索引集合" class="headerlink" title="5.4 类索引，父类索引与接口索引集合"></a>5.4 类索引，父类索引与接口索引集合</h2><p>Class文件中由这三项数据来确定该类型的继承关系，，类索引，父类索引和接口索引集合都按照顺序排列在访问标志之后。    </p>
+<h2 id="5-5-字段表集合"><a href="#5-5-字段表集合" class="headerlink" title="5.5 字段表集合"></a>5.5 字段表集合</h2><p>字段表用于描述接口或者类声明中的变量，Java语言中的字段包括类级变量，以及实例级变量，但是不包括方法内部声明的局部变量，字段可以包括修饰符有字段的作用域，是实例变量还是类变量等一系列信息。值得注意的是，字段表中不会列出从父类或者父接口中继承而来的字段。</p>
+<h2 id="5-6-方法表集合"><a href="#5-6-方法表集合" class="headerlink" title="5.6 方法表集合"></a>5.6 方法表集合</h2><p>方法表中的结构如同字段表一样，依次包括访问标志，名称索引，描述符索引，属性表集合几项，而因为有一些关键字不能修饰方法，所以方法表里的访问标志少了一些标志。在Java语言中，要重载方法，除了需要与原方法具有相同的简单名称之外，还需要一个与原方法不同的特征签名，特征签名是值一个方法中各个参数在常量池中的字段符号引用的集合，正是因为返回值不包含在特征签名中，因此Java中的方法无法通过返回值的不同来进行重载。</p>
+<h2 id="5-7-属性表集合"><a href="#5-7-属性表集合" class="headerlink" title="5.7 属性表集合"></a>5.7 属性表集合</h2><p>为了正确解析Class文件，在早期的规范中，规定了虚拟机9种应当识别的属性，在Java SE 12的规范中，这个数目已经增加到了29种。</p>
+<p>如下图：</p>
+<p><img src="https://img.mercuryblog.site/img/image-20220908180421975.png" srcset="/img/newloading.gif" lazyload alt="image-20220908180421975"></p>
+<p><img src="https://img.mercuryblog.site/img/image-20220908180450216.png" srcset="/img/newloading.gif" lazyload alt="image-20220908180450216"></p>
+<h1 id="6-类加载机制"><a href="#6-类加载机制" class="headerlink" title="6. 类加载机制"></a>6. 类加载机制</h1><h2 id="6-1-类加载的流程"><a href="#6-1-类加载的流程" class="headerlink" title="6.1 类加载的流程"></a>6.1 类加载的流程</h2><p>一个类从被加载进虚拟机开始，到卸载出内存为止需要经历 加载 验证 准备 解析 初始化 使用 加载 几个阶段，其中详细的环节这里就不展开介绍了。</p>
+<h2 id="6-2-类加载器"><a href="#6-2-类加载器" class="headerlink" title="6.2 类加载器"></a>6.2 类加载器</h2><p>前面已经说过类加载器一共有四类</p>
+<ul>
+<li>自定义加载器</li>
+<li>启动类（根）加载器（使用C++）</li>
+<li>扩展类加载器</li>
+<li>应用程序加载器</li>
+</ul>
+<h2 id="6-3-双亲委派机制"><a href="#6-3-双亲委派机制" class="headerlink" title="6.3 双亲委派机制"></a>6.3 双亲委派机制</h2><p>主要的作用就是保证安全，一般来说一个类启动的时候会按照这个顺序(APP– EXC –BOOT)寻找加载器,而最终执行的加载器则是从上到下的,BOOT-&gt; EXC-&gt;APP,只有没有找到上面一层的类加载器的时候，才会执行下一层的加载器。.从最内层JVM自带的类加载器开始加载，外层恶意同名类得不到加载从而无法调用</p>
+<ol>
+<li>类加载器收到类的加载的请求</li>
+<li>将这个请求向上委托给父类加载器去完成，一直向上委托，直到启动类加载器</li>
+<li>启动加载器检查是否能够加载当前这个类，能加载就结束，使用当前的加载器，否则，抛出异常，通知自家在其进行加载</li>
+<li>重复步骤3</li>
+</ol>
+<p>如下图所示：</p>
+<p><img src="https://img.mercuryblog.site/img/image-20220909102404711.png" srcset="/img/newloading.gif" lazyload alt="image-20220909102404711"></p>
+<h2 id="6-4-沙箱安全机制"><a href="#6-4-沙箱安全机制" class="headerlink" title="6.4 沙箱安全机制"></a>6.4 沙箱安全机制</h2><p>沙箱机制就是讲Java代码限定在虚拟机JVM特定的运行范围中，并且严格限制代码对本地资源的访问，通过这样的措施来保证对代码的有效隔离，防止对本地系统造成破坏。通俗来说就是虚拟机把代码加载到拥有不同权限的域里，然后代码就拥有了该域的所有权限。这样就能控制不同代码拥有不同调用操作系统和本地资源的权限</p>
+<p>组成沙箱的基本组件：<br>1.字节码校验器（bytecode verifier）：确保Java类文件遵循Java语言规范。可以帮助Java程序实现内存保护 。核心类不经过字节码校验<br>2.类装载器：其中类装载器在3个方面对Java沙箱起作用</p>
+<p>防止恶意代码干涉善意代码（双亲委派机制）<br>守护被信任的类库边界<br>它将代码归入保护域，确定了代码可以进行哪些操作</p>
+<h1 id="7-JMM"><a href="#7-JMM" class="headerlink" title="7. JMM"></a>7. JMM</h1><p>Java Mermory Model</p>
 <p>(待完善)</p>
 
               
