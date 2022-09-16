@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://media.minutouno.com/p/2c0f79eb0aef1dc86173c539ab67a6fc/adjuntos/150/imagenes/028/051/0028051089/java_logo.png">
 <meta property="article:published_time" content="2021-09-03T12:10:31.000Z">
-<meta property="article:modified_time" content="2022-06-20T05:13:19.631Z">
+<meta property="article:modified_time" content="2022-09-16T08:48:16.847Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary_large_image">
@@ -288,7 +288,17 @@
             
             <div class="markdown-body">
               
-              <h1 id="一、常用类"><a href="#一、常用类" class="headerlink" title="一、常用类"></a>一、常用类</h1><h2 id="1）-String相关类"><a href="#1）-String相关类" class="headerlink" title="1） String相关类"></a>1） String相关类</h2><h3 id="1-String"><a href="#1-String" class="headerlink" title="1.String"></a>1.String</h3><h4 id="1-1-初识字符串"><a href="#1-1-初识字符串" class="headerlink" title="1.1 初识字符串"></a>1.1 初识字符串</h4><p><strong>声明字符串</strong></p>
+              <div class = "note note-success">
+    <p>更新日志:<p>
+    <ul> 
+      <p>2021.9.3：根据狂神说的视频整理出该笔记</p>
+      <p>2022.9.16：准备明年春招，对照一些面经等资料，做了一定修改和补充</p>
+    </ul>
+</div>
+
+
+
+<h1 id="一、常用类"><a href="#一、常用类" class="headerlink" title="一、常用类"></a>一、常用类</h1><h2 id="1）-String相关类"><a href="#1）-String相关类" class="headerlink" title="1） String相关类"></a>1） String相关类</h2><h3 id="1-String"><a href="#1-String" class="headerlink" title="1.String"></a>1.String</h3><h4 id="1-1-初识字符串"><a href="#1-1-初识字符串" class="headerlink" title="1.1 初识字符串"></a>1.1 初识字符串</h4><p><strong>声明字符串</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//方法一 声明时直接赋值</span><br>String s = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;uden&quot;</span>);<br><span class="hljs-comment">//方法二 先声明后赋值</span><br>String s = <span class="hljs-keyword">new</span> String();<br>s = sc.next();<br></code></pre></td></tr></table></figure>
 <p>转换为二进制的方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//插一个函数 重要</span><br>result = Integer.toBinaryString(num)<span class="hljs-comment">//将int 数字转换为二进制字符串（String）</span><br></code></pre></td></tr></table></figure>
@@ -602,13 +612,11 @@
 
 
 <p>线程有好几种状态，如: 阻塞状态，准备状态等等，这一部分的内容以及关于线程的调度问题具体请参照操作系统部分</p>
-<h2 id="2、多线程常用的函数"><a href="#2、多线程常用的函数" class="headerlink" title="2、多线程常用的函数"></a>2、多线程常用的函数</h2><h3 id="1-start-函数"><a href="#1-start-函数" class="headerlink" title="1) start() 函数"></a>1) start() 函数</h3><p>主要应用于在主类中启动该线程。(需要先new 一个多线程的对象。</p>
-<h3 id="2-sleep-函数"><a href="#2-sleep-函数" class="headerlink" title="2) sleep()函数"></a>2) sleep()函数</h3><p>sleep(long millils)  在指定的毫秒数内让线程休眠</p>
-<h3 id="3-join-函数"><a href="#3-join-函数" class="headerlink" title="3) join()函数"></a>3) join()函数</h3><p>等待该线程的终止</p>
-<h3 id="4-yield-函数"><a href="#4-yield-函数" class="headerlink" title="4) yield()函数"></a>4) yield()函数</h3><p>暂停当前正在执行的线程对象，让当前运行线程回到可运行状态，以允许具有相同优先级的其他线程获得运行机会</p>
-<h3 id="5-setPriority-函数"><a href="#5-setPriority-函数" class="headerlink" title="5) setPriority()函数"></a>5) setPriority()函数</h3><p>更改线程的优先级</p>
-<h3 id="6-interrupt-函数"><a href="#6-interrupt-函数" class="headerlink" title="6) interrupt()函数"></a>6) interrupt()函数</h3><p>向线程发出一个中断信号，让线程在无限等待的时候能够抛出，从而结束线程(并不是中断哪个线程)</p>
-<h3 id="7-wait-函数"><a href="#7-wait-函数" class="headerlink" title="7) wait()函数"></a>7) wait()函数</h3><p>Obj.wait()，与Obj.notify()必须要与synchronized(Obj)一起使用，也就是wait,与notify是针对已经获取了Obj锁进行操作，从语法角度来说就是Obj.wait(),Obj.notify必须在synchronized(Obj){…}语句块内。</p>
+<h2 id="2、多线程常用的函数"><a href="#2、多线程常用的函数" class="headerlink" title="2、多线程常用的函数"></a>2、多线程常用的函数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java">start() 函数<br><br><span class="hljs-comment">//主要应用于在主类中启动该线程。(需要先new 一个多线程的对象。</span><br><br>sleep()函数<br><br><span class="hljs-comment">//sleep(long millils)  在指定的毫秒数内让线程休眠</span><br><br>join()函数<br><br><span class="hljs-comment">//等待该线程的终止</span><br><br>yield()函数<br><br><span class="hljs-comment">//暂停当前正在执行的线程对象，让当前运行线程回到可运行状态，以允许具有相同优先级的其他线程获得运行机会</span><br><br>setPriority()函数<br><br><span class="hljs-comment">//更改线程的优先级</span><br><br>interrupt()函数<br><br>向线程发出一个中断信号，让线程在无限等待的时候能够抛出，从而结束线程(并不是中断哪个线程)<br><br>wait()函数<br><br><span class="hljs-comment">//Obj.wait()，与Obj.notify()必须要与synchronized(Obj)一起使用，也就是wait,</span><br><span class="hljs-comment">//与notify是针对已经获取了Obj锁进行操作，从语法角度来说就是Obj.wait(),Obj.notify必须在synchronized(Obj)&#123;...&#125;语句块内。</span><br></code></pre></td></tr></table></figure>
+
+
+
+
 <h2 id="3、线程同步"><a href="#3、线程同步" class="headerlink" title="3、线程同步"></a>3、线程同步</h2><h3 id="1）、synchronized关键字"><a href="#1）、synchronized关键字" class="headerlink" title="1）、synchronized关键字"></a>1）、synchronized关键字</h3><ul>
 <li>synchronized关键字的作用域有二种：</li>
 </ul>
@@ -623,7 +631,7 @@
 </li>
 </ul>
 <p>总的说来，synchronized关键字可以作为函数的修饰符，也可作为函数内的语句，也就是平时说的同步方法和同步语句块。如果再细的分类，synchronized可作用于instance变量、object reference（对象引用）、static函数和class literals(类名称字面常量)身上。</p>
-
+<h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><h1 id="自动装箱机制"><a href="#自动装箱机制" class="headerlink" title="自动装箱机制"></a>自动装箱机制</h1><h1 id="深拷贝-浅拷贝-引用拷贝"><a href="#深拷贝-浅拷贝-引用拷贝" class="headerlink" title="深拷贝 浅拷贝 引用拷贝"></a>深拷贝 浅拷贝 引用拷贝</h1><h1 id="I-O"><a href="#I-O" class="headerlink" title="I/O"></a>I/O</h1>
               
             </div>
             <hr/>
