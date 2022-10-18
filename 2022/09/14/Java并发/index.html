@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.mercuryblog.site/img/1e4c16.9.png">
 <meta property="article:published_time" content="2022-09-14T12:12:46.000Z">
-<meta property="article:modified_time" content="2022-10-16T12:01:01.015Z">
+<meta property="article:modified_time" content="2022-10-18T03:28:42.958Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="Java并发">
 <meta property="article:tag" content="JUC">
@@ -235,7 +235,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          36k 字
+          43k 字
         
       </span>
     
@@ -247,7 +247,7 @@
         
         
           <!-- compatible with older versions-->
-          112 分钟
+          135 分钟
         
       </span>
     
@@ -610,11 +610,11 @@
 <h2 id="Fork-Join分支合并"><a href="#Fork-Join分支合并" class="headerlink" title="Fork/Join分支合并"></a>Fork/Join分支合并</h2><p>ork/Join框架是一个实现了ExecutorService接口的多线程处理器，它专为那些可以通过递归分解成更细小的任务而设计，最大化的利用多核处理器来提高应用程序的性能。</p>
 <p>与其他ExecutorService相关的实现相同的是，Fork/Join框架会将任务分配给线程池中的线程。而与之不同的是，Fork/Join框架在执行任务时使用了<strong>工作窃取算法</strong>。</p>
 <p><strong>fork</strong>在英文里有分叉的意思，<strong>join</strong>在英文里连接、结合的意思。顾名思义，fork就是要使一个大任务分解成若干个小任务，而join就是最后将各个小任务的结果结合起来得到大任务的结果。</p>
-<p><img src="http://concurrent.redspider.group/article/03/imgs/fork_join%E6%B5%81%E7%A8%8B%E5%9B%BE.png" srcset="/img/newloading.gif" lazyload></p>
+<p><img src="https://img.mercuryblog.site/img/image-20221017132505169.png" srcset="/img/newloading.gif" lazyload alt="image-20221017132505169"></p>
 <p>感觉就是分治算法的思想</p>
 <p>工作窃取算法指的是在多线程执行不同任务队列的过程中，某个线程执行完自己队列的任务后从其他线程的任务队列里窃取任务来执行。</p>
 <p>工作窃取流程如下图所示：</p>
-<p><img src="http://concurrent.redspider.group/article/03/imgs/%E5%B7%A5%E4%BD%9C%E7%AA%83%E5%8F%96%E7%AE%97%E6%B3%95%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B%E5%9B%BE.png" srcset="/img/newloading.gif" lazyload></p>
+<p><img src="https://img.mercuryblog.site/img/image-20221017132535148.png" srcset="/img/newloading.gif" lazyload></p>
 <h2 id="异步回调"><a href="#异步回调" class="headerlink" title="异步回调"></a>异步回调</h2><ul>
 <li><p>类似ajax技术，可以进行异步执行、成功回调、失败回调。</p>
 </li>
@@ -681,30 +681,123 @@
 <li>保证特定的执行顺序</li>
 <li>可以保证某些变量的内存可见性</li>
 </ul>
-<p>单例模式</p>
-<p>饿汉式单例</p>
-<p>上来就加载</p>
-<p>懒汉式单例</p>
-<p>多线程下可能会出错 使用双重检测锁模式 还必须加上volatile避免new懒汉对象的时候指令重排  DCL懒汉式</p>
-<p>CAS</p>
-<p>原子类</p>
-<p>期望 更新</p>
-<p>如果期望的值达到了就跟新 否则不更新  CAS式</p>
-<p>atomicInteger.compareAndSet(expect:2020,update:2021)</p>
-<p>unsafe类相当于Java的后门 可以通过这个类操作内存</p>
-<p>ABA问题  狸猫换太子</p>
-<p>一个线程速度过快 完成了换的操作</p>
-<p>原子引用</p>
-<p>各种锁的理解</p>
-<p>可重入锁</p>
-<p>自旋锁</p>
-<p>spinlock</p>
-<p>只要不成立，就一直把他卡在死循环</p>
-<p>do{</p>
-<p>}while</p>
-<p>死锁</p>
-<p>jps -l</p>
-<p>jstack</p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>单例模式是Java中最简单的设计模式之一，这种模式涉及一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建，这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象</p>
+<p>注意</p>
+<ul>
+<li>单例类只能有一个实例</li>
+<li>单例类必须自己创建自己的唯一实例</li>
+<li>单例类必须给所有其他的对象提供这一实例</li>
+</ul>
+<h3 id="饿汉式单例"><a href="#饿汉式单例" class="headerlink" title="饿汉式单例"></a>饿汉式单例</h3><p>多线程下特点</p>
+<ul>
+<li>这种方式比较常用，但容易产生垃圾对象。私有构造器，开始直接创建实例被加载进内存。 容易造成内存空间的浪费</li>
+<li>优点：没有加锁，执行效率会提高。</li>
+<li>缺点：类加载时就初始化，浪费内存。</li>
+<li>它基于 classloader 机制避免了多线程的同步问题，不过，instance 在类装载时就实例化，虽然导致类装载的原因有很多种，在单例模式中大多数都是调用 getInstance 方法， 但是也不能确定有其他的方式（或者其他的静态方法）导致类装载，这时候初始化 instance 显然没有达到 lazy loading 的效果。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo1_hungry</span> </span>&#123;<br><br>    <span class="hljs-comment">// 因为是getInstance是静态方法，因此开始就被加载进内存，因此有可能会浪费内存空间</span><br>    <span class="hljs-keyword">private</span>  <span class="hljs-keyword">byte</span>[] data1 = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>* <span class="hljs-number">1024</span>];<br>    <span class="hljs-keyword">private</span>  <span class="hljs-keyword">byte</span>[] data2 = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>* <span class="hljs-number">1024</span>];<br>    <span class="hljs-keyword">private</span>  <span class="hljs-keyword">byte</span>[] data3 = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>* <span class="hljs-number">1024</span>];<br>    <span class="hljs-keyword">private</span>  <span class="hljs-keyword">byte</span>[] data4 = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>* <span class="hljs-number">1024</span>];<br><br>    <span class="hljs-comment">//注意 这里是私有的构造方法</span><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Demo1_hungry</span><span class="hljs-params">()</span> </span>&#123;<br><br>    &#125;<br><br>    <span class="hljs-keyword">private</span>  <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Demo1_hungry hungryMan = <span class="hljs-keyword">new</span> Demo1_hungry();<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Demo1_hungry <span class="hljs-title">getInstance</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> hungryMan;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="懒汉式单例"><a href="#懒汉式单例" class="headerlink" title="懒汉式单例"></a>懒汉式单例</h3><p><strong>一般懒汉式</strong></p>
+<p>特点</p>
+<ul>
+<li><p>需要使用单例时，单例才初始化占用内存。</p>
+</li>
+<li><p>单线程下没问题，但是线程下是不安全的，会出现多个实例。</p>
+</li>
+<li><p>这种方式是最基本的实现方式，这种实现最大的问题就是不支持多线程。因为没有加锁 synchronized，所以严格意义上它并不算单例模式。<br>这种方式 lazy loading 很明显，不要求线程安全，在多线程不能正常工作。</p>
+</li>
+</ul>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"> <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo2_lazy</span> </span>&#123;<br> <br>     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Demo2_lazy lazyMan;<br> <br>     <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Demo2_lazy</span><span class="hljs-params">()</span></span>&#123;<br>         System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot;线程拿到了实例！&quot;</span>);<br>     &#125;<br> <br>     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span>  Demo2_lazy <span class="hljs-title">getInstance</span><span class="hljs-params">()</span></span>&#123;<br>         <span class="hljs-comment">//需要使用单例的情况下 且实例没有被创建 才创建单例</span><br>         <span class="hljs-keyword">if</span>(lazyMan == <span class="hljs-keyword">null</span>)&#123;<br>             <span class="hljs-keyword">return</span>  <span class="hljs-keyword">new</span> Demo2_lazy();<br>         &#125;<br>         <span class="hljs-keyword">return</span> lazyMan;<br>     &#125;<br> <br>     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>         <span class="hljs-comment">//模拟线程拿到实例</span><br>         <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>             <span class="hljs-keyword">new</span> Thread(()-&gt;&#123;<br>                 Demo2_lazy.getInstance();<br>             &#125;,String.valueOf(i)).start();<br>         &#125;<br>     &#125;<br> &#125;<br><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">0</span>线程拿到了实例！<br><span class="hljs-number">4</span>线程拿到了实例！<br><span class="hljs-number">5</span>线程拿到了实例！<br><span class="hljs-number">3</span>线程拿到了实例！<br><span class="hljs-number">2</span>线程拿到了实例！<br><span class="hljs-number">1</span>线程拿到了实例！<br><span class="hljs-number">7</span>线程拿到了实例！<br><span class="hljs-number">6</span>线程拿到了实例！<br><span class="hljs-number">8</span>线程拿到了实例！<br><span class="hljs-number">9</span>线程拿到了实例！<br><br><span class="hljs-comment">//很明显不能保证一个单例</span><br></code></pre></td></tr></table></figure>
+
+<p> <strong>加锁懒汉式</strong></p>
+<p>特点</p>
+<ul>
+<li>相比一般的懒汉式，在获取实例的静态方法前加synchronized关键字，可以保证多线程之间的同步问题，保证单例模式</li>
+<li>这种方式具备很好的 lazy loading，能够在多线程中很好的工作，但是，效率很低，99% 情况下不需要同步。</li>
+<li>优点：第一次调用才初始化，避免内存浪费。</li>
+<li>缺点：必须加锁 synchronized 才能保证单例，但加锁会影响效率。getInstance() 的性能对应用程序不是很关键（该方法使用不太频繁）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo3_sychronziedLazyMan</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Demo3_sychronziedLazyMan lazyMan;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Demo3_sychronziedLazyMan</span><span class="hljs-params">()</span></span>&#123;<br>        System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot;线程拿到了实例！&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">synchronized</span> Demo3_sychronziedLazyMan <span class="hljs-title">getInstance</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-comment">//需要使用单例的情况下 且实例没有被创建 才创建单例</span><br>        <span class="hljs-keyword">if</span>(lazyMan == <span class="hljs-keyword">null</span>)&#123;<br>            lazyMan = <span class="hljs-keyword">new</span> Demo3_sychronziedLazyMan();<br>        &#125;<br>        <span class="hljs-keyword">return</span> lazyMan;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-comment">//模拟线程拿到实例</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>            <span class="hljs-keyword">new</span> Thread(()-&gt;&#123;<br>                Demo3_sychronziedLazyMan.getInstance();<br>            &#125;,String.valueOf(i)).start();<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">0</span>线程拿到了实例！<br>    <br><span class="hljs-comment">//只有一个线程拿到了实例</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="DCL双重校验锁"><a href="#DCL双重校验锁" class="headerlink" title="DCL双重校验锁"></a>DCL双重校验锁</h3><p>特点</p>
+<ul>
+<li>DCL即 double-checked locking</li>
+<li>相比一般懒汉式，又加了一层 if(实例还不存在) { synchronized (单例类) { if(实力还不存在） 初始化单例} }, volatile关键字 保证线程之间的同步问题</li>
+<li>相比加锁的懒汉式，不是在方法前面加synchronized从而影响效率，这种方法效率更高。<br>这种方式采用双锁机制，安全且在多线程情况下能保持高性能。 getInstance() 的性能对应用程序很关键。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo4_DCLLazyMan</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Demo4_DCLLazyMan lazyMan;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Demo4_DCLLazyMan</span><span class="hljs-params">()</span></span>&#123;<br>        System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot; 线程拿到了实例！&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Demo4_DCLLazyMan <span class="hljs-title">getInstance</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-comment">//第一次判断，没有实例的时候给类加锁</span><br>        <span class="hljs-keyword">if</span>(lazyMan == <span class="hljs-keyword">null</span>)&#123;<br>            <span class="hljs-keyword">synchronized</span> (Demo4_DCLLazyMan.class)&#123;<br><br>                <span class="hljs-comment">//第二次判断，没有实例的时候 获得单例</span><br>                <span class="hljs-keyword">if</span>(lazyMan == <span class="hljs-keyword">null</span>)&#123;<br>                    lazyMan = <span class="hljs-keyword">new</span> Demo4_DCLLazyMan();<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> lazyMan;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-comment">//模拟线程拿到实例</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>            <span class="hljs-keyword">new</span> Thread(()-&gt;&#123;<br>                Demo3_sychronziedLazyMan.getInstance();<br>            &#125;,String.valueOf(i)).start();<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">0</span>线程拿到了实例！<br></code></pre></td></tr></table></figure>
+
+<p>但是上面的<code>lazyMan = new Demo4_DCLLazyMan();</code>依然有一定的缺陷，在JMM中并不是原子操作，创建实例的过程大致分为三个步骤</p>
+<ul>
+<li>分配内存空间</li>
+<li>执行构造方法</li>
+<li>将实例变量指向内存空间</li>
+</ul>
+<p>而在多线程执行时候，最后两步是可以变的，而这就可能导致多线程同步异常，获取单例失败，因此可以通过使用volatile关键字禁止指令重排解决常见操作非原子性的问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//所以可以将上述代码改为</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> Demo4_DCLLazyMan lazyMan;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h2><p>概念</p>
+<ul>
+<li>CAS（Compare-and-Swap），即比较并替换，是一种实现并发算法时常用到的技术，Java并发包中的很多类都使用了CAS技术。</li>
+<li>CAS也是现在面试经常问的问题<br>之前学习的java.util.concurrent.automics下的AtomicsInteger等类提供简单的cas操作</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo1_CAS</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        AtomicInteger num  = <span class="hljs-keyword">new</span> AtomicInteger(<span class="hljs-number">100</span>);<br>        <span class="hljs-comment">//期望 更新</span><br>        <span class="hljs-comment">//如果期望的值达到了就跟新 否则不更新</span><br>        num.compareAndSet(<span class="hljs-number">100</span>,<span class="hljs-number">101</span>);<br>        System.out.println(num.compareAndSet(<span class="hljs-number">101</span>, <span class="hljs-number">120</span>));<span class="hljs-comment">//true</span><br>        System.out.println(num.compareAndSet(<span class="hljs-number">150</span>, <span class="hljs-number">130</span>));<span class="hljs-comment">//false</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>而Java实现CAS的功能使用的依然是我们熟悉的Unsafe类</p>
+<h3 id="ABA问题"><a href="#ABA问题" class="headerlink" title="ABA问题"></a>ABA问题</h3><p>ABA问题即是狸猫换太子，也就是一个线程速度过快，在正常线程1，2之间穿插了一个捣乱的线程，但是捣乱线程的操作会使 数据恢复为未执行之前的状态，故不会影响正常线程执行结果，一般情况下ABA并不会出现什么问题，但是设计引用的时候就会出现问题。</p>
+<p><strong>通过原子引用来解决ABA问题</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ABA</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> AtomicStampedReference&lt;Integer&gt; num = <span class="hljs-keyword">new</span> AtomicStampedReference&lt;&gt;(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>);<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>        <span class="hljs-comment">//线程2 期望的版本号</span><br>        <span class="hljs-keyword">int</span> currentStamp = num.getStamp();<br><br>        <span class="hljs-keyword">new</span> Thread(()-&gt;&#123;<br>            System.out.println(<span class="hljs-string">&quot;=============正常线程1===========&quot;</span>);<br><br>            <span class="hljs-comment">//获得版本号</span><br>            System.out.println(<span class="hljs-string">&quot;正常版本号1 拿到版本号&quot;</span> + num.getStamp());<br>        &#125;,<span class="hljs-string">&quot;正常线程&quot;</span>).start();<br><br>        <span class="hljs-comment">//休眠2s</span><br>        <span class="hljs-keyword">try</span> &#123;<br>            TimeUnit.SECONDS.sleep(<span class="hljs-number">2</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>            e.printStackTrace();<br>        &#125;<br><br>        <span class="hljs-comment">//捣乱的线程不影响正常结果</span><br>        <span class="hljs-keyword">new</span> Thread(()-&gt;&#123;<br>            System.out.println(<span class="hljs-string">&quot;=========I AM 捣乱线程==========&quot;</span>);<br>            System.out.println(num.compareAndSet(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,num.getStamp(), num.getStamp() + <span class="hljs-number">1</span>));<br>            System.out.println(<span class="hljs-string">&quot;捣乱线程第一次修改值后的 版本号===》&quot;</span> + num.getStamp());<br>            System.out.println(num.compareAndSet(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, num.getStamp(), num.getStamp() + <span class="hljs-number">1</span>));<br>            System.out.println(<span class="hljs-string">&quot;捣乱线程第二次修改值后的 版本号===》&quot;</span> + num.getStamp());<br>        &#125;,<span class="hljs-string">&quot;捣乱线程&quot;</span>).start();<br><br>        <span class="hljs-comment">//休眠2s</span><br>        <span class="hljs-keyword">try</span> &#123;<br>            TimeUnit.SECONDS.sleep(<span class="hljs-number">2</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>            e.printStackTrace();<br>        &#125;<br><br>        <span class="hljs-comment">//正常线程2</span><br>        <span class="hljs-keyword">new</span> Thread(()-&gt;&#123;<br>            System.out.println(<span class="hljs-string">&quot;=============正常线程2===========&quot;</span>);<br><br>            <span class="hljs-comment">//获得版本号</span><br>            System.out.println(<span class="hljs-string">&quot;正常版本号2执行前 当前版本号&quot;</span> + num.getStamp());<br>            System.out.println(<span class="hljs-string">&quot;正常版本号2执行前 期望版本号&quot;</span> + currentStamp);<br>            System.out.println(num.compareAndSet(<span class="hljs-number">1000</span>, <span class="hljs-number">3000</span>, currentStamp, num.getStamp() + <span class="hljs-number">1</span>));<br>            System.out.println(<span class="hljs-string">&quot;正常线程2执行后 版本号===》&quot;</span> + num.getStamp());<br>        &#125;,<span class="hljs-string">&quot;正常线程&quot;</span>).start();<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//输出</span><br>=============正常线程<span class="hljs-number">1</span>===========<br>正常版本号<span class="hljs-number">1</span> 拿到版本号<span class="hljs-number">1</span><br>=========I AM 捣乱线程==========<br><span class="hljs-keyword">true</span><br>捣乱线程第一次修改值后的 版本号===》<span class="hljs-number">2</span><br><span class="hljs-keyword">true</span><br>捣乱线程第二次修改值后的 版本号===》<span class="hljs-number">3</span><br>=============正常线程<span class="hljs-number">2</span>===========<br>正常版本号<span class="hljs-number">2</span>执行前 当前版本号<span class="hljs-number">3</span><br>正常版本号<span class="hljs-number">2</span>执行前 期望版本号<span class="hljs-number">1</span><br><span class="hljs-keyword">false</span><br>正常线程<span class="hljs-number">2</span>执行后 版本号===》<span class="hljs-number">3</span><br><br>进程已结束，退出代码为 <span class="hljs-number">0</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="各种锁"><a href="#各种锁" class="headerlink" title="各种锁"></a>各种锁</h2><h3 id="公平，非公平锁"><a href="#公平，非公平锁" class="headerlink" title="公平，非公平锁"></a>公平，非公平锁</h3><p>概念</p>
+<ul>
+<li>公平锁：非常公平，线程之间不可以插队</li>
+<li>非公平锁：非常不公平，线程之间可以插队(默认）</li>
+</ul>
+<p>这里的“公平”，其实通俗意义来说就是“先来后到”，也就是FIFO。如果对一个锁来说，先对锁获取请求的线程一定会先被满足，后对锁获取请求的线程后被满足，那这个锁就是公平的。反之，那就是不公平的。</p>
+<p>一般情况下，<strong>非公平锁能提升一定的效率。但是非公平锁可能会发生线程饥饿（有一些线程长时间得不到锁）的情况</strong>。所以要根据实际的需求来选择非公平锁和公平锁。</p>
+<p>ReentrantLock支持非公平锁和公平锁两种。</p>
+<h3 id="乐观锁与悲观锁"><a href="#乐观锁与悲观锁" class="headerlink" title="乐观锁与悲观锁"></a>乐观锁与悲观锁</h3><p><strong>悲观锁：</strong></p>
+<p>悲观锁就是我们常说的锁。对于悲观锁来说，它总是认为每次访问共享资源时会发生冲突，所以必须对每次数据操作加上锁，以保证临界区的程序同一时间只能有一个线程在执行。</p>
+<p><strong>乐观锁：</strong></p>
+<p>乐观锁又称为“无锁”，顾名思义，它是乐观派。乐观锁总是假设对共享资源的访问没有冲突，线程可以不停地执行，无需加锁也无需等待。而一旦多个线程发生冲突，乐观锁通常是使用一种称为CAS的技术来保证线程执行的安全性。</p>
+<p>由于无锁操作中没有锁的存在，因此不可能出现死锁的情况，也就是说<strong>乐观锁天生免疫死锁</strong>。</p>
+<p>乐观锁多用于“读多写少“的环境，避免频繁加锁影响性能；而悲观锁多用于”写多读少“的环境，避免频繁失败和重试影响性能。</p>
+<h3 id="可重入锁"><a href="#可重入锁" class="headerlink" title="可重入锁"></a>可重入锁</h3><p>所谓重入锁，顾名思义。就是支持重新进入的锁，也就是说这个锁支持一个<strong>线程对资源重复加锁</strong>。</p>
+<p>synchronized关键字就是使用的重入锁。比如说，你在一个synchronized实例方法里面调用另一个本实例的synchronized实例方法，它可以重新进入这个锁，不会出现任何异常。</p>
+<p>如果我们自己在继承AQS实现同步器的时候，没有考虑到占有锁的线程再次获取锁的场景，可能就会导致线程阻塞，那这个就是一个“非可重入锁”。</p>
+<p><code>ReentrantLock</code>的中文意思就是可重入锁。</p>
+<h3 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h3><p>概述</p>
+<ul>
+<li>AtomicXxx类下的CAS方法底层就是 自旋锁，不断循环直到成功为止</li>
+<li>自旋锁主要应用CAS操作，直到手动释放锁才停止</li>
+</ul>
+<p>主要就是while啥的，不成功就一直循环</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">    * Atomically updates the current value with the results of</span><br><span class="hljs-comment">    * applying the given function, returning the previous value. The</span><br><span class="hljs-comment">    * function should be side-effect-free, since it may be re-applied</span><br><span class="hljs-comment">    * when attempted updates fail due to contention among threads.</span><br><span class="hljs-comment">    *</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> updateFunction a side-effect-free function</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@return</span> the previous value</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@since</span> 1.8</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getAndUpdate</span><span class="hljs-params">(IntUnaryOperator updateFunction)</span> </span>&#123;<br>       <span class="hljs-keyword">int</span> prev, next;<br>       <span class="hljs-keyword">do</span> &#123;<br>           prev = get();<br>           next = updateFunction.applyAsInt(prev);<br>       &#125; <span class="hljs-keyword">while</span> (!compareAndSet(prev, next));<br>       <span class="hljs-keyword">return</span> prev;<br>   &#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>概念</p>
+<ul>
+<li>死锁是指两个或两个以上的进程在执行过程中，由于竞争资源或者由于彼此通信而造成的一种阻塞的现象，若无外力作用，它们都将无法推进下去。 此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。</li>
+<li>两个线程互相抢夺资源，互相争用还未释放的锁</li>
+</ul>
+<p>可以使用下面的方法排查死锁</p>
+<ul>
+<li>使用命令 <code>jps -1</code> 定位进程号</li>
+<li>使用<code>jstack 进程号</code> 查看堆栈信息</li>
+</ul>
 
               
             </div>

@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.mercuryblog.site/img/kongxianblog.png">
 <meta property="article:published_time" content="2022-06-29T12:12:46.000Z">
-<meta property="article:modified_time" content="2022-10-15T02:21:01.513Z">
+<meta property="article:modified_time" content="2022-10-18T02:50:05.721Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="Algorithm">
 <meta property="article:tag" content="leetcode">
@@ -235,7 +235,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          19k 字
+          20k 字
         
       </span>
     
@@ -247,7 +247,7 @@
         
         
           <!-- compatible with older versions-->
-          60 分钟
+          63 分钟
         
       </span>
     
@@ -424,6 +424,27 @@
 
 <h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><h2 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-inorder-traversal/">94. 二叉树的中序遍历 - 力扣（LeetCode）</a>一道简单的中序遍历的题，唯一需要值得注意的就是返回的list</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">inorderTraversal</span><span class="hljs-params">(TreeNode root)</span> </span>&#123;<br>        List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;Integer&gt;();<br>        infixOrder(root,list);<br>        <span class="hljs-keyword">return</span> list;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">infixOrder</span><span class="hljs-params">(TreeNode root,List&lt;Integer&gt; list)</span></span>&#123;<br>        <span class="hljs-keyword">if</span>(root == <span class="hljs-keyword">null</span>)&#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        infixOrder(root.left,list);<br>        list.add(root.val);<span class="hljs-comment">//list集合用的是add，别记错了</span><br>        infixOrder(root.right,list);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><h2 id="连续子数组"><a href="#连续子数组" class="headerlink" title="连续子数组"></a>连续子数组</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-unsorted-continuous-subarray/description/">581. 最短无序连续子数组 - 力扣（Leetcode）</a>这道题还是比较靠思维，下面贴一张图比较好懂</p>
+<p><img src="https://img.mercuryblog.site/img/image-20221018104918469.png" srcset="/img/newloading.gif" lazyload alt="image-20221018104918469"></p>
+<p>先只考虑中段数组，设其左边界为<code>L</code>，右边界为<code>R</code>：</p>
+<ul>
+<li><code>nums[R]</code> 不可能是【L，R】中的最大值（否则应该将 <code>nums[R]</code> 并入右端数组）</li>
+<li><code>nums[L]</code> 不可能是【L，R】中的最小值（否则应该将 <code>nums[L]</code> 并入左端数组）</li>
+</ul>
+<p>很明显:</p>
+<ul>
+<li>【L，R】中的最大值 <code>等于</code>【0，R】中的最大值，设其为 <code>max</code></li>
+<li>【L，R】中的最小值 <code>等于</code> 【L， nums.length-1】中的最小值，设其为 <code>min</code></li>
+</ul>
+<p>那么有：</p>
+<ul>
+<li><code>nums[R]</code> &lt; <code>max</code> &lt; <code>nums[R+1]</code> &lt; <code>nums[R+2]</code> &lt; … 所以说，从左往右遍历，最后一个小于<code>max</code>的为右边界</li>
+<li><code>nums[L]</code> &gt; <code>min</code> &gt; <code>nums[L-1]</code> &gt; <code>nums[L-2]</code> &gt; … 所以说，从右往左遍历，最后一个大于<code>min</code>的为左边界</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//只能说是题解牛逼</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findUnsortedSubarray</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> len = nums.length;<br>        <span class="hljs-keyword">int</span> begin = <span class="hljs-number">0</span>;<span class="hljs-comment">//左边界</span><br>        <span class="hljs-keyword">int</span> end = -<span class="hljs-number">1</span>;<span class="hljs-comment">//右边界</span><br>        <span class="hljs-keyword">int</span> max = nums[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">int</span> min = nums[len-<span class="hljs-number">1</span>];<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i&lt;len;i++)&#123;<br>            <span class="hljs-comment">//从左到右维护最大值，最后一个小于最大值的就是右边界</span><br>            <span class="hljs-keyword">if</span>(nums[i] &lt; max)&#123;<br>                end = i;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                max = nums[i];<br>            &#125;<br><br>            <span class="hljs-comment">//从右到左维护最小值，最后一个大于最小值的就是左边界</span><br>            <span class="hljs-keyword">if</span>(nums[len-i-<span class="hljs-number">1</span>] &gt; min)&#123;<br>                begin = len-i-<span class="hljs-number">1</span>;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                min = nums[len-i-<span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> end-begin+<span class="hljs-number">1</span>;<br>    &#125;<br></code></pre></td></tr></table></figure>
 
 
               
