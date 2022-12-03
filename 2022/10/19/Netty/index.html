@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.mercuryblog.site/img/img-16502952963391007c790321aac0c74987956dfa75e3c312bb830dc7f10def694a7a4fa5c8e51.jpg">
 <meta property="article:published_time" content="2022-10-19T11:07:46.000Z">
-<meta property="article:modified_time" content="2022-11-02T09:12:15.257Z">
+<meta property="article:modified_time" content="2022-12-03T09:41:20.068Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="Netty">
 <meta name="twitter:card" content="summary_large_image">
@@ -234,7 +234,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          843 字
+          3.7k 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
           <!-- compatible with older versions-->
-          3 分钟
+          12 分钟
         
       </span>
     
@@ -299,11 +299,9 @@
          </div>
      <ul>
 </div>
+# 线程模型基本介绍
 
-
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h1 id="Netty版本说明"><a href="#Netty版本说明" class="headerlink" title="Netty版本说明"></a>Netty版本说明</h1><p>Netty 5出现重大bug 已经被官网废弃，目前推荐使用Netty 4.x的稳定版本</p>
-<p>在课程中，使用的是Netty4.1.x版本</p>
-<h1 id="Netty高性能架构设计"><a href="#Netty高性能架构设计" class="headerlink" title="Netty高性能架构设计"></a>Netty高性能架构设计</h1><h2 id="线程模型基本介绍"><a href="#线程模型基本介绍" class="headerlink" title="线程模型基本介绍"></a>线程模型基本介绍</h2><p>现存线程模型：传统I/O服务模型和Reactor模式</p>
+<p>现存线程模型：传统I/O服务模型和Reactor模式</p>
 <p>传统阻塞I/O服务模型</p>
 <p>特点：</p>
 <p>采用阻塞IO模式获取输入的数据</p>
@@ -312,7 +310,62 @@
 <p>当并发数很大，就会创建大量的线程，占用很大系统资源</p>
 <p>若线程暂时没有数据可读，该线程会阻塞在Hander对象的read操作，导致线程资源浪费</p>
 <p><img src="https://img.mercuryblog.site/img/image-20221031152502979.png" srcset="/img/newloading.gif" lazyload alt="image-20221031152502979"></p>
-<p>Reactor</p>
+<h2 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h2><p><strong>Blocking I/O</strong>同步阻塞I/O模式，数据的读取都阻塞在一个线程内等待完成，很明显，无法应对高并发</p>
+<h2 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h2><p><strong>Non-blocking I/O</strong> 同步非阻塞型的I/O模型，提供了Channel,Seletor,Buffer等。支持面向缓冲的，基于通道的I/O操作方法，对于高负载，高并发的的应用，也有很好的支持</p>
+<h2 id="AIO"><a href="#AIO" class="headerlink" title="AIO"></a>AIO</h2><p><strong>Asynchronous I/O</strong> 就是NIO 2，是一种异步非阻塞的IO模型，异步IO是基于时间和回调机制实现的。也就是应用操作之后会直接返回，不会阻塞在那里，当后台处理完成后，操作系统会通知相应的线程进行后续操作。目前AIO的应用还不是特别的广泛。</p>
+<p class="note note-success">BIO,NIO,AIO的区别</p>
+
+<p>当客户端发起请求</p>
+<ul>
+<li>BIO：阻塞等待直到处理完成</li>
+<li>NIO：通过选择器监听多个通道，非阻塞，处理完成之后就返回</li>
+<li>AIO：通过回调</li>
+</ul>
+<h1 id="Netty简介"><a href="#Netty简介" class="headerlink" title="Netty简介"></a>Netty简介</h1><h2 id="Netty是什么"><a href="#Netty是什么" class="headerlink" title="Netty是什么"></a>Netty是什么</h2><ul>
+<li>Netty是一个基于NIO的client-server框架，使用它可以快速简单的开发网络应用程序</li>
+<li>极大简化了TCP 和 UDP的套接字编程，并且在性能和安全性仿麦呢更优</li>
+<li>支持多种协议比如SMTP，HTTP等</li>
+</ul>
+<h2 id="Netty版本说明"><a href="#Netty版本说明" class="headerlink" title="Netty版本说明"></a>Netty版本说明</h2><p>Netty 5出现重大bug 已经被官网废弃，目前推荐使用Netty 4.x的稳定版本</p>
+<p>在课程中，使用的是Netty4.1.x版本</p>
+<h2 id="Netty的优点"><a href="#Netty的优点" class="headerlink" title="Netty的优点"></a>Netty的优点</h2><ul>
+<li>统一的API,支持多种传输类型，阻塞的，非阻塞的</li>
+<li>自带编解码器解决TCP粘包/拆包问题</li>
+<li>自带各种协议栈</li>
+<li>安全性可靠</li>
+<li>…</li>
+</ul>
+<h1 id="Netty的核心组件"><a href="#Netty的核心组件" class="headerlink" title="Netty的核心组件"></a>Netty的核心组件</h1><h2 id="Bytebuf-字节容器"><a href="#Bytebuf-字节容器" class="headerlink" title="Bytebuf 字节容器"></a>Bytebuf 字节容器</h2><p>网络通信最终都是通过字节流进行传输的。ByteBuf就是Netty提供的一个字节容器，内部是一个字节数组，相比Java NIO提供的ByteBuf更加简单方便</p>
+<h2 id="Bootstrap和ServerBootstrap-启动引导类"><a href="#Bootstrap和ServerBootstrap-启动引导类" class="headerlink" title="Bootstrap和ServerBootstrap 启动引导类"></a>Bootstrap和ServerBootstrap 启动引导类</h2><p>Bootstrap 是客户端的启动引导类，通常使用<code>connect()</code>方法连接到远程的主机和端口，作为一个Netty TCP协议通信中的客户端，Bootstrap也可以通过<code>bind()</code>方法绑定本地的一个端口，作为UDP协议通信的一个端口</p>
+<p>ServerBootstrap 很明显是服务端的启动引导类，通常使用<code>bind()</code>方法绑定本地的端口，然后等待客户端的连接</p>
+<p>Bootstrap只需要配置一个线程组 EventLoopGroup,而ServerBootstrap需要配置两个线程组，一个用于接收连接，一个用于具体的IO处理</p>
+<h2 id="Channel-网络操作抽象类"><a href="#Channel-网络操作抽象类" class="headerlink" title="Channel 网络操作抽象类"></a>Channel 网络操作抽象类</h2><p>Netty通过Channel进行IO操作。一旦客户端成功连接服务端，就会新建一个Channel和这个客户端进行绑定</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> Channel <span class="hljs-title">doConnect</span><span class="hljs-params">(InetSocketAddresss inetSocketAddress)</span></span>&#123;<br>    CompletableFuture&lt;Channel&gt; completableFuture = <span class="hljs-keyword">new</span> CompletableFuture&lt;&gt;();<br>    bootstrap.connect(inetSocketAddress).addListener((channelFutureListener) future -&gt;&#123;<br>        <span class="hljs-keyword">if</span>(future,isSuccess())&#123;<br>            completableFuture.complete(future.channel());<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException();<br>        &#125;<br>    &#125;);<br>    <span class="hljs-keyword">return</span> completableFuture.get();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>常用的有两个实现类</p>
+<p>NioServerSocketChannel (服务端)</p>
+<p>NioSocketChannel (客户端)</p>
+<h2 id="EventLoop-事件循环"><a href="#EventLoop-事件循环" class="headerlink" title="EventLoop 事件循环"></a>EventLoop 事件循环</h2><h3 id="EventLoop介绍"><a href="#EventLoop介绍" class="headerlink" title="EventLoop介绍"></a>EventLoop介绍</h3><p>EventLoop定义了Netty的核心抽象，用于处理来了连接的生命周期中所发生的事件，通俗的讲就是它的主要作用就是负责监听网络事件处理器进行相关 I/O操作(读写)的处理</p>
+<h3 id="EventLoop和channel的关系"><a href="#EventLoop和channel的关系" class="headerlink" title="EventLoop和channel的关系"></a>EventLoop和channel的关系</h3><p>channel为Netty网络操作抽象类，Event Loop负责处理注册到其上的Channel的I/O操作，两者配合进行I/O操作</p>
+<h3 id="EventLoopGroup和EventLoop的关系"><a href="#EventLoopGroup和EventLoop的关系" class="headerlink" title="EventLoopGroup和EventLoop的关系"></a>EventLoopGroup和EventLoop的关系</h3><p><code>EventLoopGroup</code>包含多个<code>EventLoop</code>管理着所有的<code>EventLoop</code>的生命周期</p>
+<p><code>EventLoop</code>处理的I/O事件都将在它专有的<code>Thread</code>上被处理，即<code>Thread</code>和 <code>EventLoop</code>属于1:1的关系，从而保证线程安全</p>
+<p><img src="https://img.mercuryblog.site/img/image-20221203162809780.png" srcset="/img/newloading.gif" lazyload alt="image-20221203162809780"></p>
+<h2 id="ChannelHander-消息处理器-和-ChannelPipeline-ChannelHander-对象链表"><a href="#ChannelHander-消息处理器-和-ChannelPipeline-ChannelHander-对象链表" class="headerlink" title="ChannelHander (消息处理器) 和 ChannelPipeline (ChannelHander 对象链表)"></a>ChannelHander (消息处理器) 和 ChannelPipeline (ChannelHander 对象链表)</h2><p><code>ChannelHandler</code>是消息的具体处理器，主要负责处理客户端/服务端接收和发送的数据。</p>
+<p>当channel被创建的时候，会自动地分配到它专属的<code>ChannelPipeline</code>。 <code>ChannelPipeline</code>是<code>ChannelHander</code>的链，一个pipeline上可以有多个<code>ChannelHandler</code></p>
+<p><img src="https://img.mercuryblog.site/img/image-20221203164046760.png" srcset="/img/newloading.gif" lazyload alt="image-20221203164046760"></p>
+<h2 id="ChannelFuture-操作执行结果"><a href="#ChannelFuture-操作执行结果" class="headerlink" title="ChannelFuture 操作执行结果"></a>ChannelFuture 操作执行结果</h2><p>Netty中所有的I/O操作都是异步的，我们不能立刻得到操作是否执行成功，不过可以通过<code>ChannelFuture</code>接口的<code>addListener</code>方法注册一个<code>ChannelFutureListener</code>，当操作执行成功或者失败时，监听就会自动触发返回结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">ChannelFuture f = b.connect(host,port).addListener(future -&gt; &#123;<br>    <span class="hljs-keyword">if</span>(future.isSuccess())&#123;<br>        System.out.println(<span class="hljs-string">&quot;连接成功!&quot;</span>);<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        System.err.println(<span class="hljs-string">&quot;连接失败!&quot;</span>);<br>    &#125;<br>&#125;).sync();<br></code></pre></td></tr></table></figure>
+
+<p>还可以通过<code>ChannelFuture</code>的<code>channel()</code>方法获取连接相关联的<code>Channel</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Channel channel = f.channel();<br></code></pre></td></tr></table></figure>
+
+<p>还可以通过<code>ChannelFuture</code>接口的<code>sync()</code>方法让异步的操作变成同步的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">ChannelFuture f = b.bind(port).sync();<br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>NioEventLoopGroup</strong>默认的构造函数实际会起的线程数为<strong>CPU核心数*2</strong></p>
+<h1 id="Reactor-线程模型"><a href="#Reactor-线程模型" class="headerlink" title="Reactor 线程模型"></a>Reactor 线程模型</h1><p>Reactor是一种经典的线程模型，它基于事件驱动，特别适合处理海量的I/O事件</p>
 <p>别名</p>
 <ul>
 <li>反应器模式</li>
@@ -324,21 +377,25 @@
 <p>服务器端程序处理传入的多个请求，并将他们同步分派到相应的处理线程</p>
 <p>Reator模式使用IO复用监听事件，收到事件后，分发给某个线程</p>
 <p>原先有多个Hander阻塞，现在只用一个ServiceHandler连接</p>
-<h3 id="Reactor模式分类"><a href="#Reactor模式分类" class="headerlink" title="Reactor模式分类"></a>Reactor模式分类</h3><p>单Reactor单线程</p>
-<p><img src="https://img.mercuryblog.site/img/image-20221101195028780.png" srcset="/img/newloading.gif" lazyload alt="image-20221101195028780"></p>
-<p>单Reactor多线程</p>
-<p><img src="https://img.mercuryblog.site/img/image-20221101193557851.png" srcset="/img/newloading.gif" lazyload alt="image-20221101193557851"></p>
-<p>主从Reactor多线程</p>
-<p><img src="https://img.mercuryblog.site/img/image-20221101193327320.png" srcset="/img/newloading.gif" lazyload alt="image-20221101193327320"></p>
+<h2 id="Reactor模式分类"><a href="#Reactor模式分类" class="headerlink" title="Reactor模式分类"></a>Reactor模式分类</h2><h3 id="单线程Reactor"><a href="#单线程Reactor" class="headerlink" title="单线程Reactor"></a>单线程Reactor</h3><p><img src="https://img.mercuryblog.site/img/image-20221101195028780.png" srcset="/img/newloading.gif" lazyload alt="image-20221101195028780"></p>
+<p>单线程Reactor的优点是对系统资源的消耗特别小，但是，没办法支撑大量请求的应用场景并且处理请求的时间可能非常慢，所以一般实际项目中不会使用单线程Reactor</p>
+<h3 id="多线程Reactor"><a href="#多线程Reactor" class="headerlink" title="多线程Reactor"></a>多线程Reactor</h3><p><img src="https://img.mercuryblog.site/img/image-20221101193557851.png" srcset="/img/newloading.gif" lazyload alt="image-20221101193557851"></p>
+<p><strong>一个</strong>线程负责接收请求，<strong>一组</strong>NIO请求处理IO操作</p>
+<p>大部分场景下多线程Reactor模型没有啥问题，但是在一些并发数连接比较多(百万级别)的情况下，一个线程负责接收客户端就存在性能问题了</p>
+<h3 id="主从Reactor多线程"><a href="#主从Reactor多线程" class="headerlink" title="主从Reactor多线程"></a>主从Reactor多线程</h3><p><img src="https://img.mercuryblog.site/img/image-20221101193327320.png" srcset="/img/newloading.gif" lazyload alt="image-20221101193327320"></p>
+<p>一组NIO线程负责接收请求，一组NIO线程处理IO操作</p>
+<div class = "note note-success">更通俗的理解</div>
+
 <p>单Reactor单线程 前台接待员和服务员是同一个人，全程为顾客服务</p>
 <p>单Reactor多线程 一个前台接待员，多个服务员，接待员只负责接待</p>
 <p>主从Reactor多线程，多个前台接待员，多个服务生</p>
-<p><strong>Reactor模式的优点</strong></p>
-<h2 id="Netty模型"><a href="#Netty模型" class="headerlink" title="Netty模型"></a>Netty模型</h2><p>netty基于主从Reactor多线程模型做了一定的额改进</p>
-<p>channel</p>
-<p>Netty网络通信的组件 能够用于执行网络I/O操作</p>
-<p>Netty提供的编码器</p>
-<h1 id="用Netty自己实现一个简单的RPC"><a href="#用Netty自己实现一个简单的RPC" class="headerlink" title="用Netty自己实现一个简单的RPC"></a>用Netty自己实现一个简单的RPC</h1><p>RPC(Remote Procedure Call) 远程过程调用，是一个计算机通信协议，该协议允许运行于一台计算机的程序调用另一台计算机的子程序，而程序员无需额外地为这个交互作用编程</p>
+<h1 id="Netty线程模型"><a href="#Netty线程模型" class="headerlink" title="Netty线程模型"></a>Netty线程模型</h1><p>大部分的网络框架都是基于Reactor模式设计开发的，在Netty主要靠<code>NioEventLoopGroup</code>线程池来实现具体的线程模型。</p>
+<p>实现服务端的时候，一般会初始化两个线程组</p>
+<ul>
+<li>bossGroup : 接收连接</li>
+<li>workerGroup: 负责具体的处理，交由对应的Hander处理</li>
+</ul>
+<h2 id="单线程模型"><a href="#单线程模型" class="headerlink" title="单线程模型"></a>单线程模型</h2><h1 id="用Netty自己实现一个简单的RPC"><a href="#用Netty自己实现一个简单的RPC" class="headerlink" title="用Netty自己实现一个简单的RPC"></a>用Netty自己实现一个简单的RPC</h1><p>RPC(Remote Procedure Call) 远程过程调用，是一个计算机通信协议，该协议允许运行于一台计算机的程序调用另一台计算机的子程序，而程序员无需额外地为这个交互作用编程</p>
 <p>caller – Remote API – RpcProxy – RpcInvoker – RpcConnector –RpcProtocol</p>
 
               
