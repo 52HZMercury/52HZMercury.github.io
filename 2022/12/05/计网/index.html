@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.mercuryblog.site/img/day80.jpg">
 <meta property="article:published_time" content="2022-12-05T07:31:46.000Z">
-<meta property="article:modified_time" content="2022-12-05T09:15:28.709Z">
+<meta property="article:modified_time" content="2022-12-11T09:57:21.876Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="计网">
 <meta name="twitter:card" content="summary_large_image">
@@ -234,7 +234,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.2k 字
+          2.8k 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
           <!-- compatible with older versions-->
-          4 分钟
+          9 分钟
         
       </span>
     
@@ -331,6 +331,99 @@
 <blockquote>
 <p>计算机科学领域的任何问题都可以通过增加一个间接的中间层来解决，计算机整个体系从上到下都是按照严格的层次结构设计的</p>
 </blockquote>
+<h1 id="TCP和UDP"><a href="#TCP和UDP" class="headerlink" title="TCP和UDP"></a>TCP和UDP</h1><h2 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>TCP</th>
+<th>UDP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否面向连接</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>是否可靠传输</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>是否有状态</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>传输效率</td>
+<td>较慢</td>
+<td>较快</td>
+</tr>
+<tr>
+<td>传输形式</td>
+<td>字节流</td>
+<td>数据报文段</td>
+</tr>
+<tr>
+<td>首部开销</td>
+<td>20~60 bytes</td>
+<td>8 bytes</td>
+</tr>
+<tr>
+<td>是否提供广播或多播服务</td>
+<td>否</td>
+<td>是</td>
+</tr>
+</tbody></table>
+<div class ="note note-success">什么时候选择TCP，什么时候选UDP</div>
+
+<ul>
+<li><p>UDP一般用于即是通信，语音，视频，直播等，这些场景对于数据的准确性要求不是特别高的场景</p>
+</li>
+<li><p>TCP用于对准确性要求特别高的场景，比如文件传输，发送和接收邮件，远程登录等</p>
+</li>
+<li><p><strong>HTTP协议</strong>是基于TCP协议的，所以HTTP建立之前需要经历三次握手</p>
+</li>
+</ul>
+<h2 id="使用TCP和UDP的协议"><a href="#使用TCP和UDP的协议" class="headerlink" title="使用TCP和UDP的协议"></a>使用TCP和UDP的协议</h2><p><strong>TCP</strong></p>
+<p>HTTP,HTTPS,FTP,SMTP,POP3/IMAP,Telent(远程登录协议),SSH</p>
+<p><strong>UDP</strong></p>
+<p>DHCP(动态主机配置协议)，DNS</p>
+<h2 id="TCP三次握手和四次挥手-非常重要"><a href="#TCP三次握手和四次挥手-非常重要" class="headerlink" title="TCP三次握手和四次挥手(非常重要!!!)"></a>TCP三次握手和四次挥手(非常重要!!!)</h2><h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><img src="https://img.mercuryblog.site/img/image-20221211162931677.png" srcset="/img/newloading.gif" lazyload alt="image-20221211162931677"></p>
+<ul>
+<li>一次握手：客户端发送带有SYN (SEQ=x)标志的数据包 -&gt;服务端，然后客户端进入<strong>SYN_SEND</strong>状态，等待服务器的确认</li>
+<li>二次握手：服务器发送带有SYN+ACK(SEQ=y,ACK=x+1)标志的数据包-&gt;客户端，然后服务端进入<strong>SYN_RECV</strong>状态</li>
+<li>三次握手：客户端发送带有ACK(ACK = y+1)标志的数据包-&gt;服务端，然后客户端和服务端都进入<strong>ESTABLISHED</strong>状态，完成TCP的三次握手</li>
+</ul>
+<div class = "note note-success">为什么需要三次握手?</div>
+
+<p>三次握手的目的是建立可靠的通信信道，目的就是双方确认自己与对方的数据发送和接收都是正常的。</p>
+<ul>
+<li>第一次握手：Client什么都不能确认；Server确认了对方发送正常，自己接收正常</li>
+<li>第二次握手：Client确认了自己发送，接收正常，对方发送接受收正常；Server确认了对方发送正常，自己接收正常</li>
+<li>第三次握手：Client确认了自己发送，接收正常，对方发送接受收正常；Server确认了自己发送，接收正常，对方发送，接收正常</li>
+</ul>
+<p>因此只有三次握手才能确认双方的收发功能都正常，缺一不可</p>
+<div class= "note note-success">为什么第二次还需要回传SYN</div>
+
+<p>到第二次的时候回传SYN是为了建立并确认服务端到客户端的通信是否正常</p>
+<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="https://img.mercuryblog.site/img/image-20221211164930656.png" srcset="/img/newloading.gif" lazyload alt="image-20221211164930656"></p>
+<ul>
+<li>第一次挥手：客户端发送一个FIN(SEQ=x)标志的数据包，它发送一个ACK(SEQ=X+1)标志的数据包-&gt;客户端，用来关闭客户端到服务端的数据传送。然后客户端进入<strong>FIN-WAIT-1</strong>状态</li>
+<li>第二次挥手：服务器收到这个FIN(SEQ=x)标志的数据包，它发送一个ACK(SEQ=X+1)标志的数据包-&gt;客户端。然后，此时服务端进入<strong>CLOSE-WAIT</strong>状态，客户端进入<strong>FIN-WAIT-2</strong>状态</li>
+<li>第三次挥手：服务端关闭和客户端的连接并发送一个FIN(SEQ=y)标志的数据包-&gt;客户端请求关闭，然后，服务端进入<strong>LAST-ACK</strong>状态</li>
+<li>第四次握手：客户端发送ACK(SEQ=y+1)标志的数据包-&gt;服务端并且进入<strong>TIME-WAIT</strong>状态，服务端在收到ACK(SEQ=y+1)标志的数据包后进入ClOSE状态。此时，如果客户端等待<strong>2MSL</strong>(2个报文最大生存时间)后依然没有收到回复，就证明服务端已经正常关闭，随后，客户端关闭。</li>
+</ul>
+<div class= "note note-success">为什么要四次挥手</div>
+
+<p>TCP是全双工通信，可以双向传输数据。任何一方发出连接释放通知后，会进入半关闭状态，当另一方确认后，才会完全关闭，因此需要四次</p>
+<div class="note note-success">为什么不把中间服务端的ACK和FIN合并变成三次挥手</div>
+
+<p>因为服务器收到客户端断开请求时，可能还有一些数据</p>
+<p>没有发完，先回复ACK表示收到了断开连接的请求，等到数据发完之后再发FIN，断开服务器到客户端的数据传送</p>
+<div class ="note note-success">为什么需要等待2*MSL时间后才进入CLOSED状态</div>
+
+<p>因为客户端发送给服务器的ACK有可能丢失，如果服务端因为某些原因没有收到ACK的话，就会不断重发FIN。因此需要客户端再次等待2MSL，防止服务端没有收到ACK而不断的重发FIN</p>
 
               
             </div>
