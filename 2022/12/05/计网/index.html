@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.mercuryblog.site/img/day80.jpg">
 <meta property="article:published_time" content="2022-12-05T07:31:46.000Z">
-<meta property="article:modified_time" content="2022-12-11T09:57:21.876Z">
+<meta property="article:modified_time" content="2022-12-12T11:36:24.138Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="计网">
 <meta name="twitter:card" content="summary_large_image">
@@ -234,7 +234,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.8k 字
+          4k 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
           <!-- compatible with older versions-->
-          9 分钟
+          13 分钟
         
       </span>
     
@@ -424,6 +424,46 @@
 <div class ="note note-success">为什么需要等待2*MSL时间后才进入CLOSED状态</div>
 
 <p>因为客户端发送给服务器的ACK有可能丢失，如果服务端因为某些原因没有收到ACK的话，就会不断重发FIN。因此需要客户端再次等待2MSL，防止服务端没有收到ACK而不断的重发FIN</p>
+<h2 id="TCP传输可靠性保障"><a href="#TCP传输可靠性保障" class="headerlink" title="TCP传输可靠性保障"></a>TCP传输可靠性保障</h2><h3 id="TCP如何保证传输的可靠性"><a href="#TCP如何保证传输的可靠性" class="headerlink" title="TCP如何保证传输的可靠性"></a>TCP如何保证传输的可靠性</h3><ul>
+<li><strong>基于数据块传输</strong>：应用数据被分割成TCP认为最适合发送的数据块</li>
+<li>对失序数据包重新排序以及去重：TCP给每一个包一个序列号，有了序列号就能根据序列号进行排序，并且去掉重复序列号的数据</li>
+<li><strong>校验和</strong>：TCP将保持它首部和数据的校验和，目的是检测数据在传输过程中的任何变化。如果收到的检验和有差错，TCP将丢弃这个报文段</li>
+<li><strong>超时重传</strong>：当发送方发送数据后，会启动一个计时器。接收端成功收到后会返回一个相应的确认信息，如果在合理的往返时延内未收到确认信息，那么对应的数据包就会被假设为已丢失并进行重传</li>
+<li><strong>流量控制</strong>：TCP连接的每一方都有固定大小的缓冲空间，TCP接收端只允许发送端发送缓冲区能接收的数据，当接收方来不及处理发送方的数据，能提示发送方降低发送的速率，防止包丢失。</li>
+<li><strong>拥塞控制</strong>：当网络拥塞时，减少数据的发送</li>
+</ul>
+<h3 id="TCP如何让实现流量控制"><a href="#TCP如何让实现流量控制" class="headerlink" title="TCP如何让实现流量控制"></a>TCP如何让实现流量控制</h3><p><strong>TCP利用滑动窗口进行流量控制</strong>，目的是为了控制发送方发送速率，保证发送方来得及接收。</p>
+<p>TCP<strong>发送窗口</strong>可以划分为四个部分</p>
+<ol>
+<li>已经发送并且确认的TCP段</li>
+<li>已经发送但是没有确认的TCP段</li>
+<li>未发送但是接收方准备接收的TCP段</li>
+<li>未发送并且接收方也未准备接受收的TCP段</li>
+</ol>
+<p>发送窗口如下图所示</p>
+<p><img src="https://img.mercuryblog.site/img/image-20221212160652697.png" srcset="/img/newloading.gif" lazyload alt="image-20221212160652697"></p>
+<p>TCP<strong>接收窗口</strong>可以划分为三个部分</p>
+<ol>
+<li>已经接收并且已经确认的TCP段</li>
+<li>等待接受且允许发送方发送TCP段</li>
+<li>不可接收且不允许发送方发送TCP段</li>
+</ol>
+<p>接收窗口如下图所示</p>
+<p><img src="https://img.mercuryblog.site/img/image-20221212161038279.png" srcset="/img/newloading.gif" lazyload alt="image-20221212161038279"></p>
+<p><strong>接收窗口的大小是根据接收端处理数据的速度动态调整的</strong></p>
+<h3 id="拥塞控制的实现"><a href="#拥塞控制的实现" class="headerlink" title="拥塞控制的实现"></a>拥塞控制的实现</h3><p><img src="https://img.mercuryblog.site/img/image-20221212190619792.png" srcset="/img/newloading.gif" lazyload alt="image-20221212190619792"></p>
+<p>TCP的拥塞控制采用了四种算法，<strong>慢开始</strong>，<strong>拥塞避免</strong>，<strong>快重传</strong>，<strong>快恢复</strong>。</p>
+<ul>
+<li><strong>慢开始</strong>：先试探一波，即由小到大逐渐增大拥塞窗口的数值，cwnd初始值为1，每经过一个传播轮次，cwnd<strong>加倍</strong></li>
+<li><strong>拥塞避免</strong>：拥塞避免算法的思路是让拥塞窗口cwnd缓慢增大，每经过一个往返时间RTT就增大1</li>
+<li><strong>快重传与快恢复</strong>(FRR)：能快速恢复丢失的数据包，有了FRR，如果接收机接收到一个不按顺序的数据段，它会立即给发送机发送一个重复确认，如果接收到三个重复确认，它会假定数据段缺失了，并立即重传这些缺失的数据段。减少重传时的暂停。</li>
+</ul>
+<h3 id="ARQ协议"><a href="#ARQ协议" class="headerlink" title="ARQ协议"></a>ARQ协议</h3><p><strong>自动重传请求</strong>(Automatic Repeat-reQuest,ARQ)是OSI模型中数据链路层和传输层的错误纠正协议之一，如果发送方在发送之后一段时间之内没有收到确认信息(ACK)，它会重新发送，直到收到确认信息或者重试超过一定的次数。</p>
+<p>ARQ包括停止等待ARQ协议和连续ARQ协议</p>
+<p><strong>停止等待ARQ协议</strong></p>
+<p>每发完一个分组就停止发送，等待对方确认(ACK)，若过了一段时间，还是没有收到ACK确认，说明没有发送成功，需要重新发送，直到收到确认后再发下一个分组</p>
+<p><strong>连续ARQ协议</strong></p>
+<p>发送方维护一个发送窗口，凡位于发送窗口内的分组可以连续发送出去，而不需要等待对方确认。接收方一般采用累积确认，对按序到达的最后一个分组发送确认，表明到这个分组为止的所有分组都已经正确收到了</p>
 
               
             </div>
