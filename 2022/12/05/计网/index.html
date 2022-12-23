@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.mercuryblog.site/img/day80.jpg">
 <meta property="article:published_time" content="2022-12-05T07:31:46.000Z">
-<meta property="article:modified_time" content="2022-12-12T11:36:24.138Z">
+<meta property="article:modified_time" content="2022-12-23T10:27:05.476Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="计网">
 <meta name="twitter:card" content="summary_large_image">
@@ -234,7 +234,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          4k 字
+          6.6k 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
           <!-- compatible with older versions-->
-          13 分钟
+          21 分钟
         
       </span>
     
@@ -290,6 +290,7 @@
               
               <h1 id="OSI和TCP-IP网络分层模型"><a href="#OSI和TCP-IP网络分层模型" class="headerlink" title="OSI和TCP/IP网络分层模型"></a>OSI和TCP/IP网络分层模型</h1><h2 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h2><p><img src="https://img.mercuryblog.site/img/image-20221205153408890.png" srcset="/img/newloading.gif" lazyload alt="image-20221205153408890"></p>
 <p>每一层都专注于自己的事情，并且每一层都需要下一层 提供的功能，OSI的七层体系结构概念清楚，理论完整，但是比较复杂而且不实用，而且有些功能在多个层中重复出现</p>
+<p>数据链路层的三个基本问题：封装成帧，透明传输，差错检测</p>
 <p><img src="https://guide-blog-images.oss-cn-shenzhen.aliyuncs.com/github/javaguide/cs-basics/network/osi-model-detail.png" srcset="/img/newloading.gif" lazyload alt="img"></p>
 <p>OSI七层模型很明显是失败了，但是还是留下了不少遗产(经典话术)</p>
 <h2 id="TCP-IP四层模型"><a href="#TCP-IP四层模型" class="headerlink" title="TCP/IP四层模型"></a>TCP/IP四层模型</h2><ol>
@@ -301,7 +302,16 @@
 <p><img src="https://img.mercuryblog.site/img/image-20221205154052697.png" srcset="/img/newloading.gif" lazyload alt="image-20221205154052697"></p>
 <h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p><strong>位于传输层之上，主要提供两个终端设备上的应用程序之间的信息交换的服务，它定义了信息交换的格式，消息会交给下一层传输层来传输。</strong>应用层交互的数据称为报文</p>
 <p>应用层协议定义了网络通信规则，对于不同的网络应用需要不同的应用协议，比如:HTTP,DHCP,FTP,DNS,SMTP,IMAP等</p>
-<p>//应用层协议总结todo</p>
+<h3 id="应用层常见协议"><a href="#应用层常见协议" class="headerlink" title="应用层常见协议"></a>应用层常见协议</h3><p><strong>HTTP</strong>：超文本传输协议，主要是为了Web浏览器与Web服务器之间的通信而设计的。当我们使用浏览器浏览网页的时候，我们的网页就是通过HTTP请求进行加载的</p>
+<p><strong>SMTP</strong>：简单邮件传输(发送)协议，基于TCP协议，用来发送电子邮件，</p>
+<blockquote>
+<p>注意⚠️: 接收邮件的是POP3协议，不是SMTP协议</p>
+</blockquote>
+<p><strong>POP3/IMAP</strong>：邮件接收的协议，这两个协议都是负责邮件接收的协议，IMAP协议相比于POP3协议要更新一些，几乎所有现代的电子邮件都支持IMAP。大部分的网络邮件提供商都支持POP3和IMAP</p>
+<p><strong>FTP</strong>：文件传输协议，基于TCP实现可靠的传输，使用FTP传输文件的好处就是可以屏蔽操作系统和文件存储方式</p>
+<p><strong>Telnet</strong>：远程登录协议，建立在可靠的传输协议TCP上</p>
+<p><strong>SSH</strong>：安全的网络传输协议，是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。利用SSH可以有效防止远程管理过程中的信息泄露问题。SSH建立在可靠的传输协议上。</p>
+<p><strong>Telnet和SSH之间的主要区别在于SSH协议会对传输的数据进行加密保证数据安全性</strong></p>
 <h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><p><strong>传输层的主要任务就是负责向两台终端设备之间的通信提供通用的数据传输服务。</strong>应用进程利用该服务传输应用层的报文</p>
 <p>主要使用以下两种协议</p>
 <ul>
@@ -464,6 +474,101 @@
 <p>每发完一个分组就停止发送，等待对方确认(ACK)，若过了一段时间，还是没有收到ACK确认，说明没有发送成功，需要重新发送，直到收到确认后再发下一个分组</p>
 <p><strong>连续ARQ协议</strong></p>
 <p>发送方维护一个发送窗口，凡位于发送窗口内的分组可以连续发送出去，而不需要等待对方确认。接收方一般采用累积确认，对按序到达的最后一个分组发送确认，表明到这个分组为止的所有分组都已经正确收到了</p>
+<h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><h2 id="从输入URL到页面展示到底发生了什么"><a href="#从输入URL到页面展示到底发生了什么" class="headerlink" title="从输入URL到页面展示到底发生了什么"></a>从输入URL到页面展示到底发生了什么</h2><p>(打开一个网页，整个过程会使用那些协议)<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000006879700">从输入URL到页面加载发生了什么?参考</a></p>
+<ol>
+<li>DNS解析</li>
+<li>TCP连接</li>
+<li>发送HTTP请求</li>
+<li>服务器处理请求并返回HTTP报文</li>
+<li>浏览器解析渲染页面</li>
+<li>连接结束</li>
+</ol>
+<p><strong>DNS解析</strong></p>
+<p>DNS解析就是寻找哪台机器上有你需要资源的过程， 查询的方式是递归查询</p>
+<p>首先在本地域名服务器中查询IP地址，如果没有找到，本地域名服务器会向根域名服务器发送一个请求，如果根域名也不存在，那么本地域名会向com顶级域名发送请求，依次类推</p>
+<p><strong>TCP连接</strong></p>
+<p>见上面的TCP连接</p>
+<p><strong>HTTP请求</strong></p>
+<p>发送HTTP请求的过程就是构建HTTP请求报文并通过TCP协议发送到服务器指定端口(HTTPS 443 ; HTTP 80)。HTTP请求报文由三部分组成:<strong>请求行，请求报文</strong>和<strong>请求正文</strong></p>
+<p><strong>服务器处理请求并返回HTTP报文</strong></p>
+<p>后端从固定得到端口接收到TCP报文开始，这一部分对应变成语言里面的socket。它会对TCP连接进行处理，对HTTP协议进行解析，并按照报文格式进一步封装成HTTP Request对象，供上层使用。HTTP的响应报文也是由三部分组成：<strong>状态码，响应报头</strong>和<strong>响应报文</strong>。</p>
+<p><strong>浏览器解析渲染页面</strong></p>
+<p>浏览器是一个边解析边渲染的过程。首先浏览器解析HTML文件构建DOM树，然后解析CSS文件构建渲染树，等到渲染树构建完成后，浏览器开始布局渲染树并将其绘制到屏幕上。</p>
+<h2 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>类别</th>
+<th>原因短语</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1XX</td>
+<td>信息性状态码</td>
+<td>接收的请求正在处理</td>
+</tr>
+<tr>
+<td>2XX</td>
+<td>成功状态码</td>
+<td>请求正常处理完毕</td>
+</tr>
+<tr>
+<td>3XX</td>
+<td>重定向状态码</td>
+<td>需要进行附加操作以完成请求</td>
+</tr>
+<tr>
+<td>4XX</td>
+<td>客户端错误状态码</td>
+<td>服务器无法处理请求</td>
+</tr>
+<tr>
+<td>5XX</td>
+<td>服务器错误状态码</td>
+<td>服务器处理请求错误</td>
+</tr>
+</tbody></table>
+<h3 id="1xx（信息状态码）"><a href="#1xx（信息状态码）" class="headerlink" title="1xx（信息状态码）"></a>1xx（信息状态码）</h3><p>大概率不会碰到，略</p>
+<h3 id="2xx-成功状态码"><a href="#2xx-成功状态码" class="headerlink" title="2xx (成功状态码)"></a>2xx (成功状态码)</h3><ul>
+<li>200 OK：请求被成功处理，服务端返回了数据</li>
+<li>201 Created：请求被成功处理并且在服务器端创建了一个新的资源</li>
+<li>202 Accepted：服务端已经接收到了请求，但是还没处理</li>
+<li>204 Not Content：服务端已经成功处理了请求，但是没有返回任何内容</li>
+</ul>
+<p>204见得比较少，这里说一下，204状态码描述就是我们向服务端发送HTTP请求之后，只关注处理结果是否成功的场景，也就是我们需要的就是一个结果: true/false</p>
+<h3 id="3xx-重定向状态码"><a href="#3xx-重定向状态码" class="headerlink" title="3xx (重定向状态码)"></a>3xx (重定向状态码)</h3><ul>
+<li>301 Moved Permanently：资源被永久重定向了。</li>
+<li>302 Found：资源被临时重定向了</li>
+</ul>
+<h3 id="4xx-客户端错误状态码"><a href="#4xx-客户端错误状态码" class="headerlink" title="4xx (客户端错误状态码)"></a>4xx (客户端错误状态码)</h3><ul>
+<li>400 Bad Request：发送的HTTP请求存在问题</li>
+<li>401 Unauthorized：未认证却请求需要认证之后才能访问的资源</li>
+<li>403 Forbidden：直接拒绝HTTP请求，不处理，一般用来针对非法请求</li>
+<li>404 Not Found：你请求的资源未在服务器找到</li>
+<li>409 Conflict：表示请求的资源与服务器当前的状态存在冲突，请求无法被处理</li>
+</ul>
+<h3 id="5xx-（服务端错误状态码）"><a href="#5xx-（服务端错误状态码）" class="headerlink" title="5xx （服务端错误状态码）"></a>5xx （服务端错误状态码）</h3><ul>
+<li>500 Internal Server Error：服务端出问题了，服务端处理请求的时候突然抛出异常，但是异常未在服务端被正确处理</li>
+<li>502 Bad Gateway：我们的网关将请求转发到服务端，但是服务端返回的却是一个错误的响应</li>
+</ul>
+<h2 id="HTTP-和-HTTPS有什么区别"><a href="#HTTP-和-HTTPS有什么区别" class="headerlink" title="HTTP 和 HTTPS有什么区别"></a>HTTP 和 HTTPS有什么区别</h2><ul>
+<li>端口号:HTTP默认是80，HTTPS默认是443</li>
+<li>前缀不同，显而易见一个是HTTP一个是HTTPS</li>
+<li>安全性和资源消耗：HTTP所有传输的内容都是明文，客户端和服务器端都无法验证对方的身份，HTTPS所有传输的内容都经过加密，HTTPS拥有更高的安全性，但是会消耗更多的服务器资源</li>
+</ul>
+<h2 id="HTTP是不保存状态的协议，如何保存用户状态"><a href="#HTTP是不保存状态的协议，如何保存用户状态" class="headerlink" title="HTTP是不保存状态的协议，如何保存用户状态"></a>HTTP是不保存状态的协议，如何保存用户状态</h2><p>HTTP协议自身不对请求和响应之间的通信状态进行保存。方案就是Session，服务端给特定的用户创建特定的Session，之后就可以标识这个用户并且跟踪这个用户了(一般情况下，服务器会在一定时间内保存这个session，过了时间限制，就会销毁这个session)</p>
+<p>在服务端保存Session的方法很多，最常用的就是内存和数据库保存，我们一般通过在Cookie中附带一个Session ID来进行跟踪Session。</p>
+<div class = "note note-success">Cookie被禁用怎么办？</div>
+
+<p>最常用的就是利用URL重写把Session ID直接附加在URL路径的后面</p>
+<h2 id="URI和URL的区别"><a href="#URI和URL的区别" class="headerlink" title="URI和URL的区别"></a>URI和URL的区别</h2><ul>
+<li>URI(Uniform Resource Identifier)：是统一资源标志符，可以唯一标识一个资源</li>
+<li>URL(Uniform Resource Locator):统一资源定位符，可以提供该资源的路径。是一种具体的URI，即URL可以用来标识一个资源，而且还指明了如何locate这个资源</li>
+</ul>
+<h1 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h1><h2 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h2><p>MAC(Media Access Control Address)即媒体访问控制地址，互联网一切网络设备都由MAC地址唯一标识</p>
+<p>MAC地址的长度为6字节，地址空间大小有280万亿之多，MAC地址由IEEE统一管理与分配，它具有可携带性，永久性，而IP地址则没有这些性质</p>
+<p>MAC地址有一个特殊的地址:FF-FF-FF-FF-FF-FF (全1地址)，该地址表示广播地址</p>
+<h2 id="ARP协议解决了什么问题"><a href="#ARP协议解决了什么问题" class="headerlink" title="ARP协议解决了什么问题"></a>ARP协议解决了什么问题</h2><p>ARP全程地址解析协议(Address Resolution Protocol)，它解决的是网络层地址和链路层之间的转换问题，因为IP数据包在传输的过程中需要知道下一跳该去往哪里，但IP地址只是逻辑地址，MAC地址才是物理地址，解决了IP地址转MAC地址的一些问题</p>
 
               
             </div>
