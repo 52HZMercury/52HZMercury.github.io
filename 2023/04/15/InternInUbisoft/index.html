@@ -16,26 +16,26 @@
   <meta name="author" content="Mercury">
   <meta name="keywords" content="">
   
-    <meta name="description" content="操作系统学好了，才能进大厂！">
+    <meta name="description" content="育碧实习经历">
 <meta property="og:type" content="article">
-<meta property="og:title" content="操作系统">
-<meta property="og:url" content="http://example.com/2022/12/27/OS/index.html">
+<meta property="og:title" content="我在育碧种土豆">
+<meta property="og:url" content="http://example.com/2023/04/15/InternInUbisoft/index.html">
 <meta property="og:site_name" content="Mercury&#39;s blog">
-<meta property="og:description" content="操作系统学好了，才能进大厂！">
+<meta property="og:description" content="育碧实习经历">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.mercuryblog.site/img/167188596010716_9.png">
-<meta property="article:published_time" content="2022-12-27T07:31:46.000Z">
-<meta property="article:modified_time" content="2023-01-07T07:33:51.750Z">
+<meta property="og:image" content="https://img.mercuryblog.site/img/image-20230415111930300.png">
+<meta property="article:published_time" content="2023-04-15T01:44:46.000Z">
+<meta property="article:modified_time" content="2023-04-15T03:19:53.890Z">
 <meta property="article:author" content="Mercury">
-<meta property="article:tag" content="操作系统">
+<meta property="article:tag" content="Ubisoft">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.mercuryblog.site/img/167188596010716_9.png">
+<meta name="twitter:image" content="https://img.mercuryblog.site/img/image-20230415111930300.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>操作系统 - Mercury&#39;s blog</title>
+  <title>我在育碧种土豆 - Mercury&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="操作系统"></span>
+            <span id="subtitle" data-typed-text="我在育碧种土豆"></span>
           
         </div>
 
@@ -221,8 +221,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-12-27 15:31" pubdate>
-          2022年12月27日 下午
+        <time datetime="2023-04-15 09:44" pubdate>
+          2023年4月15日 上午
         </time>
       </span>
     
@@ -234,7 +234,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3.3k 字
+          1.7k 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
           <!-- compatible with older versions-->
-          11 分钟
+          6 分钟
         
       </span>
     
@@ -284,113 +284,37 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">操作系统</h1>
+            <h1 style="display: none">我在育碧种土豆</h1>
             
             <div class="markdown-body">
               
-              <h1 id="操作系统基础"><a href="#操作系统基础" class="headerlink" title="操作系统基础"></a>操作系统基础</h1><h2 id="什么是操作系统"><a href="#什么是操作系统" class="headerlink" title="什么是操作系统"></a>什么是操作系统</h2><ol>
-<li>操作系统是管理计算机硬件和软件资源的程序，是计算机的基石</li>
-<li>操作系统本质上是一个运行在计算机上的软件程序，用于管理计算机硬件个软件资源</li>
-<li>操作系统的存在屏蔽了硬件层的复杂性</li>
-<li>操作系统的内核时操作系统的核心部分，他负责系统的内存管理，硬件设备的管理，文件系统的管理以及应用程序的管理</li>
-</ol>
-<h2 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h2><p>根据进程访问的特点，我们可以把进程在系统上的运行分为两个级别</p>
-<ol>
-<li>用户态：用户运行的进程可以直接读取读取用户程序的数据</li>
-<li>系统态：系统态运行的进程或程序几乎可以访问计算机的任何资源，不受限制</li>
-</ol>
-<p>所以什么是系统调用呢？</p>
-<p>在我们运行的用户程序中，凡是与系统态级别的资源有关的操作（如文件管理，进程控制，内存管理等），都必须通过系统调用方式向操作系统提出服务请求，并由操作系统代为完成</p>
-<p>比如：<strong>设备管理，文件管理，进程控制，进程通信，内存管理</strong></p>
-<h1 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h1><h2 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h2><p>线程是进程划分的更小的运行单位，一个进程在其执行的过程中可以产生多个线程。线程和进程最大的不同在于基本上各进程是独立的，而各线程则不一定，因为同一进程中的线程极有可能会相互影响</p>
-<p><strong>进程是操作系统进行资源分配的最小单元，线程是操作系统进行运算调度的最小单元</strong></p>
-<h2 id="进程的几种状态"><a href="#进程的几种状态" class="headerlink" title="进程的几种状态"></a>进程的几种状态</h2><p><strong>创建状态</strong>：进程正在被创建，尚未到就绪状态</p>
-<p><strong>就绪状态</strong>：进程已处于准备运行状态，即进程获得了除了处理器之外的一切所需资源，一旦获得处理器资源即可运行</p>
-<p><strong>运行状态</strong>：进程正在处理器上运行 </p>
-<p><strong>阻塞状态</strong>：又称为等待状态，进程正在等待某一事件而暂停运行如等待某资源为可用或等待IO操作完成。即使处理器空闲，该进程也不能运行</p>
-<p><strong>结束状态</strong>：进程正在从系统中消失。可能是进程正常结束或其他原因中断退出运行</p>
-<h2 id="进程间的通信方式"><a href="#进程间的通信方式" class="headerlink" title="进程间的通信方式"></a>进程间的通信方式</h2><p><strong>管道/匿名管道</strong>：用于具有亲缘关系的父子进程或者兄弟进程之间的通信</p>
-<p><strong>有名管道</strong>：匿名管道由于没有名字，只能用于亲缘关系的进程间通信。因此提出了有名管道，有名管道以磁盘文件的方式存在，可以实现本机任意两个进程通信</p>
-<p><strong>信号</strong>：一种比较复杂的通信方式，用于通知接收进程某个事件已经发生</p>
-<p><strong>消息队列</strong>：消息队列是消息的链表，具有特定的格式，存放在内存中并由消息队列标识符标识。消息队列克服了信号承载信息量少，管道只能承载无格式字节流以及缓冲区大小受限等缺点</p>
-<p><strong>信号量</strong>：信号量是一个计数器，用于多进程对共享数据的访问，信号量的意图在于进程间同步</p>
-<p><strong>共享内存</strong>：使得多个进程可以访问同一块内存空间，不同进程可以及时看到对方进程中对共享内存中数据的更新</p>
-<p><strong>套接字</strong>：主要用于客户端和服务器之间通过网络进行通信。、</p>
-<h2 id="线程间的同步方式"><a href="#线程间的同步方式" class="headerlink" title="线程间的同步方式"></a>线程间的同步方式</h2><p>线程同步就是两个或多个共享关键资源的线程并发执行，一般有下面三种线程同步的方式</p>
-<ol>
-<li><strong>互斥量</strong>：采用互斥对象机制，只有拥有互斥对象的线程才有访问公告资源的权限。</li>
-<li><strong>信号量</strong>：它允许同一时刻多个线程访问同一资源，但是需要控制同一资源的最大资源数量</li>
-<li><strong>事件</strong>：通过通知操作系统的方式来保持多线程同步，还可以方便的实现多线程优先级的比较操作</li>
-</ol>
-<h2 id="进程的调度算法"><a href="#进程的调度算法" class="headerlink" title="进程的调度算法"></a>进程的调度算法</h2><ul>
-<li>**先到先服务算法(FCFS)**：从就绪队列中选择一个最先进入该队列的进程分配资源。</li>
-<li>**短作业优先调度算法(SJF)**：从就绪队列中选出一个估计运行时间最短的进程分配资源</li>
-<li><strong>时间片轮转调度算法</strong>：每个进程被分配一个时间段，称为它的时间片，即该进程允许运行的时间</li>
-<li><strong>多级反馈队列调度算法</strong>：短进程有限的额调度算法仅照顾了短进程而忽视了长进程。多级反馈队列调度算法既能使高优先级的作业得到响应又能使短作业迅速完成，是现在公认的较好的进程调度算法</li>
-<li><strong>优先级调度</strong>：为每个线程分配优先级，首先执行的具有最高优先级的进程</li>
-</ul>
-<h2 id="什么是死锁"><a href="#什么是死锁" class="headerlink" title="什么是死锁"></a>什么是死锁</h2><p>多个进程/线程同时被阻塞，他们中的一个或者全部都在等待某个资源被释放。由于进程/线程被无限期的阻塞，因此程序不可能正常终止。</p>
-<h2 id="死锁的四个必要条件"><a href="#死锁的四个必要条件" class="headerlink" title="死锁的四个必要条件"></a>死锁的四个必要条件</h2><ul>
-<li><strong>互斥</strong>：资源必须处于非共享模式，即一次只有一个进程可以使用</li>
-<li><strong>占有并等待</strong>：一个进程至少应该占有一个资源，并等待另一资源，而该资源被其他进程所占有</li>
-<li><strong>非抢占</strong>：资源不能被抢占。只能在持有资源的进程完成任务后，该资源才会被释放</li>
-<li><strong>循环等待</strong>：P0等待的资源被P1占有，P1等待的资源被P2占有……，Pn等待的资源被P0占有</li>
-</ul>
-<p><strong>注意</strong>：这里是必要条件，不是充分条件</p>
-<h2 id="解决死锁的办法"><a href="#解决死锁的办法" class="headerlink" title="解决死锁的办法"></a>解决死锁的办法</h2><p><strong>预防</strong>：采取某种策略，限制并发进程对资源的请求</p>
-<p><strong>避免</strong>：在分配资源时，根据资源的使用情况提前做出预测，从而避免死锁的发生</p>
-<p><strong>检测</strong>：系统设有专门的额机构，当死锁发生的时候，该机构能够检测死锁的发生，并精确地确定与死锁有关的进程和资源</p>
-<p><strong>解除</strong>：与检测相配套的一种措施，用于将进程从死锁状态下解脱出来</p>
-<div class = "note note-success">避免死锁的经典算法</div>
-
-<p>最具代表性的就是银行家算法，简单的来说就是当一个进程申请使用资源的时候，银行家算法通过先试探分配给该进程资源，然后通过安全性算法判断分配后的系统是否处于安全状态，若不安全则试探分配作废，让该进程继续等待，若能够进入到安全的状态，则就真的分配资源给该进程                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </p>
-<h1 id="操作系统内存管理"><a href="#操作系统内存管理" class="headerlink" title="操作系统内存管理"></a>操作系统内存管理</h1><h2 id="内存管理主要是做什么的"><a href="#内存管理主要是做什么的" class="headerlink" title="内存管理主要是做什么的"></a>内存管理主要是做什么的</h2><p>主要负责内存的分配与回收，地址转换(将逻辑地址转换为物理地址)也是内存管理做的事情</p>
-<h2 id="常见的几种内存管理机制"><a href="#常见的几种内存管理机制" class="headerlink" title="常见的几种内存管理机制"></a>常见的几种内存管理机制</h2><p>简单的分为<strong>连续分配管理</strong>和<strong>非连续分配管理方式</strong>，连续分配包括<strong>块式管理</strong>，非连续管理分配包括<strong>页式管理</strong>和<strong>段式管理</strong></p>
-<ul>
-<li><p>块式管理：将内存分为几个固定大小的块，每个块只有一个进程，当程序运行需要内存的时候，操作系统就分一块给他，这块内存剩下的空间就被浪费了</p>
-</li>
-<li><p>页式管理：把主存分为大小相等且固定的一页一页的形式，页比较小，相比于块的划分颗粒度更小，减少内存碎片，通过页表对应逻辑地址和物理地址</p>
-</li>
-<li><p>段式管理：页式管理其中的页并没有实际的意义。段式管理把主存分为一段一段的，段是具有实际意义的，每个段定义了一组逻辑信息，比如主程序段，子程序段等。通过段表对应逻辑地址和逻辑地址</p>
-</li>
-<li><p>段页式管理：结合了段页式管理的优点，简单的来说就是把主存分为若干段，每个段又分为若干页，也就说段页式管理中段与段以及段的内部都是离散的</p>
-</li>
-</ul>
-<h2 id="分页机制和分段机制的共同点和区别"><a href="#分页机制和分段机制的共同点和区别" class="headerlink" title="分页机制和分段机制的共同点和区别"></a>分页机制和分段机制的共同点和区别</h2><ul>
-<li>共同点：<ul>
-<li>分页和分段都是为了提高内存利用率，减少碎片</li>
-<li>页和段都是离散存储的，但是页和段内部式连续的</li>
-</ul>
-</li>
-<li>区别<ul>
-<li>页的大小式固定的，但是段的大小是不固定的，取决于我们当前运行的程序</li>
-<li>页没有信息，但是段是逻辑信息的单位，在程序中可以分为代码段，数据段等</li>
-</ul>
-</li>
-</ul>
-<h1 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h1><h2 id="什么是虚拟内存"><a href="#什么是虚拟内存" class="headerlink" title="什么是虚拟内存"></a>什么是虚拟内存</h2><p>虚拟内存是计算机内存管理的一种技术，通过虚拟内存，可以为每一个进程提供一个一致性的，私有的地址空间。虚拟内存的重要意义就是它定义了一个连续的虚拟地址空间，并且把内存扩展到硬盘空间</p>
-<h2 id="局部性原理"><a href="#局部性原理" class="headerlink" title="局部性原理"></a>局部性原理</h2><p>程序在执行的时候往往呈现局部性规律，也就是说在某个较短的时间段内，程序执行局限于某一小部分，程序访问的存储空间页局限于某个区域</p>
-<p>主要表现在</p>
-<ul>
-<li>时间局限性</li>
-<li>空间局限性</li>
-</ul>
-<p>猜测一些大型游戏的加载是不是同样使用了这个原理</p>
-<h2 id="虚拟存储器"><a href="#虚拟存储器" class="headerlink" title="虚拟存储器"></a>虚拟存储器</h2><p>基于局部性原理，在程序装入的时候，可以将程序的一部分咋恍如内存，而将其他部分留在外村，就可以启动程序的执行。需要的时候再将需要的调入内存，将不需要的资源调出，这样，计算机仿佛就为用户提供了一个比实际内存大得多的储存器，这就是虚拟存储器</p>
-<p>技术实现</p>
-<ul>
-<li>请求分页存储管理</li>
-<li>请求分段存储管理</li>
-<li>请求段页式存储管理</li>
-</ul>
-<p>和上面的类似，但是不同的是装入作业的时候不是全部装入，而是装入一部分</p>
-<h2 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h2><p>地址映射的过程中，若在页面中发现所要的页面不再内存中，则会发生缺页中断，这时如果没有空闲的页面，操作系统就需要淘汰一些页面腾出内存空间为将调入的页面做准备</p>
-<ul>
-<li>**OPT 页面置换算法(最佳页面置换算法)**：选择以后以后永不使用或者未来最长时间不被使用的的页面淘汰，保证最低的缺页率，但是我们无法知道内存中哪个是未来最长不被使用的，因此这个算法是无法实现的</li>
-<li><strong>FIFO(First In First Out)算法</strong>：看名字就知道是选择最先进入的页面淘汰</li>
-<li>**LRU(Least Recently Used) 页面置换算法(最近最久未使用置换算法)**：赋予每个页面一个T值记录自上次访问以来经历的时间，每次就挑这个T值最大的淘汰</li>
-<li>**LFU(Least Frequently Used) 页面置换算法(最少使用页面置换算法)**：选择之前使用次数最少的页面淘汰</li>
-</ul>
+              <h1 id="意料之外的回复"><a href="#意料之外的回复" class="headerlink" title="意料之外的回复"></a>意料之外的回复</h1><p>时间回到三月中旬，此时的我刚刚因为工资等方面的原因拒绝了某外企的QA实习，不过那个部门主管确实很负责任，甚至还帮我看了租房子那些，人也非常的和蔼可亲。好的，扯回育碧实习，那是一个周四，我在boss上海投，开始想着先找一个成都的小厂先干着，边干边找。</p>
+<p>刷着刷着，我看到了育碧的Intern Game Tester这个职位，看了看职位描述，都没有多少跟计算机技术相关的描述，只有一个需要懂点计算机网络啥的(后面发现，根本用不上)，而且工资对比育碧这个游戏业界大厂，简直是低得发指，想着反正找个小厂先干着，于是随手一投😐</p>
+<h1 id="怪怪的笔试题"><a href="#怪怪的笔试题" class="headerlink" title="怪怪的笔试题"></a>怪怪的笔试题</h1><p>时间来到了周五,在团队摸了一天的🐟, 饭还是要吃的. 正在排队买面的时候,育碧的HR突然发来了一个笔试链接,说要我做做</p>
+<p>回到团队打开链接,准备做题的时候,我才发现,丫的,不愧是育碧,这链接一直转圈根本进不去,于是手贱一刷新,刚刚通过邮件发过来的临时登录密码显示已经用过了,已经登不上了,只能再换个邮箱再重新搞</p>
+<p>这一次我学聪明了,就等他一直转圈,他就这样转了好几分钟,居然真的还进去了.题目要求全英文做题, 作为一个快两年都没碰过的菜鸡来说</p>
+<p>我看你是为难我胖虎.jpg</p>
+<p>题目大概就是玩过哪些游戏,对于游戏的理解, 游戏bug有哪些分类啥的,最后重头戏来了—看图找bug,并且使用英语描述</p>
+<p><img src="https://img.mercuryblog.site/img/image-20230415103223555.png" srcset="/img/newloading.gif" lazyload alt="image-20230415103223555"></p>
+<p>做完好几道这种题之后,我就大概知道了进去之后大概是个什么工作了,所以最后还有一道专门考英语水平的汉译英我压根做都没做.(绝对不是因为懒</p>
+<h1 id="居然约面了"><a href="#居然约面了" class="headerlink" title="居然约面了?"></a>居然约面了?</h1><p>时间又过了一个周末, 对于做过的笔试题我也没放在心上,没想到在周二的时候, HR居然又给我打电话约面了,还聊了一些薪资方面的问题,加上补贴啥的,一个月的工资竟有高达三千人民币🥲,但有面试就不错了,我都先答应下来了. 面试官还专门说, 面试有个英语环节,要我好好准备一下,口语菜鸡瑟瑟发抖.</p>
+<p>我赶紧用看看牛客上有没有育碧的面试,居然还真的有,而且好像还是同一个职位,看面经,英语环节只是自我介绍需要,其他的环节用中文就好了, 于是用我们的 chatGPT 帮我写了一篇英语的自我介绍,不得不说写得真好, 刚开始想把它给背下来,发现做不到 (苦涩.jpg) ,还是多读几遍,明天照着念吧.</p>
+<h1 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h1><p>面试用的teams, 有HR,以及两人,应该是部门的人. 果不其然,一来就是英语的自我介绍. 这让我回想起了,当初大一上外教课的时候, 期末的口语考试 — 去和一个纯英国伦敦人面对面坐着,自己选一个话题说口语. 然后外教一脸微笑的听着我的辣鸡口语的窘迫感.</p>
+<p>面试问的问题就和笔试差不多,根本就没有问计算机相关的问题,问了问对游戏的理解,玩过什么游戏,对于育碧游戏的看法,最后还问了我能不能胜任比较枯燥的重复工作(这句话给我们埋下了伏笔)</p>
+<p>最后反问的环节,我问了以前经常问的问题, “部门的业务具体是什么” 的变化版—“这个测试平时的工作具体是什么”.谁知道居然给她问蒙了</p>
+<p>“我不太理解你的意思,测试平时的工作就是测试啊,还能有啥”</p>
+<p>“我的意思是平时都需要做些什么”</p>
+<p>“??? 就是测试啊”</p>
+<p>“???”</p>
+<p>“我直接给你说吧,就是做的黑盒测试方面的,听了这个回答你还想来吗?”</p>
+<p>犹豫了几秒….. </p>
+<p>“balabala”  心里: 黑盒测试是什么,面完搜一下….</p>
+<p>面试就这样结束了,看最后的反问环节,都把她问得不耐烦了,猜想估计是寄了,算了,反正也不是特别想去,工资也还低</p>
+<h1 id="Offer"><a href="#Offer" class="headerlink" title="Offer"></a>Offer</h1><p>面试后,又过了一天. HR居然又打电话过来了,通知我过了. 虽然工资低, 毕竟是育碧. 我还是给接下来了. 先去干着吧,简历上还能多一段实习经历,加了HR的微信,约了个时间入职,OC后一天.收到offer</p>
+<p><img src="https://img.mercuryblog.site/img/image-20230415110718828.png" srcset="/img/newloading.gif" lazyload alt="image-20230415110718828"></p>
+<h1 id="入职"><a href="#入职" class="headerlink" title="入职"></a>入职</h1><p>在入职前几天,我还和某夏姓男子打算一起出去短租一个房子,实习期间住,毕竟从新都到天府三街确实是远, 没想到逛了一下午,房子没租到满意的, 还一人被坑了180块。还没毕业就遭到社会的毒打😭。没办法,只有每天去挤地铁了。</p>
+<p>第一天我就感受到了，早上的一号线真TM的挤啊，刚去报到，没仔细看offer，跑错了写字楼，原来入职是在B3。。。</p>
+<p>九点半，HR带我们几个今天刚入职的人又签一遍实习协议，然后还签了一个保密协议，看了看，如果泄露信息，要赔一万块，穷学生表示赔不起。</p>
 
               
             </div>
@@ -408,7 +332,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="category-chain-item">计算机基础</a>
+  <a href="/categories/%E5%AE%9E%E4%B9%A0/" class="category-chain-item">实习</a>
   
   
 
@@ -423,7 +347,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">#操作系统</a>
+        <a href="/tags/Ubisoft/">#Ubisoft</a>
       
     </div>
   
@@ -435,8 +359,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>操作系统</div>
-      <div>http://example.com/2022/12/27/OS/</div>
+      <div>我在育碧种土豆</div>
+      <div>http://example.com/2023/04/15/InternInUbisoft/</div>
     </div>
     <div class="license-meta">
       
@@ -448,7 +372,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年12月27日</div>
+          <div>2023年4月15日</div>
         </div>
       
       
@@ -478,18 +402,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/15/InternInUbisoft/" title="我在育碧种土豆">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">我在育碧种土豆</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/12/05/%E8%AE%A1%E7%BD%91/" title="计网">
-                        <span class="hidden-mobile">计网</span>
+                      <a href="/2022/12/27/OS/" title="操作系统">
+                        <span class="hidden-mobile">操作系统</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
