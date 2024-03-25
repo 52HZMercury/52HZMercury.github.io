@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog//day80.jpg">
 <meta property="article:published_time" content="2022-12-05T07:31:46.000Z">
-<meta property="article:modified_time" content="2024-03-25T08:31:18.469Z">
+<meta property="article:modified_time" content="2024-03-25T08:56:51.624Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="计网">
 <meta name="twitter:card" content="summary_large_image">
@@ -288,7 +288,7 @@
             
             <div class="markdown-body">
               
-              <h1 id="OSI和TCP-IP网络分层模型"><a href="#OSI和TCP-IP网络分层模型" class="headerlink" title="OSI和TCP/IP网络分层模型"></a>OSI和TCP/IP网络分层模型</h1><h2 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h2><p><img src="https://img.mercuryblog.site/img/image-20221205153408890.png" srcset="/img/newloading.gif" lazyload alt="image-20221205153408890"></p>
+              <h1 id="OSI和TCP-IP网络分层模型"><a href="#OSI和TCP-IP网络分层模型" class="headerlink" title="OSI和TCP/IP网络分层模型"></a>OSI和TCP/IP网络分层模型</h1><h2 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h2><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221205153408890.png" srcset="/img/newloading.gif" lazyload alt="image-20221205153408890"></p>
 <p>每一层都专注于自己的事情，并且每一层都需要下一层 提供的功能，OSI的七层体系结构概念清楚，理论完整，但是比较复杂而且不实用，而且有些功能在多个层中重复出现</p>
 <p>数据链路层的三个基本问题：封装成帧，透明传输，差错检测</p>
 <p>OSI七层模型很明显是失败了，但是还是留下了不少遗产(经典话术)</p>
@@ -298,7 +298,7 @@
 <li>网络层</li>
 <li>网络接口层</li>
 </ol>
-<p><img src="https://img.mercuryblog.site/img/image-20221205154052697.png" srcset="/img/newloading.gif" lazyload alt="image-20221205154052697"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221205154052697.png" srcset="/img/newloading.gif" lazyload alt="image-20221205154052697"></p>
 <h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p><strong>位于传输层之上，主要提供两个终端设备上的应用程序之间的信息交换的服务，它定义了信息交换的格式，消息会交给下一层传输层来传输。</strong>应用层交互的数据称为报文</p>
 <p>应用层协议定义了网络通信规则，对于不同的网络应用需要不同的应用协议，比如:HTTP,DHCP,FTP,DNS,SMTP,IMAP等</p>
 <h3 id="应用层常见协议"><a href="#应用层常见协议" class="headerlink" title="应用层常见协议"></a>应用层常见协议</h3><p><strong>HTTP</strong>：超文本传输协议，主要是为了Web浏览器与Web服务器之间的通信而设计的。当我们使用浏览器浏览网页的时候，我们的网页就是通过HTTP请求进行加载的</p>
@@ -331,7 +331,7 @@
 <li>数据链路层：作用是将网络层交下来的IP数据报组装成帧，在两个相邻节点间的链路上传送帧。每一帧包括数据和必要的控制信息(如同步信息，地址信息，差错控制)</li>
 <li>物理层的作用是实现相邻计算机节点之间比特流的透明传输，尽可能屏蔽掉具体传输介质和物理设备的差异</li>
 </ol>
-<p><img src="https://img.mercuryblog.site/img/image-20221205170103001.png" srcset="/img/newloading.gif" lazyload alt="image-20221205170103001"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221205170103001.png" srcset="/img/newloading.gif" lazyload alt="image-20221205170103001"></p>
 <h2 id="为什么要分层"><a href="#为什么要分层" class="headerlink" title="为什么要分层"></a>为什么要分层</h2><ol>
 <li>各层之间相互独立：各层之间不需要关心其他层是如何实现的，只需要直到自己如何调用下层提供好的功能就可以了</li>
 <li>提高了整体灵活性：每一层都可以使用最适合的技术来实现，只需要保证接口的规则没有变就行了，对应上了<strong>高内聚，低耦合</strong></li>
@@ -398,7 +398,7 @@
 <p>HTTP,HTTPS,FTP,SMTP,POP3/IMAP,Telent(远程登录协议),SSH</p>
 <p><strong>UDP</strong></p>
 <p>DHCP(动态主机配置协议)，DNS</p>
-<h2 id="TCP三次握手和四次挥手-非常重要"><a href="#TCP三次握手和四次挥手-非常重要" class="headerlink" title="TCP三次握手和四次挥手(非常重要!!!)"></a>TCP三次握手和四次挥手(非常重要!!!)</h2><h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><img src="https://img.mercuryblog.site/img/image-20221211162931677.png" srcset="/img/newloading.gif" lazyload alt="image-20221211162931677"></p>
+<h2 id="TCP三次握手和四次挥手-非常重要"><a href="#TCP三次握手和四次挥手-非常重要" class="headerlink" title="TCP三次握手和四次挥手(非常重要!!!)"></a>TCP三次握手和四次挥手(非常重要!!!)</h2><h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221211162931677.png" srcset="/img/newloading.gif" lazyload alt="image-20221211162931677"></p>
 <ul>
 <li>一次握手：客户端发送带有SYN (SEQ=x)标志的数据包 -&gt;服务端，然后客户端进入<strong>SYN_SEND</strong>状态，等待服务器的确认</li>
 <li>二次握手：服务器发送带有SYN+ACK(SEQ=y,ACK=x+1)标志的数据包-&gt;客户端，然后服务端进入<strong>SYN_RECV</strong>状态</li>
@@ -416,7 +416,7 @@
 <div class= "note note-success">为什么第二次还需要回传SYN</div>
 
 <p>到第二次的时候回传SYN是为了建立并确认服务端到客户端的通信是否正常</p>
-<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="https://img.mercuryblog.site/img/image-20221211164930656.png" srcset="/img/newloading.gif" lazyload alt="image-20221211164930656"></p>
+<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221211164930656.png" srcset="/img/newloading.gif" lazyload alt="image-20221211164930656"></p>
 <ul>
 <li>第一次挥手：客户端发送一个FIN(SEQ=x)标志的数据包，它发送一个ACK(SEQ=X+1)标志的数据包-&gt;客户端，用来关闭客户端到服务端的数据传送。然后客户端进入<strong>FIN-WAIT-1</strong>状态</li>
 <li>第二次挥手：服务器收到这个FIN(SEQ=x)标志的数据包，它发送一个ACK(SEQ=X+1)标志的数据包-&gt;客户端。然后，此时服务端进入<strong>CLOSE-WAIT</strong>状态，客户端进入<strong>FIN-WAIT-2</strong>状态</li>
@@ -450,7 +450,7 @@
 <li>未发送并且接收方也未准备接受收的TCP段</li>
 </ol>
 <p>发送窗口如下图所示</p>
-<p><img src="https://img.mercuryblog.site/img/image-20221212160652697.png" srcset="/img/newloading.gif" lazyload alt="image-20221212160652697"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221212160652697.png" srcset="/img/newloading.gif" lazyload alt="image-20221212160652697"></p>
 <p>TCP<strong>接收窗口</strong>可以划分为三个部分</p>
 <ol>
 <li>已经接收并且已经确认的TCP段</li>
@@ -458,9 +458,9 @@
 <li>不可接收且不允许发送方发送TCP段</li>
 </ol>
 <p>接收窗口如下图所示</p>
-<p><img src="https://img.mercuryblog.site/img/image-20221212161038279.png" srcset="/img/newloading.gif" lazyload alt="image-20221212161038279"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221212161038279.png" srcset="/img/newloading.gif" lazyload alt="image-20221212161038279"></p>
 <p><strong>接收窗口的大小是根据接收端处理数据的速度动态调整的</strong></p>
-<h3 id="拥塞控制的实现"><a href="#拥塞控制的实现" class="headerlink" title="拥塞控制的实现"></a>拥塞控制的实现</h3><p><img src="https://img.mercuryblog.site/img/image-20221212190619792.png" srcset="/img/newloading.gif" lazyload alt="image-20221212190619792"></p>
+<h3 id="拥塞控制的实现"><a href="#拥塞控制的实现" class="headerlink" title="拥塞控制的实现"></a>拥塞控制的实现</h3><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221212190619792.png" srcset="/img/newloading.gif" lazyload alt="image-20221212190619792"></p>
 <p>TCP的拥塞控制采用了四种算法，<strong>慢开始</strong>，<strong>拥塞避免</strong>，<strong>快重传</strong>，<strong>快恢复</strong>。</p>
 <ul>
 <li><strong>慢开始</strong>：先试探一波，即由小到大逐渐增大拥塞窗口的数值，cwnd初始值为1，每经过一个传播轮次，cwnd<strong>加倍</strong></li>
