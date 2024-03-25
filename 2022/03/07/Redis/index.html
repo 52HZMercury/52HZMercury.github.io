@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Mercury&#39;s blog">
 <meta property="og:description" content="redis作为一个NoSQL可以作为数据库，缓存或者消息中间件，已经是这个大数据时代的后端程序员所必须要掌握的一项技术了">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.mercuryblog.site/img/mmexport1649953059484.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/mmexport1649953059484.jpg">
 <meta property="article:published_time" content="2022-03-07T11:57:14.000Z">
-<meta property="article:modified_time" content="2022-12-02T09:27:31.255Z">
+<meta property="article:modified_time" content="2024-03-25T08:37:45.896Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="database">
 <meta property="article:tag" content="NoSQL">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.mercuryblog.site/img/mmexport1649953059484.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/mmexport1649953059484.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -649,7 +649,7 @@
 
 <p>重要的是去理解redis的思想和使用情景</p>
 <h1 id="九、redis-conf详解"><a href="#九、redis-conf详解" class="headerlink" title="九、redis.conf详解"></a>九、redis.conf详解</h1><p>文件的位置<p class="label label-success">默认路径 /usr/local/bin/Nconfig</p></p>
-<p><img src="https://img.mercuryblog.site/img/image-20220414174009767.png" srcset="/img/newloading.gif" lazyload alt="image-20220414174009767"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220414174009767.png" srcset="/img/newloading.gif" lazyload alt="image-20220414174009767"></p>
 <p>配置文件对于大小写不敏感</p>
 <h2 id="1、包含-INCLUDES"><a href="#1、包含-INCLUDES" class="headerlink" title="1、包含 INCLUDES"></a>1、包含 INCLUDES</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">include /path/to/local.conf<br><br>include /path/to/other.conf<br></code></pre></td></tr></table></figure>
 
@@ -744,7 +744,7 @@
 
 
 
-<p><img src="https://img.mercuryblog.site/img/20220415223451.png" srcset="/img/newloading.gif" lazyload alt="修复截图"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/20220415223451.png" srcset="/img/newloading.gif" lazyload alt="修复截图"></p>
 <p>修复之后可能会损失一些数据,但总比全部丢了好</p>
 <h3 id="2-2-AOF的rewrite"><a href="#2-2-AOF的rewrite" class="headerlink" title="2.2 AOF的rewrite"></a>2.2 AOF的rewrite</h3><p>aof默认就是文件无限制的追加，因此如果一个文件太大之后，AOF会fork一个新的进程进行重写</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">auto-aof-rewrite-percentage 100<br>auto-aof-rewrite-min-size 64mb<br></code></pre></td></tr></table></figure>
@@ -871,7 +871,7 @@
 <h2 id="6-谋朝篡位-🤪"><a href="#6-谋朝篡位-🤪" class="headerlink" title="6. 谋朝篡位 🤪"></a>6. 谋朝篡位 🤪</h2><p>如果主机断开了连接，我们可以使用<span class = "label label-danger">SLAVEOF no one</span>命令使自己变成主机，其他主机可以手动连接到这个主节点</p>
 <h1 id="十三、哨兵模式"><a href="#十三、哨兵模式" class="headerlink" title="十三、哨兵模式"></a>十三、哨兵模式</h1><h2 id="1-概念-1"><a href="#1-概念-1" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>简单的来说，哨兵模式就是自动选举主机的模式。一般情况下，当主服务器宕机后，需要手动把一台服务器切换为主服务器，但是手动对于程序员来讲还是太麻烦了🙌,所以Redis从2.8正式提供了Sentinel哨兵模式来解决这个问题</p>
 <p>哨兵模式能够在后台自动监测主机是否故障，如果故障了将根据投票数自动将从机转换为主机，哨兵模式是一种特殊的模式，首先Redis提供了哨兵的命令，哨兵是一个独立的进程。原理就是哨兵通过发送命令，等待服务器响应，从而监控多个redis实例</p>
-<p><img src="https://img.mercuryblog.site/img/image-20220417190613545.png" srcset="/img/newloading.gif" lazyload alt="哨兵示意图"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220417190613545.png" srcset="/img/newloading.gif" lazyload alt="哨兵示意图"></p>
 <p>过程：假设主服务器宕机(比如断电啥的)，哨兵会检测到这个结果，系统并不会马上进行failover过程，仅仅是哨兵1主观的认为主服务器不可用，这个现象称为<strong>主观下线</strong>。当后面的哨兵也检测到主服务器不可用，并且数量达到一定值时，那么哨兵之间就会进行一次投票，投票的结果由一个哨兵发起，进行failover[故障转移]操作。切换成功后，就会通过发布订阅模式，让各个哨兵把自己监控的从服务器实现切换主机，这个过程称为<strong>客观下线</strong></p>
 <h2 id="2-实际测试一波"><a href="#2-实际测试一波" class="headerlink" title="2. 实际测试一波"></a>2. 实际测试一波</h2><p> 简单编辑配置文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">[root@Mercury Nconfig]<span class="hljs-comment"># vim sentinel.conf</span><br><br>sentinel monitor myredis 127.0.0.1 6379 1<br><br><span class="hljs-comment"># 后面这个数字1代表有多少个哨兵认为这个主机挂了就执行换主机的操作</span><br><br></code></pre></td></tr></table></figure>
@@ -920,9 +920,9 @@
 
 <h1 id="十四、缓存穿透和雪崩"><a href="#十四、缓存穿透和雪崩" class="headerlink" title="十四、缓存穿透和雪崩"></a>十四、缓存穿透和雪崩</h1><h2 id="1-缓存穿透"><a href="#1-缓存穿透" class="headerlink" title="1. 缓存穿透"></a>1. 缓存穿透</h2><h3 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念"></a>1.1 概念</h3><p>缓存穿透的概念很简单，用户想要查询一个数据，发现 redis 内存数据库没有，也就是缓存没有命中，于是向持久层数据库查询。现也没有，于是本次查询失败。当用户很多的时候，缓存都没有命中（秒杀！)，于是都去请求了持久层数据库。这会给持久层数据库造成很大的压力，这时候就相当于出现了缓存穿透。</p>
 <h3 id="1-2-解决方案"><a href="#1-2-解决方案" class="headerlink" title="1.2 解决方案"></a>1.2 解决方案</h3><h4 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h4><p>布隆过滤器是一种数据结构，对所有可能査询的参数以 hash 形式存储，在控制层先进行校验，不符合则丢弃，从而避免了对底层存储系统的查询压力；</p>
-<p><img src="https://img.mercuryblog.site/img/image-20220417194623551.png" srcset="/img/newloading.gif" lazyload alt="布隆过滤器"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220417194623551.png" srcset="/img/newloading.gif" lazyload alt="布隆过滤器"></p>
 <h4 id="缓存空对象"><a href="#缓存空对象" class="headerlink" title="缓存空对象"></a>缓存空对象</h4><p>当存储层不命中后，即使返回的空对象也将其缓存起来，同时设置一个过期时间，之后再访问这个数据会从缓存中获取，保护了后端数据源</p>
-<p><img src="https://img.mercuryblog.site/img/image-20220417194749943.png" srcset="/img/newloading.gif" lazyload alt="缓存空对象"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220417194749943.png" srcset="/img/newloading.gif" lazyload alt="缓存空对象"></p>
 <p>但是这种方法会存在两个问题：<br>1、如果空值能够被缓存起来，这就意味着缓存需要更多的空间存储更多的键，因为这当中可能会有很多的空值的键；<br>2、即使对空值设置了过期时间，还是会存在缓存层和存储层的数据会有一段时间窗口的不一致，这对于需要保持一致性的业务会<br>有影响。</p>
 <h2 id="2-缓存击穿"><a href="#2-缓存击穿" class="headerlink" title="2. 缓存击穿"></a>2. 缓存击穿</h2><h3 id="2-1-概述"><a href="#2-1-概述" class="headerlink" title="2.1 概述"></a>2.1 概述</h3><p>这里需要注意和缓存击穿的区别，缓存击穿，是指一个 key 非常热点，在不停的扛着大并发，大并发集中对这一个点进行访问，当这个 key 在失效的瞬间，持续的大并发就穿破缓存，直接请求数据库，就像在一个屏障上凿开了一个洞。当某个 key 在过期的瞬间，有大量的请求并发访问，这类数据一般是热点数据，由于缓存过期，会同时访问数据库来查询最新数据，并且回写缓存，会导使数据库瞬间压力过大。</p>
 <h3 id="2-2-解决方案"><a href="#2-2-解决方案" class="headerlink" title="2.2 解决方案"></a>2.2 解决方案</h3><h4 id="设置热点数据永不过期"><a href="#设置热点数据永不过期" class="headerlink" title="设置热点数据永不过期"></a>设置热点数据永不过期</h4><p>从缓存层面来看，没有设置过期时间，所以不会出现热点 key 过期后产生的问题。</p>

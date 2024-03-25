@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="Mercury&#39;s blog">
 <meta property="og:description" content="基于Mybatis的一次全面的升级，懒人后端的福音">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.mercuryblog.site/img/sangshensmall.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/sangshensmall.jpg">
 <meta property="article:published_time" content="2022-05-20T09:14:42.000Z">
-<meta property="article:modified_time" content="2022-06-20T04:40:52.276Z">
+<meta property="article:modified_time" content="2024-03-25T08:36:55.768Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="Mybatis">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.mercuryblog.site/img/sangshensmall.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/sangshensmall.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -412,9 +412,9 @@
 <h1 id="5-自动填充"><a href="#5-自动填充" class="headerlink" title="5. 自动填充"></a>5. 自动填充</h1><p>创建时间，修改时间，这些操作都是自动化完成的</p>
 <p>在国际标准中所有的数据库表gmt_create  gmt_modified几乎所有的表都要配置上，而且需要自动化</p>
 <h2 id="5-1-数据库级别的修改"><a href="#5-1-数据库级别的修改" class="headerlink" title="5.1 数据库级别的修改"></a>5.1 数据库级别的修改</h2><p>增加create_time update_time字段</p>
-<p><img src="https://img.mercuryblog.site/img/image-20220521133004843.png" srcset="/img/newloading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220521133004843.png" srcset="/img/newloading.gif" lazyload></p>
 <p>可以看到默认的时间</p>
-<p><img src="https://img.mercuryblog.site/img/image-20220521133024647.png" srcset="/img/newloading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220521133024647.png" srcset="/img/newloading.gif" lazyload></p>
 <h2 id="5-2-代码级别的修改"><a href="#5-2-代码级别的修改" class="headerlink" title="5.2 代码级别的修改"></a>5.2 代码级别的修改</h2><p>首先还原数据库的设置，将默认CURRENT_TIMESTAMP和更新取消掉</p>
 <ol>
 <li>实体类字段属性上添加注解</li>
@@ -445,7 +445,7 @@
 <ol>
 <li>数据库里增加version字段 (默认初版为1)</li>
 </ol>
-<p><img src="https://img.mercuryblog.site/img/image-20220522130711039.png" srcset="/img/newloading.gif" lazyload alt="image-20220522130711039"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220522130711039.png" srcset="/img/newloading.gif" lazyload alt="image-20220522130711039"></p>
 <ol start="2">
 <li>实体类中增加</li>
 </ol>
@@ -527,7 +527,7 @@
 <ol>
 <li>数据库增加deleted字段</li>
 </ol>
-<p> <img src="https://img.mercuryblog.site/img/image-20220522143025600.png" srcset="/img/newloading.gif" lazyload alt="image-20220522143025600"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220522143025600.png" srcset="/img/newloading.gif" lazyload alt="image-20220522143025600"></p>
 <ol start="2">
 <li>实体类中增加注解</li>
 </ol>

@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Mercury&#39;s blog">
 <meta property="og:description" content="面试的常青树">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.mercuryblog.site/img/1e4c16.9.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/1e4c16.9.png">
 <meta property="article:published_time" content="2022-09-14T12:12:46.000Z">
-<meta property="article:modified_time" content="2022-10-18T03:28:42.958Z">
+<meta property="article:modified_time" content="2024-03-25T08:34:51.267Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="Java并发">
 <meta property="article:tag" content="JUC">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.mercuryblog.site/img/1e4c16.9.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/1e4c16.9.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -610,11 +610,11 @@
 <h2 id="Fork-Join分支合并"><a href="#Fork-Join分支合并" class="headerlink" title="Fork/Join分支合并"></a>Fork/Join分支合并</h2><p>ork/Join框架是一个实现了ExecutorService接口的多线程处理器，它专为那些可以通过递归分解成更细小的任务而设计，最大化的利用多核处理器来提高应用程序的性能。</p>
 <p>与其他ExecutorService相关的实现相同的是，Fork/Join框架会将任务分配给线程池中的线程。而与之不同的是，Fork/Join框架在执行任务时使用了<strong>工作窃取算法</strong>。</p>
 <p><strong>fork</strong>在英文里有分叉的意思，<strong>join</strong>在英文里连接、结合的意思。顾名思义，fork就是要使一个大任务分解成若干个小任务，而join就是最后将各个小任务的结果结合起来得到大任务的结果。</p>
-<p><img src="https://img.mercuryblog.site/img/image-20221017132505169.png" srcset="/img/newloading.gif" lazyload alt="image-20221017132505169"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221017132505169.png" srcset="/img/newloading.gif" lazyload alt="image-20221017132505169"></p>
 <p>感觉就是分治算法的思想</p>
 <p>工作窃取算法指的是在多线程执行不同任务队列的过程中，某个线程执行完自己队列的任务后从其他线程的任务队列里窃取任务来执行。</p>
 <p>工作窃取流程如下图所示：</p>
-<p><img src="https://img.mercuryblog.site/img/image-20221017132535148.png" srcset="/img/newloading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221017132535148.png" srcset="/img/newloading.gif" lazyload></p>
 <h2 id="异步回调"><a href="#异步回调" class="headerlink" title="异步回调"></a>异步回调</h2><ul>
 <li><p>类似ajax技术，可以进行异步执行、成功回调、失败回调。</p>
 </li>

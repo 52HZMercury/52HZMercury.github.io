@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="Mercury&#39;s blog">
 <meta property="og:description" content="一个很火的网络框架，赶快学起来！">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.mercuryblog.site/img/1660626055796.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/1660626055796.png">
 <meta property="article:published_time" content="2022-10-19T11:07:46.000Z">
-<meta property="article:modified_time" content="2022-12-05T07:29:16.667Z">
+<meta property="article:modified_time" content="2024-03-25T08:37:02.314Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="Netty">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.mercuryblog.site/img/1660626055796.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/1660626055796.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -309,7 +309,7 @@
 <p>缺陷</p>
 <p>当并发数很大，就会创建大量的线程，占用很大系统资源</p>
 <p>若线程暂时没有数据可读，该线程会阻塞在Hander对象的read操作，导致线程资源浪费</p>
-<p><img src="https://img.mercuryblog.site/img/image-20221031152502979.png" srcset="/img/newloading.gif" lazyload alt="image-20221031152502979"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221031152502979.png" srcset="/img/newloading.gif" lazyload alt="image-20221031152502979"></p>
 <h2 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h2><p><strong>Blocking I/O</strong>同步阻塞I/O模式，数据的读取都阻塞在一个线程内等待完成，很明显，无法应对高并发</p>
 <h2 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h2><p><strong>Non-blocking I/O</strong> 同步非阻塞型的I/O模型，提供了Channel,Seletor,Buffer等。支持面向缓冲的，基于通道的I/O操作方法，对于高负载，高并发的的应用，也有很好的支持</p>
 <h2 id="AIO"><a href="#AIO" class="headerlink" title="AIO"></a>AIO</h2><p><strong>Asynchronous I/O</strong> 就是NIO 2，是一种异步非阻塞的IO模型，异步IO是基于时间和回调机制实现的。也就是应用操作之后会直接返回，不会阻塞在那里，当后台处理完成后，操作系统会通知相应的线程进行后续操作。目前AIO的应用还不是特别的广泛。</p>
@@ -357,10 +357,10 @@
 <h3 id="EventLoop和channel的关系"><a href="#EventLoop和channel的关系" class="headerlink" title="EventLoop和channel的关系"></a>EventLoop和channel的关系</h3><p>channel为Netty网络操作抽象类，Event Loop负责处理注册到其上的Channel的I/O操作，两者配合进行I/O操作</p>
 <h3 id="EventLoopGroup和EventLoop的关系"><a href="#EventLoopGroup和EventLoop的关系" class="headerlink" title="EventLoopGroup和EventLoop的关系"></a>EventLoopGroup和EventLoop的关系</h3><p><code>EventLoopGroup</code>包含多个<code>EventLoop</code>管理着所有的<code>EventLoop</code>的生命周期</p>
 <p><code>EventLoop</code>处理的I/O事件都将在它专有的<code>Thread</code>上被处理，即<code>Thread</code>和 <code>EventLoop</code>属于1:1的关系，从而保证线程安全</p>
-<p><img src="https://img.mercuryblog.site/img/image-20221203162809780.png" srcset="/img/newloading.gif" lazyload alt="image-20221203162809780"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221203162809780.png" srcset="/img/newloading.gif" lazyload alt="image-20221203162809780"></p>
 <h2 id="ChannelHander-消息处理器-和-ChannelPipeline-ChannelHander-对象链表"><a href="#ChannelHander-消息处理器-和-ChannelPipeline-ChannelHander-对象链表" class="headerlink" title="ChannelHander (消息处理器) 和 ChannelPipeline (ChannelHander 对象链表)"></a>ChannelHander (消息处理器) 和 ChannelPipeline (ChannelHander 对象链表)</h2><p><code>ChannelHandler</code>是消息的具体处理器，主要负责处理客户端/服务端接收和发送的数据。</p>
 <p>当channel被创建的时候，会自动地分配到它专属的<code>ChannelPipeline</code>。 <code>ChannelPipeline</code>是<code>ChannelHander</code>的链，一个pipeline上可以有多个<code>ChannelHandler</code></p>
-<p><img src="https://img.mercuryblog.site/img/image-20221203164046760.png" srcset="/img/newloading.gif" lazyload alt="image-20221203164046760"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221203164046760.png" srcset="/img/newloading.gif" lazyload alt="image-20221203164046760"></p>
 <h2 id="ChannelFuture-操作执行结果"><a href="#ChannelFuture-操作执行结果" class="headerlink" title="ChannelFuture 操作执行结果"></a>ChannelFuture 操作执行结果</h2><p>Netty中所有的I/O操作都是异步的，我们不能立刻得到操作是否执行成功，不过可以通过<code>ChannelFuture</code>接口的<code>addListener</code>方法注册一个<code>ChannelFutureListener</code>，当操作执行成功或者失败时，监听就会自动触发返回结果</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">ChannelFuture f = b.connect(host,port).addListener(future -&gt; &#123;<br>    <span class="hljs-keyword">if</span>(future.isSuccess())&#123;<br>        System.out.println(<span class="hljs-string">&quot;连接成功!&quot;</span>);<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        System.err.println(<span class="hljs-string">&quot;连接失败!&quot;</span>);<br>    &#125;<br>&#125;).sync();<br></code></pre></td></tr></table></figure>
 
@@ -380,17 +380,17 @@
 <li>分发者模式(Dispatcher)</li>
 <li>通知者模式(notifier)</li>
 </ul>
-<p><img src="https://img.mercuryblog.site/img/image-20221031153540687.png" srcset="/img/newloading.gif" lazyload alt="image-20221031153540687"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221031153540687.png" srcset="/img/newloading.gif" lazyload alt="image-20221031153540687"></p>
 <p>Reactor 模式 通过一个或多个输入同时传递给服务处理器的模式</p>
 <p>服务器端程序处理传入的多个请求，并将他们同步分派到相应的处理线程</p>
 <p>Reator模式使用IO复用监听事件，收到事件后，分发给某个线程</p>
 <p>原先有多个Hander阻塞，现在只用一个ServiceHandler连接</p>
-<h2 id="Reactor模式分类"><a href="#Reactor模式分类" class="headerlink" title="Reactor模式分类"></a>Reactor模式分类</h2><h3 id="单线程Reactor"><a href="#单线程Reactor" class="headerlink" title="单线程Reactor"></a>单线程Reactor</h3><p><img src="https://img.mercuryblog.site/img/image-20221101195028780.png" srcset="/img/newloading.gif" lazyload alt="image-20221101195028780"></p>
+<h2 id="Reactor模式分类"><a href="#Reactor模式分类" class="headerlink" title="Reactor模式分类"></a>Reactor模式分类</h2><h3 id="单线程Reactor"><a href="#单线程Reactor" class="headerlink" title="单线程Reactor"></a>单线程Reactor</h3><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221101195028780.png" srcset="/img/newloading.gif" lazyload alt="image-20221101195028780"></p>
 <p>单线程Reactor的优点是对系统资源的消耗特别小，但是，没办法支撑大量请求的应用场景并且处理请求的时间可能非常慢，所以一般实际项目中不会使用单线程Reactor</p>
-<h3 id="多线程Reactor"><a href="#多线程Reactor" class="headerlink" title="多线程Reactor"></a>多线程Reactor</h3><p><img src="https://img.mercuryblog.site/img/image-20221101193557851.png" srcset="/img/newloading.gif" lazyload alt="image-20221101193557851"></p>
+<h3 id="多线程Reactor"><a href="#多线程Reactor" class="headerlink" title="多线程Reactor"></a>多线程Reactor</h3><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221101193557851.png" srcset="/img/newloading.gif" lazyload alt="image-20221101193557851"></p>
 <p><strong>一个</strong>线程负责接收请求，<strong>一组</strong>NIO请求处理IO操作</p>
 <p>大部分场景下多线程Reactor模型没有啥问题，但是在一些并发数连接比较多(百万级别)的情况下，一个线程负责接收客户端就存在性能问题了</p>
-<h3 id="主从Reactor多线程"><a href="#主从Reactor多线程" class="headerlink" title="主从Reactor多线程"></a>主从Reactor多线程</h3><p><img src="https://img.mercuryblog.site/img/image-20221101193327320.png" srcset="/img/newloading.gif" lazyload alt="image-20221101193327320"></p>
+<h3 id="主从Reactor多线程"><a href="#主从Reactor多线程" class="headerlink" title="主从Reactor多线程"></a>主从Reactor多线程</h3><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221101193327320.png" srcset="/img/newloading.gif" lazyload alt="image-20221101193327320"></p>
 <p>一组NIO线程负责接收请求，一组NIO线程处理IO操作</p>
 <div class = "note note-success">更通俗的理解</div>
 
