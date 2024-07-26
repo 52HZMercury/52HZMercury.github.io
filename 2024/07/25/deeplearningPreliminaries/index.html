@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/20240711_222107.jpg">
 <meta property="article:published_time" content="2024-07-25T08:53:46.000Z">
-<meta property="article:modified_time" content="2024-07-26T07:17:38.610Z">
+<meta property="article:modified_time" content="2024-07-26T07:55:23.965Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习 人工智能">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +236,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.3k 字
+          2.7k 字
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
           <!-- compatible with older versions-->
-          8 分钟
+          9 分钟
         
       </span>
     
@@ -360,14 +360,23 @@ c-4-3.333-8.333-7.667-13 -13l-13-13l77-155 77-156c66 199.333 139 419.667
 <p>调用以下函数将计算矩阵的Frobenius范数</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.norm(torch.ones((<span class="hljs-number">4</span>, <span class="hljs-number">9</span>)))<br><span class="hljs-comment"># tensor(6.)</span><br></code></pre></td></tr></table></figure>
 <h1>矩阵计算</h1>
-<p>梯度指向的是值变化最大的方向</p>
+<p>通常所指的梯度就是导数，即函数的斜率。梯度指向的是值变化最大的方向</p>
 <p>自动求导的两种模式</p>
-<p>链式法则</p>
+<ul>
+<li>正向累积</li>
+<li>反向累积</li>
+</ul>
+<p>链式法则的公式</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240725172612742.png" srcset="/img/newloading.gif" lazyload alt="image-20240725172612742"></p>
-<p>正向累积</p>
+<p>正向累积 示意</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240725172650144.png" srcset="/img/newloading.gif" lazyload alt="image-20240725172650144"></p>
-<p>反向累积、又称反向传递</p>
+<p>反向累积、又称反向传递 示意</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240725172707248.png" srcset="/img/newloading.gif" lazyload alt="image-20240725172707248"></p>
+<p class = "note note-info">一个例子</p>
+<p>对函数进行求导</p>
+<p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">y = 2x^2
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><br>x = torch.arange(<span class="hljs-number">4.0</span>) <br><span class="hljs-comment">#tensor([0., 1., 2., 3.])</span><br><br>x.requires_grad_(<span class="hljs-literal">True</span>)  <br><span class="hljs-comment"># 等价于x=torch.arange(4.0,requires_grad=True)</span><br><br><span class="hljs-comment"># requires_grad 表达的含义是，这一参数是否保留（或者说持有，即在前向传播完成后，是否在显存中记录这一参数的梯度，而非立即释放）梯度，等待优化器执行optim.step()更新参数</span><br><br>y = <span class="hljs-number">2</span> * torch.dot(x, x)<br><br>y.backward()<br><span class="hljs-built_in">print</span>(x.grad)<br><span class="hljs-comment"># tensor([ 0.,  4.,  8., 12.])</span><br><br>x.grad == <span class="hljs-number">4</span> * x<br><span class="hljs-comment"># 函数y = 2x^x关于x的梯度应为,快速验证这个梯度是否计算正确</span><br><span class="hljs-comment"># 输出tensor([True, True, True, True])</span><br></code></pre></td></tr></table></figure>
 
               
             </div>
