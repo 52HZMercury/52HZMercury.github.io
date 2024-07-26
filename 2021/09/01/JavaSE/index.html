@@ -47,6 +47,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -288,21 +290,27 @@
             
             <div class="markdown-body">
               
-              <h1 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h1><h2 id="标识符和关键字"><a href="#标识符和关键字" class="headerlink" title="标识符和关键字"></a>标识符和关键字</h2><ul>
+              <h1>Java基础</h1>
+<h2 id="标识符和关键字">标识符和关键字</h2>
+<ul>
 <li>Java所有的组成部分都需要有名字，类名，变量名以及方法名都被称为标识符 ，所有的标识符都应该以英文字母(a-z,A-Z)，美元符($)，或者下划线(_)开头</li>
 <li>首字母之后可以是字母，美元符下划线或数字的任何字符组合</li>
 <li>不能使用关键字作为标识符</li>
 <li>标识符是大小写敏感的</li>
 <li>可用使用中文命名，但是不建议</li>
 </ul>
-<p>下面的标识符是合法的：<br>myName，My_name，Points，$points,<em>sys_ta，OK，_23b，_3</em><br>下面的标识符是非法的：<br>#name，25name，class，&amp;time，if</p>
-<p>Java 9规定：不允许单独使用下划线作为分隔符。<br>Java 的关键字加上goto const true false nulll 一共有53个关键字和保留字，都不能作为Java的标识符。</p>
-<h2 id="Java数据的类型"><a href="#Java数据的类型" class="headerlink" title="Java数据的类型"></a>Java数据的类型</h2><ul>
-<li>基本类型</li>
-<li>引用类型<br><img src="https://img-blog.csdnimg.cn/e6e35e613e2041c69ac93c8df2bc1dc7.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></li>
-</ul>
-<p><strong>注意</strong></p>
+<p>下面的标识符是合法的：<br>
+myName，My_name，Points，$points,_sys_ta，OK，_23b，<em>3</em><br>
+下面的标识符是非法的：<br>
+#name，25name，class，&amp;time，if</p>
+<p>Java 9规定：不允许单独使用下划线作为分隔符。<br>
+Java 的关键字加上goto const true false nulll 一共有53个关键字和保留字，都不能作为Java的标识符。</p>
+<h2 id="Java数据的类型">Java数据的类型</h2>
 <ul>
+<li>基本类型</li>
+<li>引用类型<br>
+<img src="https://img-blog.csdnimg.cn/e6e35e613e2041c69ac93c8df2bc1dc7.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+<strong>注意</strong></li>
 <li>其中float需要float需要这样来声明 float  = 0.1f;float是有限,离散,舍入误差,大约,接近但不等于,因此最好不要用浮点数进行 == 这样的确定是否相等的操作,会有精度的损失,可以采用BigDecimal数学工具类;</li>
 <li>String是引用类型,不是基本类型;</li>
 <li>Java和C不同的是,Java采用Unicode编码,范围是 0-65536;</li>
@@ -311,74 +319,131 @@
 <li>比较字符串时最好使用str.equal()方法进行比较</li>
 </ul>
 <hr>
-<p>注意点<br><img src="https://img-blog.csdnimg.cn/4e8976c0dc134f598ed04186955c3669.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>上图中,false的原因是因为两个字符串在不同的对象中,因此为false,而后一个没有对象,在同一片内存中,因此为true;</p>
-<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p>类型转换主要有两种类型转换<br><img src="https://img-blog.csdnimg.cn/310a5a405c97449bbadc22e2ed9d0fc1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>byte只有128位<br>数字间是可以用下划线间隔的,更加方便阅读数字<br><img src="https://img-blog.csdnimg.cn/fead415a853c4ff384b1f8b560ce3574.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
-<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p><img src="https://img-blog.csdnimg.cn/ec452ab51a1f44ddb7c76d484481c458.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>分为实例变量和局部变量</p>
+<p>注意点<br>
+<img src="https://img-blog.csdnimg.cn/4e8976c0dc134f598ed04186955c3669.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+上图中,false的原因是因为两个字符串在不同的对象中,因此为false,而后一个没有对象,在同一片内存中,因此为true;</p>
+<h2 id="类型转换">类型转换</h2>
+<p>类型转换主要有两种类型转换<br>
+<img src="https://img-blog.csdnimg.cn/310a5a405c97449bbadc22e2ed9d0fc1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+byte只有128位<br>
+数字间是可以用下划线间隔的,更加方便阅读数字<br>
+<img src="https://img-blog.csdnimg.cn/fead415a853c4ff384b1f8b560ce3574.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
+<h2 id="变量">变量</h2>
+<p><img src="https://img-blog.csdnimg.cn/ec452ab51a1f44ddb7c76d484481c458.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+分为实例变量和局部变量</p>
 <ul>
 <li>局部变量直接就可以使用</li>
 <li>实例变量必须通过对象来调用</li>
 <li>加上了static即成为了类变量,跟类一起出现消失,可以直接通过类调用</li>
 </ul>
-<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p><img src="https://img-blog.csdnimg.cn/08bcf1b5227e4011bbb720bbb034b62c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
-<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><p><img src="https://img-blog.csdnimg.cn/068a9c341f5e41c7ab75719f26837d7f.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>尤其应该注意一下位运算<br>&lt;&lt; 左移一位即 原数*2    ;   左移三位即原数 *2 *2 *2  是次方的关系<br>&lt;&lt; 右移则同理<br><img src="https://img-blog.csdnimg.cn/db8bdfbbb68641eb80bfef61ba8e8929.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="常量">常量</h2>
+<p><img src="https://img-blog.csdnimg.cn/08bcf1b5227e4011bbb720bbb034b62c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
+<h2 id="运算符">运算符</h2>
+<p><img src="https://img-blog.csdnimg.cn/068a9c341f5e41c7ab75719f26837d7f.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+尤其应该注意一下位运算<br>
+&lt;&lt; 左移一位即 原数*2    ;   左移三位即原数 *2 *2 *2  是次方的关系<br>
+&lt;&lt; 右移则同理<br>
+<img src="https://img-blog.csdnimg.cn/db8bdfbbb68641eb80bfef61ba8e8929.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
 <blockquote>
-<p>插入一个idea的快捷键<br>ctrl+D 复制当前行到下一行</p>
+<p>插入一个idea的快捷键<br>
+ctrl+D 复制当前行到下一行</p>
 </blockquote>
-<h2 id="关于注释时的参数"><a href="#关于注释时的参数" class="headerlink" title="关于注释时的参数"></a>关于注释时的参数</h2><ul>
+<h2 id="关于注释时的参数">关于注释时的参数</h2>
+<ul>
 <li>@author 作者名</li>
 <li>@version 版本号</li>
 <li>@since 指明需要最早的jdk版本</li>
 <li>@param 参数名</li>
 <li>@return 返回值情况</li>
-<li>@异常抛出情况<h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2>Java使用Scanner对象进行输入操作<br><img src="https://img-blog.csdnimg.cn/df7cc3e3a47f4176b0bd9d2fe390af13.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo1</span></span>&#123;<br>   <span class="hljs-comment">//创建一个扫描器对象,用于接收键盘数据</span><br>   Scanner scanner = <span class="hljs-keyword">new</span> Scanner(System.in);<br>   System.out.println(<span class="hljs-string">&quot;使用next方式接收:&quot;</span>);<br>   <span class="hljs-comment">//判断用户有没有输入信息,这个在这里没有必要,主要是后面的循环部分用得比较多</span><br>   <span class="hljs-keyword">if</span>(Scanner.hasNext())&#123;<br>   <span class="hljs-comment">//使用next方式进行接收</span><br>     String str = Scanner.next();<span class="hljs-comment">//String str = Scanner.nextLine();</span><br>     System.out.println(<span class="hljs-string">&quot;输出的内容为:&quot;</span>+str);<br>   &#125;<br>   <span class="hljs-comment">//养成好习惯,用完后关闭scanner;</span><br>   scanner.close();<br><br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>@异常抛出情况</li>
 </ul>
-<p><strong>关于next()和nextLine()</strong><br>next()会以空格结束,而nextLine()以enter结束,所以可以输入带空格的字符串</p>
+<h2 id="输入">输入</h2>
+<p>Java使用Scanner对象进行输入操作<br>
+<img src="https://img-blog.csdnimg.cn/df7cc3e3a47f4176b0bd9d2fe390af13.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo1</span></span>&#123;<br>   <span class="hljs-comment">//创建一个扫描器对象,用于接收键盘数据</span><br>   Scanner scanner = <span class="hljs-keyword">new</span> Scanner(System.in);<br>   System.out.println(<span class="hljs-string">&quot;使用next方式接收:&quot;</span>);<br>   <span class="hljs-comment">//判断用户有没有输入信息,这个在这里没有必要,主要是后面的循环部分用得比较多</span><br>   <span class="hljs-keyword">if</span>(Scanner.hasNext())&#123;<br>   <span class="hljs-comment">//使用next方式进行接收</span><br>     String str = Scanner.next();<span class="hljs-comment">//String str = Scanner.nextLine();</span><br>     System.out.println(<span class="hljs-string">&quot;输出的内容为:&quot;</span>+str);<br>   &#125;<br>   <span class="hljs-comment">//养成好习惯,用完后关闭scanner;</span><br>   scanner.close();<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>关于next()和nextLine()</strong><br>
+next()会以空格结束,而nextLine()以enter结束,所以可以输入带空格的字符串</p>
 <p>输入单个字符 <strong>char c = sc.next().charAt(0);</strong></p>
-<h2 id="增强for循环"><a href="#增强for循环" class="headerlink" title="增强for循环"></a>增强for循环</h2><p>增强for循环主要用于输出,因为它没有下表,不方便操作数据<br><img src="https://img-blog.csdnimg.cn/18b541fcfaf641dfac52a9af7fbe3f9d.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="增强for循环">增强for循环</h2>
+<p>增强for循环主要用于输出,因为它没有下表,不方便操作数据<br>
+<img src="https://img-blog.csdnimg.cn/18b541fcfaf641dfac52a9af7fbe3f9d.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> x:nums)&#123;<br>    System.out.println(x);<br>&#125;<span class="hljs-comment">//这里x表示循环时的数据名称类似i ; nums则是循环的数组名称</span><br><br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> ants:nums[])&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> x:ants)&#123;<br>       System.out.println(x);<br>  &#125;<br>&#125;<span class="hljs-comment">//输出二维数组</span><br></code></pre></td></tr></table></figure>
-<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p><img src="https://img-blog.csdnimg.cn/981d419a11ca40be9f167b58e742a04d.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
-<h2 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h2><p>熟记重载的规则<br><img src="https://img-blog.csdnimg.cn/7c0525834acb4ebdae262068b8c2f14e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
-<h2 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h2><p><img src="https://img-blog.csdnimg.cn/d36134a7fce94940a6e7484f6812071b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>可变参数的使用<br><img src="https://img-blog.csdnimg.cn/92dccd58cfea49fcaec42f24b9ed7ab2.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><strong>其实本质就是数组</strong></p>
-<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数组和C语言类似，就是声明时有所不同<br><img src="https://img-blog.csdnimg.cn/e135da64d534496189b136dc877ce460.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
-<p><strong>Java的内存</strong><br><img src="https://img-blog.csdnimg.cn/2bf98bda1fa84718a7fa2e8c5c52c58b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
-<h2 id="数组三种初始化"><a href="#数组三种初始化" class="headerlink" title="数组三种初始化"></a>数组三种初始化</h2><p>即有</p>
+<h1>方法</h1>
+<p><img src="https://img-blog.csdnimg.cn/981d419a11ca40be9f167b58e742a04d.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
+<h2 id="重载">重载</h2>
+<p>熟记重载的规则<br>
+<img src="https://img-blog.csdnimg.cn/7c0525834acb4ebdae262068b8c2f14e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
+<h2 id="可变参数">可变参数</h2>
+<p><img src="https://img-blog.csdnimg.cn/d36134a7fce94940a6e7484f6812071b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+可变参数的使用<br>
+<img src="https://img-blog.csdnimg.cn/92dccd58cfea49fcaec42f24b9ed7ab2.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+<strong>其实本质就是数组</strong></p>
+<h1>数组</h1>
+<p>数组和C语言类似，就是声明时有所不同<br>
+<img src="https://img-blog.csdnimg.cn/e135da64d534496189b136dc877ce460.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
+<p><strong>Java的内存</strong><br>
+<img src="https://img-blog.csdnimg.cn/2bf98bda1fa84718a7fa2e8c5c52c58b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
+<h2 id="数组三种初始化">数组三种初始化</h2>
+<p>即有</p>
 <ol>
 <li>静态初始化</li>
 <li>动态初始化</li>
-<li>隐式初始化<br><img src="https://img-blog.csdnimg.cn/c6773a201d4b4212b8d865274f606f0c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></li>
+<li>隐式初始化<br>
+<img src="https://img-blog.csdnimg.cn/c6773a201d4b4212b8d865274f606f0c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></li>
 </ol>
 <p><strong>特殊点:</strong> 布尔型的初始为false;</p>
 <p>Java里数组可以通过　<strong>shuzuname.length</strong>　来直接获得长度;</p>
-<h2 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h2><p>声明</p>
+<h2 id="多维数组">多维数组</h2>
+<p>声明</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[][] array = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">10</span>][<span class="hljs-number">10</span>];<br></code></pre></td></tr></table></figure>
 <p>多维数组的其他部分皆于C语言相同,此处不再赘述;</p>
-<h2 id="Arrays类"><a href="#Arrays类" class="headerlink" title="Arrays类"></a>Arrays类</h2><p><img src="https://img-blog.csdnimg.cn/a6010c745ca744d0bc6874a948705d73.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><strong>toString()方法</strong><br><img src="https://img-blog.csdnimg.cn/e27eb4f46d3a444c9e8e04ce1c25d228.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><strong>.sort() 排序方法</strong>  默认为升序;<br><strong>.fill() 填充方法</strong>  参数可以填(数组名,起始点,终止点,待填充的数字) 若不填起始点,终止点则会全部填充</p>
-<h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1><p><img src="https://img-blog.csdnimg.cn/82a710aae75e4e44aae79715fd167d5d.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="Arrays类">Arrays类</h2>
+<p><img src="https://img-blog.csdnimg.cn/a6010c745ca744d0bc6874a948705d73.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+<strong>toString()方法</strong><br>
+<img src="https://img-blog.csdnimg.cn/e27eb4f46d3a444c9e8e04ce1c25d228.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+<strong>.sort() 排序方法</strong>  默认为升序;<br>
+<strong>.fill() 填充方法</strong>  参数可以填(数组名,起始点,终止点,待填充的数字) 若不填起始点,终止点则会全部填充</p>
+<h1>面向对象</h1>
+<p><img src="https://img-blog.csdnimg.cn/82a710aae75e4e44aae79715fd167d5d.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
 <p><strong>本质:以类的方式组织代码,以对象的组织(封装)数据</strong></p>
 <p><strong>三大特性</strong></p>
 <ol>
-<li><p>封装</p>
+<li>
+<p>封装</p>
 </li>
-<li><p>继承</p>
+<li>
+<p>继承</p>
 </li>
-<li><p>多态</p>
+<li>
+<p>多态</p>
 </li>
 </ol>
 <hr>
-<h2 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h2><p>emmm…….这部分没啥写的</p>
+<h2 id="类和对象">类和对象</h2>
+<p>emmm…这部分没啥写的</p>
 <blockquote>
 <p>关于静态方法:   静态方法可以直接调用,非静态方法必须将类实例化后才能通过对象调用此方法</p>
 </blockquote>
-<p><img src="https://img-blog.csdnimg.cn/6630c03d3dcf4c8482727a2ba2ea9f3e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><strong>引用传递</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/6630c03d3dcf4c8482727a2ba2ea9f3e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><strong>引用传递</strong></p>
 <p>即传参时传递一个对象 相当于指针,在方法中是<strong>可以改变参数</strong>的</p>
-<p><strong>构造器</strong><br>默认有一个无参的,在new对象时就是调用,自己写了有参的之后需要把无参的构造方法加上,不然会损失无参构造.</p>
-<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>只需要记住.属性私有(private)<br>则需要getter和setter方法</p>
+<p><strong>构造器</strong><br>
+默认有一个无参的,在new对象时就是调用,自己写了有参的之后需要把无参的构造方法加上,不然会损失无参构造.</p>
+<h2 id="封装">封装</h2>
+<p>只需要记住.属性私有(private)<br>
+则需要getter和setter方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getAge</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-comment">//getter方法</span><br>   <span class="hljs-keyword">this</span>.age = age;<br>   <span class="hljs-keyword">return</span> age;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age)</span></span>&#123;<span class="hljs-comment">//setter方法</span><br>   <span class="hljs-keyword">this</span>.age = age;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 <p>如果是private非静态属性依旧需要new一个对象才能访问</p>
-<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p><img src="https://img-blog.csdnimg.cn/80d57daec6f94eff9658fd79f8873682.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>java只有单继承:简单的理解 一个儿子一个爸爸,一个爸爸多个儿子</p>
-<p><img src="https://img-blog.csdnimg.cn/bb4aee66deba42269bc802c2ab7b78d7.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>所有的类都是继承了object类的</p>
+<h2 id="继承">继承</h2>
+<p><img src="https://img-blog.csdnimg.cn/80d57daec6f94eff9658fd79f8873682.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+java只有单继承:简单的理解 一个儿子一个爸爸,一个爸爸多个儿子</p>
+<p><img src="https://img-blog.csdnimg.cn/bb4aee66deba42269bc802c2ab7b78d7.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+所有的类都是继承了object类的</p>
 <p>继承之后,子类可以<strong>直接调用</strong>父类的方法,即使是没有static</p>
-<p><strong>私有</strong>的方法是无法被继承的，即通过super也调<strong>不</strong>了，如上图所示就会报错<br><img src="https://img-blog.csdnimg.cn/18ef23a4825a48ceb99cb2d7d7727d7e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>在new子类的时候，也调用了父类的无参构造，在这里   super()；是隐藏代码<br><img src="https://img-blog.csdnimg.cn/146a1e925fa14bc98862a2072e698bfa.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>父类的构造器必须在子类构造器的第一行，这里不写也没有关系，反正都是隐藏代码</p>
+<p><strong>私有</strong>的方法是无法被继承的，即通过super也调<strong>不</strong>了，如上图所示就会报错<br>
+<img src="https://img-blog.csdnimg.cn/18ef23a4825a48ceb99cb2d7d7727d7e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+在new子类的时候，也调用了父类的无参构造，在这里   super()；是隐藏代码<br>
+<img src="https://img-blog.csdnimg.cn/146a1e925fa14bc98862a2072e698bfa.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+父类的构造器必须在子类构造器的第一行，这里不写也没有关系，反正都是隐藏代码</p>
 <p><strong>super的注意点</strong></p>
 <ol>
 <li>super调用父类的构造方法,必须在构造方法的第一位</li>
@@ -387,20 +452,38 @@
 </ol>
 <p>和 this 比较</p>
 <ol>
-<li>代表的对象不同<br> this：本身调用者这个对象<br>   super：代表父类对象的应用</li>
-<li>前提<br>this没有继承也可以使用<br>super：只能在继承关系下才能使用</li>
-<li>构造方法<br>this();本类构造<br>super();父类的构造；<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><img src="https://img-blog.csdnimg.cn/71db29ee92db4294b98f8727b9740986.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>方法的重写<br>重写都是方法重写和属性无关<img src="https://img-blog.csdnimg.cn/3eb05644954848bc97909be10171bfcc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>如上图，static方法是无法被重写的，相当于两个方法，这时候能调什么方法都看左边是什么类型<br><img src="https://img-blog.csdnimg.cn/2fac47f4ae0c4cf38cd4e9b35e24995e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>重写后一般会有@override注释<br>并且重写只能是public方法，如果是私有方法，则会出现如上图所示的报错</li>
+<li>代表的对象不同<br>
+this：本身调用者这个对象<br>
+super：代表父类对象的应用</li>
+<li>前提<br>
+this没有继承也可以使用<br>
+super：只能在继承关系下才能使用</li>
+<li>构造方法<br>
+this();本类构造<br>
+super();父类的构造；</li>
 </ol>
+<h2 id="多态">多态</h2>
+<p><img src="https://img-blog.csdnimg.cn/71db29ee92db4294b98f8727b9740986.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+方法的重写<br>
+重写都是方法重写和属性无关<img src="https://img-blog.csdnimg.cn/3eb05644954848bc97909be10171bfcc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+如上图，static方法是无法被重写的，相当于两个方法，这时候能调什么方法都看左边是什么类型<br>
+<img src="https://img-blog.csdnimg.cn/2fac47f4ae0c4cf38cd4e9b35e24995e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+重写后一般会有@override注释<br>
+并且重写只能是public方法，如果是私有方法，则会出现如上图所示的报错</p>
 <p><strong>关于重写</strong></p>
 <ol>
 <li>需要有继承关系，子类重写父类的方法</li>
 <li>方法名必须相同</li>
 <li>修饰符：范围可以扩大但不能缩小 publci &gt; Protected &gt;defalt&gt;private</li>
-<li>抛出的异常：范围可以被缩小，但不能扩大：ClassNotFoundException –&gt;Exception</li>
+<li>抛出的异常：范围可以被缩小，但不能扩大：ClassNotFoundException --&gt;Exception</li>
 <li>子类的方法和父类必要一致，方法体不同</li>
 </ol>
 <hr>
-<p> <img src="https://img-blog.csdnimg.cn/3d28d93f36f946e08d935cf4008b29a6.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>对象能执行那种方法主要看左边是什么类型和右边关系不大 要想调用,可以强制转换<br><img src="https://img-blog.csdnimg.cn/71e545f92fbd4be7a58861efe169e3f5.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>如上图：强制转换(上向下)就可以调用了<br><strong>多态注意事项</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/3d28d93f36f946e08d935cf4008b29a6.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+对象能执行那种方法主要看左边是什么类型和右边关系不大 要想调用,可以强制转换<br>
+<img src="https://img-blog.csdnimg.cn/71e545f92fbd4be7a58861efe169e3f5.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+如上图：强制转换(上向下)就可以调用了<br>
+<strong>多态注意事项</strong></p>
 <ol>
 <li>多态是方法的多态，属性没有多态</li>
 <li>父类和子类，有联系  类型转换异常 ClassCastException</li>
@@ -412,48 +495,86 @@
 <li>final常量</li>
 <li>private方法</li>
 </ol>
-<p><strong>instanceof关键字</strong><img src="https://img-blog.csdnimg.cn/a6f01d41808f4acfb0ffd65b216736b9.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>instanceof关键字就是用来判断子父类的关系的，值得注意的是再上图中Object是student new出来的所以在Teacher 那里依然是false</p>
-<h2 id="static-详解"><a href="#static-详解" class="headerlink" title="static 详解"></a>static 详解</h2><p><img src="https://img-blog.csdnimg.cn/ff85d48a42c74b50abfb3494f14c0f12.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>简单的来说就是</p>
+<p><strong>instanceof关键字</strong><img src="https://img-blog.csdnimg.cn/a6f01d41808f4acfb0ffd65b216736b9.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+instanceof关键字就是用来判断子父类的关系的，值得注意的是再上图中Object是student new出来的所以在Teacher 那里依然是false</p>
+<h2 id="static-详解">static 详解</h2>
+<p><img src="https://img-blog.csdnimg.cn/ff85d48a42c74b50abfb3494f14c0f12.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+简单的来说就是</p>
 <ul>
-<li><p>非可以调静</p>
+<li>
+<p>非可以调静</p>
 </li>
-<li><p>静不可以调非</p>
+<li>
+<p>静不可以调非</p>
 </li>
-<li><p>main函数也是静，所以不可以直接调用非静的方法</p>
+<li>
+<p>main函数也是静，所以不可以直接调用非静的方法</p>
 </li>
 </ul>
-<p><strong>关于代码块</strong><br><img src="https://img-blog.csdnimg.cn/223115825d5b4e9c9a7143a3d536adcc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>以下顺序是代码执行的顺序</p>
+<p><strong>关于代码块</strong><br>
+<img src="https://img-blog.csdnimg.cn/223115825d5b4e9c9a7143a3d536adcc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+以下顺序是代码执行的顺序</p>
 <ol>
 <li>静 只执行一次</li>
 <li>匿名</li>
-<li>构造方法<br>构造方法竟是最后执行的，令人震惊<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><img src="https://img-blog.csdnimg.cn/4b9913a75b954ceab0ef0491ab30caaa.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><img src="https://img-blog.csdnimg.cn/2b6235ed0a4d488ba5afdf2ba6b9fe61.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><img src="https://img-blog.csdnimg.cn/356a0a672d6c48fdb4b011d88fd5b7fb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></li>
+<li>构造方法<br>
+构造方法竟是最后执行的，令人震惊</li>
 </ol>
+<h2 id="抽象类">抽象类</h2>
+<p><img src="https://img-blog.csdnimg.cn/4b9913a75b954ceab0ef0491ab30caaa.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
+<h2 id="接口">接口</h2>
+<p><img src="https://img-blog.csdnimg.cn/2b6235ed0a4d488ba5afdf2ba6b9fe61.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+<img src="https://img-blog.csdnimg.cn/356a0a672d6c48fdb4b011d88fd5b7fb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
 <ul>
-<li><p>接口中的所有定义方法都是抽象的public abstract</p>
+<li>
+<p>接口中的所有定义方法都是抽象的public abstract</p>
 </li>
-<li><p>在接口中常量都是public static final前缀</p>
+<li>
+<p>在接口中常量都是public static final前缀</p>
 </li>
-<li><p>类可以实现接口implements</p>
+<li>
+<p>类可以实现接口implements</p>
 </li>
-<li><p>实现了接口中的类,就必须实现接口中的方法</p>
+<li>
+<p>实现了接口中的类,就必须实现接口中的方法</p>
 </li>
-<li><p>接口可以实现多就继承</p>
+<li>
+<p>接口可以实现多就继承</p>
 </li>
 </ul>
 <p>例如</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">UserService</span>,<span class="hljs-title">TimService</span></span>&#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><p><img src="https://img-blog.csdnimg.cn/df88ae293d614273bd77ab0ad070bba2.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><strong>成员内部类</strong><br><img src="https://img-blog.csdnimg.cn/fa07bb0be2794fc483d400434cad34c4.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
+<h2 id="内部类">内部类</h2>
+<p><img src="https://img-blog.csdnimg.cn/df88ae293d614273bd77ab0ad070bba2.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+<strong>成员内部类</strong><br>
+<img src="https://img-blog.csdnimg.cn/fa07bb0be2794fc483d400434cad34c4.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Outer.Inner inner = outer.<span class="hljs-function">new <span class="hljs-title">Inner</span><span class="hljs-params">()</span></span>;<span class="hljs-comment">//实例化一个内部类</span><br></code></pre></td></tr></table></figure>
 <p>内部类可以获得外部类的私有属性</p>
-<p><img src="https://img-blog.csdnimg.cn/7e178dbc5da64c1c8d9b897ae802ac92.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>一个Java类中可以有多个class类，但是只能有一个public class类（这不叫内部类）</p>
-<p><strong>静态内部类</strong><br><img src="https://img-blog.csdnimg.cn/0c95a4ee1e054ba6a7b2e4ba277b094a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
-<p><strong>局部内部类</strong><br><img src="https://img-blog.csdnimg.cn/2f7d902939434e20b89401cf3bde7d07.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><strong>匿名内部类</strong><br><img src="https://img-blog.csdnimg.cn/2479caca973045f7965e87f169bad1b5.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p><img src="https://img-blog.csdnimg.cn/d0f7aed9cd5c4aea973e67698d955aec.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><img src="https://img-blog.csdnimg.cn/aba73c6f1fd94cbe83399a5221723439.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><img src="https://img-blog.csdnimg.cn/6b19ca19ea2b4820827131e1c6eb7911.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>最大就是throwable<img src="https://img-blog.csdnimg.cn/113158eeca0d4cafaee7d8e2c8126da0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><img src="https://img-blog.csdnimg.cn/9b7ea35410fd4a63989454daaa6f61bb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><img src="https://img-blog.csdnimg.cn/24853f5359e14a16a802aa39c865a8d6.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="局部内部类"></p>
+<p><img src="https://img-blog.csdnimg.cn/7e178dbc5da64c1c8d9b897ae802ac92.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+一个Java类中可以有多个class类，但是只能有一个public class类（这不叫内部类）</p>
+<p><strong>静态内部类</strong><br>
+<img src="https://img-blog.csdnimg.cn/0c95a4ee1e054ba6a7b2e4ba277b094a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
+<p><strong>局部内部类</strong><br>
+<img src="https://img-blog.csdnimg.cn/2f7d902939434e20b89401cf3bde7d07.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+<strong>匿名内部类</strong><br>
+<img src="https://img-blog.csdnimg.cn/2479caca973045f7965e87f169bad1b5.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
+<h2 id="异常">异常</h2>
+<p><img src="https://img-blog.csdnimg.cn/d0f7aed9cd5c4aea973e67698d955aec.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+<img src="https://img-blog.csdnimg.cn/aba73c6f1fd94cbe83399a5221723439.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+<img src="https://img-blog.csdnimg.cn/6b19ca19ea2b4820827131e1c6eb7911.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+最大就是throwable<img src="https://img-blog.csdnimg.cn/113158eeca0d4cafaee7d8e2c8126da0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+<img src="https://img-blog.csdnimg.cn/9b7ea35410fd4a63989454daaa6f61bb.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+<img src="https://img-blog.csdnimg.cn/24853f5359e14a16a802aa39c865a8d6.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="局部内部类"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>&#123;<br>     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>       <span class="hljs-keyword">int</span> a = <span class="hljs-number">1</span>;<br>       <span class="hljs-keyword">int</span> b = <span class="hljs-number">0</span>;<br>       <span class="hljs-keyword">try</span>&#123;<span class="hljs-comment">//try监控区域</span><br>          System.out.println(a/b);<br>       &#125;<span class="hljs-keyword">catch</span>(ArithmeticException e)&#123;<br>          System.out.println(<span class="hljs-string">&quot;程序出现异常，变量b不能为0&quot;</span>);<br>       &#125;<span class="hljs-keyword">finally</span>&#123;<span class="hljs-comment">//处理善后工作</span><br>          System.out.println(<span class="hljs-string">&quot;finally&quot;</span>);<br>       &#125;<br>     <br>   &#125; <br>&#125;<br></code></pre></td></tr></table></figure>
 <p>finally可以不要,一般用于处理关闭IO流的相关操作</p>
 <p>idea快捷键 ctrl+alt+T    try catch包裹代码</p>
-<p><img src="https://img-blog.csdnimg.cn/075d7c2d3c6b4345b3d2f9681b119693.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload></p>
-<h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2><p><img src="https://img-blog.csdnimg.cn/c2d45eb5285f466ca34f706235da61d5.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><img src="https://img-blog.csdnimg.cn/30e4c48cf1ba409499e470e9366ce709.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><img src="https://img-blog.csdnimg.cn/180592be91c845729f47d99bc5dbaf4c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br><img src="https://img-blog.csdnimg.cn/6ccf4da3daa34ba392ffe2c42475035c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload><br>JavaSE结束，后面开始Java多线程和注解反射</p>
+<p><img src="https://img-blog.csdnimg.cn/075d7c2d3c6b4345b3d2f9681b119693.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""></p>
+<h2 id="自定义异常">自定义异常</h2>
+<p><img src="https://img-blog.csdnimg.cn/c2d45eb5285f466ca34f706235da61d5.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+<img src="https://img-blog.csdnimg.cn/30e4c48cf1ba409499e470e9366ce709.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+<img src="https://img-blog.csdnimg.cn/180592be91c845729f47d99bc5dbaf4c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+<img src="https://img-blog.csdnimg.cn/6ccf4da3daa34ba392ffe2c42475035c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt=""><br>
+JavaSE结束，后面开始Java多线程和注解反射</p>
 
               
             </div>
@@ -610,7 +731,6 @@
 
   
   
-
 
 
 
@@ -868,44 +988,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        MathJax = {
-          tex    : {
-            inlineMath: { '[+]': [['$', '$']] }
-          },
-          loader : {
-            load: ['ui/lazy']
-          },
-          options: {
-            renderActions: {
-              findScript    : [10, doc => {
-                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                  const display = !!node.type.match(/; *mode=display/);
-                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                  const text = document.createTextNode('');
-                  node.parentNode.replaceChild(text, node);
-                  math.start = { node: text, delim: '', n: 0 };
-                  math.end = { node: text, delim: '', n: 0 };
-                  doc.math.push(math);
-                });
-              }, '', false],
-              insertedScript: [200, () => {
-                document.querySelectorAll('mjx-container').forEach(node => {
-                  let target = node.parentNode;
-                  if (target.nodeName.toLowerCase() === 'li') {
-                    target.parentNode.classList.add('has-jax');
-                  }
-                });
-              }, '', false]
-            }
-          }
-        };
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

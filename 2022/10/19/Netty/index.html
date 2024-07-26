@@ -47,6 +47,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -299,9 +301,8 @@
          </div>
      <ul>
 </div>
-
-
-<h1 id="线程模型基本介绍"><a href="#线程模型基本介绍" class="headerlink" title="线程模型基本介绍"></a>线程模型基本介绍</h1><p>现存线程模型：传统I/O服务模型和Reactor模式</p>
+<h1>线程模型基本介绍</h1>
+<p>现存线程模型：传统I/O服务模型和Reactor模式</p>
 <p>传统阻塞I/O服务模型</p>
 <p>特点：</p>
 <p>采用阻塞IO模式获取输入的数据</p>
@@ -310,70 +311,77 @@
 <p>当并发数很大，就会创建大量的线程，占用很大系统资源</p>
 <p>若线程暂时没有数据可读，该线程会阻塞在Hander对象的read操作，导致线程资源浪费</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221031152502979.png" srcset="/img/newloading.gif" lazyload alt="image-20221031152502979"></p>
-<h2 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h2><p><strong>Blocking I/O</strong>同步阻塞I/O模式，数据的读取都阻塞在一个线程内等待完成，很明显，无法应对高并发</p>
-<h2 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h2><p><strong>Non-blocking I/O</strong> 同步非阻塞型的I/O模型，提供了Channel,Seletor,Buffer等。支持面向缓冲的，基于通道的I/O操作方法，对于高负载，高并发的的应用，也有很好的支持</p>
-<h2 id="AIO"><a href="#AIO" class="headerlink" title="AIO"></a>AIO</h2><p><strong>Asynchronous I/O</strong> 就是NIO 2，是一种异步非阻塞的IO模型，异步IO是基于时间和回调机制实现的。也就是应用操作之后会直接返回，不会阻塞在那里，当后台处理完成后，操作系统会通知相应的线程进行后续操作。目前AIO的应用还不是特别的广泛。</p>
+<h2 id="BIO">BIO</h2>
+<p><strong>Blocking I/O</strong>同步阻塞I/O模式，数据的读取都阻塞在一个线程内等待完成，很明显，无法应对高并发</p>
+<h2 id="NIO">NIO</h2>
+<p><strong>Non-blocking I/O</strong> 同步非阻塞型的I/O模型，提供了Channel,Seletor,Buffer等。支持面向缓冲的，基于通道的I/O操作方法，对于高负载，高并发的的应用，也有很好的支持</p>
+<h2 id="AIO">AIO</h2>
+<p><strong>Asynchronous I/O</strong> 就是NIO 2，是一种异步非阻塞的IO模型，异步IO是基于时间和回调机制实现的。也就是应用操作之后会直接返回，不会阻塞在那里，当后台处理完成后，操作系统会通知相应的线程进行后续操作。目前AIO的应用还不是特别的广泛。</p>
 <p class="note note-success">BIO,NIO,AIO的区别</p>
-
 <p>当客户端发起请求</p>
 <ul>
 <li>BIO：阻塞等待直到处理完成</li>
 <li>NIO：通过选择器监听多个通道，非阻塞，处理完成之后就返回</li>
 <li>AIO：通过回调机制实现，应用操作后直接返回，不会阻塞在那里</li>
 </ul>
-<h1 id="Netty简介"><a href="#Netty简介" class="headerlink" title="Netty简介"></a>Netty简介</h1><h2 id="Netty是什么"><a href="#Netty是什么" class="headerlink" title="Netty是什么"></a>Netty是什么</h2><ul>
+<h1>Netty简介</h1>
+<h2 id="Netty是什么">Netty是什么</h2>
+<ul>
 <li>Netty是一个基于NIO的client-server框架，使用它可以快速简单的开发网络应用程序</li>
 <li>极大简化了TCP 和 UDP的套接字编程，并且在性能和安全性仿麦呢更优</li>
 <li>支持多种协议比如SMTP，HTTP等</li>
 </ul>
-<h2 id="Netty版本说明"><a href="#Netty版本说明" class="headerlink" title="Netty版本说明"></a>Netty版本说明</h2><p>Netty 5出现重大bug 已经被官网废弃，目前推荐使用Netty 4.x的稳定版本</p>
+<h2 id="Netty版本说明">Netty版本说明</h2>
+<p>Netty 5出现重大bug 已经被官网废弃，目前推荐使用Netty 4.x的稳定版本</p>
 <p>在课程中，使用的是Netty4.1.x版本</p>
-<h2 id="Netty的优点"><a href="#Netty的优点" class="headerlink" title="Netty的优点"></a>Netty的优点</h2><ul>
+<h2 id="Netty的优点">Netty的优点</h2>
+<ul>
 <li>统一的API,支持多种传输类型，阻塞的，非阻塞的</li>
 <li>自带编解码器解决TCP粘包/拆包问题</li>
 <li>自带各种协议栈</li>
 <li>安全性可靠</li>
 <li>…</li>
 </ul>
-<h1 id="Netty的核心组件"><a href="#Netty的核心组件" class="headerlink" title="Netty的核心组件"></a>Netty的核心组件</h1><h2 id="Bytebuf-字节容器"><a href="#Bytebuf-字节容器" class="headerlink" title="Bytebuf 字节容器"></a>Bytebuf 字节容器</h2><p>网络通信最终都是通过字节流进行传输的。ByteBuf就是Netty提供的一个字节容器，内部是一个字节数组，相比Java NIO提供的ByteBuf更加简单方便</p>
-<h2 id="Bootstrap和ServerBootstrap-启动引导类"><a href="#Bootstrap和ServerBootstrap-启动引导类" class="headerlink" title="Bootstrap和ServerBootstrap 启动引导类"></a>Bootstrap和ServerBootstrap 启动引导类</h2><p>Bootstrap的使用方法</p>
+<h1>Netty的核心组件</h1>
+<h2 id="Bytebuf-字节容器">Bytebuf 字节容器</h2>
+<p>网络通信最终都是通过字节流进行传输的。ByteBuf就是Netty提供的一个字节容器，内部是一个字节数组，相比Java NIO提供的ByteBuf更加简单方便</p>
+<h2 id="Bootstrap和ServerBootstrap-启动引导类">Bootstrap和ServerBootstrap 启动引导类</h2>
+<p>Bootstrap的使用方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java">EventLoopGroup group = <span class="hljs-keyword">new</span> NioEventLoopGGroup();<br><span class="hljs-keyword">try</span>&#123;<br>    <span class="hljs-comment">//创建客户端启动引导/辅助类:Bootstrap</span><br>    Bootstrap b = <span class="hljs-keyword">new</span> Bootstrap();<br>    <span class="hljs-comment">//指定线程模型</span><br>    b.group(group).<br>        .....<br>    <span class="hljs-comment">//尝试建立连接</span><br>    ChannelFuture f = b.connect(host,port).sync();<br>    f.channel().closeFuture().sync();<br>&#125; <span class="hljs-keyword">finally</span>&#123;<br>    <span class="hljs-comment">//关闭线程组资源</span><br>    group.shutdownGracefully();<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <p>ServerBootstrap的使用方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 1.bossGroup用于接收连接，workerGroup 用于具体的额管理</span><br>EventLoopGroup bossGroup = <span class="hljs-keyword">new</span> NioEventLoopGroup(<span class="hljs-number">1</span>);<br>EventLoopGroup workerGroup = <span class="hljs-keyword">new</span> NioEventLoopGroup(<span class="hljs-number">1</span>);<br><span class="hljs-keyword">try</span>&#123;<br>    <span class="hljs-comment">//2.创建服务端启动引导类/辅助类 ：ServerBootstrap</span><br>    ServerBootstrap b = <span class="hljs-keyword">new</span> ServerBootstrap();<br>    <span class="hljs-comment">//3.给引导类配置两大线程组，确定了线程模型</span><br>    b.group(bossGroup,workerGroup).<br>        .....<br>    <span class="hljs-comment">// 6. 绑定端口</span><br>    ChannelFuture f = b.bind(port).sync();<br>    <span class="hljs-comment">//等待连接关闭</span><br>    f.channel().closeFuture().sync();<br>&#125;<span class="hljs-keyword">finally</span>&#123;<br>    <span class="hljs-comment">//7.关闭线程组资源</span><br>    bossGroup.shutdownGracefully();<br>    wokerGroup.shutdownGracefully();<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
 <p>Bootstrap 是客户端的启动引导类，通常使用<code>connect()</code>方法连接到远程的主机和端口，作为一个Netty TCP协议通信中的客户端，Bootstrap也可以通过<code>bind()</code>方法绑定本地的一个端口，作为UDP协议通信的一个端口</p>
 <p>ServerBootstrap 很明显是服务端的启动引导类，通常使用<code>bind()</code>方法绑定本地的端口，然后等待客户端的连接</p>
 <p>Bootstrap只需要配置一个线程组 EventLoopGroup,而ServerBootstrap需要配置两个线程组，一个用于接收连接，一个用于具体的IO处理</p>
-<h2 id="Channel-网络操作抽象类"><a href="#Channel-网络操作抽象类" class="headerlink" title="Channel 网络操作抽象类"></a>Channel 网络操作抽象类</h2><p>Netty通过Channel进行IO操作。一旦客户端成功连接服务端，就会新建一个Channel和这个客户端进行绑定</p>
+<h2 id="Channel-网络操作抽象类">Channel 网络操作抽象类</h2>
+<p>Netty通过Channel进行IO操作。一旦客户端成功连接服务端，就会新建一个Channel和这个客户端进行绑定</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> Channel <span class="hljs-title">doConnect</span><span class="hljs-params">(InetSocketAddresss inetSocketAddress)</span></span>&#123;<br>    CompletableFuture&lt;Channel&gt; completableFuture = <span class="hljs-keyword">new</span> CompletableFuture&lt;&gt;();<br>    bootstrap.connect(inetSocketAddress).addListener((channelFutureListener) future -&gt;&#123;<br>        <span class="hljs-keyword">if</span>(future,isSuccess())&#123;<br>            completableFuture.complete(future.channel());<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException();<br>        &#125;<br>    &#125;);<br>    <span class="hljs-keyword">return</span> completableFuture.get();<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <p>常用的有两个实现类</p>
 <p>NioServerSocketChannel (服务端)</p>
 <p>NioSocketChannel (客户端)</p>
-<h2 id="EventLoop-事件循环"><a href="#EventLoop-事件循环" class="headerlink" title="EventLoop 事件循环"></a>EventLoop 事件循环</h2><h3 id="EventLoop介绍"><a href="#EventLoop介绍" class="headerlink" title="EventLoop介绍"></a>EventLoop介绍</h3><p>EventLoop定义了Netty的核心抽象，用于处理来了连接的生命周期中所发生的事件，通俗的讲就是它的主要作用就是负责监听网络事件处理器进行相关 I/O操作(读写)的处理</p>
-<h3 id="EventLoop和channel的关系"><a href="#EventLoop和channel的关系" class="headerlink" title="EventLoop和channel的关系"></a>EventLoop和channel的关系</h3><p>channel为Netty网络操作抽象类，Event Loop负责处理注册到其上的Channel的I/O操作，两者配合进行I/O操作</p>
-<h3 id="EventLoopGroup和EventLoop的关系"><a href="#EventLoopGroup和EventLoop的关系" class="headerlink" title="EventLoopGroup和EventLoop的关系"></a>EventLoopGroup和EventLoop的关系</h3><p><code>EventLoopGroup</code>包含多个<code>EventLoop</code>管理着所有的<code>EventLoop</code>的生命周期</p>
+<h2 id="EventLoop-事件循环">EventLoop 事件循环</h2>
+<h3 id="EventLoop介绍">EventLoop介绍</h3>
+<p>EventLoop定义了Netty的核心抽象，用于处理来了连接的生命周期中所发生的事件，通俗的讲就是它的主要作用就是负责监听网络事件处理器进行相关 I/O操作(读写)的处理</p>
+<h3 id="EventLoop和channel的关系">EventLoop和channel的关系</h3>
+<p>channel为Netty网络操作抽象类，Event Loop负责处理注册到其上的Channel的I/O操作，两者配合进行I/O操作</p>
+<h3 id="EventLoopGroup和EventLoop的关系">EventLoopGroup和EventLoop的关系</h3>
+<p><code>EventLoopGroup</code>包含多个<code>EventLoop</code>管理着所有的<code>EventLoop</code>的生命周期</p>
 <p><code>EventLoop</code>处理的I/O事件都将在它专有的<code>Thread</code>上被处理，即<code>Thread</code>和 <code>EventLoop</code>属于1:1的关系，从而保证线程安全</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221203162809780.png" srcset="/img/newloading.gif" lazyload alt="image-20221203162809780"></p>
-<h2 id="ChannelHander-消息处理器-和-ChannelPipeline-ChannelHander-对象链表"><a href="#ChannelHander-消息处理器-和-ChannelPipeline-ChannelHander-对象链表" class="headerlink" title="ChannelHander (消息处理器) 和 ChannelPipeline (ChannelHander 对象链表)"></a>ChannelHander (消息处理器) 和 ChannelPipeline (ChannelHander 对象链表)</h2><p><code>ChannelHandler</code>是消息的具体处理器，主要负责处理客户端/服务端接收和发送的数据。</p>
+<h2 id="ChannelHander-消息处理器-和-ChannelPipeline-ChannelHander-对象链表">ChannelHander (消息处理器) 和 ChannelPipeline (ChannelHander 对象链表)</h2>
+<p><code>ChannelHandler</code>是消息的具体处理器，主要负责处理客户端/服务端接收和发送的数据。</p>
 <p>当channel被创建的时候，会自动地分配到它专属的<code>ChannelPipeline</code>。 <code>ChannelPipeline</code>是<code>ChannelHander</code>的链，一个pipeline上可以有多个<code>ChannelHandler</code></p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221203164046760.png" srcset="/img/newloading.gif" lazyload alt="image-20221203164046760"></p>
-<h2 id="ChannelFuture-操作执行结果"><a href="#ChannelFuture-操作执行结果" class="headerlink" title="ChannelFuture 操作执行结果"></a>ChannelFuture 操作执行结果</h2><p>Netty中所有的I/O操作都是异步的，我们不能立刻得到操作是否执行成功，不过可以通过<code>ChannelFuture</code>接口的<code>addListener</code>方法注册一个<code>ChannelFutureListener</code>，当操作执行成功或者失败时，监听就会自动触发返回结果</p>
+<h2 id="ChannelFuture-操作执行结果">ChannelFuture 操作执行结果</h2>
+<p>Netty中所有的I/O操作都是异步的，我们不能立刻得到操作是否执行成功，不过可以通过<code>ChannelFuture</code>接口的<code>addListener</code>方法注册一个<code>ChannelFutureListener</code>，当操作执行成功或者失败时，监听就会自动触发返回结果</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">ChannelFuture f = b.connect(host,port).addListener(future -&gt; &#123;<br>    <span class="hljs-keyword">if</span>(future.isSuccess())&#123;<br>        System.out.println(<span class="hljs-string">&quot;连接成功!&quot;</span>);<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        System.err.println(<span class="hljs-string">&quot;连接失败!&quot;</span>);<br>    &#125;<br>&#125;).sync();<br></code></pre></td></tr></table></figure>
-
 <p>还可以通过<code>ChannelFuture</code>的<code>channel()</code>方法获取连接相关联的<code>Channel</code></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Channel channel = f.channel();<br></code></pre></td></tr></table></figure>
-
 <p>还可以通过<code>ChannelFuture</code>接口的<code>sync()</code>方法让异步的操作变成同步的</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">ChannelFuture f = b.bind(port).sync();<br></code></pre></td></tr></table></figure>
-
-
-
 <p><strong>NioEventLoopGroup</strong>默认的构造函数实际会起的线程数为<strong>CPU核心数*2</strong></p>
-<h1 id="Reactor-线程模型"><a href="#Reactor-线程模型" class="headerlink" title="Reactor 线程模型"></a>Reactor 线程模型</h1><p>Reactor是一种经典的线程模型，它基于事件驱动，特别适合处理海量的I/O事件</p>
+<h1>Reactor 线程模型</h1>
+<p>Reactor是一种经典的线程模型，它基于事件驱动，特别适合处理海量的I/O事件</p>
 <p>别名</p>
 <ul>
 <li>反应器模式</li>
@@ -385,62 +393,65 @@
 <p>服务器端程序处理传入的多个请求，并将他们同步分派到相应的处理线程</p>
 <p>Reator模式使用IO复用监听事件，收到事件后，分发给某个线程</p>
 <p>原先有多个Hander阻塞，现在只用一个ServiceHandler连接</p>
-<h2 id="Reactor模式分类"><a href="#Reactor模式分类" class="headerlink" title="Reactor模式分类"></a>Reactor模式分类</h2><h3 id="单线程Reactor"><a href="#单线程Reactor" class="headerlink" title="单线程Reactor"></a>单线程Reactor</h3><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221101195028780.png" srcset="/img/newloading.gif" lazyload alt="image-20221101195028780"></p>
+<h2 id="Reactor模式分类">Reactor模式分类</h2>
+<h3 id="单线程Reactor">单线程Reactor</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221101195028780.png" srcset="/img/newloading.gif" lazyload alt="image-20221101195028780"></p>
 <p>单线程Reactor的优点是对系统资源的消耗特别小，但是，没办法支撑大量请求的应用场景并且处理请求的时间可能非常慢，所以一般实际项目中不会使用单线程Reactor</p>
-<h3 id="多线程Reactor"><a href="#多线程Reactor" class="headerlink" title="多线程Reactor"></a>多线程Reactor</h3><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221101193557851.png" srcset="/img/newloading.gif" lazyload alt="image-20221101193557851"></p>
+<h3 id="多线程Reactor">多线程Reactor</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221101193557851.png" srcset="/img/newloading.gif" lazyload alt="image-20221101193557851"></p>
 <p><strong>一个</strong>线程负责接收请求，<strong>一组</strong>NIO请求处理IO操作</p>
 <p>大部分场景下多线程Reactor模型没有啥问题，但是在一些并发数连接比较多(百万级别)的情况下，一个线程负责接收客户端就存在性能问题了</p>
-<h3 id="主从Reactor多线程"><a href="#主从Reactor多线程" class="headerlink" title="主从Reactor多线程"></a>主从Reactor多线程</h3><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221101193327320.png" srcset="/img/newloading.gif" lazyload alt="image-20221101193327320"></p>
+<h3 id="主从Reactor多线程">主从Reactor多线程</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20221101193327320.png" srcset="/img/newloading.gif" lazyload alt="image-20221101193327320"></p>
 <p>一组NIO线程负责接收请求，一组NIO线程处理IO操作</p>
 <div class = "note note-success">更通俗的理解</div>
-
 <p>单Reactor单线程 前台接待员和服务员是同一个人，全程为顾客服务</p>
 <p>单Reactor多线程 一个前台接待员，多个服务员，接待员只负责接待</p>
 <p>主从Reactor多线程，多个前台接待员，多个服务生</p>
-<h1 id="Netty线程模型"><a href="#Netty线程模型" class="headerlink" title="Netty线程模型"></a>Netty线程模型</h1><p>大部分的网络框架都是基于Reactor模式设计开发的，在Netty主要靠<code>NioEventLoopGroup</code>线程池来实现具体的线程模型。</p>
+<h1>Netty线程模型</h1>
+<p>大部分的网络框架都是基于Reactor模式设计开发的，在Netty主要靠<code>NioEventLoopGroup</code>线程池来实现具体的线程模型。</p>
 <p>实现服务端的时候，一般会初始化两个线程组</p>
 <ul>
 <li>bossGroup : 接收连接</li>
 <li>workerGroup: 负责具体的处理，交由对应的Hander处理</li>
 </ul>
-<h2 id="单线程模型"><a href="#单线程模型" class="headerlink" title="单线程模型"></a>单线程模型</h2><p>一个线程执行处理所有的accept,read,decode,process,encode,send事件，无法应对性能要求比较高的场景</p>
+<h2 id="单线程模型">单线程模型</h2>
+<p>一个线程执行处理所有的accept,read,decode,process,encode,send事件，无法应对性能要求比较高的场景</p>
 <p>如：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//1.eventGroup既用于处理客户端连接，又负责具体的处理</span><br>EventLoopGroup eventGroup = <span class="hljs-keyword">new</span> NioEventLoopGroup(<span class="hljs-number">1</span>);<br><span class="hljs-comment">//2.创建服务端启动引导/辅助类：ServerBootstrap</span><br>ServerBootstrap b = <span class="hljs-keyword">new</span> ServerBootstrap();<br>           b.group(eventGroup,eventGroup)<br>           <span class="hljs-comment">//....</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="多线程模型"><a href="#多线程模型" class="headerlink" title="多线程模型"></a>多线程模型</h2><p>一个Acceptor线程只负责监听客户端的连接，一个NIO线程池负责具体的处理accept,read,decode,process,encode,send事件，但是和上面说的一样，可以处理连接量不太大的情况，但是连接量巨大的时候(百万级别)就可能出现性能瓶颈</p>
+<h2 id="多线程模型">多线程模型</h2>
+<p>一个Acceptor线程只负责监听客户端的连接，一个NIO线程池负责具体的处理accept,read,decode,process,encode,send事件，但是和上面说的一样，可以处理连接量不太大的情况，但是连接量巨大的时候(百万级别)就可能出现性能瓶颈</p>
 <p>can can 代码:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 1.bossGroup 用于接收连接，workerGroup用于具体的处理</span><br>EventLoopGroup bossGroup = <span class="hljs-keyword">new</span> NioEventLoopGroup(<span class="hljs-number">1</span>);<br>EventLoopGroup workGroup = <span class="hljs-keyword">new</span> NioEventLoopGroup();<br><span class="hljs-keyword">try</span>&#123;<br>    <span class="hljs-comment">//2.创建服务端启动引导/辅助类：ServerBootstrap</span><br>    ServerBootstrap b = <span class="hljs-keyword">new</span> ServerBootstrap();<br>    <span class="hljs-comment">//3.给引导类配置两大线程组，确定线程模型</span><br>    b.group(bossGroup,workerGroup)<br>        <span class="hljs-comment">//.....</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="主从多线程模型"><a href="#主从多线程模型" class="headerlink" title="主从多线程模型"></a>主从多线程模型</h2><p>从一个主线程NIO线程池中选择一个线程作为Acceptor线程，绑定监听端口，接受客户端连接的连接，其他线程负责后续的接入认证等工作。连接完成后，SubNIO线程池负责具体处理I/O读写</p>
+<h2 id="主从多线程模型">主从多线程模型</h2>
+<p>从一个主线程NIO线程池中选择一个线程作为Acceptor线程，绑定监听端口，接受客户端连接的连接，其他线程负责后续的接入认证等工作。连接完成后，SubNIO线程池负责具体处理I/O读写</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//1.bossGroup 用于接收连接，workerGroup用于具体的处理</span><br>EventLoopGroup bossGroup = <span class="hljs-keyword">new</span> NioEventLoopGroup();<span class="hljs-comment">//这里没有1</span><br>EventLoopGroup workGroup = <span class="hljs-keyword">new</span> NioEventLoopGroup();<br><span class="hljs-keyword">try</span>&#123;<br>    <span class="hljs-comment">//2.创建服务端启动引导/辅助类：ServerBootstrap</span><br>    ServerBootstrap b = <span class="hljs-keyword">new</span> ServerBootstrap();<br>    <span class="hljs-comment">//3.给引导类配置两大线程组，确定线程模型</span><br>    b.group(bossGroup,workerGroup)<br>        <span class="hljs-comment">//.....</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h1 id="Netty服务端和客户端的启动过程"><a href="#Netty服务端和客户端的启动过程" class="headerlink" title="Netty服务端和客户端的启动过程"></a>Netty服务端和客户端的启动过程</h1><h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 1.bossGroup 用于接收连接，workerGroup用于具体的处理</span><br>EventLoopGroup bossGroup = <span class="hljs-keyword">new</span> NioEventLoopGroup(<span class="hljs-number">1</span>);<br>EventLoopGroup workGroup = <span class="hljs-keyword">new</span> NioEventLoopGroup();<br><span class="hljs-keyword">try</span>&#123;<br>    <span class="hljs-comment">//2.创建服务端启动引导/辅助类：ServerBootstrap</span><br>    ServerBootstrap b = <span class="hljs-keyword">new</span> ServerBootstrap();<br>    <span class="hljs-comment">//3.给引导类配置两大线程组，确定线程模型</span><br>    b.group(bossGroup,workerGroup)<br>        <span class="hljs-comment">// 4.指定IO模型</span><br>        .channel(NioSocketChannel.class)<br>        .childHandler(<span class="hljs-keyword">new</span> ChannelInitializer&lt;SocketChannel&gt;() &#123;<br>                    <span class="hljs-meta">@Override</span><br>                    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initChannel</span><span class="hljs-params">(SocketChannel ch)</span> </span>&#123;<br>                        <span class="hljs-comment">/**</span><br><span class="hljs-comment">                         * 自定义序列化编解码器</span><br><span class="hljs-comment">                         */</span><br>                        ChannelPipeline p = ch.pipeline();<br>                        <span class="hljs-comment">//5.可以自定义客户端消息的业务处理逻辑</span><br>                        p.addLast(<span class="hljs-keyword">new</span> HelloServerHandler());<br>                    &#125;<br>        &#125;);<br>    <span class="hljs-comment">// 6.绑定端口，调用sync方法阻塞直到绑定完成</span><br>    ChannelFuture f = b.bind(port).sync();<br>    <span class="hljs-comment">// 7.阻塞等待直到服务器Channel关闭</span><br>    f.channel().closeFuture().sync();<br>&#125;<span class="hljs-keyword">finally</span>&#123;<br>    <span class="hljs-comment">//8.关闭线程组资源</span><br>    bossGroup.shutdownGracefully();<br>    wokerGroup.shutdownGracefully();<br>&#125;        <br></code></pre></td></tr></table></figure>
-
-<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 1.创建一个NioEventLoopGroup对象实例</span><br>EventLoopGroup workGroup = <span class="hljs-keyword">new</span> NioEventLoopGroup();<br><span class="hljs-keyword">try</span>&#123;<br>    <span class="hljs-comment">//2.创建服务端启动引导/辅助类：Bootstrap</span><br>    Bootstrap b = <span class="hljs-keyword">new</span> Bootstrap();<br>    <span class="hljs-comment">//3.指定线程组</span><br>    b.group(bossGroup,workerGroup)<br>        <span class="hljs-comment">// 4.指定IO模型</span><br>        .channel(NioSocketChannel.class)<br>        .handler(<span class="hljs-keyword">new</span> ChannelInitializer&lt;SocketChannel&gt;() &#123;<br>                    <span class="hljs-meta">@Override</span><br>                    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initChannel</span><span class="hljs-params">(SocketChannel ch)</span> </span>&#123;<br>                      <br>                        ChannelPipeline p = ch.pipeline();<br>                        <span class="hljs-comment">//5.可以自定义客户端消息的业务处理逻辑</span><br>                        p.addLast(<span class="hljs-keyword">new</span> HelloServerHandler(message));<br>                    &#125;<br>        &#125;);<br>    <span class="hljs-comment">// 6.尝试建立连接</span><br>    ChannelFuture f = b.connect(host,port).sync();<br>    <span class="hljs-comment">// 7.等待连接关闭</span><br>    f.channel().closeFuture().sync();<br>&#125;<span class="hljs-keyword">finally</span>&#123;<br>    <span class="hljs-comment">//8.关闭线程组资源</span><br>    group.shutdownGracefully();<br>&#125;        <br></code></pre></td></tr></table></figure>
-
-
-
+<h1>Netty服务端和客户端的启动过程</h1>
+<h2 id="服务端">服务端</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 1.bossGroup 用于接收连接，workerGroup用于具体的处理</span><br>EventLoopGroup bossGroup = <span class="hljs-keyword">new</span> NioEventLoopGroup(<span class="hljs-number">1</span>);<br>EventLoopGroup workGroup = <span class="hljs-keyword">new</span> NioEventLoopGroup();<br><span class="hljs-keyword">try</span>&#123;<br>    <span class="hljs-comment">//2.创建服务端启动引导/辅助类：ServerBootstrap</span><br>    ServerBootstrap b = <span class="hljs-keyword">new</span> ServerBootstrap();<br>    <span class="hljs-comment">//3.给引导类配置两大线程组，确定线程模型</span><br>    b.group(bossGroup,workerGroup)<br>        <span class="hljs-comment">// 4.指定IO模型</span><br>        .channel(NioSocketChannel.class)<br>        .childHandler(<span class="hljs-keyword">new</span> ChannelInitializer&lt;SocketChannel&gt;() &#123;<br>                    <span class="hljs-meta">@Override</span><br>                    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initChannel</span><span class="hljs-params">(SocketChannel ch)</span> </span>&#123;<br>                        <span class="hljs-comment">/**</span><br><span class="hljs-comment">                         * 自定义序列化编解码器</span><br><span class="hljs-comment">                         */</span><br>                        ChannelPipeline p = ch.pipeline();<br>                        <span class="hljs-comment">//5.可以自定义客户端消息的业务处理逻辑</span><br>                        p.addLast(<span class="hljs-keyword">new</span> HelloServerHandler());<br>                    &#125;<br>        &#125;);<br>    <span class="hljs-comment">// 6.绑定端口，调用sync方法阻塞直到绑定完成</span><br>    ChannelFuture f = b.bind(port).sync();<br>    <span class="hljs-comment">// 7.阻塞等待直到服务器Channel关闭</span><br>    f.channel().closeFuture().sync();<br>&#125;<span class="hljs-keyword">finally</span>&#123;<br>    <span class="hljs-comment">//8.关闭线程组资源</span><br>    bossGroup.shutdownGracefully();<br>    wokerGroup.shutdownGracefully();<br>&#125;        <br></code></pre></td></tr></table></figure>
+<h2 id="客户端">客户端</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 1.创建一个NioEventLoopGroup对象实例</span><br>EventLoopGroup workGroup = <span class="hljs-keyword">new</span> NioEventLoopGroup();<br><span class="hljs-keyword">try</span>&#123;<br>    <span class="hljs-comment">//2.创建服务端启动引导/辅助类：Bootstrap</span><br>    Bootstrap b = <span class="hljs-keyword">new</span> Bootstrap();<br>    <span class="hljs-comment">//3.指定线程组</span><br>    b.group(bossGroup,workerGroup)<br>        <span class="hljs-comment">// 4.指定IO模型</span><br>        .channel(NioSocketChannel.class)<br>        .handler(<span class="hljs-keyword">new</span> ChannelInitializer&lt;SocketChannel&gt;() &#123;<br>                    <span class="hljs-meta">@Override</span><br>                    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initChannel</span><span class="hljs-params">(SocketChannel ch)</span> </span>&#123;<br>                      <br>                        ChannelPipeline p = ch.pipeline();<br>                        <span class="hljs-comment">//5.可以自定义客户端消息的业务处理逻辑</span><br>                        p.addLast(<span class="hljs-keyword">new</span> HelloServerHandler(message));<br>                    &#125;<br>        &#125;);<br>    <span class="hljs-comment">// 6.尝试建立连接</span><br>    ChannelFuture f = b.connect(host,port).sync();<br>    <span class="hljs-comment">// 7.等待连接关闭</span><br>    f.channel().closeFuture().sync();<br>&#125;<span class="hljs-keyword">finally</span>&#123;<br>    <span class="hljs-comment">//8.关闭线程组资源</span><br>    group.shutdownGracefully();<br>&#125;        <br></code></pre></td></tr></table></figure>
 <p>这里的connect方法返回的是一个ChannelFuture对象</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> ChannelFuture <span class="hljs-title">connect</span><span class="hljs-params">(SocketAddress remoteAddress)</span> </span>&#123;<br>        ObjectUtil.checkNotNull(remoteAddress, <span class="hljs-string">&quot;remoteAddress&quot;</span>);<br>        <span class="hljs-keyword">this</span>.validate();<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.doResolveAndConnect(remoteAddress, <span class="hljs-keyword">this</span>.config.localAddress());<br>    &#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> ChannelFuture <span class="hljs-title">connect</span><span class="hljs-params">(SocketAddress remoteAddress, SocketAddress localAddress)</span> </span>&#123;<br>    ObjectUtil.checkNotNull(remoteAddress, <span class="hljs-string">&quot;remoteAddress&quot;</span>);<br>    <span class="hljs-keyword">this</span>.validate();<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.doResolveAndConnect(remoteAddress, localAddress);<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <p>因为他是异步的，也可以像上面ChannelFuture那儿说的，通过addListener方法增加一个监听器打印消息，看是否连接成功</p>
-<h1 id="TCP-粘包-拆包"><a href="#TCP-粘包-拆包" class="headerlink" title="TCP 粘包/拆包"></a>TCP 粘包/拆包</h1><p>TCP粘包/拆包就是基于TCP发送数据的时候，出现了多个字符串“粘”在一起或者一个字符串被“拆”开的情况</p>
+<h1>TCP 粘包/拆包</h1>
+<p>TCP粘包/拆包就是基于TCP发送数据的时候，出现了多个字符串“粘”在一起或者一个字符串被“拆”开的情况</p>
 <p>解决方案</p>
 <ol>
 <li>使用Netty自带的解码器</li>
 </ol>
 <ul>
-<li><p><code>lineBasedFrameDecoder</code>：发送数据包的时候，每个数据包之间以换行符作为分隔，<code>lineBaseFrameDecoder</code>就依次遍历<code>ByteBuf</code>中的可读字节，判断是否有换行符，然后截取</p>
+<li>
+<p><code>lineBasedFrameDecoder</code>：发送数据包的时候，每个数据包之间以换行符作为分隔，<code>lineBaseFrameDecoder</code>就依次遍历<code>ByteBuf</code>中的可读字节，判断是否有换行符，然后截取</p>
 </li>
-<li><p><code>DelimiterBasedFrameDecoder</code> :可以自定义分隔符解码器，<code>lineBasedFrameDecoder</code>实际上是一种特殊的<code>DelimiterBasedFrameDecoder</code>解码器</p>
+<li>
+<p><code>DelimiterBasedFrameDecoder</code> :可以自定义分隔符解码器，<code>lineBasedFrameDecoder</code>实际上是一种特殊的<code>DelimiterBasedFrameDecoder</code>解码器</p>
 </li>
-<li><p><code>FixedLengthFrameDecoder</code>：固定长度解码器</p>
+<li>
+<p><code>FixedLengthFrameDecoder</code>：固定长度解码器</p>
 </li>
-<li><p><code>LengthFieldBaseFrameDecoder</code>：基于长度字段的解码器</p>
+<li>
+<p><code>LengthFieldBaseFrameDecoder</code>：基于长度字段的解码器</p>
 </li>
 </ul>
 <ol start="2">
@@ -448,12 +459,16 @@
 </ol>
 <p>在Java中自带有<code>Serializable</code>接口来实现序列化，但是性能，安全等并不理想。</p>
 <p>所以一般使用Protostuff,Hessian2,json,Kryo等等</p>
-<h1 id="Netty长连接，心跳机制"><a href="#Netty长连接，心跳机制" class="headerlink" title="Netty长连接，心跳机制"></a>Netty长连接，心跳机制</h1><h2 id="长连接和短连接"><a href="#长连接和短连接" class="headerlink" title="长连接和短连接"></a>长连接和短连接</h2><p>短连接就是server端与client端连接之后，读写完成后就关闭掉，如果下一次再要互相发送消息，就要重新连接，优点就是管理和实现都比较简单，缺点即每次读写都建立连接会带来大量的消耗</p>
+<h1>Netty长连接，心跳机制</h1>
+<h2 id="长连接和短连接">长连接和短连接</h2>
+<p>短连接就是server端与client端连接之后，读写完成后就关闭掉，如果下一次再要互相发送消息，就要重新连接，优点就是管理和实现都比较简单，缺点即每次读写都建立连接会带来大量的消耗</p>
 <p>长连接就是client和server双方建立连接之后，即使client和server完成一次读写，他们之间的连接不会主动关闭，后续读写继续使用这个连接。长连接可以省去较多的TCP建立和关闭的操作，降低对网络的依赖，节约时间。</p>
-<h2 id="心跳机制"><a href="#心跳机制" class="headerlink" title="心跳机制"></a>心跳机制</h2><p>在保持长连接的过程中，可能会出现网络异常出现，那么怎么发现对方已经掉线呢，答案就是心跳机制</p>
+<h2 id="心跳机制">心跳机制</h2>
+<p>在保持长连接的过程中，可能会出现网络异常出现，那么怎么发现对方已经掉线呢，答案就是心跳机制</p>
 <p>心跳机制就是client与server之间没有数据交互的时候，客户端或服务器就会发送一个特殊的数据包给对方，接收方收到数据后，也会发送一个特殊的数据报文回应对方，这样，就知道了对象仍然在线，确保TCP连接的有效性</p>
 <p>Netty层面实现的话，核心类是<code>IdleStateHander</code></p>
-<h1 id="Netty的零拷贝"><a href="#Netty的零拷贝" class="headerlink" title="Netty的零拷贝"></a>Netty的零拷贝</h1><p>Zero-copy 即计算机执行操作时，CPU不需要先将数据从某处内存复制到另一个特定区域。这种技术通常用于网络传输文件时节省CPU周期和内存带宽</p>
+<h1>Netty的零拷贝</h1>
+<p>Zero-copy 即计算机执行操作时，CPU不需要先将数据从某处内存复制到另一个特定区域。这种技术通常用于网络传输文件时节省CPU周期和内存带宽</p>
 <p>在OS层面上的零拷贝通常用于避免在用户态与内存态之间来回拷贝数据，在Netty层面，主要体现咋子对于数据操作的优化</p>
 <p>Netty中</p>
 <ul>
@@ -617,7 +632,6 @@
 
   
   
-
 
 
 
@@ -875,44 +889,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        MathJax = {
-          tex    : {
-            inlineMath: { '[+]': [['$', '$']] }
-          },
-          loader : {
-            load: ['ui/lazy']
-          },
-          options: {
-            renderActions: {
-              findScript    : [10, doc => {
-                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                  const display = !!node.type.match(/; *mode=display/);
-                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                  const text = document.createTextNode('');
-                  node.parentNode.replaceChild(text, node);
-                  math.start = { node: text, delim: '', n: 0 };
-                  math.end = { node: text, delim: '', n: 0 };
-                  doc.math.push(math);
-                });
-              }, '', false],
-              insertedScript: [200, () => {
-                document.querySelectorAll('mjx-container').forEach(node => {
-                  let target = node.parentNode;
-                  if (target.nodeName.toLowerCase() === 'li') {
-                    target.parentNode.classList.add('has-jax');
-                  }
-                });
-              }, '', false]
-            }
-          }
-        };
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

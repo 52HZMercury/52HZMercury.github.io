@@ -48,6 +48,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -296,9 +298,8 @@
           <div>2022.6.17 根据狂神的视频进行初步了解掌握</div>
       </ul>
 </div>
-
-
-<h1 id="1-JVM的探究"><a href="#1-JVM的探究" class="headerlink" title="1. JVM的探究"></a>1. JVM的探究</h1><ol>
+<h1>1. JVM的探究</h1>
+<ol>
 <li>请你谈谈对于JVM的理解？Java8虚拟机和之前的变化更新</li>
 <li>什么是OOM，什么是栈溢出StackOverFlowError? 怎么分析</li>
 <li>JVM的常用调优参数有哪些</li>
@@ -306,51 +307,67 @@
 <li>谈谈JVM中，你对于类加载器的认识</li>
 </ol>
 <div class = "note note-success">三种jvm</div>
-
 <ul>
-<li><p>SUN公司 hotpot</p>
+<li>
+<p>SUN公司 hotpot</p>
 </li>
-<li><p>BEA JRockit</p>
+<li>
+<p>BEA JRockit</p>
 </li>
-<li><p>IBM J9VM</p>
+<li>
+<p>IBM J9VM</p>
 </li>
 </ul>
-<h1 id="2-JVM-结构"><a href="#2-JVM-结构" class="headerlink" title="2. JVM 结构"></a>2. JVM 结构</h1><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220619152717928.png" srcset="/img/newloading.gif" lazyload alt="image-20220619152717928"></p>
+<h1>2. JVM 结构</h1>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220619152717928.png" srcset="/img/newloading.gif" lazyload alt="image-20220619152717928"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220617184022048.png" srcset="/img/newloading.gif" lazyload alt="image-20220617184022048"></p>
-<h2 id="1-类加载器"><a href="#1-类加载器" class="headerlink" title="1. 类加载器"></a>1. 类加载器</h2><p>类加载器分为四类</p>
+<h2 id="1-类加载器">1. 类加载器</h2>
+<p>类加载器分为四类</p>
 <ul>
-<li><p>虚拟机自带的加载器</p>
+<li>
+<p>虚拟机自带的加载器</p>
 </li>
-<li><p>启动类（根）加载器（使用C++）</p>
+<li>
+<p>启动类（根）加载器（使用C++）</p>
 </li>
-<li><p>扩展类加载器</p>
+<li>
+<p>扩展类加载器</p>
 </li>
-<li><p>应用程序加载器</p>
+<li>
+<p>应用程序加载器</p>
 </li>
 </ul>
-<h2 id="2-程序计数器"><a href="#2-程序计数器" class="headerlink" title="2. 程序计数器"></a>2. 程序计数器</h2><p>程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。在Java虚拟机的概念模型里 ，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，它是程序控制流的指示器，分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖这个计数器来完成。</p>
-<h2 id="3-Native和方法区"><a href="#3-Native和方法区" class="headerlink" title="3. Native和方法区"></a>3. Native和方法区</h2><h3 id="3-1-Native"><a href="#3-1-Native" class="headerlink" title="3.1 Native"></a>3.1 Native</h3><p>有时候我们会在Java的源码里面看见如下代码</p>
+<h2 id="2-程序计数器">2. 程序计数器</h2>
+<p>程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器。在Java虚拟机的概念模型里 ，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，它是程序控制流的指示器，分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖这个计数器来完成。</p>
+<h2 id="3-Native和方法区">3. Native和方法区</h2>
+<h3 id="3-1-Native">3.1 Native</h3>
+<p>有时候我们会在Java的源码里面看见如下代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">native</span> <span class="hljs-keyword">void</span> <span class="hljs-title">start0</span><span class="hljs-params">()</span></span>;<br></code></pre></td></tr></table></figure>
-
 <p>凡是带了native关键字的方法，说明Java的作用范围达不到了  需要去调用底层C语言的库，会进入本地方法栈，然后调用本地方法接口 JNI</p>
 <p>本地方法接口就是为了去调本地方法库 扩展Java的使用 融合不同的编程语言为Java所用</p>
-<h3 id="3-2-方法区"><a href="#3-2-方法区" class="headerlink" title="3.2 方法区"></a>3.2 方法区</h3><p>方法区是被所有线程共享，所有字段和方法字节码，以及一些特殊方法，如构造函数，接口代码也在此定义，简单的来说，所有定义的方法的信息都保存在该区域，此区域书于共享区间；方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等数据。虽然《Java虚拟机规范》中把方法区描述为堆的一个<strong>逻辑部分</strong>，但是它却有一个别名叫作“非堆”（Non-Heap），目的是与Java堆区分开来。</p>
+<h3 id="3-2-方法区">3.2 方法区</h3>
+<p>方法区是被所有线程共享，所有字段和方法字节码，以及一些特殊方法，如构造函数，接口代码也在此定义，简单的来说，所有定义的方法的信息都保存在该区域，此区域书于共享区间；方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等数据。虽然《Java虚拟机规范》中把方法区描述为堆的一个<strong>逻辑部分</strong>，但是它却有一个别名叫作“非堆”（Non-Heap），目的是与Java堆区分开来。</p>
 <p>常量池（Runtime Constant Pool）是方法区的一部分。Class文件中除了有类的版本、字段、方法、接口等描述信息外，还有一项信息是常量池表（Constant Pool Table），用于存放编译期生成的各种字面量与符号引用，这部分内容将在类加载后存放到方法区的运行时常量池中。静态变量、常量、类信息(构造方法，接口定义)，运行时的常量池存在方法区中，但是实例变量存在<strong>堆内存</strong>中，和方法区无关</p>
-<h2 id="4-栈"><a href="#4-栈" class="headerlink" title="4. 栈"></a>4. 栈</h2><p>“栈”通常就是指上面讲的虚拟机栈，或者更多的情况下只是指虚拟机栈中局部变量表部分。栈内存，主管程序的运行、生命周期和线程同步。线程结束，栈内存也释放。对于栈来说，不存在垃圾回收问题， 一旦线程结束栈就结束</p>
+<h2 id="4-栈">4. 栈</h2>
+<p>“栈”通常就是指上面讲的虚拟机栈，或者更多的情况下只是指虚拟机栈中局部变量表部分。栈内存，主管程序的运行、生命周期和线程同步。线程结束，栈内存也释放。对于栈来说，不存在垃圾回收问题， 一旦线程结束栈就结束</p>
 <p>栈的运行原理  : 栈帧(栈帧也叫过程活动记录，是编译器用来实现过程函数调用的一种数据结构”。实际上，可以简单理解为：栈帧就是存储在用户栈上的（当然内核栈同样适用）每一次函数调用涉及的相关信息的记录单元。</p>
-<h2 id="5-堆"><a href="#5-堆" class="headerlink" title="5. 堆"></a>5. 堆</h2><p>heap一个jvm只有一个堆内存 堆内存的大小是可以调节的</p>
+<h2 id="5-堆">5. 堆</h2>
+<p>heap一个jvm只有一个堆内存 堆内存的大小是可以调节的</p>
 <p>堆内存中还要细分三个区域</p>
 <ul>
-<li><p>新生区(伊甸园区 eden space  幸存0区 幸存1区)</p>
+<li>
+<p>新生区(伊甸园区 eden space  幸存0区 幸存1区)</p>
 </li>
-<li><p>养老区</p>
+<li>
+<p>养老区</p>
 </li>
-<li><p>永久区(1.8后称为元空间)</p>
+<li>
+<p>永久区(1.8后称为元空间)</p>
 </li>
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220617191448788.png" srcset="/img/newloading.gif" lazyload alt="堆内存"></p>
 <ol>
-<li>新生区  </li>
+<li>新生区</li>
 </ol>
 <p>类诞生和成长的地方 甚至死亡，伊甸园区：所有的对象都是在伊甸园区new出来的</p>
 <ol start="2">
@@ -358,7 +375,8 @@
 </ol>
 <p>这个区域常驻内存 用来存放自身携带的class对象 interface元数据 存储的是Java运行的一些环境或类信息 这个区域不存在垃圾回收 关闭vm虚拟机就会释放这个区域的内存</p>
 <p>元空间逻辑上存在 物理上不存在</p>
-<h3 id="5-1-堆内存错误"><a href="#5-1-堆内存错误" class="headerlink" title="5.1 堆内存错误"></a>5.1 堆内存错误</h3><p>假设内存满了 OOM  堆内存错误</p>
+<h3 id="5-1-堆内存错误">5.1 堆内存错误</h3>
+<p>假设内存满了 OOM  堆内存错误</p>
 <p>java.lang.OutOfMemoryError:Java heap space</p>
 <p>当出现这种错误的时候我们该怎么办呢？</p>
 <p>答案就是JProfiler,可以通过JProfiler进行调优</p>
@@ -376,14 +394,13 @@
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220617192656192.png" srcset="/img/newloading.gif" lazyload alt="image-20220617192656192"></p>
 <p>常用的一些命令</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//- Xms 设置初始化内存分配大小 1/64</span><br><span class="hljs-comment">//- Xmx 谈置最大分配’内存，默认1/4</span><br><span class="hljs-comment">//- XX :+ PrintGCDetails // 打印GC垃圾回收信息</span><br><span class="hljs-comment">//- XX :+HeapDumpOn0utOfMemoryError// oom DUMP</span><br><br><span class="hljs-comment">//-Xms1m-Xmx8m- XX :+ HeapDumpOnOutOfMemoryError </span><br></code></pre></td></tr></table></figure>
-
-<h1 id="3-Hotpot虚拟机对象探秘"><a href="#3-Hotpot虚拟机对象探秘" class="headerlink" title="3. Hotpot虚拟机对象探秘"></a>3. Hotpot虚拟机对象探秘</h1><h2 id="3-1-对象的创建"><a href="#3-1-对象的创建" class="headerlink" title="3.1 对象的创建"></a>3.1 对象的创建</h2><p>当Java遇到一个新的new指令的时候，它首先会去检查指令的参数能否在常量池中定位到 一个类的符号引用，并且检查这个符号所引用的类是否已经被加载，解析和初始化过，如果没有，则会先进行加载，接下来就会为这个新的对象分配内存，如果Java堆中的内存是规整的，那么分配内存的方法就是把指针向空闲空间的方向挪动一段距离，这种分配方式被称为：“指针碰撞”。如果内存不是规整的，那么就需要建立一个“空闲列表”，用来记录那些内存块分给了哪些对象。</p>
+<h1>3. Hotpot虚拟机对象探秘</h1>
+<h2 id="3-1-对象的创建">3.1 对象的创建</h2>
+<p>当Java遇到一个新的new指令的时候，它首先会去检查指令的参数能否在常量池中定位到 一个类的符号引用，并且检查这个符号所引用的类是否已经被加载，解析和初始化过，如果没有，则会先进行加载，接下来就会为这个新的对象分配内存，如果Java堆中的内存是规整的，那么分配内存的方法就是把指针向空闲空间的方向挪动一段距离，这种分配方式被称为：“指针碰撞”。如果内存不是规整的，那么就需要建立一个“空闲列表”，用来记录那些内存块分给了哪些对象。</p>
 <p>​    在分配内存的过程中，又会遇到一个问题，就是如果正在给对象A分配内存，但是对象B又同时使用了原来的指针来分配内存的情况。这种时候有两种可选择的方案–一种是堆分配内存的操作进行同步处理，第二种就是建立本地线程分配缓冲</p>
 <p>​    接下来，Java虚拟机还需要对对象进行一些必要的设置，比如这个对象是哪个类的实例，如何找回类的元数据信息，对象的哈希码，对象的GC年龄分代信息。最后执行构造函数等方法，一个完整的对象才被创建出来。</p>
 <div class = "note note-success">一个对象在内存中实例化的过程</div>
-
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">People</span></span>&#123;<br>    String name; <span class="hljs-comment">// 定义一个成员变量 name</span><br>    <span class="hljs-keyword">int</span> age; <span class="hljs-comment">// 成员变量 age</span><br>    Double height; <span class="hljs-comment">// 成员变量 height</span><br>     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span></span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;人的姓名：&quot;</span>+name);<br>        System.out.println(<span class="hljs-string">&quot;人的年龄：&quot;</span>+age);<br>        System.out.println(<span class="hljs-string">&quot;人的身高：&quot;</span>+height);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        String name; <span class="hljs-comment">// 定义一个局部变量 name</span><br>        <span class="hljs-keyword">int</span> age; <span class="hljs-comment">// 局部变量 age</span><br>        Double height; <span class="hljs-comment">// 局部变量 height</span><br>    <br>        People people = <span class="hljs-keyword">new</span> People() ; <span class="hljs-comment">//实例化对象people</span><br>        people.name = <span class="hljs-string">&quot;张三&quot;</span> ;       <span class="hljs-comment">//赋值</span><br>        people.age = <span class="hljs-number">18</span>;             <span class="hljs-comment">//赋值</span><br>        people.height = <span class="hljs-number">180.0</span> ;   <span class="hljs-comment">//赋值</span><br>        people.print();              <span class="hljs-comment">//调用方法sing</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <ol>
 <li>在还没开始时</li>
 </ol>
@@ -397,25 +414,31 @@
 </ol>
 <p>​                                                <img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220619102825310.png" srcset="/img/newloading.gif" lazyload alt="image-20220619102825310"></p>
 <ol start="4">
-<li><p>执行到Person person = new Person()；会在栈中创建Person类的引用，在堆中存放实例化的对象，然后将成员变量和成员方法放在实例中（都是取得成员变量和成员方法的地址值）</p>
+<li>
+<p>执行到Person person = new Person()；会在栈中创建Person类的引用，在堆中存放实例化的对象，然后将成员变量和成员方法放在实例中（都是取得成员变量和成员方法的地址值）</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220619103527954.png" srcset="/img/newloading.gif" lazyload alt="image-20220619103527954"></p>
 <ol start="5">
-<li>接下来对 person 对象进行赋值， person.name = “张三” ; person.age = 13; person.height= 180.0;先在栈区找到 person，然后根据地址值找到 new Person() 进行赋值操作。</li>
+<li>接下来对 person 对象进行赋值， <a target="_blank" rel="noopener" href="http://person.name">person.name</a> = “张三” ; person.age = 13; person.height= 180.0;先在栈区找到 person，然后根据地址值找到 new Person() 进行赋值操作。</li>
 </ol>
 <p>​                                              <img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220619104355652.png" srcset="/img/newloading.gif" lazyload alt="image-20220619104355652"></p>
 <ol start="6">
-<li><p>在方法体void ()被调用完成后，就会立刻马上从栈内弹出（出栈)最后，在main()函数完成后，main()函数也会出栈 如图：</p>
+<li>
+<p>在方法体void ()被调用完成后，就会立刻马上从栈内弹出（出栈)最后，在main()函数完成后，main()函数也会出栈 如图：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220619104854834.png" srcset="/img/newloading.gif" lazyload alt="image-20220619104854834"></p>
 </li>
 </ol>
 </li>
 </ol>
-<h2 id="3-2-对象的内存布局"><a href="#3-2-对象的内存布局" class="headerlink" title="3.2 对象的内存布局"></a>3.2 对象的内存布局</h2><p>Hotpot虚拟机对象的头部包含两类信息，第一类是存储对象本身运行时的数据，比如哈希码，GC年龄分代，锁状态标志，偏向线程ID，偏向时间戳等，这部分数据被官方称为”Mark word”.如下图所示<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220622112951852.png" srcset="/img/newloading.gif" lazyload alt="image-20220622112951852"></p>
+<h2 id="3-2-对象的内存布局">3.2 对象的内存布局</h2>
+<p>Hotpot虚拟机对象的头部包含两类信息，第一类是存储对象本身运行时的数据，比如哈希码，GC年龄分代，锁状态标志，偏向线程ID，偏向时间戳等，这部分数据被官方称为&quot;Mark word&quot;.如下图所示<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220622112951852.png" srcset="/img/newloading.gif" lazyload alt="image-20220622112951852"></p>
 <p>还有一类就是类型指针，Java虚拟机通过这个指针来判断该对象是哪个类的实例，如果对象是数组，还会有一个数据来记录数组的长度。</p>
-<h2 id="3-3-对象的访问定位"><a href="#3-3-对象的访问定位" class="headerlink" title="3.3 对象的访问定位"></a>3.3 对象的访问定位</h2><p>简单的来说，访问主要有句柄访问和指针访问，直接使用指针访问的话，可以节省一次指针定位的时间，累积下来，也是比较可观的，在hotpot中，主要使用指针访问，而在各种语言和框架中，使用句柄访问也很常见</p>
+<h2 id="3-3-对象的访问定位">3.3 对象的访问定位</h2>
+<p>简单的来说，访问主要有句柄访问和指针访问，直接使用指针访问的话，可以节省一次指针定位的时间，累积下来，也是比较可观的，在hotpot中，主要使用指针访问，而在各种语言和框架中，使用句柄访问也很常见</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220622113532052.png" srcset="/img/newloading.gif" lazyload alt="句柄访问"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220622113607252.png" srcset="/img/newloading.gif" lazyload alt="直接指针访问"></p>
-<h1 id="4-垃圾回收"><a href="#4-垃圾回收" class="headerlink" title="4. 垃圾回收"></a>4. 垃圾回收</h1><h2 id="4-1-什么是垃圾回收"><a href="#4-1-什么是垃圾回收" class="headerlink" title="4.1 什么是垃圾回收"></a>4.1 什么是垃圾回收</h2><p>GC(Garbage Collection )垃圾回收,分为轻量级垃圾回收和重量级垃圾回收 主要是在伊甸园区和年老区</p>
+<h1>4. 垃圾回收</h1>
+<h2 id="4-1-什么是垃圾回收">4.1 什么是垃圾回收</h2>
+<p>GC(Garbage Collection )垃圾回收,分为轻量级垃圾回收和重量级垃圾回收 主要是在伊甸园区和年老区</p>
 <p>jvm 在进行GC时，并不是对这三个区域统一回收 回收的都是年轻代</p>
 <p>将对象分为三种状态：年轻代、年老代、持久代。JVM将堆内存划分为 Eden、Survivor 和 Tenured/Old 空间。</p>
 <p>年轻代：所有新生成的对象首先都是放在Eden区。</p>
@@ -436,64 +459,91 @@
 <li>当年老代区满了，则会触发一个一次完整的垃圾回收（Full GC）</li>
 </ul>
 <div class = "note note-success">对象已死？</div>
-
 <ol>
 <li>引用计数法</li>
 </ol>
 <p>​    在对象中添加一个引用计数器，在一个地方引用它的时候，计数器就加一，当引用失效的时候，计数器就减一，任何时候当计数器为零的时候，这个对象就是不可能再使用的，就坐等被回收吧</p>
 <ol start="2">
-<li><p>可达性分析</p>
+<li>
+<p>可达性分析</p>
 <p>这个算法的基本思路就是通过一系列称为“GC Roots” 的根对象作为起始节点，向下搜索，所搜走过的路径称为“引用链”，如果某个对象与Roots之间没有任何的链相连接，那么就称这个对象不可达，即对象已死。</p>
 </li>
 </ol>
-<h2 id="4-2-GC-的算法"><a href="#4-2-GC-的算法" class="headerlink" title="4.2 GC 的算法"></a>4.2 GC 的算法</h2><h3 id="分代收集理论"><a href="#分代收集理论" class="headerlink" title="分代收集理论"></a>分代收集理论</h3><p>这个理论建立在弱分代学说和强分代学说的基础之上，认为收集器应该将内存区域分为几个区域，然后依据其年龄分开进行存储，分别进行回收</p>
-<h3 id="标记清除法-Mark-Sweep"><a href="#标记清除法-Mark-Sweep" class="headerlink" title="标记清除法(Mark-Sweep)"></a>标记清除法(Mark-Sweep)</h3><p>这是最基础的垃圾回收算法，之所以说它是最基础的是因为它最容易实现，思想也是最简单的。标记-清除算法分为两个阶段：标记阶段和清除阶段。标记阶段的任务是标记出所有需要被回收的对象，清除阶段就是回收被标记的对象所占用的空间</p>
+<h2 id="4-2-GC-的算法">4.2 GC 的算法</h2>
+<h3 id="分代收集理论">分代收集理论</h3>
+<p>这个理论建立在弱分代学说和强分代学说的基础之上，认为收集器应该将内存区域分为几个区域，然后依据其年龄分开进行存储，分别进行回收</p>
+<h3 id="标记清除法-Mark-Sweep">标记清除法(Mark-Sweep)</h3>
+<p>这是最基础的垃圾回收算法，之所以说它是最基础的是因为它最容易实现，思想也是最简单的。标记-清除算法分为两个阶段：标记阶段和清除阶段。标记阶段的任务是标记出所有需要被回收的对象，清除阶段就是回收被标记的对象所占用的空间</p>
 <p>优点： 不需要额外的空间</p>
 <p>缺点：两次扫描 严重浪费时间 会产生大量的内存碎片</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220704101326795.png" srcset="/img/newloading.gif" lazyload alt="image-20220704101326795"></p>
-<h3 id="标记-复制算法-Mark-Copying"><a href="#标记-复制算法-Mark-Copying" class="headerlink" title="标记-复制算法(Mark-Copying)"></a>标记-复制算法(Mark-Copying)</h3><p>为了解决Mark-Sweep算法的缺陷，Copying算法就被提了出来。它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，然后再把已使用的内存空间一次清理掉，这样一来就不容易出现内存碎片的问题，复制算法最佳的使用场景 对象存活度较低的时候 ，现在的商用Java虚拟机大多都优先采用了这个算法去收集新生代。</p>
+<h3 id="标记-复制算法-Mark-Copying">标记-复制算法(Mark-Copying)</h3>
+<p>为了解决Mark-Sweep算法的缺陷，Copying算法就被提了出来。它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，然后再把已使用的内存空间一次清理掉，这样一来就不容易出现内存碎片的问题，复制算法最佳的使用场景 对象存活度较低的时候 ，现在的商用Java虚拟机大多都优先采用了这个算法去收集新生代。</p>
 <p>优缺点：没有内存碎片，浪费了一半的内存空间</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220704101610542.png" srcset="/img/newloading.gif" lazyload alt="image-20220704101610542"></p>
-<h3 id="标记-整理算法（Mark-Compact）"><a href="#标记-整理算法（Mark-Compact）" class="headerlink" title="标记-整理算法（Mark-Compact）"></a>标记-整理算法（Mark-Compact）</h3><p>也称标记-压缩法为了解决Copying算法的缺陷，充分利用内存空间，提出了Mark-Compact算法。该算法标记阶段和Mark-Sweep一样，但是在完成标记之后，它不是直接清理可回收对象，而是将存活对象都向一端移动，然后清理掉端边界以外的内存. 压缩防止内存碎片产生 再次扫描 向一段一段存活的对象多了一次移动成本</p>
+<h3 id="标记-整理算法（Mark-Compact）">标记-整理算法（Mark-Compact）</h3>
+<p>也称标记-压缩法为了解决Copying算法的缺陷，充分利用内存空间，提出了Mark-Compact算法。该算法标记阶段和Mark-Sweep一样，但是在完成标记之后，它不是直接清理可回收对象，而是将存活对象都向一端移动，然后清理掉端边界以外的内存. 压缩防止内存碎片产生 再次扫描 向一段一段存活的对象多了一次移动成本</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220704101709355.png" srcset="/img/newloading.gif" lazyload alt="image-20220704101709355"></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>内存效率 :复制算法  &gt;  标记清除算法  &gt;  标记压缩算法</p>
+<h3 id="总结">总结</h3>
+<p>内存效率 :复制算法  &gt;  标记清除算法  &gt;  标记压缩算法</p>
 <p>内存整齐度  复制算法  =  标记压缩算法  &gt;  标记清除算法</p>
 <p>内存利用率  标记压缩算法  =  标记清除算法  &gt;  复制算法</p>
 <div class = "note note-danger">没有最好的算法</div>
-
 <p>年轻代存活率低所以用复制算法</p>
 <p>老年代存活率高用标记清除算法+标记压缩混合实现</p>
-<h2 id="4-3-垃圾回收的作用"><a href="#4-3-垃圾回收的作用" class="headerlink" title="4.3 垃圾回收的作用"></a>4.3 垃圾回收的作用</h2><p>垃圾回收是在内存中中存在没有引用的对象或超过作用域的对象时进行垃圾回收，垃圾回收的目的是识别并且丢弃不再使用的对象来释放和重用资源。查找和回收（清理）无用的对象。以便让JVM更有效的使用内存。</p>
-<h2 id="4-3-经典的垃圾收集器"><a href="#4-3-经典的垃圾收集器" class="headerlink" title="4.3 经典的垃圾收集器"></a>4.3 经典的垃圾收集器</h2><h3 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h3><p>采用标记-复制算法。这个收集器是最基础，历史最悠久的收集器，看名字就知道，这是一个单线程的收集器，因为是单线程，他在进行垃圾收集的时候必须暂停其他所有的工作，直到它收集完毕，这个过程被称为”stop the world”(砸瓦鲁多！🤔),但是它现在仍然是hotpot虚拟机在客户端模式下的默认新生代收集器。</p>
-<h3 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h3><p>采用标记-复制算法。这个收集器是Serial收集器的多线程并行版本，它是不少运行在服务端的虚拟机首选新生代收集器(JDK7之前)，很大的原因就是只有他才能跟CMS配合工作(老年代收集器)，从JDK9开始，ParNew+CMS收集器就不再是官方最推荐的服务器端收集器组合了，因为G1出现了。</p>
-<h3 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h3><p>同样是基于标记-复制算法实现的新生代多线程并发收集器，这个收集器主要关注的是达到一个可控制的吞吐量</p>
+<h2 id="4-3-垃圾回收的作用">4.3 垃圾回收的作用</h2>
+<p>垃圾回收是在内存中中存在没有引用的对象或超过作用域的对象时进行垃圾回收，垃圾回收的目的是识别并且丢弃不再使用的对象来释放和重用资源。查找和回收（清理）无用的对象。以便让JVM更有效的使用内存。</p>
+<h2 id="4-3-经典的垃圾收集器">4.3 经典的垃圾收集器</h2>
+<h3 id="Serial收集器">Serial收集器</h3>
+<p>采用标记-复制算法。这个收集器是最基础，历史最悠久的收集器，看名字就知道，这是一个单线程的收集器，因为是单线程，他在进行垃圾收集的时候必须暂停其他所有的工作，直到它收集完毕，这个过程被称为&quot;stop the world&quot;(砸瓦鲁多！🤔),但是它现在仍然是hotpot虚拟机在客户端模式下的默认新生代收集器。</p>
+<h3 id="ParNew收集器">ParNew收集器</h3>
+<p>采用标记-复制算法。这个收集器是Serial收集器的多线程并行版本，它是不少运行在服务端的虚拟机首选新生代收集器(JDK7之前)，很大的原因就是只有他才能跟CMS配合工作(老年代收集器)，从JDK9开始，ParNew+CMS收集器就不再是官方最推荐的服务器端收集器组合了，因为G1出现了。</p>
+<h3 id="Parallel-Scavenge收集器">Parallel Scavenge收集器</h3>
+<p>同样是基于标记-复制算法实现的新生代多线程并发收集器，这个收集器主要关注的是达到一个可控制的吞吐量</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220704103520606.png" srcset="/img/newloading.gif" lazyload alt="image-20220704103520606"></p>
 <p>它也提供了一些参数用来控制吞吐量，这里不再详述，因为和吞吐量密切相关，因此也被称为“吞吐量优先收集器”</p>
-<h3 id="Serial-Old-收集器"><a href="#Serial-Old-收集器" class="headerlink" title="Serial Old 收集器"></a>Serial Old 收集器</h3><p>Serial收集器的老年代版本，一个采用标记-整理算法的单线程收集器。主要也是提供给客户端模式下的hotpot虚拟机使用。它也可能有两种用途：一种是在JDK 5以及之前的版本中与Parallel Scavenge收集器搭配使用，另外一种就是作为CMS收集器发生失败时的后备预案，在并发收集发生Concurrent Mode Failure时使用</p>
-<h3 id="Parallel-Old-收集器"><a href="#Parallel-Old-收集器" class="headerlink" title="Parallel Old 收集器"></a>Parallel Old 收集器</h3><p>Parallel Scavenge收集器的老年代版本，支持多线程并发收集，基于标记-整理算法实现。用来和Parallel Scavenge收集器搭配，一起专注于吞吐量的组合。适合注重吞吐量和处理器资源稀缺的场景</p>
-<h3 id="CMS-收集器"><a href="#CMS-收集器" class="headerlink" title="CMS 收集器"></a>CMS 收集器</h3><p>全称Concurrent Mark Sweep收集器，基于标记-清除算法的老年代收集器，是以获取最短回收停顿时间为目标的收集器，但它不是简单的标记-清除。主要分为了  <strong>初识标记</strong>， <strong>并发标记</strong>，<strong>重新标记</strong> ，<strong>并发清除</strong> 四个步骤 ，这个收集器主要特点就是并发收集，低停顿。由于标记-清除算法很容易产生内存碎片，所以CMS收集器予以解决(JDK9后被废除)</p>
-<h3 id="Garbage-First-收集器"><a href="#Garbage-First-收集器" class="headerlink" title="Garbage First 收集器"></a>Garbage First 收集器</h3><p>G1是一款主要面向服务端应用的垃圾收集器。JDK 9发布之日，G1宣告取代Parallel Scavenge加Parallel Old组合，成为服务端模式下的默认垃圾收集器。它可以面向堆内存任何部分来组成回收集（Collection Set，一般简称CSet）进行回收，衡量标准不再是它属于哪个分代，而是哪块内存中存放的垃圾数量最多，回收收益最大，这就是G1收集器的Mixed GC模式。每一个Region都可以根据需要，扮演新生代的Eden空间、Survivor空间，或者老年代空间。收集器能够对扮演不同角色的Region采用不同的策略去处理，这样无论是新创建的对象还是已经存活了一段时间、熬过多次收集的旧对象都能获取很好的收集效果。</p>
-<h2 id="4-4-低延迟垃圾收集器"><a href="#4-4-低延迟垃圾收集器" class="headerlink" title="4.4 低延迟垃圾收集器"></a>4.4 低延迟垃圾收集器</h2><p>略</p>
-<h1 id="5-类文件结构"><a href="#5-类文件结构" class="headerlink" title="5. 类文件结构"></a>5. 类文件结构</h1><p>Class 文件格式采用一种类似于C语言结构体的伪结构来存储数据，这种伪结构中只有两种数据结构：“无符号数”和“表”。</p>
-<h2 id="5-1-魔数和Java版本"><a href="#5-1-魔数和Java版本" class="headerlink" title="5.1 魔数和Java版本"></a>5.1 魔数和Java版本</h2><p>每个class版本的头四个字节被称为魔数，Class文件的魔数被早期的开发者取为“0xCAFEBABY”,紧接的四个字节存储的Java的版本信息，高版本的JDK能够兼容低版本的版本。</p>
-<h2 id="5-2-常量池"><a href="#5-2-常量池" class="headerlink" title="5.2 常量池"></a>5.2 常量池</h2><p>紧接着版本号之后，就是Java的常量池入口，由于常量池的数量大多是不固定的，因此，在常量池的入口需要放置一个u2类型的数据，代表常量池的容器计数器。常量池主要存放两大类常量，字面量和符号引用。常量池中每一项常量都是一个表，常量池中一共有17种数据类型的结构。</p>
-<h2 id="5-3-访问标志"><a href="#5-3-访问标志" class="headerlink" title="5.3 访问标志"></a>5.3 访问标志</h2><p>在常量池结束后紧接的两个字节代表着访问标志，这个标志用于识别一些类或者接口层次的访问信息，包括，这个class是类还是接口，是否是public，是否是abstract类，</p>
-<h2 id="5-4-类索引，父类索引与接口索引集合"><a href="#5-4-类索引，父类索引与接口索引集合" class="headerlink" title="5.4 类索引，父类索引与接口索引集合"></a>5.4 类索引，父类索引与接口索引集合</h2><p>Class文件中由这三项数据来确定该类型的继承关系，，类索引，父类索引和接口索引集合都按照顺序排列在访问标志之后。    </p>
-<h2 id="5-5-字段表集合"><a href="#5-5-字段表集合" class="headerlink" title="5.5 字段表集合"></a>5.5 字段表集合</h2><p>字段表用于描述接口或者类声明中的变量，Java语言中的字段包括类级变量，以及实例级变量，但是不包括方法内部声明的局部变量，字段可以包括修饰符有字段的作用域，是实例变量还是类变量等一系列信息。值得注意的是，字段表中不会列出从父类或者父接口中继承而来的字段。</p>
-<h2 id="5-6-方法表集合"><a href="#5-6-方法表集合" class="headerlink" title="5.6 方法表集合"></a>5.6 方法表集合</h2><p>方法表中的结构如同字段表一样，依次包括访问标志，名称索引，描述符索引，属性表集合几项，而因为有一些关键字不能修饰方法，所以方法表里的访问标志少了一些标志。在Java语言中，要重载方法，除了需要与原方法具有相同的简单名称之外，还需要一个与原方法不同的特征签名，特征签名是值一个方法中各个参数在常量池中的字段符号引用的集合，正是因为返回值不包含在特征签名中，因此Java中的方法无法通过返回值的不同来进行重载。</p>
-<h2 id="5-7-属性表集合"><a href="#5-7-属性表集合" class="headerlink" title="5.7 属性表集合"></a>5.7 属性表集合</h2><p>为了正确解析Class文件，在早期的规范中，规定了虚拟机9种应当识别的属性，在Java SE 12的规范中，这个数目已经增加到了29种。</p>
+<h3 id="Serial-Old-收集器">Serial Old 收集器</h3>
+<p>Serial收集器的老年代版本，一个采用标记-整理算法的单线程收集器。主要也是提供给客户端模式下的hotpot虚拟机使用。它也可能有两种用途：一种是在JDK 5以及之前的版本中与Parallel Scavenge收集器搭配使用，另外一种就是作为CMS收集器发生失败时的后备预案，在并发收集发生Concurrent Mode Failure时使用</p>
+<h3 id="Parallel-Old-收集器">Parallel Old 收集器</h3>
+<p>Parallel Scavenge收集器的老年代版本，支持多线程并发收集，基于标记-整理算法实现。用来和Parallel Scavenge收集器搭配，一起专注于吞吐量的组合。适合注重吞吐量和处理器资源稀缺的场景</p>
+<h3 id="CMS-收集器">CMS 收集器</h3>
+<p>全称Concurrent Mark Sweep收集器，基于标记-清除算法的老年代收集器，是以获取最短回收停顿时间为目标的收集器，但它不是简单的标记-清除。主要分为了  <strong>初识标记</strong>， <strong>并发标记</strong>，<strong>重新标记</strong> ，<strong>并发清除</strong> 四个步骤 ，这个收集器主要特点就是并发收集，低停顿。由于标记-清除算法很容易产生内存碎片，所以CMS收集器予以解决(JDK9后被废除)</p>
+<h3 id="Garbage-First-收集器">Garbage First 收集器</h3>
+<p>G1是一款主要面向服务端应用的垃圾收集器。JDK 9发布之日，G1宣告取代Parallel Scavenge加Parallel Old组合，成为服务端模式下的默认垃圾收集器。它可以面向堆内存任何部分来组成回收集（Collection Set，一般简称CSet）进行回收，衡量标准不再是它属于哪个分代，而是哪块内存中存放的垃圾数量最多，回收收益最大，这就是G1收集器的Mixed GC模式。每一个Region都可以根据需要，扮演新生代的Eden空间、Survivor空间，或者老年代空间。收集器能够对扮演不同角色的Region采用不同的策略去处理，这样无论是新创建的对象还是已经存活了一段时间、熬过多次收集的旧对象都能获取很好的收集效果。</p>
+<h2 id="4-4-低延迟垃圾收集器">4.4 低延迟垃圾收集器</h2>
+<p>略</p>
+<h1>5. 类文件结构</h1>
+<p>Class 文件格式采用一种类似于C语言结构体的伪结构来存储数据，这种伪结构中只有两种数据结构：“无符号数”和“表”。</p>
+<h2 id="5-1-魔数和Java版本">5.1 魔数和Java版本</h2>
+<p>每个class版本的头四个字节被称为魔数，Class文件的魔数被早期的开发者取为“0xCAFEBABY”,紧接的四个字节存储的Java的版本信息，高版本的JDK能够兼容低版本的版本。</p>
+<h2 id="5-2-常量池">5.2 常量池</h2>
+<p>紧接着版本号之后，就是Java的常量池入口，由于常量池的数量大多是不固定的，因此，在常量池的入口需要放置一个u2类型的数据，代表常量池的容器计数器。常量池主要存放两大类常量，字面量和符号引用。常量池中每一项常量都是一个表，常量池中一共有17种数据类型的结构。</p>
+<h2 id="5-3-访问标志">5.3 访问标志</h2>
+<p>在常量池结束后紧接的两个字节代表着访问标志，这个标志用于识别一些类或者接口层次的访问信息，包括，这个class是类还是接口，是否是public，是否是abstract类，</p>
+<h2 id="5-4-类索引，父类索引与接口索引集合">5.4 类索引，父类索引与接口索引集合</h2>
+<p>Class文件中由这三项数据来确定该类型的继承关系，，类索引，父类索引和接口索引集合都按照顺序排列在访问标志之后。</p>
+<h2 id="5-5-字段表集合">5.5 字段表集合</h2>
+<p>字段表用于描述接口或者类声明中的变量，Java语言中的字段包括类级变量，以及实例级变量，但是不包括方法内部声明的局部变量，字段可以包括修饰符有字段的作用域，是实例变量还是类变量等一系列信息。值得注意的是，字段表中不会列出从父类或者父接口中继承而来的字段。</p>
+<h2 id="5-6-方法表集合">5.6 方法表集合</h2>
+<p>方法表中的结构如同字段表一样，依次包括访问标志，名称索引，描述符索引，属性表集合几项，而因为有一些关键字不能修饰方法，所以方法表里的访问标志少了一些标志。在Java语言中，要重载方法，除了需要与原方法具有相同的简单名称之外，还需要一个与原方法不同的特征签名，特征签名是值一个方法中各个参数在常量池中的字段符号引用的集合，正是因为返回值不包含在特征签名中，因此Java中的方法无法通过返回值的不同来进行重载。</p>
+<h2 id="5-7-属性表集合">5.7 属性表集合</h2>
+<p>为了正确解析Class文件，在早期的规范中，规定了虚拟机9种应当识别的属性，在Java SE 12的规范中，这个数目已经增加到了29种。</p>
 <p>如下图：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220908180421975.png" srcset="/img/newloading.gif" lazyload alt="image-20220908180421975"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220908180450216.png" srcset="/img/newloading.gif" lazyload alt="image-20220908180450216"></p>
-<h1 id="6-类加载机制"><a href="#6-类加载机制" class="headerlink" title="6. 类加载机制"></a>6. 类加载机制</h1><h2 id="6-1-类加载的流程"><a href="#6-1-类加载的流程" class="headerlink" title="6.1 类加载的流程"></a>6.1 类加载的流程</h2><p>一个类从被加载进虚拟机开始，到卸载出内存为止需要经历 加载 验证 准备 解析 初始化 使用 加载 几个阶段，其中详细的环节这里就不展开介绍了。</p>
-<h2 id="6-2-类加载器"><a href="#6-2-类加载器" class="headerlink" title="6.2 类加载器"></a>6.2 类加载器</h2><p>前面已经说过类加载器一共有四类</p>
+<h1>6. 类加载机制</h1>
+<h2 id="6-1-类加载的流程">6.1 类加载的流程</h2>
+<p>一个类从被加载进虚拟机开始，到卸载出内存为止需要经历 加载 验证 准备 解析 初始化 使用 加载 几个阶段，其中详细的环节这里就不展开介绍了。</p>
+<h2 id="6-2-类加载器">6.2 类加载器</h2>
+<p>前面已经说过类加载器一共有四类</p>
 <ul>
 <li>自定义加载器</li>
 <li>启动类（根）加载器（使用C++）</li>
 <li>扩展类加载器</li>
 <li>应用程序加载器</li>
 </ul>
-<h2 id="6-3-双亲委派机制"><a href="#6-3-双亲委派机制" class="headerlink" title="6.3 双亲委派机制"></a>6.3 双亲委派机制</h2><p>主要的作用就是保证安全，一般来说一个类启动的时候会按照这个顺序(APP– EXC –BOOT)寻找加载器,而最终执行的加载器则是从上到下的,BOOT-&gt; EXC-&gt;APP,只有没有找到上面一层的类加载器的时候，才会执行下一层的加载器。.从最内层JVM自带的类加载器开始加载，外层恶意同名类得不到加载从而无法调用</p>
+<h2 id="6-3-双亲委派机制">6.3 双亲委派机制</h2>
+<p>主要的作用就是保证安全，一般来说一个类启动的时候会按照这个顺序(APP-- EXC --BOOT)寻找加载器,而最终执行的加载器则是从上到下的,BOOT-&gt; EXC-&gt;APP,只有没有找到上面一层的类加载器的时候，才会执行下一层的加载器。.从最内层JVM自带的类加载器开始加载，外层恶意同名类得不到加载从而无法调用</p>
 <ol>
 <li>类加载器收到类的加载的请求</li>
 <li>将这个请求向上委托给父类加载器去完成，一直向上委托，直到启动类加载器</li>
@@ -502,10 +552,16 @@
 </ol>
 <p>如下图所示：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20220909102404711.png" srcset="/img/newloading.gif" lazyload alt="image-20220909102404711"></p>
-<h2 id="6-4-沙箱安全机制"><a href="#6-4-沙箱安全机制" class="headerlink" title="6.4 沙箱安全机制"></a>6.4 沙箱安全机制</h2><p>沙箱机制就是讲Java代码限定在虚拟机JVM特定的运行范围中，并且严格限制代码对本地资源的访问，通过这样的措施来保证对代码的有效隔离，防止对本地系统造成破坏。通俗来说就是虚拟机把代码加载到拥有不同权限的域里，然后代码就拥有了该域的所有权限。这样就能控制不同代码拥有不同调用操作系统和本地资源的权限</p>
-<p>组成沙箱的基本组件：<br>1.字节码校验器（bytecode verifier）：确保Java类文件遵循Java语言规范。可以帮助Java程序实现内存保护 。核心类不经过字节码校验<br>2.类装载器：其中类装载器在3个方面对Java沙箱起作用</p>
-<p>防止恶意代码干涉善意代码（双亲委派机制）<br>守护被信任的类库边界<br>它将代码归入保护域，确定了代码可以进行哪些操作</p>
-<h1 id="7-JMM"><a href="#7-JMM" class="headerlink" title="7. JMM"></a>7. JMM</h1><p>Java Mermory Model</p>
+<h2 id="6-4-沙箱安全机制">6.4 沙箱安全机制</h2>
+<p>沙箱机制就是讲Java代码限定在虚拟机JVM特定的运行范围中，并且严格限制代码对本地资源的访问，通过这样的措施来保证对代码的有效隔离，防止对本地系统造成破坏。通俗来说就是虚拟机把代码加载到拥有不同权限的域里，然后代码就拥有了该域的所有权限。这样就能控制不同代码拥有不同调用操作系统和本地资源的权限</p>
+<p>组成沙箱的基本组件：<br>
+1.字节码校验器（bytecode verifier）：确保Java类文件遵循Java语言规范。可以帮助Java程序实现内存保护 。核心类不经过字节码校验<br>
+2.类装载器：其中类装载器在3个方面对Java沙箱起作用</p>
+<p>防止恶意代码干涉善意代码（双亲委派机制）<br>
+守护被信任的类库边界<br>
+它将代码归入保护域，确定了代码可以进行哪些操作</p>
+<h1>7. JMM</h1>
+<p>Java Mermory Model</p>
 <p>(待完善)</p>
 
               
@@ -665,7 +721,6 @@
 
   
   
-
 
 
 
@@ -923,44 +978,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        MathJax = {
-          tex    : {
-            inlineMath: { '[+]': [['$', '$']] }
-          },
-          loader : {
-            load: ['ui/lazy']
-          },
-          options: {
-            renderActions: {
-              findScript    : [10, doc => {
-                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                  const display = !!node.type.match(/; *mode=display/);
-                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                  const text = document.createTextNode('');
-                  node.parentNode.replaceChild(text, node);
-                  math.start = { node: text, delim: '', n: 0 };
-                  math.end = { node: text, delim: '', n: 0 };
-                  doc.math.push(math);
-                });
-              }, '', false],
-              insertedScript: [200, () => {
-                document.querySelectorAll('mjx-container').forEach(node => {
-                  let target = node.parentNode;
-                  if (target.nodeName.toLowerCase() === 'li') {
-                    target.parentNode.classList.add('has-jax');
-                  }
-                });
-              }, '', false]
-            }
-          }
-        };
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

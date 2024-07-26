@@ -47,6 +47,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -289,21 +291,21 @@
             <div class="markdown-body">
               
               <p class="note note-success">前言</p>
-
-
 <p>由于众所周知的原因，全球最大的同性交友网站github在国内的连接十分的不稳定，因此十分不方便交到我们交友，经常在推送和下载仓库时断线或者连接超时，这篇博文就是用来解决这个问题(下载和clone仓库时加速)，通过修改系统hosts文件，绕过国内dns解析，直接访问GitHub的CDN节点，从而达到加速的目的.</p>
-<h2 id="查询github的地址"><a href="#查询github的地址" class="headerlink" title="查询github的地址"></a>查询github的地址</h2><p>查询的地址链接   <a href = "https://www.ipaddress.com/">https://www.ipaddress.com/</a></p>
+<h2 id="查询github的地址">查询github的地址</h2>
+<p>查询的地址链接   <a href = "https://www.ipaddress.com/">https://www.ipaddress.com/</a></p>
 <p>在此网站查询以下三个网址的ip</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">github<span class="hljs-selector-class">.com</span> <br>assets-cdn<span class="hljs-selector-class">.github</span><span class="hljs-selector-class">.com</span> <br>github<span class="hljs-selector-class">.global</span><span class="hljs-selector-class">.ssl</span><span class="hljs-selector-class">.fastly</span>.net<br></code></pre></td></tr></table></figure>
-
 <p>由于时间不同查询到的IP可能不同</p>
-<h2 id="修改host文件"><a href="#修改host文件" class="headerlink" title="修改host文件"></a>修改host文件</h2><h3 id="host在windows的路径"><a href="#host在windows的路径" class="headerlink" title="host在windows的路径"></a>host在windows的路径</h3><blockquote>
+<h2 id="修改host文件">修改host文件</h2>
+<h3 id="host在windows的路径">host在windows的路径</h3>
+<blockquote>
 <p>C:\Windows\System32\drivers\etc</p>
 </blockquote>
 <figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">140.82.112.3</span>    github.com<br><span class="hljs-number">185.199.109.153</span>    assets-cdn.github.com<br><span class="hljs-number">199.232.69.194</span>    github.global.ssl.fastly.net<br></code></pre></td></tr></table></figure>
-
 <p>在文件最下面加上上面这三行，前面的IP就是上一步里面你查询的IP，然后保存退出</p>
-<h2 id="刷新DNS缓存"><a href="#刷新DNS缓存" class="headerlink" title="刷新DNS缓存"></a>刷新DNS缓存</h2><p>在windows中打开 powershell </p>
+<h2 id="刷新DNS缓存">刷新DNS缓存</h2>
+<p>在windows中打开 powershell</p>
 <p>输入命令 <strong>ipconfig /flushdns</strong></p>
 <p>成功刷新后就全部完成了，推送的时候终于不会掉线超时了。</p>
 
@@ -462,7 +464,6 @@
 
   
   
-
 
 
 
@@ -720,44 +721,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        MathJax = {
-          tex    : {
-            inlineMath: { '[+]': [['$', '$']] }
-          },
-          loader : {
-            load: ['ui/lazy']
-          },
-          options: {
-            renderActions: {
-              findScript    : [10, doc => {
-                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                  const display = !!node.type.match(/; *mode=display/);
-                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                  const text = document.createTextNode('');
-                  node.parentNode.replaceChild(text, node);
-                  math.start = { node: text, delim: '', n: 0 };
-                  math.end = { node: text, delim: '', n: 0 };
-                  doc.math.push(math);
-                });
-              }, '', false],
-              insertedScript: [200, () => {
-                document.querySelectorAll('mjx-container').forEach(node => {
-                  let target = node.parentNode;
-                  if (target.nodeName.toLowerCase() === 'li') {
-                    target.parentNode.classList.add('has-jax');
-                  }
-                });
-              }, '', false]
-            }
-          }
-        };
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

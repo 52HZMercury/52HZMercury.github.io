@@ -48,6 +48,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -289,32 +291,43 @@
             
             <div class="markdown-body">
               
-              <h1 id="一、为什么要使用swagger"><a href="#一、为什么要使用swagger" class="headerlink" title="一、为什么要使用swagger"></a>一、为什么要使用swagger</h1><p>在前后端分离的时代，前端人员和后端人员无法做到“及时协商，尽早解决”，最终会导致许多的问题出现。<br>解决方案：</p>
+              <h1>一、为什么要使用swagger</h1>
+<p>在前后端分离的时代，前端人员和后端人员无法做到“及时协商，尽早解决”，最终会导致许多的问题出现。<br>
+解决方案：</p>
 <ul>
 <li>首先制定一个schema，实时更新最新的API，降低集成的风险；</li>
-<li>前后端分离<ul>
+<li>前后端分离
+<ul>
 <li>前端测试后端接口：postman</li>
-<li>后端提供接口，需要实时更新最新的消息及改动<br>这里可以参考swagger的官网 <a target="_blank" rel="noopener" href="https://swagger.io/">https://swagger.io/</a></li>
+<li>后端提供接口，需要实时更新最新的消息及改动<br>
+这里可以参考swagger的官网 <a target="_blank" rel="noopener" href="https://swagger.io/">https://swagger.io/</a></li>
 </ul>
 </li>
 </ul>
-<h1 id="二、springboot集成swagger"><a href="#二、springboot集成swagger" class="headerlink" title="二、springboot集成swagger"></a>二、springboot集成swagger</h1><p>这里是以springboot 2.6.0和swagger3.0.0版本作为演示</p>
+<h1>二、springboot集成swagger</h1>
+<p>这里是以springboot 2.6.0和swagger3.0.0版本作为演示</p>
 <p>首先在pom.xml文档里面加入这个依赖</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.springfox<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>springfox-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
 <p>然后需要写一个对于swagger的配置类</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableOpenApi</span><br><span class="hljs-meta">@EnableWebMvc</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SwaggerConfig</span> </span>&#123;<br><br>    <span class="hljs-comment">//分组</span><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket1</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="hljs-string">&quot;A&quot;</span>);<br>    &#125;<br><br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket2</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="hljs-string">&quot;B&quot;</span>);<br>    &#125;<br><br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket3</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="hljs-string">&quot;C&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket</span><span class="hljs-params">()</span></span>&#123;<br><br><br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2)<br>                .apiInfo(apiInfo())<br>                .enable(<span class="hljs-keyword">true</span>)<span class="hljs-comment">//默认为true 关闭后，则不能使用swagger</span><br>                .select()<br>                <span class="hljs-comment">//指定接口的位置</span><br>                .apis(RequestHandlerSelectors.basePackage(<span class="hljs-string">&quot;com.swagger.controller&quot;</span>))<br>                <span class="hljs-comment">//过滤什么路径</span><br>                <span class="hljs-comment">//.paths()</span><br>                .build();<br>                <span class="hljs-comment">//.globalOperationParameters(pars);</span><br><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> ApiInfo <span class="hljs-title">apiInfo</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">//作者信息</span><br>        Contact contact = <span class="hljs-keyword">new</span> Contact(<span class="hljs-string">&quot;William&quot;</span>,<span class="hljs-string">&quot;https://mercurys-52hz.gitee.io/&quot;</span>,<span class="hljs-string">&quot;chening_william@163.com&quot;</span>);<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ApiInfo(<br>                <span class="hljs-string">&quot;William的接口文档&quot;</span>,<br>                <span class="hljs-string">&quot;前端根据接口进行测试&quot;</span>,<br>                <span class="hljs-string">&quot;1.0&quot;</span>,<br>                <span class="hljs-string">&quot;https://mercurys-52hz.gitee.io/&quot;</span>,<br>                contact,<br>                <span class="hljs-string">&quot;Apache 2.0&quot;</span>,<br>                <span class="hljs-string">&quot;http://www.apache.org/licenses/LICENSE-2.0&quot;</span>,<br>                <span class="hljs-keyword">new</span> ArrayList()<br>        );<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-<h1 id="三、配置详解"><a href="#三、配置详解" class="headerlink" title="三、配置详解"></a>三、配置详解</h1><h2 id="1-swagger配置"><a href="#1-swagger配置" class="headerlink" title="1.swagger配置"></a>1.swagger配置</h2><p>在swagger3.0.0版本中，需要在配置类的上面加上 <strong>@EnableOpenApi</strong>，当然还有配置类需要的@Configuration注解，最重要的就是一定需要加上 <strong>@EnableWebMvc</strong>注解，不然控制面板就会报错，就是这个错误浪费了我一下午的时间</p>
-<p><img src="https://img-blog.csdnimg.cn/c56545e911d04ed2846559866babdb15.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="更多的配置"><br>可以通过设置 <strong>.apis(RequestHandlerSelectors.basePackage(“com.swagger.controller”))</strong> 里面的参数用来指定需要扫描的包，这里面还可以设置更多的参数，详情可以参照上面的这张图片。加上 <strong>paths()</strong> 后可以在里面设置过滤的路径不扫描。</p>
-<h2 id="2-信息配置"><a href="#2-信息配置" class="headerlink" title="2.信息配置"></a>2.信息配置</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java">  <span class="hljs-function"><span class="hljs-keyword">private</span> ApiInfo <span class="hljs-title">apiInfo</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">//作者信息</span><br>        Contact contact = <span class="hljs-keyword">new</span> Contact(<span class="hljs-string">&quot;William&quot;</span>,<span class="hljs-string">&quot;https://mercurys-52hz.gitee.io/&quot;</span>,<span class="hljs-string">&quot;chening_william@163.com&quot;</span>);<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ApiInfo(<br>                <span class="hljs-string">&quot;William的接口文档&quot;</span>,<br>                <span class="hljs-string">&quot;前端根据接口进行测试&quot;</span>,<br>                <span class="hljs-string">&quot;1.0&quot;</span>,<br>                <span class="hljs-string">&quot;https://mercurys-52hz.gitee.io/&quot;</span>,<br>                contact,<br>                <span class="hljs-string">&quot;Apache 2.0&quot;</span>,<br>                <span class="hljs-string">&quot;http://www.apache.org/licenses/LICENSE-2.0&quot;</span>,<br>                <span class="hljs-keyword">new</span> ArrayList()<br>        );<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/7738d84b0a794a7a8870ffb54cdcd915.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_15,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="里面一些参数的名字"><br>这里主要就是配置一些作者的信息的名字好联系啥的，不太重要，就不细讲了。</p>
-<h2 id="3-配置多api分组"><a href="#3-配置多api分组" class="headerlink" title="3.配置多api分组"></a>3.配置多api分组</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//分组</span><br>   <span class="hljs-meta">@Bean</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket1</span><span class="hljs-params">()</span></span>&#123;<br>       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="hljs-string">&quot;A&quot;</span>);<br>   &#125;<br><br><br>   <span class="hljs-meta">@Bean</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket2</span><span class="hljs-params">()</span></span>&#123;<br>       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="hljs-string">&quot;B&quot;</span>);<br>   &#125;<br><br><br>   <span class="hljs-meta">@Bean</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket3</span><span class="hljs-params">()</span></span>&#123;<br>       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="hljs-string">&quot;C&quot;</span>);<br>   &#125;<br><br></code></pre></td></tr></table></figure>
-
-<p>作用就是为每个api分一下组。作用效果如下图<br><img src="https://img-blog.csdnimg.cn/13fe5463f9b240b0a2d76be6183d9d63.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="分组详情"></p>
-<h2 id="4-通过注解配置注释"><a href="#4-通过注解配置注释" class="headerlink" title="4.通过注解配置注释"></a>4.通过注解配置注释</h2><p>凭空传过去，前端一定会一脸懵逼的，这时候就需要注释来帮助理解了。<br><img src="https://img-blog.csdnimg.cn/b7caed00139349b499335c18b7b094c7.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="在这里插入图片描述"></p>
-<h1 id="四、swagger的使用"><a href="#四、swagger的使用" class="headerlink" title="四、swagger的使用"></a>四、swagger的使用</h1><p>1、访问</p>
+<h1>三、配置详解</h1>
+<h2 id="1-swagger配置">1.swagger配置</h2>
+<p>在swagger3.0.0版本中，需要在配置类的上面加上 <strong>@EnableOpenApi</strong>，当然还有配置类需要的@Configuration注解，最重要的就是一定需要加上 <strong>@EnableWebMvc</strong>注解，不然控制面板就会报错，就是这个错误浪费了我一下午的时间</p>
+<p><img src="https://img-blog.csdnimg.cn/c56545e911d04ed2846559866babdb15.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="更多的配置"><br>
+可以通过设置 <strong>.apis(RequestHandlerSelectors.basePackage(“com.swagger.controller”))</strong> 里面的参数用来指定需要扫描的包，这里面还可以设置更多的参数，详情可以参照上面的这张图片。加上 <strong>paths()</strong> 后可以在里面设置过滤的路径不扫描。</p>
+<h2 id="2-信息配置">2.信息配置</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java">  <span class="hljs-function"><span class="hljs-keyword">private</span> ApiInfo <span class="hljs-title">apiInfo</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">//作者信息</span><br>        Contact contact = <span class="hljs-keyword">new</span> Contact(<span class="hljs-string">&quot;William&quot;</span>,<span class="hljs-string">&quot;https://mercurys-52hz.gitee.io/&quot;</span>,<span class="hljs-string">&quot;chening_william@163.com&quot;</span>);<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ApiInfo(<br>                <span class="hljs-string">&quot;William的接口文档&quot;</span>,<br>                <span class="hljs-string">&quot;前端根据接口进行测试&quot;</span>,<br>                <span class="hljs-string">&quot;1.0&quot;</span>,<br>                <span class="hljs-string">&quot;https://mercurys-52hz.gitee.io/&quot;</span>,<br>                contact,<br>                <span class="hljs-string">&quot;Apache 2.0&quot;</span>,<br>                <span class="hljs-string">&quot;http://www.apache.org/licenses/LICENSE-2.0&quot;</span>,<br>                <span class="hljs-keyword">new</span> ArrayList()<br>        );<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/7738d84b0a794a7a8870ffb54cdcd915.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_15,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="里面一些参数的名字"><br>
+这里主要就是配置一些作者的信息的名字好联系啥的，不太重要，就不细讲了。</p>
+<h2 id="3-配置多api分组">3.配置多api分组</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//分组</span><br>   <span class="hljs-meta">@Bean</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket1</span><span class="hljs-params">()</span></span>&#123;<br>       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="hljs-string">&quot;A&quot;</span>);<br>   &#125;<br><br><br>   <span class="hljs-meta">@Bean</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket2</span><span class="hljs-params">()</span></span>&#123;<br>       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="hljs-string">&quot;B&quot;</span>);<br>   &#125;<br><br><br>   <span class="hljs-meta">@Bean</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket3</span><span class="hljs-params">()</span></span>&#123;<br>       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="hljs-string">&quot;C&quot;</span>);<br>   &#125;<br><br></code></pre></td></tr></table></figure>
+<p>作用就是为每个api分一下组。作用效果如下图<br>
+<img src="https://img-blog.csdnimg.cn/13fe5463f9b240b0a2d76be6183d9d63.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="分组详情"></p>
+<h2 id="4-通过注解配置注释">4.通过注解配置注释</h2>
+<p>凭空传过去，前端一定会一脸懵逼的，这时候就需要注释来帮助理解了。<br>
+<img src="https://img-blog.csdnimg.cn/b7caed00139349b499335c18b7b094c7.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="在这里插入图片描述"></p>
+<h1>四、swagger的使用</h1>
+<p>1、访问</p>
 <p>swagger3.0的默认的访问地址为  主机地址+/swagger-ui/index.html</p>
 <p>2、注释的使用</p>
 <p>Swagger使用的注解及其说明：</p>
@@ -336,38 +349,37 @@
 <table>
 <thead>
 <tr>
-<th align="left">paramType：指定参数放在哪个地方</th>
-<th align="left">header：请求参数放置于Request Header，使用@RequestHeader获取 <br> query：请求参数放置于请求地址，使用@RequestParam获取<br>path：（用于restful接口）–&gt;请求参数的获取：@PathVariable<br>body：（不常用）<br>form（不常用</th>
+<th style="text-align:left">paramType：指定参数放在哪个地方</th>
+<th style="text-align:left">header：请求参数放置于Request Header，使用@RequestHeader获取 <br> query：请求参数放置于请求地址，使用@RequestParam获取<br>path：（用于restful接口）–&gt;请求参数的获取：@PathVariable<br>body：（不常用）<br>form（不常用</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">name：参数名</td>
-<td align="left"></td>
+<tbody>
+<tr>
+<td style="text-align:left">name：参数名</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
-<td align="left">dataType：参数类型</td>
-<td align="left"></td>
+<td style="text-align:left">dataType：参数类型</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
-<td align="left">required：参数是否必须传</td>
-<td align="left">true / false</td>
+<td style="text-align:left">required：参数是否必须传</td>
+<td style="text-align:left">true / false</td>
 </tr>
 <tr>
-<td align="left">value：说明参数的意思</td>
-<td align="left"></td>
+<td style="text-align:left">value：说明参数的意思</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
-<td align="left">defaultValue：参数的默认值</td>
-<td align="left"></td>
+<td style="text-align:left">defaultValue：参数的默认值</td>
+<td style="text-align:left"></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>示例:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@Api(&quot;登录控制器&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">loginController</span> </span>&#123;<br><br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> UserService userService;<br><br><br>    <span class="hljs-meta">@RequestMapping(&quot;/login&quot;)</span><br>    <span class="hljs-meta">@ApiOperation(&quot;输入用户的id和密码，查询用户信息，如果数据库没有或者密码不对应则会返回空值&quot;)</span><br>    <span class="hljs-meta">@ApiImplicitParams(&#123; @ApiImplicitParam(paramType = &quot;query&quot;,name = &quot;id&quot;,value = &quot;用户的id&quot;,required = true,dataType = &quot;Integer&quot;,dataTypeClass = Integer.class,example = &quot;123&quot;),</span><br><span class="hljs-meta">                         @ApiImplicitParam(paramType = &quot;query&quot;,name = &quot;password&quot;, value = &quot;密码&quot;,required = true,dataType = &quot;String&quot;,dataTypeClass = String.class)</span><br><span class="hljs-meta">    &#125;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> User <span class="hljs-title">login</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(&quot;id&quot;)</span><span class="hljs-keyword">int</span> id, <span class="hljs-meta">@RequestParam(&quot;password&quot;)</span> String password)</span></span>&#123;<br><br>        User loginuser = userService.doLogin(id,password);<br><br>        <span class="hljs-keyword">if</span>(loginuser == <span class="hljs-keyword">null</span>)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-keyword">return</span> loginuser;<br>        &#125;<br>    &#125;<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-
 <p>这里补充一点，在使用swagger(version 3.0)的进行上传文件的调试的时候需要注意一点，记得把把参数那里的文件的注解换一下，才能使swagger显示出来上传文件的按钮</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestPart(&quot;file&quot;)</span> MultipartFile file<br></code></pre></td></tr></table></figure>
-
 <h4><<<<<完结撒花>>>>></h4>
 
               
@@ -527,7 +539,6 @@
 
   
   
-
 
 
 
@@ -785,44 +796,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        MathJax = {
-          tex    : {
-            inlineMath: { '[+]': [['$', '$']] }
-          },
-          loader : {
-            load: ['ui/lazy']
-          },
-          options: {
-            renderActions: {
-              findScript    : [10, doc => {
-                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                  const display = !!node.type.match(/; *mode=display/);
-                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                  const text = document.createTextNode('');
-                  node.parentNode.replaceChild(text, node);
-                  math.start = { node: text, delim: '', n: 0 };
-                  math.end = { node: text, delim: '', n: 0 };
-                  doc.math.push(math);
-                });
-              }, '', false],
-              insertedScript: [200, () => {
-                document.querySelectorAll('mjx-container').forEach(node => {
-                  let target = node.parentNode;
-                  if (target.nodeName.toLowerCase() === 'li') {
-                    target.parentNode.classList.add('has-jax');
-                  }
-                });
-              }, '', false]
-            }
-          }
-        };
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

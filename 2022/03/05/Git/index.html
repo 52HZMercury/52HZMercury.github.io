@@ -48,6 +48,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -235,7 +237,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.7k 字
+          2.8k 字
         
       </span>
     
@@ -289,76 +291,119 @@
             
             <div class="markdown-body">
               
-              <h1 id="一、版本控制"><a href="#一、版本控制" class="headerlink" title="一、版本控制"></a>一、版本控制</h1><h2 id="1、什么是版本控制"><a href="#1、什么是版本控制" class="headerlink" title="1、什么是版本控制"></a>1、什么是版本控制</h2><p>版本控制（Revision control）是一种在开发的过程中用于管理我们对文件、目录或工程等内容的修改历史，方便查看更改历史记录，备份以便恢复以前的版本的软件工程技术。其目的就是用于管理多人协同开发项目而诞生的技术。</p>
-<h2 id="2、常见的版本控制工具"><a href="#2、常见的版本控制工具" class="headerlink" title="2、常见的版本控制工具"></a>2、常见的版本控制工具</h2><p>目前市面上主流的版本控制工具主要有</p>
+              <h1>一、版本控制</h1>
+<h2 id="1、什么是版本控制">1、什么是版本控制</h2>
+<p>版本控制（Revision control）是一种在开发的过程中用于管理我们对文件、目录或工程等内容的修改历史，方便查看更改历史记录，备份以便恢复以前的版本的软件工程技术。其目的就是用于管理多人协同开发项目而诞生的技术。</p>
+<h2 id="2、常见的版本控制工具">2、常见的版本控制工具</h2>
+<p>目前市面上主流的版本控制工具主要有</p>
 <ul>
 <li>Git</li>
 <li>SVN</li>
-<li> CVS</li>
+<li>CVS</li>
 <li>VSS</li>
 <li>TFS</li>
 <li>Visual studio Online</li>
 </ul>
 <p>Git 是目前全世界最为先进的分布式版本管理工具。</p>
-<h2 id="3、版本控制的分类"><a href="#3、版本控制的分类" class="headerlink" title="3、版本控制的分类"></a>3、版本控制的分类</h2><h3 id="3-1、本地版本控制分类"><a href="#3-1、本地版本控制分类" class="headerlink" title="3.1、本地版本控制分类"></a>3.1、本地版本控制分类</h3><p>记录文件每次的更新，可以对每个版本做一个快照，或是记录补丁文件，适合个人用，如RCS。<br><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163113787.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163113787"></p>
-<h3 id="3-2、集中版本控制分类"><a href="#3-2、集中版本控制分类" class="headerlink" title="3.2、集中版本控制分类"></a>3.2、集中版本控制分类</h3><p>所有的版本数据都存在服务器上，用户的本地只有自己以前所同步的版本，如果不连网的话，用户就看不到历史版本，也无法切换版本验证问题，或在不同分支工作。而且，所有数据都保存在单一的服务器上，有很大的风险这个服务器会损坏，这样就会丢失所有的数据，当然可以定期备份。代表产品：SVN、CVS、VSS<br><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163155941.png" srcset="/img/newloading.gif" lazyload alt="集中版本控制"></p>
-<h3 id="3-3、分布式版本控制分类"><a href="#3-3、分布式版本控制分类" class="headerlink" title="3.3、分布式版本控制分类"></a>3.3、分布式版本控制分类</h3><p>最具有代表性的当然就是Git啦，所有版本信息仓库全部同步到本地的每个用户，这样就可以在本地查看所有版本历史，可以离线在本地提交，只需在连网时push到相应的服务器或其他用户那里。由于每个用户那里保存的都是所有的版本数据，只要有一个用户的设备没有问题就可以恢复所有的数据，但这增加了本地存储空间的占用。</p>
-<p>不会因为服务器损坏或者网络问题，造成不能工作的情况！<br><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163244033.png" srcset="/img/newloading.gif" lazyload alt="分布式版本控制"></p>
-<h1 id="二、初识Git"><a href="#二、初识Git" class="headerlink" title="二、初识Git"></a>二、初识Git</h1><h2 id="1、下载地址"><a href="#1、下载地址" class="headerlink" title="1、下载地址"></a>1、下载地址</h2><p>打开 <a target="_blank" rel="noopener" href="https://git-scm.com/">git官网</a>或可以使用淘宝镜像下载：<a target="_blank" rel="noopener" href="http://npm.taobao.org/mirrors/git-for-windows/">http://npm.taobao.org/mirrors/git-for-windows/</a></p>
-<h2 id="2、三个程序"><a href="#2、三个程序" class="headerlink" title="2、三个程序"></a>2、三个程序</h2><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163330164.png" srcset="/img/newloading.gif" lazyload alt="git的三个程序"></p>
-<h2 id="3、配置"><a href="#3、配置" class="headerlink" title="3、配置"></a>3、配置</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 查看配置</span><br>git config -l<br><br><span class="hljs-comment">#查看系统config</span><br>git config <span class="hljs-params">--system</span> <span class="hljs-params">--list</span><br>　　<br><span class="hljs-comment">#查看当前用户（global）配置</span><br>git config <span class="hljs-params">--global</span>  <span class="hljs-params">--list</span><br></code></pre></td></tr></table></figure>
-<p>如图：<br><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163401024.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163401024"></p>
-<h1 id="三、使用Git"><a href="#三、使用Git" class="headerlink" title="三、使用Git"></a>三、使用Git</h1><h2 id="1、工作原理"><a href="#1、工作原理" class="headerlink" title="1、工作原理"></a>1、工作原理</h2><p>Git本地有三个工作区域：工作目录（Working Directory）、暂存区(Stage/Index)、资源库(Repository或Git Directory)。加上远程的git仓库(Remote Directory)就可以分为四个工作区域。</p>
+<h2 id="3、版本控制的分类">3、版本控制的分类</h2>
+<h3 id="3-1、本地版本控制分类">3.1、本地版本控制分类</h3>
+<p>记录文件每次的更新，可以对每个版本做一个快照，或是记录补丁文件，适合个人用，如RCS。<br>
+<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163113787.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163113787"></p>
+<h3 id="3-2、集中版本控制分类">3.2、集中版本控制分类</h3>
+<p>所有的版本数据都存在服务器上，用户的本地只有自己以前所同步的版本，如果不连网的话，用户就看不到历史版本，也无法切换版本验证问题，或在不同分支工作。而且，所有数据都保存在单一的服务器上，有很大的风险这个服务器会损坏，这样就会丢失所有的数据，当然可以定期备份。代表产品：SVN、CVS、VSS<br>
+<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163155941.png" srcset="/img/newloading.gif" lazyload alt="集中版本控制"></p>
+<h3 id="3-3、分布式版本控制分类">3.3、分布式版本控制分类</h3>
+<p>最具有代表性的当然就是Git啦，所有版本信息仓库全部同步到本地的每个用户，这样就可以在本地查看所有版本历史，可以离线在本地提交，只需在连网时push到相应的服务器或其他用户那里。由于每个用户那里保存的都是所有的版本数据，只要有一个用户的设备没有问题就可以恢复所有的数据，但这增加了本地存储空间的占用。</p>
+<p>不会因为服务器损坏或者网络问题，造成不能工作的情况！<br>
+<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163244033.png" srcset="/img/newloading.gif" lazyload alt="分布式版本控制"></p>
+<h1>二、初识Git</h1>
+<h2 id="1、下载地址">1、下载地址</h2>
+<p>打开 <a target="_blank" rel="noopener" href="https://git-scm.com/">git官网</a>或可以使用淘宝镜像下载：<a target="_blank" rel="noopener" href="http://npm.taobao.org/mirrors/git-for-windows/">http://npm.taobao.org/mirrors/git-for-windows/</a></p>
+<h2 id="2、三个程序">2、三个程序</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163330164.png" srcset="/img/newloading.gif" lazyload alt="git的三个程序"></p>
+<h2 id="3、配置">3、配置</h2>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 查看配置</span><br>git config -l<br><br><span class="hljs-comment">#查看系统config</span><br>git config <span class="hljs-params">--system</span> <span class="hljs-params">--list</span><br>　　<br><span class="hljs-comment">#查看当前用户（global）配置</span><br>git config <span class="hljs-params">--global</span>  <span class="hljs-params">--list</span><br></code></pre></td></tr></table></figure>
+<p>如图：<br>
+<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163401024.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163401024"></p>
+<h1>三、使用Git</h1>
+<h2 id="1、工作原理">1、工作原理</h2>
+<p>Git本地有三个工作区域：工作目录（Working Directory）、暂存区(Stage/Index)、资源库(Repository或Git Directory)。加上远程的git仓库(Remote Directory)就可以分为四个工作区域。</p>
 <ul>
-<li><p>Workspace：工作区，就是你平时存放项目代码的地方</p>
+<li>
+<p>Workspace：工作区，就是你平时存放项目代码的地方</p>
 </li>
-<li><p>Index / Stage：暂存区，用于临时存放你的改动，事实上它只是一个文件，保存即将提交到文件列表信息</p>
+<li>
+<p>Index / Stage：暂存区，用于临时存放你的改动，事实上它只是一个文件，保存即将提交到文件列表信息</p>
 </li>
-<li><p>Repository：仓库区（或本地仓库），就是安全存放数据的位置，这里面有你提交到所有版本的数据。其中HEAD指向最新放入仓库的版本</p>
+<li>
+<p>Repository：仓库区（或本地仓库），就是安全存放数据的位置，这里面有你提交到所有版本的数据。其中HEAD指向最新放入仓库的版本</p>
 </li>
-<li><p>Remote：远程仓库，托管代码的服务器，可以简单的认为是你项目组中的一台电脑用于远程数据交换</p>
-</li>
-</ul>
-<h2 id="2、工作流程"><a href="#2、工作流程" class="headerlink" title="2、工作流程"></a>2、工作流程</h2><ul>
-<li><p>在工作目录中添加、修改文件；</p>
-</li>
-<li><p>将需要进行版本管理的文件放入暂存区域；</p>
-</li>
-<li><p>将暂存区域的文件提交到git仓库。</p>
+<li>
+<p>Remote：远程仓库，托管代码的服务器，可以简单的认为是你项目组中的一台电脑用于远程数据交换</p>
 </li>
 </ul>
-<p>因此，git管理的文件有三种状态：已修改（modified）,已暂存（staged）,已提交(committed)<br><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163425025.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163425025"></p>
-<h2 id="3、常用指令"><a href="#3、常用指令" class="headerlink" title="3、常用指令"></a>3、常用指令</h2><h3 id="3-1-克隆仓库"><a href="#3-1-克隆仓库" class="headerlink" title="3.1 克隆仓库"></a>3.1 克隆仓库</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-comment"># 克隆一个项目和它的整个代码历史(版本信息)</span><br><br> git <span class="hljs-keyword">clone</span> <span class="hljs-title">[url</span>]  <br><br><span class="hljs-comment"># 克隆仓库指定的分支的代码，develop为需要拉取的分支，giturl为git仓库地址</span><br><br>git <span class="hljs-keyword">clone</span> <span class="hljs-title">-b</span> develop giturl<br><br></code></pre></td></tr></table></figure>
-<p>克隆之后，git的目录下面就会有对应名字的一个项目仓库<br><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163446960.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163446960"><br>打开显示隐藏的项目，就会有一个.git文件夹<br><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163505722.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163505722"><br>把这个文件夹复制一份到你的项目文件下就可以和你远程仓库形成类似于绑定的关系，复制到项目文件后，用idea打开的话就会自动多出来几个按钮</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163527895.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163527895"><br>按钮作用在后面</p>
-<h3 id="3-2-文件状态"><a href="#3-2-文件状态" class="headerlink" title="3.2 文件状态"></a>3.2 文件状态</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta">#查看指定文件状态</span><br>git status [filename]<br><br><span class="hljs-meta">#查看所有文件状态</span><br>git status<br></code></pre></td></tr></table></figure>
+<h2 id="2、工作流程">2、工作流程</h2>
+<ul>
+<li>
+<p>在工作目录中添加、修改文件；</p>
+</li>
+<li>
+<p>将需要进行版本管理的文件放入暂存区域；</p>
+</li>
+<li>
+<p>将暂存区域的文件提交到git仓库。</p>
+</li>
+</ul>
+<p>因此，git管理的文件有三种状态：已修改（modified）,已暂存（staged）,已提交(committed)<br>
+<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163425025.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163425025"></p>
+<h2 id="3、常用指令">3、常用指令</h2>
+<h3 id="3-1-克隆仓库">3.1 克隆仓库</h3>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-comment"># 克隆一个项目和它的整个代码历史(版本信息)</span><br><br> git <span class="hljs-keyword">clone</span> <span class="hljs-title">[url</span>]  <br><br><span class="hljs-comment"># 克隆仓库指定的分支的代码，develop为需要拉取的分支，giturl为git仓库地址</span><br><br>git <span class="hljs-keyword">clone</span> <span class="hljs-title">-b</span> develop giturl<br><br></code></pre></td></tr></table></figure>
+<p>克隆之后，git的目录下面就会有对应名字的一个项目仓库<br>
+<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163446960.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163446960"><br>
+打开显示隐藏的项目，就会有一个.git文件夹<br>
+<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163505722.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163505722"><br>
+把这个文件夹复制一份到你的项目文件下就可以和你远程仓库形成类似于绑定的关系，复制到项目文件后，用idea打开的话就会自动多出来几个按钮</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163527895.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163527895"><br>
+按钮作用在后面</p>
+<h3 id="3-2-文件状态">3.2 文件状态</h3>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta">#查看指定文件状态</span><br>git status [filename]<br><br><span class="hljs-meta">#查看所有文件状态</span><br>git status<br></code></pre></td></tr></table></figure>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163548782.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163548782"></p>
 <ul>
 <li>红褐色：创建之后没有add，没提交，不在Git版本控制范围之内，这时候文件是红褐色的，需要先add文件；</li>
 <li>绿色：add之后是文件绿色的，没有提交（commit）;</li>
 <li>蓝色：原本有一个文件，改动过后没有提交（commit）是蓝色的，提交之后，变成正常颜色。</li>
 </ul>
-<h3 id="3-2-添加和提交"><a href="#3-2-添加和提交" class="headerlink" title="3.2 添加和提交"></a>3.2 添加和提交</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 添加所有文件到暂存区</span><br><br>git add .                  <br><br><span class="hljs-meta"># 提交暂存区中的内容到本地仓库 -m 提交信息</span><br><br>git commit -m <span class="hljs-string">&quot;消息内容&quot;</span>    <br><br><span class="hljs-meta"># push到远程仓库</span><br><br>git push<br><br><br><span class="hljs-meta">#版本发布  当前的版本号 发布版本 比如</span><br><br>git tag -a v1<span class="hljs-number">.0</span><br> <br><br>把这个版本发布到线上<br><br>git push --tags<br></code></pre></td></tr></table></figure>
-<p>在idea中:<br><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163610069.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163610069"></p>
-<h1 id="四、忽略文件"><a href="#四、忽略文件" class="headerlink" title="四、忽略文件"></a>四、忽略文件</h1><p>就是选择不上传到仓库的文件，通常用在主目录下建立”.gitignore”文件用来配置，此文件有如下规则：</p>
+<h3 id="3-2-添加和提交">3.2 添加和提交</h3>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 添加所有文件到暂存区</span><br><br>git add .                  <br><br><span class="hljs-meta"># 提交暂存区中的内容到本地仓库 -m 提交信息</span><br><br>git commit -m <span class="hljs-string">&quot;消息内容&quot;</span>    <br><br><span class="hljs-meta"># push到远程仓库</span><br><br>git push<br><br><br><span class="hljs-meta">#版本发布  当前的版本号 发布版本 比如</span><br><br>git tag -a v1<span class="hljs-number">.0</span><br> <br><br>把这个版本发布到线上<br><br>git push --tags<br></code></pre></td></tr></table></figure>
+<p>在idea中:<br>
+<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163610069.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163610069"></p>
+<h1>四、忽略文件</h1>
+<p>就是选择不上传到仓库的文件，通常用在主目录下建立&quot;.gitignore&quot;文件用来配置，此文件有如下规则：</p>
 <ul>
-<li><p>忽略文件中的空行或以井号（#）开始的行将会被忽略。</p>
+<li>
+<p>忽略文件中的空行或以井号（#）开始的行将会被忽略。</p>
 </li>
-<li><p>可以使用Linux通配符。例如：星号（*）代表任意多个字符，问号（？）代表一个字符，方括号（[abc]）代表可选字符范围，大括号（{string1,string2,…}）代表可选的字符串等。</p>
+<li>
+<p>可以使用Linux通配符。例如：星号（*）代表任意多个字符，问号（？）代表一个字符，方括号（[abc]）代表可选字符范围，大括号（{string1,string2,…}）代表可选的字符串等。</p>
 </li>
-<li><p>如果名称的最前面有一个感叹号（!），表示例外规则，将不被忽略。</p>
+<li>
+<p>如果名称的最前面有一个感叹号（!），表示例外规则，将不被忽略。</p>
 </li>
-<li><p>如果名称的最前面是一个路径分隔符（/），表示要忽略的文件在此目录下，而子目录中的文件不忽略。</p>
+<li>
+<p>如果名称的最前面是一个路径分隔符（/），表示要忽略的文件在此目录下，而子目录中的文件不忽略。</p>
 </li>
-<li><p>如果名称的最后面是一个路径分隔符（/），表示要忽略的是此目录下该名称的子目录，而非文件（默认文件或目录都忽略）。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#为注释</span><br>*.txt        <span class="hljs-comment">#忽略所有 .txt结尾的文件,这样的话上传就不会被选中！</span><br>!lib.txt     <span class="hljs-comment">#但lib.txt除外</span><br>/temp        <span class="hljs-comment">#仅忽略项目根目录下的TODO文件,不包括其它目录temp</span><br>build<span class="hljs-regexp">/       #忽略build/</span>目录下的所有文件<br>doc<span class="hljs-regexp">/*.txt    #会忽略 doc/</span>notes.txt 但不包括 doc<span class="hljs-regexp">/server/</span>arch.txt<br></code></pre></td></tr></table></figure>
-<h1 id="五、Git分支"><a href="#五、Git分支" class="headerlink" title="五、Git分支"></a>五、Git分支</h1><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163638542.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163638542"><br>分支常用的命令：</p>
+<li>
+<p>如果名称的最后面是一个路径分隔符（/），表示要忽略的是此目录下该名称的子目录，而非文件（默认文件或目录都忽略）。</p>
 </li>
 </ul>
+ <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#为注释</span><br>*.txt        <span class="hljs-comment">#忽略所有 .txt结尾的文件,这样的话上传就不会被选中！</span><br>!lib.txt     <span class="hljs-comment">#但lib.txt除外</span><br>/temp        <span class="hljs-comment">#仅忽略项目根目录下的TODO文件,不包括其它目录temp</span><br>build<span class="hljs-regexp">/       #忽略build/</span>目录下的所有文件<br>doc<span class="hljs-regexp">/*.txt    #会忽略 doc/</span>notes.txt 但不包括 doc<span class="hljs-regexp">/server/</span>arch.txt<br></code></pre></td></tr></table></figure>
+<h1>五、Git分支</h1>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240409163638542.png" srcset="/img/newloading.gif" lazyload alt="image-20240409163638542"><br>
+分支常用的命令：</p>
 <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 列出所有本地分支</span><br>git branch<br><br><span class="hljs-meta"># 列出所有远程分支</span><br>git branch -r<br><br><span class="hljs-meta"># 新建一个分支，但依然停留在当前分支</span><br>git branch [branch-name]<br><br><span class="hljs-meta"># 新建一个分支，并切换到该分支</span><br>git checkout -b [branch]<br><br><span class="hljs-meta"># 合并指定分支到当前分支</span><br>$ git merge [branch]<br><br><span class="hljs-meta"># 删除分支</span><br>$ git branch -d [branch-name]<br><br><span class="hljs-meta"># 删除远程分支</span><br>$ git push origin --delete [branch-name]<br>$ git branch -dr [remote/branch]<br></code></pre></td></tr></table></figure>
-
-<h1 id="六、将远程代码强制同步到本地"><a href="#六、将远程代码强制同步到本地" class="headerlink" title="六、将远程代码强制同步到本地"></a>六、将远程代码强制同步到本地</h1><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">git <span class="hljs-keyword">fetch</span> <span class="hljs-comment">--all</span><br><br>git <span class="hljs-keyword">reset</span> <span class="hljs-comment">--hard origin/master</span><br></code></pre></td></tr></table></figure>
-
+<h1>六、将远程代码强制同步到本地</h1>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">git <span class="hljs-keyword">fetch</span> <span class="hljs-comment">--all</span><br><br>git <span class="hljs-keyword">reset</span> <span class="hljs-comment">--hard origin/master</span><br></code></pre></td></tr></table></figure>
 <p><code>git fetch</code> 只下载远程仓库的内容，不做任何的合并，<code>git reset</code> 把HEAD指向刚刚下载的最新版本</p>
 <p>愉快的Git结束。</p>
 
@@ -519,7 +564,6 @@
 
   
   
-
 
 
 
@@ -777,44 +821,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        MathJax = {
-          tex    : {
-            inlineMath: { '[+]': [['$', '$']] }
-          },
-          loader : {
-            load: ['ui/lazy']
-          },
-          options: {
-            renderActions: {
-              findScript    : [10, doc => {
-                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                  const display = !!node.type.match(/; *mode=display/);
-                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                  const text = document.createTextNode('');
-                  node.parentNode.replaceChild(text, node);
-                  math.start = { node: text, delim: '', n: 0 };
-                  math.end = { node: text, delim: '', n: 0 };
-                  doc.math.push(math);
-                });
-              }, '', false],
-              insertedScript: [200, () => {
-                document.querySelectorAll('mjx-container').forEach(node => {
-                  let target = node.parentNode;
-                  if (target.nodeName.toLowerCase() === 'li') {
-                    target.parentNode.classList.add('has-jax');
-                  }
-                });
-              }, '', false]
-            }
-          }
-        };
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
