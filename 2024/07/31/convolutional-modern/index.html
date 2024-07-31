@@ -16,26 +16,26 @@
   <meta name="author" content="Mercury">
   <meta name="keywords" content="">
   
-    <meta name="description" content="卷积神经网络">
+    <meta name="description" content="几个经典卷积神经网络模型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="卷积神经网络CNN">
-<meta property="og:url" content="http://example.com/2024/07/30/CNN/index.html">
+<meta property="og:title" content="现代卷积神经网络模型">
+<meta property="og:url" content="http://example.com/2024/07/31/convolutional-modern/index.html">
 <meta property="og:site_name" content="Mercury&#39;s blog">
-<meta property="og:description" content="卷积神经网络">
+<meta property="og:description" content="几个经典卷积神经网络模型">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/mmexport1709471461425.jpg">
-<meta property="article:published_time" content="2024-07-30T06:43:46.000Z">
-<meta property="article:modified_time" content="2024-07-31T08:53:07.446Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/B0EEF.jpg">
+<meta property="article:published_time" content="2024-07-31T08:49:46.000Z">
+<meta property="article:modified_time" content="2024-07-31T08:55:31.539Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习 人工智能">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/mmexport1709471461425.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/B0EEF.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>卷积神经网络CNN - Mercury&#39;s blog</title>
+  <title>现代卷积神经网络模型 - Mercury&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="卷积神经网络CNN"></span>
+            <span id="subtitle" data-typed-text="现代卷积神经网络模型"></span>
           
         </div>
 
@@ -223,8 +223,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-30 14:43" pubdate>
-          2024年7月30日 下午
+        <time datetime="2024-07-31 16:49" pubdate>
+          2024年7月31日 下午
         </time>
       </span>
     
@@ -236,7 +236,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.6k 字
+          30 字
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
           <!-- compatible with older versions-->
-          9 分钟
+          1 分钟
         
       </span>
     
@@ -286,108 +286,14 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">卷积神经网络CNN</h1>
+            <h1 style="display: none">现代卷积神经网络模型</h1>
             
             <div class="markdown-body">
               
               <p class="note note-success">前言:依据李沐视频整理</p>
-<h1>什么是卷积神经网络</h1>
-<p>卷积神经网络（Convolutional Neural Network，CNN）：是一种前馈神经网络，最早可追溯到1986年的BP算法。</p>
-<p>三大网络结构：卷积层（Conv2d）、池化层（MaxPool2d）、全连接层（Linear）<br>
-两大特点：稀疏连接、权值共享。可以用更少的参数，获得更高的性能。</p>
-<h1>全连接层</h1>
-<p>全连接层（Fully Connected Layers，FC）：<span class = "label label-danger">torch.nn.Linear(n_hidden, classification_num)</span></p>
-<p>卷积层、池化层、激活函数 —— 将原始数据映射到隐层特征空间，提取特征；</p>
-<p>全连接层 —— 将学到的 “分布式特征” 映射到样本标记空间，进行分类</p>
-<p>全连接层FC的缺点：</p>
-<ul>
-<li>（1）由于忽略了空间结构，故不适用于目标检测。如：分割任务中的FCN采用卷积层替换全连接层。</li>
-<li>（2）全连接层的参数过多，导致模型复杂度提升，容易过拟合。如：ResNet、GoogleNet采用全局平均池化替换全连接层。</li>
-</ul>
-<p>全连接层FC的作用：这一步卷积还有一个非常重要的作用，就是将分布式特征representation映射到样本标记空间。简单来说，就是将输入图像的所有特征整合到一起，输出一个值（猫 / 狗）。<br>
-效果：<span class = "label label-danger">大大减少目标位置的不同，而对分类结果带来的影响。</span></p>
-<h1>从全连接到卷积</h1>
-<h2 id="平移不变性">平移不变性</h2>
-<h2 id="局部性">局部性</h2>
-<p>只看附近的区域</p>
-<p>对全连接层使用平移不变性和局部性得到卷积层，卷积层是一个特殊的全连接层</p>
-<h1>卷积层</h1>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.nn.Conv2d(in_channels=<span class="hljs-number">3</span>, out_channels=<span class="hljs-number">16</span>, kernel_size=<span class="hljs-number">5</span>, stride=<span class="hljs-number">1</span>, padding=<span class="hljs-number">0</span>)<br></code></pre></td></tr></table></figure>
-<p class="note note-info">卷积神经网络的核心网络层是卷积层，而卷积层的核心是卷积</p>
-<h2 id="卷积运算">卷积运算</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240724151136946.png" srcset="/img/newloading.gif" lazyload alt="image-20240724151136946"></p>
-<p>卷积运算公式</p>
-<p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>o</mi><mi>u</mi><mi>t</mi><mi>p</mi><mi>u</mi><mi>t</mi><mo>=</mo><mfrac><mrow><mi>i</mi><mi>n</mi><mi>p</mi><mi>u</mi><mi>t</mi><mo>−</mo><mi>k</mi><mi>e</mi><mi>r</mi><mi>n</mi><mi>e</mi><mi>l</mi><mo>+</mo><mn>2</mn><mo>∗</mo><mi>p</mi><mi>a</mi><mi>d</mi><mi>d</mi><mi>i</mi><mi>n</mi><mi>g</mi></mrow><mrow><mi>s</mi><mi>t</mi><mi>r</mi><mi>i</mi><mi>d</mi><mi>e</mi></mrow></mfrac><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">output = \frac{input - kernel + 2 * padding}{stride} + 1
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8095em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">tp</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0574em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">in</span><span class="mord mathnormal">p</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord mathnormal">n</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal">dd</span><span class="mord mathnormal">in</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span></p>
-<p><strong>卷积运算的详细过程：</strong></p>
-<p>1、取（3 x 3）输入图像中的（2 x 2）矩阵，然后与（2 x 2）卷积核进行卷积运算，得到一个计算结果（ <code>0 * 0 + 1 * 1 + 3 * 2 + 4 * 3 = 19</code>）；</p>
-<p>2、通过滑窗，循环计算得到输出特征图（2 x 2）。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240724152527092.png" srcset="/img/newloading.gif" lazyload alt="image-20240724152527092"></p>
-<p>用不同的卷积核能实现不同的效果，如边缘检测，图像锐化，高斯模糊</p>
-<p>卷积层将输出和核矩阵进行交叉运算，加上偏移后得到输出</p>
-<p>Y = wX + b   w(核矩阵)和b(偏移)是可学习的参数</p>
-<p>卷积层代码实现</p>
 <p>//todo</p>
-<h2 id="权值共享">权值共享</h2>
-<p><img src="https://pic1.zhimg.com/v2-aaad3a67aac2b7b1412455eb331b7977_1200x500.jpg" srcset="/img/newloading.gif" lazyload alt="CNN中卷积层的计算细节 - 知乎"></p>
-<p>卷积运算（多通道）</p>
-<p>1、Kernels卷积核计算<br>
-每个 Kernel 的 3 个channle（R/G/B）分别与 Input 对应的 3 个channle（R/G/B）进行卷积运算，最后每个 Kernel 得到 3 个（6 * 6） feature_map_0 。</p>
-<p>2、Feature Maps特征图计算<br>
-将 3 个（6 * 6）的 feature_map0 逐元素相加（即通道融合）得到 1 个 feature_map_1；<br>
-然后将 feature_map1 的每个元素都加上其对应的偏置 b1，得到该 Kernel 的 FeatureMap1。<br>
-同一个 Kernel1 对应的 3 个 channle 共享一个偏置 b1（权值共享1）<br>
-同一个 FeatureMap1 的所有元素共享一个卷积核 Kernel1（权值共享2）<br>
-同理其余Kernel，最后得到（6 * 6 * 5） 个 Feature Maps（即最终输出的 channel 数等于 Kernel 的个数）。</p>
-<p>3、Feature Vector向量计算<br>
-采用全局最大池化，分别计算每一个Feature Map，最终得到一个（1 * 1 * 5）Feature Vector。</p>
-<h2 id="边界填充Padding">边界填充Padding</h2>
-<p>图像尺寸对齐，保持边界信息</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.nn.Conv2d(in_channels=<span class="hljs-number">3</span>, out_channels=<span class="hljs-number">16</span>, kernel_size=<span class="hljs-number">5</span>, stride=<span class="hljs-number">1</span>, padding=<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
-<p>padding=1：表示在输入图像的边界填充 1 圈，全 0 元素。<br>
-作用：</p>
-<ul>
-<li>（1）图像尺寸对齐：对图像进行扩展，扩展区域补零。</li>
-<li>（2）保持边界信息：若没有padding，卷积核将对输入图像的边界像素只卷积一次，而中间像素卷积多次，导致边界信息丢失。</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240724153348514.png" srcset="/img/newloading.gif" lazyload alt="image-20240724153348514"></p>
-<p class = "note note-info">补0圈数的计算公式为：</p>
-<p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mi>a</mi><mi>d</mi><mi>d</mi><mi>i</mi><mi>n</mi><mi>g</mi><mo>=</mo><mfrac><mrow><mi>k</mi><mi>e</mi><mi>r</mi><mi>n</mi><mi>e</mi><mi>l</mi><mo>−</mo><mn>1</mn></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">Padding = \frac{kernel - 1}{2}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal">a</span><span class="mord mathnormal">dd</span><span class="mord mathnormal">in</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0574em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord mathnormal">n</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>如果想要 con2d 出来的图片长宽没有变化, padding=(kernel_size-1)/2 当 stride=1</p>
-<p>stride=1  表示行/列的滑动步长，也就是步幅，是成倍缩小尺寸，而这个参数的值就是缩小的具体倍数，比如步幅为2，输出就是输入的1/2；步幅为3，输出就是输入的1/3</p>
-<h2 id="多输入输出通道">多输入输出通道</h2>
-<p>每个通道都有一个卷积核，结果是所有通道卷积结果的和</p>
-<p>多个输出通道</p>
-<p>我们可以有多个三位卷积核，每个核生成一个输出通道</p>
-<p>1x1卷积层</p>
-<p>它不识别空间模式，只是融合通道</p>
-<h1>池化层</h1>
-<p>通过卷积层获得的图像特征，可以直接训练分类，但很容易导致过拟合。因此需要降采样，增大感受野，防止过拟合。</p>
-<p>池化（Pooling）：又叫下采样、降采样。<br>
-作用： 降采样（减少参数），增大感受野，提高运算速度及减小噪声影响，防止过拟合。</p>
-<p>分类：</p>
-<ul>
-<li>局部池化
-<ul>
-<li>最大池化（Max Pooling）：取Pooling窗口内的最大值作为采样值。</li>
-<li>均值池化（Average Pooling）：取Pooling窗口内的所有值相加取均值作为采样值。</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.nn.MaxPool2d(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">1</span>, padding=<span class="hljs-number">0</span>)<br>torch.nn.AvgPool2d(kernel_size=<span class="hljs-number">2</span>, stride=<span class="hljs-number">1</span>, padding=<span class="hljs-number">0</span>)<br></code></pre></td></tr></table></figure>
-<ul>
-<li>全局池化</li>
-<li>全局最大池化（Global Max Pooling）：取以整个特征图为单位的最大值作为采样值。</li>
-<li>全局均值池化（Global Average Pooling）：取以整个特征图为单位的所有值相加取均值作为采样值。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.nn.AdaptiveMaxPool2d(output_size=(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>))<br>torch.nn.AdaptiveAvgPool2d(output_size=(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
-<p><span class = "label label-info">全局池化相比局部池化能减少更多参数，且泛化能力比较好，但唯一的不足之处是收敛速度比较慢。</span></p>
-<h1>Lenet</h1>
-<p>示意图</p>
-<p>是早期成功的神经网络</p>
-<p>先使用卷积层来学习图片空间信息</p>
-<p>然后使用全连接层来转换到类别空间</p>
+<h1>AlexNet</h1>
+<h1>ResNet</h1>
 
               
             </div>
@@ -432,8 +338,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>卷积神经网络CNN</div>
-      <div>http://example.com/2024/07/30/CNN/</div>
+      <div>现代卷积神经网络模型</div>
+      <div>http://example.com/2024/07/31/convolutional-modern/</div>
     </div>
     <div class="license-meta">
       
@@ -445,7 +351,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月30日</div>
+          <div>2024年7月31日</div>
         </div>
       
       
@@ -475,9 +381,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/31/convolutional-modern/" title="现代卷积神经网络模型">
+                      <a href="/2024/08/01/AlexNet/" title="AlexNet论文">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">现代卷积神经网络模型</span>
+                        <span class="hidden-mobile">AlexNet论文</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -485,8 +391,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/30/optimization/" title="优化算法">
-                        <span class="hidden-mobile">优化算法</span>
+                      <a href="/2024/07/30/CNN/" title="卷积神经网络CNN">
+                        <span class="hidden-mobile">卷积神经网络CNN</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
