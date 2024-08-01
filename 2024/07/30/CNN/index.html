@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/mmexport1709471461425.jpg">
 <meta property="article:published_time" content="2024-07-30T06:43:46.000Z">
-<meta property="article:modified_time" content="2024-07-31T12:45:08.596Z">
+<meta property="article:modified_time" content="2024-08-01T02:50:18.706Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="人工智能">
@@ -292,11 +292,11 @@
             <div class="markdown-body">
               
               <p class="note note-success">前言:依据李沐视频整理</p>
-<h1>什么是卷积神经网络</h1>
+<h2 id="什么是卷积神经网络">什么是卷积神经网络</h2>
 <p>卷积神经网络（Convolutional Neural Network，CNN）：是一种前馈神经网络，最早可追溯到1986年的BP算法。</p>
 <p>三大网络结构：卷积层（Conv2d）、池化层（MaxPool2d）、全连接层（Linear）<br>
 两大特点：稀疏连接、权值共享。可以用更少的参数，获得更高的性能。</p>
-<h1>全连接层</h1>
+<h2 id="全连接层">全连接层</h2>
 <p>全连接层（Fully Connected Layers，FC）：<span class = "label label-danger">torch.nn.Linear(n_hidden, classification_num)</span></p>
 <p>卷积层、池化层、激活函数 —— 将原始数据映射到隐层特征空间，提取特征；</p>
 <p>全连接层 —— 将学到的 “分布式特征” 映射到样本标记空间，进行分类</p>
@@ -307,15 +307,15 @@
 </ul>
 <p>全连接层FC的作用：这一步卷积还有一个非常重要的作用，就是将分布式特征representation映射到样本标记空间。简单来说，就是将输入图像的所有特征整合到一起，输出一个值（猫 / 狗）。<br>
 效果：<span class = "label label-danger">大大减少目标位置的不同，而对分类结果带来的影响。</span></p>
-<h1>从全连接到卷积</h1>
-<h2 id="平移不变性">平移不变性</h2>
-<h2 id="局部性">局部性</h2>
+<h2 id="从全连接到卷积">从全连接到卷积</h2>
+<h3 id="平移不变性">平移不变性</h3>
+<h3 id="局部性">局部性</h3>
 <p>只看附近的区域</p>
 <p>对全连接层使用平移不变性和局部性得到卷积层，卷积层是一个特殊的全连接层</p>
-<h1>卷积层</h1>
+<h2 id="卷积层">卷积层</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.nn.Conv2d(in_channels=<span class="hljs-number">3</span>, out_channels=<span class="hljs-number">16</span>, kernel_size=<span class="hljs-number">5</span>, stride=<span class="hljs-number">1</span>, padding=<span class="hljs-number">0</span>)<br></code></pre></td></tr></table></figure>
 <p class="note note-info">卷积神经网络的核心网络层是卷积层，而卷积层的核心是卷积</p>
-<h2 id="卷积运算">卷积运算</h2>
+<h3 id="卷积运算">卷积运算</h3>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240724151136946.png" srcset="/img/newloading.gif" lazyload alt="image-20240724151136946"></p>
 <p>卷积运算公式</p>
 <p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>o</mi><mi>u</mi><mi>t</mi><mi>p</mi><mi>u</mi><mi>t</mi><mo>=</mo><mfrac><mrow><mi>i</mi><mi>n</mi><mi>p</mi><mi>u</mi><mi>t</mi><mo>−</mo><mi>k</mi><mi>e</mi><mi>r</mi><mi>n</mi><mi>e</mi><mi>l</mi><mo>+</mo><mn>2</mn><mo>∗</mo><mi>p</mi><mi>a</mi><mi>d</mi><mi>d</mi><mi>i</mi><mi>n</mi><mi>g</mi></mrow><mrow><mi>s</mi><mi>t</mi><mi>r</mi><mi>i</mi><mi>d</mi><mi>e</mi></mrow></mfrac><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">output = \frac{input - kernel + 2 * padding}{stride} + 1
@@ -329,7 +329,7 @@
 <p>Y = wX + b   w(核矩阵)和b(偏移)是可学习的参数</p>
 <p>卷积层代码实现</p>
 <p>//todo</p>
-<h2 id="权值共享">权值共享</h2>
+<h3 id="权值共享">权值共享</h3>
 <p><img src="https://pic1.zhimg.com/v2-aaad3a67aac2b7b1412455eb331b7977_1200x500.jpg" srcset="/img/newloading.gif" lazyload alt="CNN中卷积层的计算细节 - 知乎"></p>
 <p>卷积运算（多通道）</p>
 <p>1、Kernels卷积核计算<br>
@@ -342,7 +342,7 @@
 同理其余Kernel，最后得到（6 * 6 * 5） 个 Feature Maps（即最终输出的 channel 数等于 Kernel 的个数）。</p>
 <p>3、Feature Vector向量计算<br>
 采用全局最大池化，分别计算每一个Feature Map，最终得到一个（1 * 1 * 5）Feature Vector。</p>
-<h2 id="边界填充Padding">边界填充Padding</h2>
+<h3 id="边界填充Padding">边界填充Padding</h3>
 <p>图像尺寸对齐，保持边界信息</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.nn.Conv2d(in_channels=<span class="hljs-number">3</span>, out_channels=<span class="hljs-number">16</span>, kernel_size=<span class="hljs-number">5</span>, stride=<span class="hljs-number">1</span>, padding=<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
 <p>padding=1：表示在输入图像的边界填充 1 圈，全 0 元素。<br>
@@ -357,13 +357,13 @@
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal">a</span><span class="mord mathnormal">dd</span><span class="mord mathnormal">in</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0574em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord mathnormal">n</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <p>如果想要 con2d 出来的图片长宽没有变化, padding=(kernel_size-1)/2 当 stride=1</p>
 <p>stride=1  表示行/列的滑动步长，也就是步幅，是成倍缩小尺寸，而这个参数的值就是缩小的具体倍数，比如步幅为2，输出就是输入的1/2；步幅为3，输出就是输入的1/3</p>
-<h2 id="多输入输出通道">多输入输出通道</h2>
+<h3 id="多输入输出通道">多输入输出通道</h3>
 <p>每个通道都有一个卷积核，结果是所有通道卷积结果的和</p>
 <p>多个输出通道</p>
 <p>我们可以有多个三位卷积核，每个核生成一个输出通道</p>
 <p>1x1卷积层</p>
 <p>它不识别空间模式，只是融合通道</p>
-<h1>池化层</h1>
+<h2 id="池化层">池化层</h2>
 <p>通过卷积层获得的图像特征，可以直接训练分类，但很容易导致过拟合。因此需要降采样，增大感受野，防止过拟合。</p>
 <p>池化（Pooling）：又叫下采样、降采样。<br>
 作用： 降采样（减少参数），增大感受野，提高运算速度及减小噪声影响，防止过拟合。</p>
@@ -384,7 +384,7 @@
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.nn.AdaptiveMaxPool2d(output_size=(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>))<br>torch.nn.AdaptiveAvgPool2d(output_size=(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
 <p><span class = "label label-info">全局池化相比局部池化能减少更多参数，且泛化能力比较好，但唯一的不足之处是收敛速度比较慢。</span></p>
-<h1>Lenet</h1>
+<h2 id="Lenet">Lenet</h2>
 <p>示意图</p>
 <p>是早期成功的神经网络</p>
 <p>先使用卷积层来学习图片空间信息</p>
