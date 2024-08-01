@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/B0EEF.jpg">
 <meta property="article:published_time" content="2024-07-31T08:49:46.000Z">
-<meta property="article:modified_time" content="2024-08-01T02:50:33.605Z">
+<meta property="article:modified_time" content="2024-08-01T09:27:03.804Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="人工智能">
@@ -237,7 +237,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          30 字
+          227 字
         
       </span>
     
@@ -294,7 +294,26 @@
               <p class="note note-success">前言:依据李沐视频整理</p>
 <p>//todo</p>
 <h2 id="AlexNet">AlexNet</h2>
+<p>更深更大的LeNet<br>
+主要改进  丢弃法 ReLu MaxPooling</p>
+<p>隐藏全连接层后加入了丢弃层</p>
+<p>代码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/QQ_1722496518954.png" srcset="/img/newloading.gif" lazyload alt="训练中"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/QQ_1722496906760.png" srcset="/img/newloading.gif" lazyload alt="训练完成"></p>
+<h2 id="VGG">VGG</h2>
+<p>VGG块</p>
+<p>3X3 卷积 (填充1   n层，m通道)</p>
+<p>2X2 最大池化层</p>
+<p>更大更深的AlexNet (重复的VGG块)</p>
+<p>使用可重复使用的卷积快来构建深度卷积神经网络</p>
+<p>不同的卷积快个数和超参数可以得到不同复杂度的变种、</p>
+<p>代码</p>
 <h2 id="ResNet">ResNet</h2>
+<p>残差块</p>
+<ul>
+<li>串联一个层改变函数类，我们希望能扩大函数类</li>
+<li>残差块加入快速通道来得到<code>f(x) = x + g(x)</code> 的结构</li>
+</ul>
 
               
             </div>
