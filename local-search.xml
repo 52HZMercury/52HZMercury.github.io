@@ -4,16 +4,16 @@
   
   
   <entry>
-    <title>AlexNet论文</title>
-    <link href="/2024/08/01/AlexNet/"/>
-    <url>/2024/08/01/AlexNet/</url>
+    <title>注意力机制</title>
+    <link href="/2024/08/01/attention/"/>
+    <url>/2024/08/01/attention/</url>
     
     <content type="html"><![CDATA[<p>//todo</p>]]></content>
     
     
     <categories>
       
-      <category>读论文</category>
+      <category>深度学习</category>
       
     </categories>
     
@@ -23,8 +23,6 @@
       <tag>深度学习</tag>
       
       <tag>人工智能</tag>
-      
-      <tag>AlexNet</tag>
       
     </tags>
     
@@ -37,7 +35,7 @@
     <link href="/2024/07/31/convolutional-modern/"/>
     <url>/2024/07/31/convolutional-modern/</url>
     
-    <content type="html"><![CDATA[<p class="note note-success">前言:依据李沐视频整理</p><p>//todo</p><h2 id="AlexNet">AlexNet</h2><p>更深更大的LeNet<br>主要改进  丢弃法 ReLu MaxPooling</p><p>隐藏全连接层后加入了丢弃层</p><p>代码</p><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/QQ_1722496518954.png" alt="训练中"></p><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/QQ_1722496906760.png" alt="训练完成"></p><h2 id="VGG">VGG</h2><p>VGG块</p><p>3X3 卷积 (填充1   n层，m通道)</p><p>2X2 最大池化层</p><p>更大更深的AlexNet (重复的VGG块)</p><p>使用可重复使用的卷积快来构建深度卷积神经网络</p><p>不同的卷积快个数和超参数可以得到不同复杂度的变种、</p><p>代码</p><h2 id="ResNet">ResNet</h2><p>残差块</p><ul><li>串联一个层改变函数类，我们希望能扩大函数类</li><li>残差块加入快速通道来得到<code>f(x) = x + g(x)</code> 的结构</li></ul>]]></content>
+    <content type="html"><![CDATA[<p class="note note-success">前言:依据李沐视频整理</p><p>//todo</p><h2 id="AlexNet">AlexNet</h2><p>更深更大的LeNet<br>主要改进  丢弃法 ReLu MaxPooling</p><p>隐藏全连接层后加入了丢弃层</p><p>代码</p><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/QQ_1722496518954.png" alt="训练中"></p><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/QQ_1722496906760.png" alt="训练完成"></p><h2 id="VGG">VGG</h2><p>VGG块</p><p>3X3 卷积 (填充1   n层，m通道)</p><p>2X2 最大池化层</p><p>更大更深的AlexNet (重复的VGG块)</p><p>使用可重复使用的卷积快来构建深度卷积神经网络</p><p>不同的卷积快个数和超参数可以得到不同复杂度的变种、</p><p>代码</p><h2 id="NiN">NiN</h2><p>NiN块</p><p>一个卷积层后跟两个全连接层</p><p>步幅1 无填充 输出形状跟卷积层输出一样</p><p>起到全连接层的作用</p><p>无全连接层</p><p>交替使用NiN块和步幅为2的组大池化层  逐步减少高宽和增大通道数</p><p>最后使用全局平均池化层得到输出  其输出通道数是类别数</p><p>NiN块使用卷积层加两个1X1卷积层  后者队每个像素增加了非线性性</p><p>使用全局平均池化层来代替VGG和AlexNet中的全连接层</p><p>不容易过拟合，更少的参数</p><p>不经常使用</p><h2 id="GoogLeNet">GoogLeNet</h2><p>玩梗  致敬LeNet</p><p>Inception块 小学才做选择题，我全都要   致敬盗梦空间</p><p>四个路径从不同层面抽取信息，然后再输出通道维合并</p><p>这个块跟单3x3,5x5卷积层比，Inception块有跟梢的参数个数和计算复杂度</p><h2 id="批量归一化">批量归一化</h2><p>//todo</p><p>固定小批量里面的均值和方差，然后再做额外的调整</p><p>作用在</p><p>全连接层和卷积层输出上，激活函数前面</p><p>全连接层和卷积层输入上</p><p>对全连接层，作用在特征维</p><p>对于卷积层，作用在通道维</p><p>这个东西在做什么</p><p>最初论文是想用它来减少内部协变量转移</p><p>后续论文指出它可能就是通过在每个小批量里加入噪声来控制模型复杂度</p><p>因此没必要跟丢弃法混合使用</p><p>总结</p><p>固定小批量中的均值和方差，然后学习出适合的偏移和缩放</p><p>可以加速收敛速度，但一般不改变模型精度</p><h2 id="ResNet">ResNet</h2><p>残差块</p><ul><li>串联一个层改变函数类，我们希望能扩大函数类</li><li>残差块加入快速通道来得到<code>f(x) = x + g(x)</code> 的结构</li></ul>]]></content>
     
     
     <categories>
