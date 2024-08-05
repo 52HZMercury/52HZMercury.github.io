@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/B0EEF.jpg">
 <meta property="article:published_time" content="2024-07-31T08:49:46.000Z">
-<meta property="article:modified_time" content="2024-08-02T09:19:06.921Z">
+<meta property="article:modified_time" content="2024-08-05T08:01:10.756Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="人工智能">
@@ -237,7 +237,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          732 字
+          3.8k 字
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
           <!-- compatible with older versions-->
-          3 分钟
+          12 分钟
         
       </span>
     
@@ -292,36 +292,59 @@
             <div class="markdown-body">
               
               <p class="note note-success">前言:依据李沐视频整理</p>
-<p>//todo</p>
 <h2 id="AlexNet">AlexNet</h2>
-<p>更深更大的LeNet<br>
-主要改进  丢弃法 ReLu MaxPooling</p>
-<p>隐藏全连接层后加入了丢弃层</p>
-<p>代码</p>
+<p>2012年，AlexNet横空出世。它首次证明了学习到的特征可以超越手工设计的特征。它一举打破了计算机视觉研究的现状。 AlexNet使用了8层卷积神经网络，并以很大的优势赢得了2012年ImageNet图像识别挑战赛。是一个更深更大的LeNet。</p>
+<p><img src="https://zh.d2l.ai/_images/alexnet.svg" srcset="/img/newloading.gif" lazyload alt="从LeNet到AlexNet"></p>
+<p>主要改进:</p>
+<ul>
+<li>
+<p>使用将sigmoid激活函数改为更简单的ReLU激活函数，ReLU激活函数的计算更简单</p>
+</li>
+<li>
+<p>使用了dropout丢弃法防止过拟合</p>
+</li>
+<li>
+<p>使用最大汇聚层MaxPooling替代平均汇聚层</p>
+</li>
+</ul>
+<p>来看看代码实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python">net = nn.Sequential(<br>    <span class="hljs-comment"># 这里使用一个11*11的更大窗口来捕捉对象。</span><br>    <span class="hljs-comment"># 同时，步幅为4，以减少输出的高度和宽度。</span><br>    <span class="hljs-comment"># 另外，输出通道的数目远大于LeNet</span><br>    nn.Conv2d(<span class="hljs-number">1</span>, <span class="hljs-number">96</span>, kernel_size=<span class="hljs-number">11</span>, stride=<span class="hljs-number">4</span>, padding=<span class="hljs-number">1</span>), nn.ReLU(),<br>    nn.MaxPool2d(kernel_size=<span class="hljs-number">3</span>, stride=<span class="hljs-number">2</span>),<br>    <span class="hljs-comment"># 减小卷积窗口，使用填充为2来使得输入与输出的高和宽一致，且增大输出通道数</span><br>    nn.Conv2d(<span class="hljs-number">96</span>, <span class="hljs-number">256</span>, kernel_size=<span class="hljs-number">5</span>, padding=<span class="hljs-number">2</span>), nn.ReLU(),<br>    nn.MaxPool2d(kernel_size=<span class="hljs-number">3</span>, stride=<span class="hljs-number">2</span>),<br>    <span class="hljs-comment"># 使用三个连续的卷积层和较小的卷积窗口。</span><br>    <span class="hljs-comment"># 除了最后的卷积层，输出通道的数量进一步增加。</span><br>    <span class="hljs-comment"># 在前两个卷积层之后，汇聚层不用于减少输入的高度和宽度</span><br>    nn.Conv2d(<span class="hljs-number">256</span>, <span class="hljs-number">384</span>, kernel_size=<span class="hljs-number">3</span>, padding=<span class="hljs-number">1</span>), nn.ReLU(),<br>    nn.Conv2d(<span class="hljs-number">384</span>, <span class="hljs-number">384</span>, kernel_size=<span class="hljs-number">3</span>, padding=<span class="hljs-number">1</span>), nn.ReLU(),<br>    nn.Conv2d(<span class="hljs-number">384</span>, <span class="hljs-number">256</span>, kernel_size=<span class="hljs-number">3</span>, padding=<span class="hljs-number">1</span>), nn.ReLU(),<br>    nn.MaxPool2d(kernel_size=<span class="hljs-number">3</span>, stride=<span class="hljs-number">2</span>),<br>    nn.Flatten(),<br>    <span class="hljs-comment"># 这里，全连接层的输出数量是LeNet中的好几倍。使用dropout层来减轻过拟合</span><br>    nn.Linear(<span class="hljs-number">6400</span>, <span class="hljs-number">4096</span>), nn.ReLU(),<br>    nn.Dropout(p=<span class="hljs-number">0.5</span>),<br>    nn.Linear(<span class="hljs-number">4096</span>, <span class="hljs-number">4096</span>), nn.ReLU(),<br>    nn.Dropout(p=<span class="hljs-number">0.5</span>),<br>    <span class="hljs-comment"># 最后是输出层。由于这里使用Fashion-MNIST，所以用类别数为10，而非论文中的1000</span><br>    nn.Linear(<span class="hljs-number">4096</span>, <span class="hljs-number">10</span>))<br></code></pre></td></tr></table></figure>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/QQ_1722496518954.png" srcset="/img/newloading.gif" lazyload alt="训练中"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/QQ_1722496906760.png" srcset="/img/newloading.gif" lazyload alt="训练完成"></p>
 <h2 id="VGG">VGG</h2>
-<p>VGG块</p>
-<p>3X3 卷积 (填充1   n层，m通道)</p>
-<p>2X2 最大池化层</p>
-<p>更大更深的AlexNet (重复的VGG块)</p>
-<p>使用可重复使用的卷积快来构建深度卷积神经网络</p>
-<p>不同的卷积快个数和超参数可以得到不同复杂度的变种、</p>
-<p>代码</p>
+<p>与AlexNet、LeNet一样，VGG网络可以分为两部分：第一部分主要由卷积层和汇聚层组成，第二部分由全连接层组成。其中最大的特点就是VGG使用了VGG块来进行重复。</p>
+<p><img src="https://zh.d2l.ai/_images/vgg.svg" srcset="/img/newloading.gif" lazyload alt="VGG结构"></p>
+<p>一个VGG块与之类似，由一系列卷积层组成，后面再加上用于空间下采样的最大汇聚层。在最初的VGG论文中 (<a target="_blank" rel="noopener" href="https://zh.d2l.ai/chapter_references/zreferences.html#id153">Simonyan and Zisserman, 2014</a>)，作者使用了带有3×3卷积核、填充为1（保持高度和宽度）的卷积层，和带有2×2汇聚窗口、步幅为2（每个块后的分辨率减半）的最大汇聚层。是一个更大更深的AlexNet (重复的VGG块)。</p>
+<p>它的思想是使用可重复使用的卷积快来构建深度卷积神经网络，不同的卷积快个数和超参数可以得到不同复杂度的变种。</p>
+<p>来看看实现代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn<br><span class="hljs-keyword">from</span> d2l <span class="hljs-keyword">import</span> torch <span class="hljs-keyword">as</span> d2l<br><br><span class="hljs-comment"># vgg的块</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">vgg_block</span>(<span class="hljs-params">num_convs, in_channels, out_channels</span>):</span><br>    layers = []<br>    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_convs):<br>        layers.append(nn.Conv2d(in_channels, out_channels,<br>                                kernel_size=<span class="hljs-number">3</span>, padding=<span class="hljs-number">1</span>))<br>        layers.append(nn.ReLU())<br>        in_channels = out_channels<br>    layers.append(nn.MaxPool2d(kernel_size=<span class="hljs-number">2</span>,stride=<span class="hljs-number">2</span>))<br>    <span class="hljs-keyword">return</span> nn.Sequential(*layers)<br><br><br>conv_arch = ((<span class="hljs-number">1</span>, <span class="hljs-number">64</span>), (<span class="hljs-number">1</span>, <span class="hljs-number">128</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">256</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">512</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">512</span>))<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">vgg</span>(<span class="hljs-params">conv_arch</span>):</span><br>    conv_blks = []<br>    in_channels = <span class="hljs-number">1</span><br>    <span class="hljs-comment"># 卷积层部分</span><br>    <span class="hljs-keyword">for</span> (num_convs, out_channels) <span class="hljs-keyword">in</span> conv_arch:<br>        conv_blks.append(vgg_block(num_convs, in_channels, out_channels))<br>        in_channels = out_channels<br><br>    <span class="hljs-keyword">return</span> nn.Sequential(<br>        *conv_blks, nn.Flatten(),<br>        <span class="hljs-comment"># 全连接层部分</span><br>        nn.Linear(out_channels * <span class="hljs-number">7</span> * <span class="hljs-number">7</span>, <span class="hljs-number">4096</span>), nn.ReLU(), nn.Dropout(<span class="hljs-number">0.5</span>),<br>        nn.Linear(<span class="hljs-number">4096</span>, <span class="hljs-number">4096</span>), nn.ReLU(), nn.Dropout(<span class="hljs-number">0.5</span>),<br>        nn.Linear(<span class="hljs-number">4096</span>, <span class="hljs-number">10</span>))<br><br>net = vgg(conv_arch)<br></code></pre></td></tr></table></figure>
+<p>跑出来的结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240805155336497.png" srcset="/img/newloading.gif" lazyload alt="vgg"></p>
 <h2 id="NiN">NiN</h2>
-<p>NiN块</p>
-<p>一个卷积层后跟两个全连接层</p>
-<p>步幅1 无填充 输出形状跟卷积层输出一样</p>
-<p>起到全连接层的作用</p>
-<p>无全连接层</p>
+<p>最初的NiN网络是在AlexNet后不久提出的，显然从中得到了一些启示。 NiN使用窗口形状为11×11、5×5和3×3的卷积层，输出通道数量与AlexNet中的相同。 每个NiN块后有一个最大汇聚层，汇聚窗口形状为3×3，步幅为2。</p>
+<p>NiN和AlexNet之间的一个显著区别是NiN完全取消了全连接层。 相反，NiN使用一个NiN块，其输出通道数等于标签类别的数量。最后放一个<em>全局平均汇聚层</em>（global average pooling layer），生成一个对数几率 （logits）。NiN设计的一个优点是，它显著减少了模型所需参数的数量。</p>
+<p>结构示意；</p>
+<p><img src="https://zh.d2l.ai/_images/nin.svg" srcset="/img/newloading.gif" lazyload alt="nin结构"></p>
+<p>特点：</p>
+<ul>
+<li>
+<p>无全连接层，使用全局平均池化层来代替VGG和AlexNet中的全连接层，最后使用全局平均池化层得到输出  其输出通道数是类别数</p>
+</li>
+<li>
 <p>交替使用NiN块和步幅为2的组大池化层  逐步减少高宽和增大通道数</p>
-<p>最后使用全局平均池化层得到输出  其输出通道数是类别数</p>
+</li>
+<li>
 <p>NiN块使用卷积层加两个1X1卷积层  后者队每个像素增加了非线性性</p>
-<p>使用全局平均池化层来代替VGG和AlexNet中的全连接层</p>
+</li>
+<li>
 <p>不容易过拟合，更少的参数</p>
-<p>不经常使用</p>
+</li>
+</ul>
+<p>又来看看代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn<br><span class="hljs-keyword">from</span> d2l <span class="hljs-keyword">import</span> torch <span class="hljs-keyword">as</span> d2l<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">nin_block</span>(<span class="hljs-params">in_channels, out_channels, kernel_size, strides, padding</span>):</span><br>    <span class="hljs-keyword">return</span> nn.Sequential(<br>        nn.Conv2d(in_channels, out_channels, kernel_size, strides, padding),<br>        nn.ReLU(),<br>        nn.Conv2d(out_channels, out_channels, kernel_size=<span class="hljs-number">1</span>), nn.ReLU(),<br>        nn.Conv2d(out_channels, out_channels, kernel_size=<span class="hljs-number">1</span>), nn.ReLU())<br><br>net = nn.Sequential(<br>    nin_block(<span class="hljs-number">1</span>, <span class="hljs-number">96</span>, kernel_size=<span class="hljs-number">11</span>, strides=<span class="hljs-number">4</span>, padding=<span class="hljs-number">0</span>),<br>    nn.MaxPool2d(<span class="hljs-number">3</span>, stride=<span class="hljs-number">2</span>),<br>    nin_block(<span class="hljs-number">96</span>, <span class="hljs-number">256</span>, kernel_size=<span class="hljs-number">5</span>, strides=<span class="hljs-number">1</span>, padding=<span class="hljs-number">2</span>),<br>    nn.MaxPool2d(<span class="hljs-number">3</span>, stride=<span class="hljs-number">2</span>),<br>    nin_block(<span class="hljs-number">256</span>, <span class="hljs-number">384</span>, kernel_size=<span class="hljs-number">3</span>, strides=<span class="hljs-number">1</span>, padding=<span class="hljs-number">1</span>),<br>    nn.MaxPool2d(<span class="hljs-number">3</span>, stride=<span class="hljs-number">2</span>),<br>    nn.Dropout(<span class="hljs-number">0.5</span>),<br>    <span class="hljs-comment"># 标签类别数是10</span><br>    nin_block(<span class="hljs-number">384</span>, <span class="hljs-number">10</span>, kernel_size=<span class="hljs-number">3</span>, strides=<span class="hljs-number">1</span>, padding=<span class="hljs-number">1</span>),<br>    nn.AdaptiveAvgPool2d((<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)),<br>    <span class="hljs-comment"># 将四维的输出转成二维的输出，其形状为(批量大小,10)</span><br>    nn.Flatten())<br></code></pre></td></tr></table></figure>
+<p><span class = "note note-danger">不经常使用</span></p>
 <h2 id="GoogLeNet">GoogLeNet</h2>
-<p>玩梗  致敬LeNet</p>
+<p>首先从名字就能看出是谷歌开发的，其中名字还有玩梗，将L大写，致敬了LeNet。</p>
 <p>Inception块 小学才做选择题，我全都要   致敬盗梦空间</p>
 <p>四个路径从不同层面抽取信息，然后再输出通道维合并</p>
 <p>这个块跟单3x3,5x5卷积层比，Inception块有跟梢的参数个数和计算复杂度</p>

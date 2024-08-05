@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/20240711_222107.jpg">
 <meta property="article:published_time" content="2024-07-25T08:53:46.000Z">
-<meta property="article:modified_time" content="2024-07-31T13:34:46.053Z">
+<meta property="article:modified_time" content="2024-08-05T06:20:39.782Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="人工智能">
@@ -237,7 +237,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          8.1k 字
+          8.4k 字
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
           <!-- compatible with older versions-->
-          26 分钟
+          27 分钟
         
       </span>
     
@@ -415,8 +415,14 @@ c-4-3.333-8.333-7.667-13 -13l-13-13l77-155 77-156c66 199.333 139 419.667
 <p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>M</mi><mi>S</mi><mi>E</mi><mo>=</mo><mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false">(</mo><mi>y</mi><mtext>预测值</mtext><mo>−</mo><mi>y</mi><mtext>实际值</mtext><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow><mi>n</mi></mfrac></mrow><annotation encoding="application/x-tex">MSE = \frac{\sum_{i = 1}^n(y\text{预测值} - y\text{实际值}) ^ 2}{n}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">MSE</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1898em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5038em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.6897em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8043em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord text"><span class="mord cjk_fallback">预测值</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord text"><span class="mord cjk_fallback">实际值</span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <h2 id="梯度下降">梯度下降</h2>
-<p>//todo</p>
 <p>那么怎么进行模型的优化呢？我们用到一种名为<em>梯度下降</em>（gradient descent）的方法， 这种方法几乎可以优化所有深度学习模型。 它通过不断地在损失函数递减的方向上更新参数来降低误差。</p>
+<p class = "note note-success">那么，为什么需要进行梯度下降呢</p>
+<p>有个挺不错的视频：[<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1oY411N7Xz/">5分钟深度学习] #01 梯度下降算法_哔哩哔哩_bilibili</a></p>
+<p>以线性的时候为例，现在需要一条直线来回归拟合这三个点</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240805140005209.png" srcset="/img/newloading.gif" lazyload alt="拟合这三个点"></p>
+<p>直线的方程是<code>y =wx + b</code>,而通过上述的损失函数，也就是直线到点的距离量化，作为与实际相差的值，那么得到损失函数就是一个二次函数</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240805140258698.png" srcset="/img/newloading.gif" lazyload alt="二次函数"></p>
+<p>这个二次函数的最小值，也就是损失函数的最小值，就是这个直线方程与实际相差最小，最拟合。这里我们使用牛顿迭代法来求出这个最小值，也就是图中所示的b的更新方程。其中ε就是学习率</p>
 <p>梯度下降最简单的用法是计算损失函数（数据集中所有样本的损失均值） 关于模型参数的导数（在这里也可以称为梯度）。 但实际中的执行可能会非常慢：因为在每一次更新参数之前，我们必须遍历整个数据集。 因此，我们通常会在每次需要计算更新的时候随机抽取一小批样本， 这种变体叫做<em>小批量随机梯度下降</em>（minibatch stochastic gradient descent）。</p>
 <p>在每次迭代中，我们首先随机抽样一个小批量样本， 它是由固定数量的训练样本组成的。 然后，我们计算小批量的平均损失关于模型参数的导数（也可以称为梯度）。 最后，我们将梯度乘以一个预先确定的正数，并从当前参数的值中减掉。</p>
 <p>计算梯度和损失值：</p>
@@ -428,10 +434,8 @@ c-4-3.333-8.333-7.667-13 -13l-13-13l77-155 77-156c66 199.333 139 419.667
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240729143941676.png" srcset="/img/newloading.gif" lazyload alt="image-20240729143941676"></p>
 <p>选择学习率，不能太大也不能太小</p>
-<p>太小 ：慢</p>
-<p>太大：震荡</p>
-<h3 id=""></h3>
-<p>使得loss值逐步降低</p>
+<p>太小会导致训练慢</p>
+<p>太大则会导致震荡</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">optimizer.zero_grad() <span class="hljs-comment">#梯度清零</span><br>optimizer.step() <span class="hljs-comment">#梯度更新</span><br></code></pre></td></tr></table></figure>
 <p class = "note note-success">经典的梯度下降法</p>
 <p>先假设一个学习率，参数沿梯度的反方向移动。</p>
@@ -568,19 +572,21 @@ c-4-3.333-8.333-7.667-13 -13l-13-13l77-155 77-156c66 199.333 139 419.667
 （2）在输入层和隐藏层都使用Dropout<br>
 （3）当学习率和冲量值较大时：如学习率扩大10 ~ 100倍，冲量值调高到0.9 ~ 0.99。<br>
 （4）用于限制网络模型的权重时：学习率越大，权重值越大。</p>
-<p>//todo</p>
 <p>通常将其作用在隐藏全连接层的输出上</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240730124159950.png" srcset="/img/newloading.gif" lazyload alt="image-20240730124159950"></p>
 <p>丢弃法将一些输出项随机置0来控制模型复杂度</p>
 <p>丢弃概率是控制模型复杂度的超参数</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python">net = nn.Sequential(nn.Flatten(),<br>        nn.Linear(<span class="hljs-number">784</span>, <span class="hljs-number">256</span>),<br>        nn.ReLU(),<br>        <span class="hljs-comment"># 在第一个全连接层之后添加一个dropout层</span><br>        nn.Dropout(dropout1),<br>        nn.Linear(<span class="hljs-number">256</span>, <span class="hljs-number">256</span>),<br>        nn.ReLU(),<br>        <span class="hljs-comment"># 在第二个全连接层之后添加一个dropout层</span><br>        nn.Dropout(dropout2),<br>        nn.Linear(<span class="hljs-number">256</span>, <span class="hljs-number">10</span>))<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">init_weights</span>(<span class="hljs-params">m</span>):</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(m) == nn.Linear:<br>        nn.init.normal_(m.weight, std=<span class="hljs-number">0.01</span>)<br><br>net.apply(init_weights);<br></code></pre></td></tr></table></figure>
 <h2 id="前向传播">前向传播</h2>
-<p>//todo</p>
 <p>实现信息的前向传导，即数据从输入层，依次经过多个隐藏层，最终到达输出层。数据每经过一个网络层，其节点输出的值所代表的信息层次就越高阶和概括</p>
 <h2 id="反向传播">反向传播</h2>
+<p>再贴一个视频 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yG411x7Cc/">介绍反向传播</a></p>
 <p>迭代训练，降低损失（loss，与最优化方法（如：梯度下降法）结合使用的，用来训练神经网络的常见方法。</p>
-<p>计算过程：通过损失函数，计算模型中所有权重参数的梯度，并反馈给优化算法进行梯度（权值）更新。迭代训练 N 次，获得最小损失。<br>
-单次反向传播的过程：首先是离输出层最近的网络层E，然后是网络层D，并按照EDCBA的依次顺序进行反向传播，直到所有层都完成一次。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240805141611358.png" srcset="/img/newloading.gif" lazyload alt="计算过程"></p>
+<p>通过损失函数，计算模型中所有权重参数的梯度，并反馈给优化算法进行梯度（权值）更新。迭代训练 N 次，获得最小损失。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240805141740674.png" srcset="/img/newloading.gif" lazyload alt="从后向前计算"></p>
+<p>这种沿着黄色箭头，从后向前计算参数梯度值的方法就叫反向传播算法。</p>
+<p>单次反向传播的过程：首先是离输出层最近的网络层E，然后是网络层D，并按照EDCBA的依次顺序进行反向传播，直到所有层都完成一次。</p>
 
               
             </div>
