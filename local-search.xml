@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>计算机视觉</title>
+    <link href="/2024/08/06/computer%20vision/"/>
+    <url>/2024/08/06/computer%20vision/</url>
+    
+    <content type="html"><![CDATA[<p class="note note-success">前言:依据李沐视频整理</p><h2 id="数据增强">数据增强</h2><ul><li>增加一个已有数据集，使得有更多的多样性<ul><li>在语言里面加入各种不同的背景噪声</li><li>改变图片的颜色和形状</li></ul></li></ul><p>翻转</p><p>切割</p><p>颜色</p><h2 id="微调">微调</h2><p>也叫迁移学习</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>深度学习</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>深度学习</tag>
+      
+      <tag>人工智能</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>注意力机制</title>
     <link href="/2024/08/01/attention/"/>
     <url>/2024/08/01/attention/</url>
