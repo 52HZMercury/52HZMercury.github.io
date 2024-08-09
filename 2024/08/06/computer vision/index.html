@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/ikuyo_lying.jpg">
 <meta property="article:published_time" content="2024-08-06T08:22:46.000Z">
-<meta property="article:modified_time" content="2024-08-06T09:41:35.186Z">
+<meta property="article:modified_time" content="2024-08-09T06:37:22.706Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="人工智能">
@@ -237,7 +237,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          74 字
+          3.2k 字
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
           <!-- compatible with older versions-->
-          1 分钟
+          11 分钟
         
       </span>
     
@@ -292,20 +292,104 @@
             <div class="markdown-body">
               
               <p class="note note-success">前言:依据李沐视频整理</p>
-<h2 id="数据增强">数据增强</h2>
-<ul>
-<li>增加一个已有数据集，使得有更多的多样性
+<h2 id="图像增广">图像增广</h2>
+<p>图像增广在对训练图像进行一系列的随机变化之后，生成相似但不同的训练样本，从而扩大了训练集的规模。 此外，应用图像增广的原因是，随机改变训练样本可以减少模型对某些属性的依赖，从而提高模型的泛化能力。也就是增加一个已有数据集，使得有更多的多样性。例如：</p>
 <ul>
 <li>在语言里面加入各种不同的背景噪声</li>
 <li>改变图片的颜色和形状</li>
 </ul>
+<h3 id="常用的图像增广方法">常用的图像增广方法</h3>
+<p><strong>翻转</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">torchvision.transforms.RandomHorizontalFlip()  <span class="hljs-comment"># 0.5几率 左右翻转</span><br><br>torchvision.transforms.RandomVerticalFlip()  <span class="hljs-comment"># 0.5几率 上下翻转</span><br></code></pre></td></tr></table></figure>
+<p><strong>切割</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">torchvision.transforms.RandomResizedCrop(<br>    (<span class="hljs-number">200</span>, <span class="hljs-number">200</span>), scale=(<span class="hljs-number">0.1</span>, <span class="hljs-number">1</span>), ratio=(<span class="hljs-number">0.5</span>, <span class="hljs-number">2</span>)) <span class="hljs-comment">#随机裁剪一个面积为原始面积10%到100%的区域，该区域的宽高比从0.5～2之间随机取值。 然后，区域的宽度和高度都被缩放到200像素</span><br></code></pre></td></tr></table></figure>
+<p><strong>颜色</strong></p>
+<p>我们可以改变图像颜色的四个方面：亮度、对比度、饱和度和色调。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">torchvision.transforms.ColorJitter(<br>    brightness=<span class="hljs-number">0.5</span>, contrast=<span class="hljs-number">0</span>, saturation=<span class="hljs-number">0</span>, hue=<span class="hljs-number">0</span>) <span class="hljs-comment"># 随机更改图像的亮度，随机值为原始图像的50%(1-0.5)到150%(1+0.5)之间</span><br><br>torchvision.transforms.ColorJitter(<br>    brightness=<span class="hljs-number">0</span>, contrast=<span class="hljs-number">0</span>, saturation=<span class="hljs-number">0</span>, hue=<span class="hljs-number">0.5</span>)  <span class="hljs-comment"># 随机更改图像的色调</span><br><br>color_aug = torchvision.transforms.ColorJitter(<br>    brightness=<span class="hljs-number">0.5</span>, contrast=<span class="hljs-number">0.5</span>, saturation=<span class="hljs-number">0.5</span>, hue=<span class="hljs-number">0.5</span>)<br>apply(img, color_aug) <span class="hljs-comment"># 创建一个RandomColorJitter实例，并设置如何同时随机更改图像的亮度（brightness）、对比度（contrast）、饱和度（saturation）和色调（hue）</span><br></code></pre></td></tr></table></figure>
+<p>结合一下多种方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">augs = torchvision.transforms.Compose([<br>    torchvision.transforms.RandomHorizontalFlip(), color_aug, shape_aug])<br>apply(img, augs)<br></code></pre></td></tr></table></figure>
+<h2 id="微调">微调</h2>
+<p>也叫<em>迁移学习</em>（transfer learning），将从<em>源数据集</em>学到的知识迁移到<em>目标数据集</em></p>
+<p><img src="https://zh.d2l.ai/_images/finetune.svg" srcset="/img/newloading.gif" lazyload alt="微调"></p>
+<p>最后一层 不能直接使用，因为标号可能变了</p>
+<p>特征提取模块可能仍然对我的数据有用</p>
+<p>一个目标数据集上的正常训练任务  但是用更强的正则化</p>
+<ul>
+<li>使用更小的学习率</li>
+<li>使用更少的数据迭代</li>
+</ul>
+<p>源数据集远复杂于目标数据，通常微调效果更好</p>
+<p>固定一些层</p>
+<ul>
+<li>低层次的特征跟家通用</li>
+<li>高层次的特征则更跟数据集相关</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">model = models.resnet18(pretrained=<span class="hljs-literal">True</span>) <span class="hljs-comment"># 自动下载预训练的模型参数</span><br>model.fc = nn.Linear(model.fc.in_features, n_class) <span class="hljs-comment"># 最后一层的输出种类，换成当前数据集有多少种类</span><br>optimizer = optim.Adam(model.fc.parameters())<br></code></pre></td></tr></table></figure>
+<h2 id="目标检测和边界框">目标检测和边界框</h2>
+<p>在图像分类任务中，我们假设图像中只有一个主要物体对象，我们只关注如何识别其类别。 然而，很多时候图像里有多个我们感兴趣的目标，我们不仅想知道它们的类别，还想得到它们在图像中的具体位置。 在计算机视觉里，我们将这类任务称为<em>目标检测</em>（object detection）或<em>目标识别</em>（object recognition）。</p>
+<p><strong>边界框</strong></p>
+<p>一个边缘框可以通过四个数字定义，边界框是矩形的，由矩形左上角的以及右下角的(x)和(y)坐标决定。 另一种常用的边界框表示方法是边界框中心的((x, y))轴坐标以及框的宽度和高度。</p>
+<p><strong>锚框</strong></p>
+<p>目标检测算法通常会在输入图像中采样大量的区域，然后判断这些区域中是否包含我们感兴趣的目标，并调整区域边界从而更准确地预测目标的<em>真实边界框</em>（ground-truth bounding box）。 不同的模型使用的区域采样方法可能不同。 这里我们介绍其中的一种方法：以每个像素为中心，生成多个缩放比和宽高比（aspect ratio）不同的边界框。 这些边界框被称为<em>锚框</em>（anchor box）</p>
+<h2 id="目标检测过程">目标检测过程</h2>
+<p>简化的过程：</p>
+<ul>
+<li>
+<p>首先生成大量锚框</p>
+</li>
+<li>
+<p>赋予标号，</p>
+</li>
+<li>
+<p>每个锚框作为一个样本进行训练</p>
 </li>
 </ul>
-<p>翻转</p>
-<p>切割</p>
-<p>颜色</p>
-<h2 id="微调">微调</h2>
-<p>也叫迁移学习</p>
+<p><em>杰卡德系数</em>（Jaccard）可以衡量锚框和真实边界框之间的相似性。 给定集合A和B，他们的杰卡德系数是他们交集的大小除以他们并集的大小，也就是交并比（IoU）</p>
+<p><img src="https://zh.d2l.ai/_images/iou.svg" srcset="/img/newloading.gif" lazyload alt="杰卡德系数-交并比"></p>
+<p>在预测时，使用NMS来去除冗余的预测。</p>
+<p>比较知名目标检测数据的有COCO(<a target="_blank" rel="noopener" href="http://cocodataset.org">cocodataset.org</a>)</p>
+<h2 id="R-CNN">R-CNN</h2>
+<p>区域卷积神经网络（region-based CNN或regions with CNN features，R-CNN）</p>
+<p>R-CNN包括以下四个步骤：</p>
+<ol>
+<li>对输入图像使用<em>选择性搜索</em>来选取多个高质量的提议区域 。这些提议区域通常是在多个尺度下选取的，并具有不同的形状和大小。每个提议区域都将被标注类别和真实边界框；</li>
+<li>选择一个预训练的卷积神经网络，并将其在输出层之前截断。将每个提议区域变形为网络需要的输入尺寸，并通过前向传播输出抽取的提议区域特征；</li>
+<li>将每个提议区域的特征连同其标注的类别作为一个样本。训练多个支持向量机对目标分类，其中每个支持向量机用来判断样本是否属于某一个类别；</li>
+<li>将每个提议区域的特征连同其标注的边界框作为一个样本，训练线性回归模型来预测真实边界框。</li>
+</ol>
+<h3 id="Fast-R-CNN">Fast R-CNN</h3>
+<p>Fast R-CNN引入了<em>兴趣区域汇聚层</em>（RoI pooling）：将卷积神经网络的输出和提议区域作为输入，输出连结后的各个提议区域抽取的特征</p>
+<p><img src="https://zh.d2l.ai/_images/fast-rcnn.svg" srcset="/img/newloading.gif" lazyload alt="fast R-CNN"></p>
+<p><strong>兴趣区域(ROI)池化层</strong></p>
+<p>给定一个锚框，均匀分割成n * m 块，输出每块里的最大值,不管锚框多大，总是输出nm个值.</p>
+<p>作用：让每个锚框编程自己想要的模样,接着使用CNN对图片抽取特征，最后使用ROI池化层对每个锚框生成固定锚框特征。</p>
+<h3 id="Faster-R-CNN">Faster R-CNN</h3>
+<p>为了较精确地检测目标结果，Fast R-CNN模型通常需要在选择性搜索中生成大量的提议区域。 <em>Faster R-CNN</em> 提出将选择性搜索替换为<em>区域提议网络</em>（region proposal network），从而减少提议区域的生成数量，并保证目标检测的精度。</p>
+<p>使用一个区域提议网络来替代启发式搜索来获得更好的锚框</p>
+<p><img src="https://zh.d2l.ai/_images/faster-rcnn.svg" srcset="/img/newloading.gif" lazyload alt="Faster R-CNN"></p>
+<h3 id="Mask-R-CNN">Mask R-CNN</h3>
+<p>如果在训练集中还标注了每个目标在图像上的像素级位置，那么<em>Mask R-CNN</em>能够有效地利用这些详尽的标注信息进一步提升目标检测的精度。如果有像素级别的标号，使用FCN来利用这些信息</p>
+<p><img src="https://zh.d2l.ai/_images/mask-rcnn.svg" srcset="/img/newloading.gif" lazyload alt="Mask R-CNN"></p>
+<p>Mask R-CNN是基于Faster R-CNN修改而来的。 具体来说，Mask R-CNN将兴趣区域汇聚层替换为了 <em>兴趣区域对齐</em>层，使用<em>双线性插值</em>（bilinear interpolation）来保留特征图上的空间信息，从而更适于像素级预测。</p>
+<h2 id="单发多框检测">单发多框检测</h2>
+<p>单发多框检测（SSD）  该模型简单、快速且被广泛使用。尽管这只是其中一种目标检测模型，但本节中的一些设计原则和实现细节也适用于其他模型。</p>
+<p>此模型主要由基础网络组成，其后是几个多尺度特征块。 基本网络用于从输入图像中提取特征，因此它可以使用深度卷积神经网络。</p>
+<p><img src="https://zh.d2l.ai/_images/ssd.svg" srcset="/img/newloading.gif" lazyload alt="单发多框检测模型主要由一个基础网络块和若干多尺度特征块串联而成"></p>
+<p>简单的来总结就是：</p>
+<ul>
+<li>
+<p>ssd通过单神经网络来检测模型</p>
+</li>
+<li>
+<p>以每个像素为中心的产生多个锚框</p>
+</li>
+<li>
+<p>在多个端的输出上进行多尺度的检测</p>
+</li>
+</ul>
+<h2 id="YOLO">YOLO</h2>
+<p>名字由来于<em>you only look once</em>，是Joseph Redmon和Ali Farhadi等人于2015年提出的基于单个神经网络的目标检测系统。在2017年CVPR上，Joseph Redmon和Ali Farhadi又发表的YOLO 2，进一步提高了检测的精度和速度。yolo将图片均匀分成s*s个锚框，每个锚框预测B个边缘框。</p>
+<p>//todo  有需要的话，后面再单独写一篇YOLO的文章</p>
 
               
             </div>
