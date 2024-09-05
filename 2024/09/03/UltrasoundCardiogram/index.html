@@ -16,27 +16,26 @@
   <meta name="author" content="Mercury">
   <meta name="keywords" content="">
   
-    <meta name="description" content="纸上得来终觉浅">
+    <meta name="description" content="早点发paper">
 <meta property="og:type" content="article">
-<meta property="og:title" content="语义分割项目">
-<meta property="og:url" content="http://example.com/2024/08/14/%E6%9D%A5%E5%AE%9E%E9%99%85%E5%81%9A%E4%B8%80%E4%B8%AA%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:title" content="超声心动图">
+<meta property="og:url" content="http://example.com/2024/09/03/UltrasoundCardiogram/index.html">
 <meta property="og:site_name" content="Mercury&#39;s blog">
-<meta property="og:description" content="纸上得来终觉浅">
+<meta property="og:description" content="早点发paper">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog//day80.jpg">
-<meta property="article:published_time" content="2024-08-14T06:31:46.000Z">
-<meta property="article:modified_time" content="2024-08-15T08:13:38.473Z">
+<meta property="og:image" content="https://ts1.cn.mm.bing.net/th?id=ODL.879d7140f84f549d3dc259e08b612016&w=298&h=225&c=10&rs=1&qlt=99&bgcl=fffffe&r=0&o=6&pid=WrapstarImage">
+<meta property="article:published_time" content="2024-09-03T07:35:46.000Z">
+<meta property="article:modified_time" content="2024-09-05T06:58:10.106Z">
 <meta property="article:author" content="Mercury">
-<meta property="article:tag" content="深度学习">
-<meta property="article:tag" content="人工智能">
+<meta property="article:tag" content="计算机视觉 医学">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog//day80.jpg">
+<meta name="twitter:image" content="https://ts1.cn.mm.bing.net/th?id=ODL.879d7140f84f549d3dc259e08b612016&w=298&h=225&c=10&rs=1&qlt=99&bgcl=fffffe&r=0&o=6&pid=WrapstarImage">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>语义分割项目 - Mercury&#39;s blog</title>
+  <title>超声心动图 - Mercury&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="语义分割项目"></span>
+            <span id="subtitle" data-typed-text="超声心动图"></span>
           
         </div>
 
@@ -224,8 +223,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-14 14:31" pubdate>
-          2024年8月14日 下午
+        <time datetime="2024-09-03 15:35" pubdate>
+          2024年9月3日 下午
         </time>
       </span>
     
@@ -237,7 +236,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.9k 字
+          5k 字
         
       </span>
     
@@ -249,7 +248,7 @@
         
         
           <!-- compatible with older versions-->
-          10 分钟
+          16 分钟
         
       </span>
     
@@ -287,98 +286,168 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">语义分割项目</h1>
+            <h1 style="display: none">超声心动图</h1>
             
             <div class="markdown-body">
               
-              <h2 id="介绍语义分割">介绍语义分割</h2>
-<p>应用场景</p>
-<p>会议软件 背景虚化</p>
-<p>智能驾驶</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240814143707560.png" srcset="/img/newloading.gif" lazyload alt="image-20240814143707560"></p>
-<p>医疗影像的分析</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240814143820519.png" srcset="/img/newloading.gif" lazyload alt="image-20240814143820519"></p>
-<p>卫星影像的分析</p>
-<p>什么时候语义分割，什么时候实例分割</p>
-<ul>
-<li>·如果不存在“实例”概念，只需要每个像素分类，用语义分割<br>
-裂纹、农田遥感、金属金相、血管<br>
-目标大片、尖细分布，轮廓不规则，</li>
-<li>如果需要区分“实例”，用实例分割<br>
-脑部肿瘤、细胞核、汽车、行人、动物<br>
-·</li>
-<li>如果需要目标检测预测框（计数、追踪、流量统计），用实例分<br>
-目标检测本身就是“实例级”，关键点检测可以视为特殊的“实例分割</li>
-</ul>
-<p>标注：</p>
-<p>使用文本提示，检测、分割、生成一切：https:/github.com/IDEA-Research/Grounded-Segment-Anything</p>
-<p>填充-切：<a target="_blank" rel="noopener" href="https://github.com/geekyutao/.Inpaint-.Anything">https://github.com/geekyutao/.Inpaint-.Anything</a><br>
-追踪一切：https:/github.com/gaomingqi/Track-Anything</p>
-<p>Magic Maker:<a target="_blank" rel="noopener" href="https://openxlab.org.cn/apps/detail/xj/magic-maker">https://openxlab.org.cn/apps/detail/xj/magic-maker</a></p>
-<h2 id="数据集">数据集</h2>
-<ul>
-<li>单类别</li>
-</ul>
-<p>组织病理切片肾小球：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/baesiann/glomeruli-hubmap-external-1024x1024">https://www.kaggle.com/datasets/baesiann/glomeruli-hubmap-external-1024x1024</a></p>
-<ul>
-<li>多类别</li>
-</ul>
-<p>迪拜卫星航拍六类别：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/humansintheloop/semantic-segmentation-of-aerial-imagery">https://www.kaggle.com/datasets/humansintheloop/semantic-segmentation-of-aerial-imagery</a></p>
-<p>其它单类别语义分割数据集</p>
-<p>乳腺癌：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/aryashah2k/breast-ultrasound-images-dataset">https://www.kaggle.com/datasets/aryashah2k/breast-ultrasound-images-dataset</a></p>
-<p>电子显微镜粒子：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/batuhanyil/electron-microscopy-particle-segmentation">https://www.kaggle.com/datasets/batuhanyil/electron-microscopy-particle-segmentation</a></p>
-<p>农作物病虫害叶片：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/fakhrealam9537/leaf-disease-segmentation-dataset">https://www.kaggle.com/datasets/fakhrealam9537/leaf-disease-segmentation-dataset</a></p>
-<p>农作物地块：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/khlaifiabilel/pastis">https://www.kaggle.com/datasets/khlaifiabilel/pastis</a></p>
-<p>洪水航拍区域：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/faizalkarim/flood-area-segmentation?select=Image">https://www.kaggle.com/datasets/faizalkarim/flood-area-segmentation?select=Image</a></p>
-<p>指甲：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/vpapenko/nails-segmentation">https://www.kaggle.com/datasets/vpapenko/nails-segmentation</a></p>
-<p>水下场景：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/ashish2001/semantic-segmentation-of-underwater-imagery-suim">https://www.kaggle.com/datasets/ashish2001/semantic-segmentation-of-underwater-imagery-suim</a></p>
-<p>西红柿种子：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/juanma9901/tomatoseedsdatasetjm">https://www.kaggle.com/datasets/juanma9901/tomatoseedsdatasetjm</a></p>
-<p>卫星建筑物：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/hyyyrwang/buildings-dataset">https://www.kaggle.com/datasets/hyyyrwang/buildings-dataset</a></p>
-<p>荧光显微镜小鼠脑切片发光神经元-实例分割：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/nbroad/fluorescent-neuronal-cells">https://www.kaggle.com/datasets/nbroad/fluorescent-neuronal-cells</a></p>
-<p>混凝土裂缝：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/jakubniemiec/concrete-crack-images">https://www.kaggle.com/datasets/jakubniemiec/concrete-crack-images</a></p>
-<p>核磁共振脑瘤分割：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/awsaf49/brats2020-training-data">https://www.kaggle.com/datasets/awsaf49/brats2020-training-data</a></p>
-<p>腹部CT肝脏病变分割：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/andrewmvd/liver-tumor-segmentation">https://www.kaggle.com/datasets/andrewmvd/liver-tumor-segmentation</a></p>
-<p>脑部神经胶质瘤核磁共振：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/mateuszbuda/lgg-mri-segmentation">https://www.kaggle.com/datasets/mateuszbuda/lgg-mri-segmentation</a></p>
-<p>其它多类别语义分割数据集</p>
-<p>高分辨率航拍-多类别：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/titan15555/uavid-semantic-segmentation-dataset">https://www.kaggle.com/datasets/titan15555/uavid-semantic-segmentation-dataset</a></p>
-<p>无人机航拍：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/bulentsiyah/semantic-drone-dataset">https://www.kaggle.com/datasets/bulentsiyah/semantic-drone-dataset</a></p>
-<p>衣物：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/rajkumarl/people-clothing-segmentation">https://www.kaggle.com/datasets/rajkumarl/people-clothing-segmentation</a></p>
-<p>海洋生物：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/crowww/a-large-scale-fish-dataset">https://www.kaggle.com/datasets/crowww/a-large-scale-fish-dataset</a></p>
-<p>腿和脚趾：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/tapakah68/legs-segmentation">https://www.kaggle.com/datasets/tapakah68/legs-segmentation</a></p>
-<p>无人机航拍：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/santurini/semantic-segmentation-drone-dataset">https://www.kaggle.com/datasets/santurini/semantic-segmentation-drone-dataset</a></p>
-<p>其它图像分类数据集</p>
-<p>气胸：<a target="_blank" rel="noopener" href="https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation">https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation</a></p>
-<p>更多数据集</p>
-<p><a target="_blank" rel="noopener" href="https://paperswithcode.com/sota">Browse the State-of-the-Art in Machine Learning | Papers With Code</a></p>
-<p>图像分割发展趋势<br>
-使用Transformer架构<br>
-统一语义分割、实例分割、全景分割<br>
-视觉大模型(SAM)<br>
-多模态+AIGC（文生图、图生图、图像编辑)</p>
-<p>评价语义分割模型</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240814145838252.png" srcset="/img/newloading.gif" lazyload alt="image-20240814145838252"></p>
-<h2 id="标注数据集">标注数据集</h2>
-<p>Labelme <a target="_blank" rel="noopener" href="https://github.com/labelmeai/labelme">labelme</a></p>
-<p>标注前</p>
+              <h2 id="超声心动图是什么">超声心动图是什么</h2>
+<h3 id="基本原理">基本原理</h3>
+<p>超声心动图主要是通过超声波探头发出超声波，超声波在人体组织中传播，遇到不同的组织界面会产生反射波，这些反射波被探头接收后，经过计算机处理，转化为图像显示在屏幕上。由于心脏是一个不断跳动的器官，超声心动图可以实时观察心脏的结构和运动情况。</p>
+<h3 id="检查类型">检查类型</h3>
 <ol>
-<li>标注前，需左上角<code>File</code>开启<code>Save Automatically</code>自动保存</li>
-<li>标注前，需左上角<code>File</code>关闭<code>Save With Image Data</code>，不把图像本身保存至标签文件中</li>
-<li>应提前把所有图像放到同一个文件夹中，再用labelme打开这个文件夹标注</li>
+<li>M 型超声心动图：可以记录心脏各结构随时间变化的运动曲线，主要用于测量心脏各腔室的大小和心功能指标。</li>
+<li>二维超声心动图：能够提供心脏的二维切面图像，清晰显示心脏的形态、结构和瓣膜的活动情况。</li>
+<li>多普勒超声心动图：包括彩色多普勒和频谱多普勒。彩色多普勒可以显示心脏内血流的方向和速度，帮助判断是否存在瓣膜反流、狭窄等异常；频谱多普勒可以定量分析血流速度和压力差等参数。</li>
 </ol>
-<p>标注中</p>
+<h3 id="临床应用">临床应用</h3>
 <ol>
-<li>应使标注文件保存至图像相同目录下，标注过程中，不要切换图像和标注文件的目录</li>
-<li>多段线（polygon）应尽可能精细，紧密贴合物体的真实边缘轮廓。</li>
-<li>如果使用AI-Polygon辅助标注，每张图片需先等待SAM分割一切大模型处理几秒钟，才能开始标注。</li>
-<li>如果是实例分割标注：标目标检测框时，画物体的外接矩形框。框的两个点，必须分别是左上角和右下角，顺序不能错。</li>
-<li>如果是目标检测+关键点检测标注：多段线（polygon）的第一个点<code>必须且只能落入一个框中</code>。见视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19g4y1777q">https://www.bilibili.com/video/BV19g4y1777q</a></li>
+<li>诊断心脏疾病
+<ul>
+<li>先天性心脏病：如房间隔缺损、室间隔缺损、动脉导管未闭等，可以明确缺损的位置、大小和分流情况。</li>
+<li>瓣膜性心脏病：判断瓣膜的形态、结构和功能，诊断瓣膜狭窄、关闭不全等病变。</li>
+<li>心肌病：如扩张型心肌病、肥厚型心肌病等，可显示心肌的厚度、运动情况和心腔大小的变化。</li>
+<li>冠心病：可以观察心肌的运动情况，评估心肌缺血和梗死的范围。</li>
+</ul>
+</li>
+<li>评估心功能
+<ul>
+<li>测量心脏的收缩功能和舒张功能指标，如射血分数、左心室短轴缩短率、E/A 比值等，判断心脏的整体功能状态。</li>
+</ul>
+</li>
+<li>指导治疗和监测疗效
+<ul>
+<li>在心脏手术前，超声心动图可以提供详细的心脏结构信息，帮助制定手术方案。</li>
+<li>术后可以监测心脏的恢复情况，评估手术效果。</li>
+<li>对于心力衰竭等患者，可定期进行超声心动图检查，调整治疗方案。</li>
+</ul>
+</li>
 </ol>
-<p>标注后确认</p>
+<h3 id="优势和局限性">优势和局限性</h3>
 <ol>
-<li>Labelme标注的json文件最后<code>imagePath</code>图像路径，<strong>只能</strong>是图像名字本身，<strong>不能</strong>有其它的路径和符号（例如<code>../</code>、<code>\\</code>之类的）</li>
+<li>优势
+<ul>
+<li>无创性：无需侵入人体，对患者无创伤。</li>
+<li>实时性：可以实时观察心脏的动态变化。</li>
+<li>可重复性：可以多次重复检查，便于观察病情变化。</li>
+<li>准确性高：对心脏结构和功能的评估较为准确。</li>
+</ul>
+</li>
+<li>局限性
+<ul>
+<li>受操作者技术水平影响：检查结果的准确性与操作者的经验和技术水平有一定关系。</li>
+<li>对肥胖、肺气肿等患者图像质量可能较差：超声波在这些患者体内的传播会受到影响，导致图像不清晰。</li>
+<li>不能检测微小血管病变：对于一些微小的冠状动脉病变可能无法检测到。</li>
+</ul>
+</li>
 </ol>
-<p>使用这个进行格式转换</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/TommyZihao/Label2Everything">TommyZihao/Label2Everything: 常见计算机视觉标注格式相互转换 (github.com)</a></p>
+<h2 id="计算机视觉可以做什么">计算机视觉可以做什么</h2>
+<h3 id="心脏结构检测与分割">心脏结构检测与分割</h3>
+<ol>
+<li>
+<p>心室分割</p>
+<ul>
+<li>准确分割左心室和右心室，确定其形状和大小。这对于评估心脏功能至关重要，例如通过计算心室容积变化来判断收缩和舒张功能。</li>
+<li>可以为医生提供定量的指标，如左心室射血分数等，辅助诊断心力衰竭等疾病。</li>
+</ul>
+<blockquote>
+<p>射血分数是指每搏输出量占心室舒张末期容积量的百分比，分数 =（心室舒张末期容积 - 心室收缩末期容积）/ 心室舒张末期容积 ×100%。可以用于评估心脏功能、诊断疾病、指导治疗、预后判断</p>
+</blockquote>
+</li>
+<li>
+<p>瓣膜分割</p>
+<ul>
+<li>识别和分割心脏瓣膜，如二尖瓣、三尖瓣、主动脉瓣和肺动脉瓣。有助于检测瓣膜的形态异常、狭窄或关闭不全等病变。</li>
+<li>为瓣膜修复或置换手术提供术前规划的重要信息。</li>
+</ul>
+</li>
+</ol>
+<h3 id="心脏运动分析">心脏运动分析</h3>
+<ol>
+<li>心肌运动跟踪
+<ul>
+<li>跟踪心肌在心动周期中的运动轨迹，分析心肌的收缩和舒张运动模式。可以检测心肌局部运动异常，如心肌缺血或梗死区域的运动减弱或消失。</li>
+<li>为早期诊断冠心病等心血管疾病提供依据。</li>
+</ul>
+</li>
+<li>瓣膜运动分析
+<ul>
+<li>监测心脏瓣膜的开放和关闭过程，评估瓣膜的运动速度、幅度和协调性。有助于诊断瓣膜功能障碍，如瓣膜脱垂、狭窄或反流等。</li>
+</ul>
+</li>
+</ol>
+<h3 id="疾病诊断与分类">疾病诊断与分类</h3>
+<ol>
+<li>先天性心脏病诊断
+<ul>
+<li>通过分析超声心动图图像中的心脏结构和血流模式，识别先天性心脏病的特征，如房间隔缺损、室间隔缺损、动脉导管未闭等。</li>
+<li>可以辅助医生进行早期诊断和制定治疗方案。</li>
+</ul>
+</li>
+<li>心肌病分类
+<ul>
+<li>区分不同类型的心肌病，如扩张型心肌病、肥厚型心肌病和限制型心肌病。通过提取图像特征和分析心脏形态、功能参数，实现对心肌病的准确分类。</li>
+<li>为个性化治疗提供指导。</li>
+</ul>
+</li>
+<li>主动脉狭窄程度预测
+<ul>
+<li>可以对主动脉狭窄进行早期诊断，及时发现潜在的疾病风险。同时，还可以对患者进行长期监测，观察狭窄程度的变化，评估治疗效果。</li>
+</ul>
+</li>
+</ol>
+<h3 id="标志物检测">标志物检测</h3>
+<ol>
+<li>心脏肿瘤诊断
+<ul>
+<li>超声心动图可以检测出心脏内或心包内的肿瘤，评估其大小、位置以及与周围组织的关系，为临床治疗提供重要信息。</li>
+</ul>
+</li>
+</ol>
+<h2 id="近三年超声心动图论文调研">近三年超声心动图论文调研</h2>
+<h3 id="MICCAI">MICCAI</h3>
+<p><em><strong>Reinforcement Learning for Active Modality Selection During Diagnosis(2022)</strong></em></p>
+<p>提出了一个RL框架来获得具有成本效益的政策，该政策顺序地提出要获得的最佳模式以产生诊断。使用超声心动图来做验证，不是想要的</p>
+<p><em><strong>Ensembled Prediction of Rheumatic Heart Disease from Ungated Doppler Echocardiography Acquired in Low-Resource Settings(2022)</strong></em></p>
+<p>在低资源环境下获得的非门控超声心动图综合预测风湿性心脏病</p>
+<p><strong>摘要</strong></p>
+<p>风湿性心脏病（RHD）是儿童的一种常见疾病，急性风湿热会导致心脏瓣膜永久性损伤，从而损害心脏泵血的能力。超声心动图是用于检测RHD的流行诊断工具。然而，这项评估的执行需要熟练医生的工作，这就带来了可及性问题，特别是在临床专家接触有限的低收入国家。本文提出了一种新型的、自动化的、基于深度学习的方法，使用彩色超声心动图剪辑来检测RHD。我们首先通过识别两个采集视图（胸旁和顶面）来均匀化非门控超声心动图的分析，然后在心室收缩期间提取左心房区域。然后，我们应用多视图3D卷积神经网络和多视图Transformer的模型集成来检测RHD。该模型使我们的分析受益于时空信息的包含，并使用注意力机制来识别RHD检测的相关时间帧，从而提高准确检测RHD的能力。使用在低资源环境中591名儿童的护理点采集的2，136个彩色超声心动图剪辑评估了该方法的性能，显示平均准确性为0.78，敏感性为0.81，特异性为0.74。这些结果与专家临床医生进行的RHD检测相似，并且优于最先进的方法。因此，我们的新模型有可能改善与临床专家接触有限的患者的RHD检测。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240905135347597.png" srcset="/img/newloading.gif" lazyload alt="Fig. 1. RHD检测提出的方法流程图"></p>
+<p><strong>超声心动图均匀化</strong></p>
+<ol>
+<li>从每个患者收集的大量数据中检索这些视图，我们将每个视频流的第一帧（代表性帧）传递给深度学习分类模型，使用ResNet 50分类</li>
+<li>分析了视频中的所有帧</li>
+<li>利用LinkNet 和VGG 16编码器分割左心房</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240905141255878.png" srcset="/img/newloading.gif" lazyload alt="Fig. 3.所采用的3D卷积神经网络（CNN）和Transformer的结构"></p>
+<p><strong>风湿性心脏病的检测</strong></p>
+<p>开发了多视图3D CNN和Transformer的模型集成，以将空间和时间特征与注意力机制融合用以检测RHD检测</p>
+<p><em>多视图3D卷积神经网络</em></p>
+<p>应用3D CNN从两个视图中提取时空信息，将它们融合在单个端到端网络中（图3）。输入数据是从两个视图之一在心室收缩期间捕获的局部左心房区域创建的，重新采样为64 x 64像素x 3个颜色通道x 16帧。这些大小是根据内存管理确定的。每个输入数据都使用两个具有ReLu激活功能的3 x 3 x 3卷积过滤器处理。每个过滤器后面是一个批规格化层和2 x 2 x 2最大池化，每个维度的步进为2。然后，使用两个完全连接的层将从两个视图中提取的特征连接起来并一起处理，其中包括256个具有ReLu激活功能的单元和2个具有Softmax概率功能的单元。该模型采用批量大小64，使用Adam优化算法最大限度地减少二进制交叉熵损失函数，在350个历元期间学习率为0.0001。</p>
+<p><em>多视图Transformer</em></p>
+<p>包括一个Transformer，以嵌入心室收缩期间帧之间的相关依赖关系，并引起人们对重要时间点的注意（图3）。首先，我们应用了两个在ImageNet数据集上预先训练的DenseNet 121 CNN，以从两个视图中捕获低级特征。DenseNet 121 CNN分析了心室收缩期间的帧，重新采样为16帧，尺寸为64 x 64像素x 3个颜色通道。从两个视图中获得的信息通过Transformer模型进行汇总以进行高级分析，类似于[23]中提出的模型。Transformer模型首先将位置信息嵌入到输入特征中以保留顺序信息。然后，该模型使用自我注意模块学习帧之间的关系，然后是一个前向神经网络，该神经网络由两层组成，带有高斯误差线性单元[29]。每个块的输入和输出之间的RST连接用于直接通过网络传递梯度。在每个块之后，应用一个规范化层来提高可概括性并减少处理时间。Transformer模型编码的特征通过全局最大池化操作进行下采样，并通过Softmax概率函数将其反馈到最后一个完全连接的层以预测RHD。在最后一个完全连接的层之前，我们应用了保持率为0.5的dropout。该模型使用批量大小为10和Adam优化算法（学习率为0.0001）进行训练，以在350个历元内最小化二进制交叉熵损失函数。</p>
+<p>3D CNN将心室收缩期间的所有帧作为体积数据来评估RHD，而Transformer则逐帧评估数据。由于两个深度学习模型从不同的角度分析数据，因此我们通过应用最大投票策略将它们的预测分数融合在集成模型中以提高准确性。此外，当可进行多次采集时，正如临床实践中的典型情况，受试者的每个A4 CC/PLAXT视图都有一个以上的视频，其中还可能包括多个心室收缩。</p>
+<p><strong>实验</strong></p>
+<p>使用Keras（版本2.6.0）和TensorFlow（版本2.6.2）实现，并在具有12 GB内存的GeForce GTX TitAN X图形处理器（NVIDIA，圣克拉拉，加利福尼亚州）上进行训练。</p>
+<p><strong>结论</strong></p>
+<p>提出了一种基于自动深度学习的方法来使用非门控多视图彩色超声心动图来检测RHD。首先，我们使用深度学习方法对图像进行均匀化，以减少数据可变性，并将分类器集中在与RHD相关的图像信息上。接下来，我们应用多视图深度学习模型（3D CNN和Transformer）来分析具有注意力机制的帧的时空信息。最后，我们采用整体模型来融合多次心室收缩的预测并获得RHD风险评分。结果表明，我们的方法可以与专家临床医生一样可靠地检测RHD，并且优于检测RHD的最新方法。我们的方法与没有心电图门控的低价手持超声设备兼容，这使得它适用于低资源环境中的RHD筛查。</p>
+<p><em><strong>Multi-frame Attention Network for Left Ventricle Segmentation in 3D Echocardiography(2021)</strong></em></p>
+<p>用于3D超声心动图左心室分割的多帧注意力网络</p>
+<p><strong>摘要</strong></p>
+<p>超声心动图是用于评估患者心血管健康状况的主要成像方式之一。在对超声心动图进行的众多分析中，左心室的分割对于量化射血分数等临床测量至关重要。然而，3D超声心动图中左心室的分割仍然是一项具有挑战性和乏味的任务。本文提出了一种多帧注意力网络来提高3D超声心动图中左心室分割的性能。多帧关注机制允许目标图像之后的图像序列中高度相关的时空特征用于增强分割的性能。51张活体猪3D+时间超声心动图图像上显示的实验结果表明，与其他标准的基于深度学习的医学图像分割模型相比，利用相关时空特征显着提高了左心室分割的性能。</p>
+<p><em><strong>Towards Efficient Human-Machine Collaboration: Real-Time Correction Effort Prediction for Ultrasound Data Acquisition (2021)</strong></em></p>
+<h3 id="CVPR">CVPR</h3>
+<p><em><strong>Reciprocal_Landmark_Detection_and_Tracking_with_Extremely_Few_Annotations</strong></em></p>
+<p>【本周任务】<br>
+1、了解超声心动图的相关概念（主要是去了解基于超声心动图有哪些任务可以做，比如分割、射血分数计算、收缩末期和舒张末期左心室容积计算、主动脉狭窄程度预测、标志物检测等）；<br>
+2、继续学习mamba模型，主要了解怎么调用，可以参考下面的代码仓；<br>
+3、粗粮阅读SegMamba的论文，主要是了解一下医学图像上的分割任务，论文在下面的链接中；<br>
+4、调研超声心动图上的分割和标志物检测模型（近三年为主），目标期刊会议：MICCAI、CVPR、AAAI、TMI（期刊）、MIA（期刊）、TIP（期刊）<br>
+【目标】<br>
+1、认识超声心脏图以及相关任务；<br>
+2、了解Mamba模型如何在下游任务使用；<br>
+3、为后续实验做准备（在调研的过程中找到一两个可以跟进的工作：①Readme文件清晰；②论文中显卡资源不夸张，那种懂不懂4卡A100的就不考虑了；③使用的数据集包含EchoNet、CAMUS、UIC）<br>
+SegMamba论文：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2207.02549">https://arxiv.org/abs/2207.02549</a><br>
+SegMamba代码：<a target="_blank" rel="noopener" href="https://github.com/guybenyosef/EchoGraphs/tree/main">https://github.com/guybenyosef/EchoGraphs/tree/main</a></p>
 
               
             </div>
@@ -396,7 +465,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
+  <a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F/" class="category-chain-item">医学影像</a>
   
   
 
@@ -411,9 +480,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
-      
-        <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">#人工智能</a>
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E5%8C%BB%E5%AD%A6/">#计算机视觉 医学</a>
       
     </div>
   
@@ -425,8 +492,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>语义分割项目</div>
-      <div>http://example.com/2024/08/14/来实际做一个语义分割项目/</div>
+      <div>超声心动图</div>
+      <div>http://example.com/2024/09/03/UltrasoundCardiogram/</div>
     </div>
     <div class="license-meta">
       
@@ -438,7 +505,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月14日</div>
+          <div>2024年9月3日</div>
         </div>
       
       
@@ -468,18 +535,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/09/03/UltrasoundCardiogram/" title="超声心动图">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">超声心动图</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/08/06/computer%20vision/" title="计算机视觉">
-                        <span class="hidden-mobile">计算机视觉</span>
+                      <a href="/2024/08/14/%E6%9D%A5%E5%AE%9E%E9%99%85%E5%81%9A%E4%B8%80%E4%B8%AA%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E9%A1%B9%E7%9B%AE/" title="语义分割项目">
+                        <span class="hidden-mobile">语义分割项目</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
