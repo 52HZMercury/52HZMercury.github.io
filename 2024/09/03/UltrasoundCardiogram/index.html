@@ -18,14 +18,14 @@
   
     <meta name="description" content="早点发paper">
 <meta property="og:type" content="article">
-<meta property="og:title" content="超声心动图">
+<meta property="og:title" content="超声心动图调研">
 <meta property="og:url" content="http://example.com/2024/09/03/UltrasoundCardiogram/index.html">
 <meta property="og:site_name" content="Mercury&#39;s blog">
 <meta property="og:description" content="早点发paper">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ts1.cn.mm.bing.net/th?id=ODL.879d7140f84f549d3dc259e08b612016&w=298&h=225&c=10&rs=1&qlt=99&bgcl=fffffe&r=0&o=6&pid=WrapstarImage">
 <meta property="article:published_time" content="2024-09-03T07:35:46.000Z">
-<meta property="article:modified_time" content="2024-09-05T06:58:10.106Z">
+<meta property="article:modified_time" content="2024-09-05T12:39:01.004Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="计算机视觉 医学">
 <meta name="twitter:card" content="summary_large_image">
@@ -35,7 +35,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>超声心动图 - Mercury&#39;s blog</title>
+  <title>超声心动图调研 - Mercury&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="超声心动图"></span>
+            <span id="subtitle" data-typed-text="超声心动图调研"></span>
           
         </div>
 
@@ -236,7 +236,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          5k 字
+          7.9k 字
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
           <!-- compatible with older versions-->
-          16 分钟
+          25 分钟
         
       </span>
     
@@ -286,7 +286,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">超声心动图</h1>
+            <h1 style="display: none">超声心动图调研</h1>
             
             <div class="markdown-body">
               
@@ -404,39 +404,116 @@
 </li>
 </ol>
 <h2 id="近三年超声心动图论文调研">近三年超声心动图论文调研</h2>
+<p><em><strong>Light-weight spatio-temporal graphs for segmentation and ejection fraction prediction in cardiac ultrasound</strong></em></p>
+<ul>
+<li><strong>摘要</strong></li>
+</ul>
+<p>准确和一致的超声心动图参数预测对于心血管疾病的诊断和治疗是非常重要的，特别是，左心室的分割可用于推导心室容积、射血分数 (EF) 和其他相关测量值。 在本文中，我们提出了一种称为 EchoGraphs 的新自动化方法，用于通过检测解剖关键点来预测射血分数和分割左心室。基于图卷积网络 (GCN) 的直接坐标回归模型用于检测关键点。 GCN 可以学习根据每个关键点的局部外观以及所有关键点组合的全局空间和时间结构来表示心脏形状。我们在 EchoNet 基准数据集上评估了我们的 EchoGraphs 模型。与语义分割相比，GCN 显示出准确的分割和稳健性和推理运行时间的改进。EF 与分割同时计算，我们的方法还获得了最先进的射血分数估计。代码链接:<a target="_blank" rel="noopener" href="https://github.com/guybenyosef/EchoGraphs">https://github.com/guybenyosef/EchoGraphs</a></p>
+<ul>
+<li><strong>模型</strong></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240905202334805.png" srcset="/img/newloading.gif" lazyload alt="The EchoGraphs model architecture"></p>
+<p>//todo</p>
 <h3 id="MICCAI">MICCAI</h3>
 <p><em><strong>Reinforcement Learning for Active Modality Selection During Diagnosis(2022)</strong></em></p>
 <p>提出了一个RL框架来获得具有成本效益的政策，该政策顺序地提出要获得的最佳模式以产生诊断。使用超声心动图来做验证，不是想要的</p>
 <p><em><strong>Ensembled Prediction of Rheumatic Heart Disease from Ungated Doppler Echocardiography Acquired in Low-Resource Settings(2022)</strong></em></p>
 <p>在低资源环境下获得的非门控超声心动图综合预测风湿性心脏病</p>
-<p><strong>摘要</strong></p>
+<ul>
+<li><strong>摘要</strong></li>
+</ul>
 <p>风湿性心脏病（RHD）是儿童的一种常见疾病，急性风湿热会导致心脏瓣膜永久性损伤，从而损害心脏泵血的能力。超声心动图是用于检测RHD的流行诊断工具。然而，这项评估的执行需要熟练医生的工作，这就带来了可及性问题，特别是在临床专家接触有限的低收入国家。本文提出了一种新型的、自动化的、基于深度学习的方法，使用彩色超声心动图剪辑来检测RHD。我们首先通过识别两个采集视图（胸旁和顶面）来均匀化非门控超声心动图的分析，然后在心室收缩期间提取左心房区域。然后，我们应用多视图3D卷积神经网络和多视图Transformer的模型集成来检测RHD。该模型使我们的分析受益于时空信息的包含，并使用注意力机制来识别RHD检测的相关时间帧，从而提高准确检测RHD的能力。使用在低资源环境中591名儿童的护理点采集的2，136个彩色超声心动图剪辑评估了该方法的性能，显示平均准确性为0.78，敏感性为0.81，特异性为0.74。这些结果与专家临床医生进行的RHD检测相似，并且优于最先进的方法。因此，我们的新模型有可能改善与临床专家接触有限的患者的RHD检测。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240905135347597.png" srcset="/img/newloading.gif" lazyload alt="Fig. 1. RHD检测提出的方法流程图"></p>
-<p><strong>超声心动图均匀化</strong></p>
-<ol>
+<ul>
+<li><strong>超声心动图均匀化</strong>
+<ul>
 <li>从每个患者收集的大量数据中检索这些视图，我们将每个视频流的第一帧（代表性帧）传递给深度学习分类模型，使用ResNet 50分类</li>
 <li>分析了视频中的所有帧</li>
 <li>利用LinkNet 和VGG 16编码器分割左心房</li>
-</ol>
+</ul>
+</li>
+</ul>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240905141255878.png" srcset="/img/newloading.gif" lazyload alt="Fig. 3.所采用的3D卷积神经网络（CNN）和Transformer的结构"></p>
-<p><strong>风湿性心脏病的检测</strong></p>
+<ul>
+<li><strong>风湿性心脏病的检测</strong></li>
+</ul>
 <p>开发了多视图3D CNN和Transformer的模型集成，以将空间和时间特征与注意力机制融合用以检测RHD检测</p>
 <p><em>多视图3D卷积神经网络</em></p>
 <p>应用3D CNN从两个视图中提取时空信息，将它们融合在单个端到端网络中（图3）。输入数据是从两个视图之一在心室收缩期间捕获的局部左心房区域创建的，重新采样为64 x 64像素x 3个颜色通道x 16帧。这些大小是根据内存管理确定的。每个输入数据都使用两个具有ReLu激活功能的3 x 3 x 3卷积过滤器处理。每个过滤器后面是一个批规格化层和2 x 2 x 2最大池化，每个维度的步进为2。然后，使用两个完全连接的层将从两个视图中提取的特征连接起来并一起处理，其中包括256个具有ReLu激活功能的单元和2个具有Softmax概率功能的单元。该模型采用批量大小64，使用Adam优化算法最大限度地减少二进制交叉熵损失函数，在350个历元期间学习率为0.0001。</p>
 <p><em>多视图Transformer</em></p>
 <p>包括一个Transformer，以嵌入心室收缩期间帧之间的相关依赖关系，并引起人们对重要时间点的注意（图3）。首先，我们应用了两个在ImageNet数据集上预先训练的DenseNet 121 CNN，以从两个视图中捕获低级特征。DenseNet 121 CNN分析了心室收缩期间的帧，重新采样为16帧，尺寸为64 x 64像素x 3个颜色通道。从两个视图中获得的信息通过Transformer模型进行汇总以进行高级分析，类似于[23]中提出的模型。Transformer模型首先将位置信息嵌入到输入特征中以保留顺序信息。然后，该模型使用自我注意模块学习帧之间的关系，然后是一个前向神经网络，该神经网络由两层组成，带有高斯误差线性单元[29]。每个块的输入和输出之间的RST连接用于直接通过网络传递梯度。在每个块之后，应用一个规范化层来提高可概括性并减少处理时间。Transformer模型编码的特征通过全局最大池化操作进行下采样，并通过Softmax概率函数将其反馈到最后一个完全连接的层以预测RHD。在最后一个完全连接的层之前，我们应用了保持率为0.5的dropout。该模型使用批量大小为10和Adam优化算法（学习率为0.0001）进行训练，以在350个历元内最小化二进制交叉熵损失函数。</p>
 <p>3D CNN将心室收缩期间的所有帧作为体积数据来评估RHD，而Transformer则逐帧评估数据。由于两个深度学习模型从不同的角度分析数据，因此我们通过应用最大投票策略将它们的预测分数融合在集成模型中以提高准确性。此外，当可进行多次采集时，正如临床实践中的典型情况，受试者的每个A4 CC/PLAXT视图都有一个以上的视频，其中还可能包括多个心室收缩。</p>
-<p><strong>实验</strong></p>
+<ul>
+<li><strong>实验</strong></li>
+</ul>
 <p>使用Keras（版本2.6.0）和TensorFlow（版本2.6.2）实现，并在具有12 GB内存的GeForce GTX TitAN X图形处理器（NVIDIA，圣克拉拉，加利福尼亚州）上进行训练。</p>
-<p><strong>结论</strong></p>
+<ul>
+<li><strong>结论</strong></li>
+</ul>
 <p>提出了一种基于自动深度学习的方法来使用非门控多视图彩色超声心动图来检测RHD。首先，我们使用深度学习方法对图像进行均匀化，以减少数据可变性，并将分类器集中在与RHD相关的图像信息上。接下来，我们应用多视图深度学习模型（3D CNN和Transformer）来分析具有注意力机制的帧的时空信息。最后，我们采用整体模型来融合多次心室收缩的预测并获得RHD风险评分。结果表明，我们的方法可以与专家临床医生一样可靠地检测RHD，并且优于检测RHD的最新方法。我们的方法与没有心电图门控的低价手持超声设备兼容，这使得它适用于低资源环境中的RHD筛查。</p>
 <p><em><strong>Multi-frame Attention Network for Left Ventricle Segmentation in 3D Echocardiography(2021)</strong></em></p>
 <p>用于3D超声心动图左心室分割的多帧注意力网络</p>
-<p><strong>摘要</strong></p>
+<ul>
+<li><strong>摘要</strong></li>
+</ul>
 <p>超声心动图是用于评估患者心血管健康状况的主要成像方式之一。在对超声心动图进行的众多分析中，左心室的分割对于量化射血分数等临床测量至关重要。然而，3D超声心动图中左心室的分割仍然是一项具有挑战性和乏味的任务。本文提出了一种多帧注意力网络来提高3D超声心动图中左心室分割的性能。多帧关注机制允许目标图像之后的图像序列中高度相关的时空特征用于增强分割的性能。51张活体猪3D+时间超声心动图图像上显示的实验结果表明，与其他标准的基于深度学习的医学图像分割模型相比，利用相关时空特征显着提高了左心室分割的性能。</p>
+<ul>
+<li><strong>模型</strong></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240905155958243.png" srcset="/img/newloading.gif" lazyload alt="Fig. 1. P多帧注意力网络用于超声心动图 3D 左心室分割"></p>
+<p>图 1 显示了模型输入为目标帧和 4 个参考帧的实例。这允许目标体积帧利用随后的一系列 4 个体积帧来学习时空注意特征。所选系列中的每个体积都将经过具有共享权重的标准编码器架构。对于 5 帧输入，在编码器阶段结束时，将有 5 个特征图，Ft、Ft+1、Ft+2、Ft+3、Ft+4。对应于输入体积的每个特征图的尺寸为 c × w × h × d，其中 c = 通道、w = 宽度、h = 高度和 d = 深度。参考特征图 Ft+1、Ft+2、Ft+3、Ft+4 将分别与目标特征图 Ft 一起使用来计算注意图。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240905160710290.png" srcset="/img/newloading.gif" lazyload alt="Fig. 2. 多帧注意力模块的视觉图示"></p>
+<p>注意力图利用了从目标特征图(蓝色)和参考特征图(黄色)中提取的特征之间的相关性。使用利用矩阵乘法，Ft 和 Ft+i（其中 i = 1, . . . , 4）被重塑为 c × whd 的维度。因此，相关性图的维度为 whd × whd。最后用softmax函数对相关图进行归一化，以计算注意力图</p>
+<ul>
+<li><strong>实验</strong></li>
+</ul>
+<p>使用猪体内 3D 超声心动图数据集评估这个多帧注意方法，该数据集由从 14 头猪身上获取的 51 个 3D+时间体积超声心动图序列组成。每头猪在不同时间点进行成像，对应不同的生理状态，该模型是使用 PyTorch 实现的，并在 GTX 1080 Ti GPU 上进行了实验。模型训练完成后，推理时间约为 20 秒。</p>
+<ul>
+<li><strong>结论</strong></li>
+</ul>
+<p>提出了一种用于 3D 超声心动图左心室分割的多帧注意架构。多帧注意网络成功地利用了给定序列中超声心动图图像体积的时空特征，并提取了目标体积和参考体积之间高度相关的特征，即使在信号强度较低时也能指导心肌边界的位置。我们提出的框架还易于扩展，以包含与参考体积一样多的帧。结果表明，利用图像的时空特性可以增强 3D 左心室分割的性能。未来的工作将扩大我们的验证范围，包括临床 3D 超声心动图数据集，以更稳健地训练我们的模型。此外，我们将使用公共 2D 超声心动图数据集评估注意力的有效性，以了解多帧注意网络对不同数据维度的可行性</p>
 <p><em><strong>Towards Efficient Human-Machine Collaboration: Real-Time Correction Effort Prediction for Ultrasound Data Acquisition (2021)</strong></em></p>
+<p>主要是改善采集方面的工作，所提出的框架提供实时校正工作量预测，以帮助超声医师避免数据采集过程中的分割失败。该方法与分割模型的开发无关，可以扩展到其他应用。令人鼓舞的结果证明了优化数据采集的可行性和好处，不仅可以优化人类视觉，还可以优化机器视觉，并直接预测人类工作量而不是传统的质量指标</p>
 <h3 id="CVPR">CVPR</h3>
 <p><em><strong>Reciprocal_Landmark_Detection_and_Tracking_with_Extremely_Few_Annotations</strong></em></p>
+<p>(这篇有点看不懂</p>
+<p>具有极少注释的交互式地标检测与跟踪</p>
+<ul>
+<li><strong>摘要</strong></li>
+</ul>
+<p>在超声心动图中定位解剖标志进行二维测量是心脏疾病诊断的常规临床工作流程的一部分，这些标志的自动定位是非常需要的，以改善工作流程并减少观察者之间的差异。考虑到黄金标准标签的稀疏性质，训练机器学习框架以执行这种定位受到阻碍;只有很少百分比的心脏电影系列帧通常被手动标记以供临床使用。在本文中，我们提出了一个新的端到端–端倒数检测和跟踪模型，专门设计用于处理超声心动图标签的稀疏性质。该模型使用跨整个心脏电影序列生成一致的检测和跟踪的标志，并提出了一个对抗性的训练模型，利用这些注释帧的优势，所提出的互惠模型的优越性进行了一系列的实验证明。</p>
+<ul>
+<li><strong>模型</strong></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240905173034834.png" srcset="/img/newloading.gif" lazyload alt="image-20240905173034834"></p>
+<p>该模型可以分为三个部分，特征编码器（蓝色），检测头（橙色）和跟踪头（绿色）。特征编码器和检测头结合在一起可以视为类似Unet的模型，其总体结构类似于Unet。在模型训练阶段，RDT模型的输入是从舒张末期帧开始到收缩末期帧结束的回波序列，对于检测分支，输入是整个帧，而对于跟踪分支，输入是来自两个相邻帧的补丁。网络的输出是LVID的两个预测的界标对位置。</p>
+<p><em>共享特征编码器</em></p>
+<p>特征编码器由六个3×3卷积层组成，每个卷积层后面都有一个整流线性单元（ReLU）。第三个卷积层的步幅等于2。由于单个特征编码器足以用于跟踪头，因此我们将这部分编码器与跟踪和检测分支共享。</p>
+<p><em>探测头和焦点损失</em></p>
+<p>与特征编码器结合在一起的检测头可以看作是一个Unet类结构，它由收缩路径和扩张路径组成，收缩路径遵循卷积网络的典型架构，检测头的开始是另外六层用于特征生成，到共享特征编码器有两个类似的下采样步骤，然而，我们还在这两个步骤中将特征通道的数量增加一倍。扩展路径中的每一步都包括对特征图进行上采样，然后进行2×2卷积（“上卷积”）。前两个上采样层将特征通道的数量减半。我们还将每个上采样层的输出与相应裁剪的收缩路径的特征映射。每个3×3卷积之后是一个ReLU。由于应用了填充，整个神经网络中没有裁剪。对于用于分类的最后两个层，第一个是3×3卷积层，第二个是1×1层，用于将每个48分量特征向量映射到所需数量的地标（这里地标的数量为2）.最后一层的输出是一个二维热图，热图的每个位置代表目标地标的概率</p>
+<p><em>跟踪头和周期损失：</em></p>
+<p>由于跟踪过程仅由舒张末期和收缩末期帧监督，因此我们引入周期损失和运动损失来监督跟踪分支。为了对周期过程进行建模，我们以向前的方式迭代地应用跟踪头T：</p>
+<p>RDT模型的基本思想是在检测任务和跟踪任务之间建立一种相互学习，因为检测任务主要关注单个帧的空间信息，而跟踪任务考虑连续帧之间的时间相关性。然而，检测到的地标对位置和跟踪的地标对位置被假设为相同。因此，我们希望这两个分支产生差异以优化特征编码器φ和检测/跟踪头</p>
+<ul>
+<li><strong>训练步骤</strong></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240905174139243.png" srcset="/img/newloading.gif" lazyload alt="Training Steps"></p>
+<ol>
+<li>
+<p>步骤A.首先，我们训练D、T和φ来正确预测带注释帧的地标对。我们训练网络来最小化应用于带注释帧的三个损失。</p>
+</li>
+<li>
+<p>步骤B.在这一步中，我们针对固定的D和T训练特征编码器φ。通过训练编码器来增加差异，可以生成更多与注释数据不同的未知特征分布。注意，这一步只使用未注释的数据。</p>
+</li>
+<li>
+<p>步骤C.我们训练D和T以最小化具有固定φ的差异。由于此步骤是为了获得均匀和正确的检测/跟踪结果，因此根据经验，对于同一小批量重复此步骤三次。此设置实现了编码器和头之间的折衷该步骤被应用于注释帧和未注释帧两者，以获得针对所有现有特征的检测/跟踪头部的最佳模型权重。</p>
+</li>
+</ol>
+<ul>
+<li><strong>结论</strong></li>
+</ul>
+<p>本文提出了一种新型的互惠地标检测和跟踪模型。该模型旨在解决超声序列的数据和注释稀缺问题。该模型仅需约2，000个注释帧即可实现可靠的地标检测和跟踪（995个序列）进行训练。对于每个序列，只有两个关键帧被注释。该模型通过一种新的对抗性训练方法进行优化，该方法能更好地利用训练数据的有限信息，与现有方法的比较和结果分析验证了该方法的有效性。</p>
+<p>目标如下：</p>
 <p>【本周任务】<br>
 1、了解超声心动图的相关概念（主要是去了解基于超声心动图有哪些任务可以做，比如分割、射血分数计算、收缩末期和舒张末期左心室容积计算、主动脉狭窄程度预测、标志物检测等）；<br>
 2、继续学习mamba模型，主要了解怎么调用，可以参考下面的代码仓；<br>
@@ -492,7 +569,7 @@ SegMamba代码：<a target="_blank" rel="noopener" href="https://github.com/guyb
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>超声心动图</div>
+      <div>超声心动图调研</div>
       <div>http://example.com/2024/09/03/UltrasoundCardiogram/</div>
     </div>
     <div class="license-meta">
