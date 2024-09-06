@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ts1.cn.mm.bing.net/th?id=ODL.879d7140f84f549d3dc259e08b612016&w=298&h=225&c=10&rs=1&qlt=99&bgcl=fffffe&r=0&o=6&pid=WrapstarImage">
 <meta property="article:published_time" content="2024-09-03T07:35:46.000Z">
-<meta property="article:modified_time" content="2024-09-05T12:39:01.004Z">
+<meta property="article:modified_time" content="2024-09-06T05:32:20.631Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="计算机视觉 医学">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +236,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          7.9k 字
+          8.7k 字
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
           <!-- compatible with older versions-->
-          25 分钟
+          28 分钟
         
       </span>
     
@@ -404,6 +404,7 @@
 </li>
 </ol>
 <h2 id="近三年超声心动图论文调研">近三年超声心动图论文调研</h2>
+<h3 id="MICCAI">MICCAI</h3>
 <p><em><strong>Light-weight spatio-temporal graphs for segmentation and ejection fraction prediction in cardiac ultrasound</strong></em></p>
 <ul>
 <li><strong>摘要</strong></li>
@@ -412,9 +413,15 @@
 <ul>
 <li><strong>模型</strong></li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240905202334805.png" srcset="/img/newloading.gif" lazyload alt="The EchoGraphs model architecture"></p>
-<p>//todo</p>
-<h3 id="MICCAI">MICCAI</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240905202334805.png" srcset="/img/newloading.gif" lazyload alt="Fig.1. The EchoGraphs model architecture"></p>
+<p>编码器 在图的输入层，每个节点被分配一个特征表示。从原始图像或视频信息,必须提取 1000 维特征向量才能满足这些输入要求。<br>
+为此，可以使用任何 CNN 网络，架构的选择是速度和准确性之间的权衡。每个节点都分配有 CNN 输出，并按照螺旋序列的顺序与相邻节点特征连接。</p>
+<p><strong>EchoGraphs - 左心室分割和 EF 预测</strong></p>
+<p>单帧分割 图像编码器和图点解码器可用于预测给定单个图像帧的每个关键点 vi 2 V 的像素位置 (x; y) 2 R2，如图 1 上部所示。基于 GCN 配置强制执行的形状约束，输出是沿心肌边界的封闭轮廓，代表左心室的分割</p>
+<p>在已知 ED/ES 的情况下进行多帧分割和 EF 预测 要测量 EF，必须分析多个输入帧。我们扩展了上面讨论的单帧方法，以优化 ED 和 ES 帧上的关键点轮廓。该序列的一个关键属性是连续帧之间左心室的形状一致性。采用与之前关于身体姿势估计的工作类似的方法 [24]，ED 处的每个图形节点都连接到 ES 中的相应节点以模拟时间连接。在两个连续帧之间添加这些时间边缘有助于加强预测分割之间的一致性</p>
+<p>对于这种方法，R(2+1)D 视频编码器 [22] 用于生成特征向量。该网络将 16 帧序列作为输入，其中第一帧为 ED，最后一帧为 ES。包含中间帧比仅使用 ED 和 ES 的两帧方法效果更好，这表明额外的上下文有助于学习。这种方法需要手动识别 ED 和 ES 帧。编码器的输出用作 EF 回归网络和图解码器的输入。这种方法中的 EF 预测来自关键点和附加到特征向量的 EF 回归器</p>
+<p>从未知的 ED/ES 进行多帧分割和 EF 预测如果 ED 和 ES 未知，我们将展示两种可能的方法。首先，上述方法可以组合成一个两阶段解决方案，其中单帧模型首先预测每帧的关键点。这些关键点允许计算心室体积，并且按照 [15] 的方法，可以识别体积的负峰值和正峰值。随后，可以将多帧模型应用于每个峰值对以估计 EF。<br>
+在第二种方法中，添加了一个 ED/ES 分类器，该分类器获取编码器输出并预测序列中 ED/ES 帧的出现。分类器输出与来自编码器的特征向量连接作为图形解码器的输入。如果检测到 ED 或 ES 帧，则解码器的输出类似于相应的心室轮廓。在推理过程中，应用滑动窗口方法来处理整个视频，并在整个序列中对 EF 结果取平均值。图 1 底部显示了带有/不带有 ED/ES 分类器的多帧方法。</p>
 <p><em><strong>Reinforcement Learning for Active Modality Selection During Diagnosis(2022)</strong></em></p>
 <p>提出了一个RL框架来获得具有成本效益的政策，该政策顺序地提出要获得的最佳模式以产生诊断。使用超声心动图来做验证，不是想要的</p>
 <p><em><strong>Ensembled Prediction of Rheumatic Heart Disease from Ungated Doppler Echocardiography Acquired in Low-Resource Settings(2022)</strong></em></p>
@@ -522,9 +529,7 @@
 【目标】<br>
 1、认识超声心脏图以及相关任务；<br>
 2、了解Mamba模型如何在下游任务使用；<br>
-3、为后续实验做准备（在调研的过程中找到一两个可以跟进的工作：①Readme文件清晰；②论文中显卡资源不夸张，那种懂不懂4卡A100的就不考虑了；③使用的数据集包含EchoNet、CAMUS、UIC）<br>
-SegMamba论文：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2207.02549">https://arxiv.org/abs/2207.02549</a><br>
-SegMamba代码：<a target="_blank" rel="noopener" href="https://github.com/guybenyosef/EchoGraphs/tree/main">https://github.com/guybenyosef/EchoGraphs/tree/main</a></p>
+3、为后续实验做准备（在调研的过程中找到一两个可以跟进的工作：①Readme文件清晰；②论文中显卡资源不夸张，那种懂不懂4卡A100的就不考虑了；③使用的数据集包含EchoNet、CAMUS、UIC）</p>
 
               
             </div>
@@ -611,6 +616,12 @@ SegMamba代码：<a target="_blank" rel="noopener" href="https://github.com/guyb
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/09/06/segmamba/" title="SegMamba">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SegMamba</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
