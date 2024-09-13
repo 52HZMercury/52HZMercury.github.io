@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240906134037404.png">
 <meta property="article:published_time" content="2024-09-06T05:36:46.000Z">
-<meta property="article:modified_time" content="2024-09-13T08:11:09.310Z">
+<meta property="article:modified_time" content="2024-09-13T09:40:22.616Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -237,7 +237,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3.1k 字
+          3.7k 字
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
           <!-- compatible with older versions-->
-          10 分钟
+          12 分钟
         
       </span>
     
@@ -294,7 +294,7 @@
               <h2 id="摘要">摘要</h2>
 <p>摘要。Transformer 架构在建模全局关系方面表现出色。然而，它在处理高维医学图像时带来了巨大的计算挑战。Mamba 作为一种状态空间模型 (SSM)，最近成为一种用于对序列数据中的长距离依赖关系进行建模的著名方法，凭借其出色的内存效率和计算速度在自然语言处理领域表现出色。受其成功的启发，我们推出了 SegMamba，一种新颖的 3D 医学图像分割 Mamba 模型，旨在有效捕获每个尺度的全体积特征内的长距离依赖关系。与基于 Transformer 的方法相比，我们的 SegMamba 在整个体积特征建模方面表现出色，即使体积特征的分辨率为 64 × 64 × 64（序列长度约为 260k），也能保持卓越的处理速度。在三个数据集上进行的综合实验证明了我们的 SegMamba 的有效性和效率。此外，为了促进 3D 结直肠癌 (CRC) 分割研究，我们贡献了一个新的大规模数据集（名为 CRC-500）。SegMamba 的代码和有关 CRC-500 数据集的信息可在以下位置找到：<a target="_blank" rel="noopener" href="https://github.com/gexing/SegMamba">https://github.com/gexing/SegMamba</a></p>
 <h2 id="模型">模型</h2>
-<p>SegMamba 主要由三个组件组成：1）具有多个三向空间 Mamba 块的 3D 特征编码器，用于对不同尺度的全局信息进行建模；2）基于卷积层的 3D 解码器，用于预测分割结果；3）跳跃连接，用于将全局多尺度特征连接到解码器以实现特征重用。图 2 说明了所提出的 SegMamba 的概览。我们将在本节中进一步描述编码器和解码器的细节。</p>
+<p>SegMamba 主要由三个组件组成：1）具有多个三向空间 Mamba 块的 3D 特征编码器，用于对不同尺度的全局信息进行建模；2）基于卷积层的 3D 解码器，用于预测分割结果；3）跳跃连接，用于将全局多尺度特征连接到解码器以实现特征重用。图 2 说明了所提出的 SegMamba 的概览。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240906134037404.png" srcset="/img/newloading.gif" lazyload alt="Fig. 2. The overview of the proposed SegMamba."></p>
 <p>对于 3D 医学图像分割而言，全局特征和多尺度特征建模至关重要。Transformer 架构可以提取全局信息，但在处理过长的特征序列时会产生很大的计算负担。为了减少序列长度，基于 Transformer 架构的方法（例如 UNETR）直接将分辨率为 D × H × W 的 3D 输入下采样为 D 16 × H 16 × W 16。然而，这种方法限制了编码多尺度特征的能力，而多尺度特征对于通过解码器预测分割结果至关重要。为了克服这个限制，我们设计了一个 TSMamba 模块，以实现多尺度和全局特征建模，同时在训练和推理期间保持高效率。</p>
 <p>编码器由一个 stem 层和多个 TSMamba 块组成。stem 层提取第一个尺度特征 z0 ∈ R 48× D 2 × H 2 × W 2。 然后，z0 被输入到每个 TSMamba 块和相应的下采样层。</p>
@@ -309,8 +309,55 @@
 <p>BraTS2023 数据集 [18,1,11] 共包含 1,251 个 3D 脑部 MRI 体积。每个体积包括四种模态（即 T1、T1Gd、T2、T2-FLAIR）和三个分割目标（WT：整个肿瘤、ET：增强肿瘤、TC：肿瘤核心）</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240912163301804.png" srcset="/img/newloading.gif" lazyload alt="论文给出的实验数据"></p>
 <p>经过一周的安装和配置环境，终于把这个代码给跑了起来，在这里再骂一遍python狗屎的各种版本。超！</p>
-<p>这里复现使用的环境为pytroch 2.01,causal-conv1d 1.0.0 , mamba 1.2.0 (site-page里面mamba-ssm换成了mamba 1.0.1),</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 第19轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.8111</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8987</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.7715</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8271</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8270890194078957</span><br></code></pre></td></tr></table></figure>
+<p>这里复现使用的环境为pytroch 2.01,causal-conv1d 1.0.0 , mamba 1.2.0 (site-page里面mamba-ssm换成了mamba 1.0.1)</p>
+<table border="1">
+    <tr>
+        <th colspan="5" align="center">Dice</th>
+    </tr>
+    <tr>
+    	<td>Epoch</td>
+        <td>tc</td>
+        <td>wt</td>
+        <td>et</td>
+        <td>avg</td>
+    </tr>
+    <tr>
+    	<td>19</td>
+        <td>0.8111</td>
+        <td>0.8987</td>
+        <td>0.7715</td>
+        <td>0.8270</td>
+    </tr>
+     <tr>
+    	<td>25</td>
+        <td>0.8550</td>
+        <td>0.9313</td>
+        <td>0.8168</td>
+        <td>0.8676</td>
+    </tr>
+     <tr>
+    	<td>35</td>
+        <td>0.8839 </td>
+        <td>0.9208 </td>
+        <td>0.8588 </td>
+        <td>0.8878 </td>
+    </tr>
+     <tr>
+    	<td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+    </tr>
+     <tr>
+    	<td>/</td>
+        <td>/</td>
+        <td>/</td>
+        <td>/</td>
+        <td>/</td>
+    </tr>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 第19轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.8111</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8987</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.7715</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8271</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8270890194078957</span><br><span class="hljs-comment"># 第25轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.8550</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.9313</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8168</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/best_model_0<span class="hljs-number">.8677</span>.pt<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8677</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8676834896990973</span><br><span class="hljs-comment"># 第35轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.8839</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.9208</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8588</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/best_model_0<span class="hljs-number">.8878</span>.pt<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8878</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8878393851712278</span><br></code></pre></td></tr></table></figure>
 <p>还是再来看看评价的指标</p>
 <p><strong>Dice系数</strong></p>
 <p>Dice系数是一种集合相似度度量函数，通常用于计算两个样本的相似度，取值范围在[0,1]</p>
