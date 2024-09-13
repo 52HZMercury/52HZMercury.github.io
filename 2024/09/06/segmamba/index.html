@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240906134037404.png">
 <meta property="article:published_time" content="2024-09-06T05:36:46.000Z">
-<meta property="article:modified_time" content="2024-09-13T09:40:22.616Z">
+<meta property="article:modified_time" content="2024-09-13T15:15:35.171Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -237,7 +237,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3.7k 字
+          4.1k 字
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
           <!-- compatible with older versions-->
-          12 分钟
+          13 分钟
         
       </span>
     
@@ -305,60 +305,7 @@
 <h2 id="结论">结论</h2>
 <p>提出了第一种基于 Mamba 的通用 3D 医学图像分割方法，称为 SegMamba。我们设计了一个三向 Mamba (ToM) 模块来增强 3D 特征的顺序建模。然后，为了有效地对空间特征进行建模，我们进一步设计了一个门控空间卷积 (GSC) 模块，以在每个 ToM 模块之前增强空间维度中的特征表示。</p>
 <h2 id="复现实验">复现实验</h2>
-<p><strong>数据集</strong></p>
-<p>BraTS2023 数据集 [18,1,11] 共包含 1,251 个 3D 脑部 MRI 体积。每个体积包括四种模态（即 T1、T1Gd、T2、T2-FLAIR）和三个分割目标（WT：整个肿瘤、ET：增强肿瘤、TC：肿瘤核心）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240912163301804.png" srcset="/img/newloading.gif" lazyload alt="论文给出的实验数据"></p>
-<p>经过一周的安装和配置环境，终于把这个代码给跑了起来，在这里再骂一遍python狗屎的各种版本。超！</p>
-<p>这里复现使用的环境为pytroch 2.01,causal-conv1d 1.0.0 , mamba 1.2.0 (site-page里面mamba-ssm换成了mamba 1.0.1)</p>
-<table border="1">
-    <tr>
-        <th colspan="5" align="center">Dice</th>
-    </tr>
-    <tr>
-    	<td>Epoch</td>
-        <td>tc</td>
-        <td>wt</td>
-        <td>et</td>
-        <td>avg</td>
-    </tr>
-    <tr>
-    	<td>19</td>
-        <td>0.8111</td>
-        <td>0.8987</td>
-        <td>0.7715</td>
-        <td>0.8270</td>
-    </tr>
-     <tr>
-    	<td>25</td>
-        <td>0.8550</td>
-        <td>0.9313</td>
-        <td>0.8168</td>
-        <td>0.8676</td>
-    </tr>
-     <tr>
-    	<td>35</td>
-        <td>0.8839 </td>
-        <td>0.9208 </td>
-        <td>0.8588 </td>
-        <td>0.8878 </td>
-    </tr>
-     <tr>
-    	<td>...</td>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
-     <tr>
-    	<td>/</td>
-        <td>/</td>
-        <td>/</td>
-        <td>/</td>
-        <td>/</td>
-    </tr>
-</table>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 第19轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.8111</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8987</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.7715</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8271</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8270890194078957</span><br><span class="hljs-comment"># 第25轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.8550</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.9313</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8168</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/best_model_0<span class="hljs-number">.8677</span>.pt<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8677</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8676834896990973</span><br><span class="hljs-comment"># 第35轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.8839</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.9208</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8588</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/best_model_0<span class="hljs-number">.8878</span>.pt<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8878</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8878393851712278</span><br></code></pre></td></tr></table></figure>
-<p>还是再来看看评价的指标</p>
+<p>经过一周的安装和配置环境，终于把这个代码给跑了起来，在这里再骂一遍python狗屎的各种版本。超！在看复现数据之前，先了解相关的评价指标</p>
 <p><strong>Dice系数</strong></p>
 <p>Dice系数是一种集合相似度度量函数，通常用于计算两个样本的相似度，取值范围在[0,1]</p>
 <p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>D</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi mathvariant="normal">∣</mi><mi>X</mi><mo>∩</mo><mi>Y</mi><mi mathvariant="normal">∣</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>X</mi><mi mathvariant="normal">∣</mi><mo>+</mo><mi mathvariant="normal">∣</mi><mi>Y</mi><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">Dice =  \frac{2|X\cap Y|}{|X| + |Y|}
@@ -378,7 +325,7 @@
 <p>(2)Dice Loss比较适用于样本极度不均的情况，一般的情况下，使用 Dice Loss 会对反向传播造成不利的影响，容易使训练变得不稳定。</p>
 <p>所以在一般情况下，还是使用交叉熵损失函数。</p>
 <p><strong>豪斯多夫距离（Hausdorff distance）</strong></p>
-<p>一般使用dice衡量区域的重合程度，使用95%的HD（ Hausdorff Distance）去<span class="note note-danger">衡量边界</span>的重合程度，之所以取95%，是因为要滤去5%的离群点。</p>
+<p>一般使用dice衡量区域的重合程度，使用95%的HD（ Hausdorff Distance）去<span class="label label-danger">衡量边界</span>的重合程度，之所以取95%，是因为要滤去5%的离群点。</p>
 <div class = "note note-success">Hausdorff_95 (95% HD) 原理</div>
 <p><strong>Hausdorff distance</strong>是描述两组点集之间相似程度的一种量度，它是两个点集之间距离的一种定义形式：假设有两组集合A={a1,…,ap},B={b1,…,bq},则这两个点集合之间的Hausdorff distance定义为：</p>
 <p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>H</mi><mo stretchy="false">(</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>=</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy="false">(</mo><mi>h</mi><mo stretchy="false">(</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>h</mi><mo stretchy="false">(</mo><mi>B</mi><mo separator="true">,</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">H(A,B)=max(h(A,B),h(B,A))             (1)
@@ -390,6 +337,63 @@
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">h</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord"><span class="mord mathnormal">mina</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">A</span><span class="mord">‖</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">a</span><span class="mord">‖</span></span><span class="mopen">(</span><span class="mord">3</span><span class="mclose">)</span></span></span></span></span></p>
 <p>‖·‖是点集A和B点集间的距离范式。(如:L2或Euclidean距离).</p>
 <p><img src="https://pic2.zhimg.com/v2-0f431a4c9e8cf45575d953e2b72fec49_r.jpg" srcset="/img/newloading.gif" lazyload alt="image-20240913160120781"></p>
+<p><strong>数据集</strong></p>
+<p>BraTS2023 数据集 共包含 1,251 个 3D 脑部 MRI 体积。每个体积包括四种模态（即 T1、T1Gd、T2、T2-FLAIR）和三个分割目标（TC：肿瘤核心、WT：整个肿瘤、ET：增强肿瘤）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240912163301804.png" srcset="/img/newloading.gif" lazyload alt="论文给出的实验数据"></p>
+<p>这里复现使用的环境为pytroch 2.01,causal-conv1d 1.0.0 , mamba 1.2.0 (site-page里面mamba-ssm换成了mamba 1.0.1)，下表就是复现实验的部分<span class = "label label-success">Dice</span>数据：</p>
+<table>
+<thead>
+<tr>
+<th>Epoch</th>
+<th>tc</th>
+<th>wt</th>
+<th>et</th>
+<th>avg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>19</td>
+<td>0.8111</td>
+<td>0.8987</td>
+<td>0.7715</td>
+<td>0.8270</td>
+</tr>
+<tr>
+<td>25</td>
+<td>0.8550</td>
+<td>0.9313</td>
+<td>0.8168</td>
+<td>0.8676</td>
+</tr>
+<tr>
+<td>35</td>
+<td>0.8839</td>
+<td>0.9208</td>
+<td>0.8588</td>
+<td>0.8878</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>119</td>
+<td>0.9089</td>
+<td>0.9292</td>
+<td>0.8559</td>
+<td>0.8980</td>
+</tr>
+</tbody>
+</table>
+<p>使用<strong>TensorBoard</strong>进行数据可视化</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">tensorboard --logdir=&lt;directory_name&gt;<br><span class="hljs-comment"># 将 directory_name 标记替换为保存数据的目录。 默认是“logs”</span><br><span class="hljs-comment"># 然后用浏览器打开http://localhost:6006/查看</span><br></code></pre></td></tr></table></figure>
+<p>//todo</p>
+<p>最后附上部分打印的数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 第19轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.8111</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8987</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.7715</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8271</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8270890194078957</span><br><span class="hljs-comment"># 第25轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.8550</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.9313</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8168</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/best_model_0<span class="hljs-number">.8677</span>.pt<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8677</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8676834896990973</span><br><span class="hljs-comment"># 第35轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.8839</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.9208</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8588</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/best_model_0<span class="hljs-number">.8878</span>.pt<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8878</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8878393851712278</span><br><span class="hljs-comment"># 第119轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.9089</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.9292</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8559</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8980</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8980341618483131</span><br></code></pre></td></tr></table></figure>
 
               
             </div>
