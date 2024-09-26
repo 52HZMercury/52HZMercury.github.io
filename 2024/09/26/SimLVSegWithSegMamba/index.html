@@ -1,0 +1,811 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/moon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mercury">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="将SimLVSeg主体的U-Net模型换为SegMamba模型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SimLVSeg With SegMamba">
+<meta property="og:url" content="http://example.com/2024/09/26/SimLVSegWithSegMamba/index.html">
+<meta property="og:site_name" content="Mercury&#39;s blog">
+<meta property="og:description" content="将SimLVSeg主体的U-Net模型换为SegMamba模型">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/c21d8a824b62089a0560393fd642f014f74a5b54_raw.jpg">
+<meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
+<meta property="article:modified_time" content="2024-09-26T08:45:27.174Z">
+<meta property="article:author" content="Mercury">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="语义分割">
+<meta property="article:tag" content="论文">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/c21d8a824b62089a0560393fd642f014f74a5b54_raw.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>SimLVSeg With SegMamba - Mercury&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/newloading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Mercury</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/Post%20Page.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="SimLVSeg With SegMamba"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-26 12:57" pubdate>
+          2024年9月26日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SimLVSeg With SegMamba</h1>
+            
+            <div class="markdown-body">
+              
+              <h2 id="SimLVSeg">SimLVSeg</h2>
+<p>SimLVSeg使基于视频的网络能够从稀疏注释的超声心动图视频中进行一致的LV分割。SimLVSeg包括具有时间掩蔽的自监督预训练，然后是为从稀疏注释中进行LV分割而定制的弱监督学习。我们展示了SimLVSeg如何在最大的2D+时间超声心动图数据集（EchoNet-Dynamics）上实现93.32%（95%CI 93.21-93.43%）的DICE评分，同时更高效，从而优于最先进的解决方案。SimLVSeg兼容两种类型的视频分割网络：2D超级图像和3D分割。为了展示我们方法的有效性，我们提供了广泛的消融研究，包括预训练设置和各种深度学习主干。我们进一步进行了分布外测试，以展示SimLVSeg在未见分布（CAMUS数据集）上的推广能力。该代码可在<a target="_blank" rel="noopener" href="https://github.com/fadamsyah/SimLVSeg%E4%B8%8A%E5%85%AC%E5%BC%80%E8%8E%B7%E5%8F%96%E3%80%82">https://github.com/fadamsyah/SimLVSeg上公开获取。</a></p>
+<p>SimLVSeg使基于视频的网络能够进行LV分段，从而增强性能和更高的时间一致性。SimLVSeg由两个训练阶段组成：具有时间掩蔽的自我监督预训练和LV分割的弱监督学习，专门设计用于解决稀疏注释（标记）超声心动图视频的挑战。</p>
+<h3 id="结构">结构</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png" srcset="/img/newloading.gif" lazyload alt="3D U-Net架构"></p>
+<p>超声心动图视频由堆叠的2D图像组成。将时间轴视为第三维允许3D模型在超声心动图剪辑上分割LV。因此，3D U-Net被用作架构。如图4所示，我们使用具有残余单元的CNN 作为编码器，其具有5个级，其中级输出被传递到解码器。剩余单元包括两个Conv 2D层、两个实例规范层、两个PReLU激活函数和一个跳过连接。</p>
+<h3 id="数据集">数据集</h3>
+<p>EchoNet-Dynamics是最大的公开2D+Time心脏超声心动图，其显示了人体心脏的顶部四腔视图。提供了约10，030个心脏超声心动图视频，固定帧大小为112 x 112。</p>
+<p>视频长度从28帧到1002帧不等，涵盖多个心跳周期，但只有两个被注释（ED和ES帧）。图1中给出了示例超声心动图序列</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151357434.png" srcset="/img/newloading.gif" lazyload alt="image-20240926151357434"></p>
+<h3 id="实验">实验</h3>
+<p>作者同时还做了多个消融实验，验证不同的主干网络对该框架性能的影响，实验数据如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926152157446.png" srcset="/img/newloading.gif" lazyload alt="Table 2 各种编码器主干的消融研究"></p>
+<p>如表2所示，实验表明性能对编码器主干是稳健的。</p>
+<h2 id="将SegMamba作为主干网络">将SegMamba作为主干网络</h2>
+<p>SegMamba也是一个分析3D超声心动图的网路，不同的是原论文中实验采用的体积数据，而不是2D图像数据加时间。因此，将SegMamba移植过来作为主干网络时，将时间作为第三个轴，即输入的帧数作为<strong>高</strong>，SegMamba在原论文实验中表现同样十分优异。详细的集成后代码可以在这里找到<a target="_blank" rel="noopener" href="https://github.com/52HZMercury/SimLVSeg-with-SegMamba">https://github.com/52HZMercury/SimLVSeg-with-SegMamba</a></p>
+<div class="info info-danger">通道数的变化</div>
+<p>首先需要注意的就是原论文中，SegMamba第一层是使用的4个通道，这里需要初始化为3个通道进行输入，这里解决之后，多半会遇到tensor对不上的问题，接着往下看</p>
+<div class="info info-danger">tensor对不上</div>
+<p>这里tensor对不上的主要原因就是EchoNet-Dynamics数据集是每帧112<em>112的，而SegMamba在原论文中是长宽高为128 * 128 * 128的输入。解决的方法就是把util代码里面的读取视频的代码输出时resize一下，改为128</em>128，至于还有一个128，在SimLVSeg中输入时将帧改为128即可，即对应的<strong>高</strong>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load_video</span>(<span class="hljs-params">filename: <span class="hljs-built_in">str</span></span>) -&gt; np.ndarray:</span><br>    <span class="hljs-string">&quot;&quot;&quot;Loads a video from a file.</span><br><span class="hljs-string">    Args:</span><br><span class="hljs-string">        filename (str): filename of video</span><br><span class="hljs-string">    Returns:</span><br><span class="hljs-string">        A np.ndarray with dimensions (channels=3, frames, height, width). The</span><br><span class="hljs-string">        values will be uint8&#x27;s ranging from 0 to 255.</span><br><span class="hljs-string">    Raises:</span><br><span class="hljs-string">        FileNotFoundError: Could not find `filename`</span><br><span class="hljs-string">        ValueError: An error occurred while reading the video</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(filename):<br>        <span class="hljs-keyword">raise</span> FileNotFoundError(filename)<br>    capture = cv2.VideoCapture(filename)<br>    <br>    frame_count = <span class="hljs-built_in">int</span>(capture.get(cv2.CAP_PROP_FRAME_COUNT))<br>    frame_width = <span class="hljs-built_in">int</span>(capture.get(cv2.CAP_PROP_FRAME_WIDTH))<br>    frame_height = <span class="hljs-built_in">int</span>(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))<br>    <br>    <span class="hljs-comment"># v = np.zeros((frame_count, frame_height, frame_width, 3), np.uint8)</span><br>    v = np.zeros((frame_count, <span class="hljs-number">128</span>, <span class="hljs-number">128</span>, <span class="hljs-number">3</span>), np.uint8)<br><br>    <span class="hljs-keyword">for</span> count <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(frame_count):<br>        ret, frame = capture.read()<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ret:<br>            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;Failed to load frame #&#123;&#125; of &#123;&#125;.&quot;</span>.<span class="hljs-built_in">format</span>(count, filename))<br>        <span class="hljs-comment">#112*112</span><br>        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)<br><br>        <span class="hljs-comment"># 缩放为128</span><br>        frame = cv2.resize(frame, (<span class="hljs-number">128</span>,<span class="hljs-number">128</span>))<br>        v[count, :, :] = frame<br>    <br>    <span class="hljs-keyword">return</span> v<br></code></pre></td></tr></table></figure>
+<div class="info info-danger">爆显存</div>
+<p>在经历上面的操作后，在实验时，可能会遇到爆显存的错误(3090)，这里的解决方法是，改小精度，将原来的32位改为了16位</p>
+<h3 id="实验结果">实验结果</h3>
+<p>Table.2.    DSC(Dice Similarity Coefficient)</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>DSC</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2235</td>
+<td>0.863</td>
+<td>0.138</td>
+</tr>
+<tr>
+<td>2980</td>
+<td>0.922</td>
+<td>0.079</td>
+</tr>
+<tr>
+<td>4470</td>
+<td>0.914</td>
+<td>0.124</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>7709</td>
+<td>0.929</td>
+<td>0.070</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Both SimLVSeg-3D and SimLVSeg-SI outperform the state-of-the-art,suggesting that the superior performance can be attributed to the SimLVSeg design rather than the selection of the underlying network architectures.</p>
+</blockquote>
+<p>原作者在论文中说是SimLVSeg设计优秀所以性能较好而不是主干网络的选择，从移植SegMamba的实验结构来看确实如此。</p>
+<h2 id="附表">附表</h2>
+<p><strong>U-Net</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926130520778.png" srcset="/img/newloading.gif" lazyload alt="train-dice-loss"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926130813332.png" srcset="/img/newloading.gif" lazyload alt="Train_dsc"></p>
+<p><strong>SegMamba</strong></p>
+<p>version_1</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926131548851.png" srcset="/img/newloading.gif" lazyload alt="train_dice_loss"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926131728341.png" srcset="/img/newloading.gif" lazyload alt="train_dsc"></p>
+<p>version_3</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926142141007.png" srcset="/img/newloading.gif" lazyload alt="train_dice_loss"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926142337259.png" srcset="/img/newloading.gif" lazyload alt="train_dsc"></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F/" class="category-chain-item">医学影像</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
+      
+        <a href="/tags/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">#语义分割</a>
+      
+        <a href="/tags/%E8%AE%BA%E6%96%87/">#论文</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>SimLVSeg With SegMamba</div>
+      <div>http://example.com/2024/09/26/SimLVSegWithSegMamba/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mercury</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年9月26日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/20/swin-umamba/" title="Swin-UMamba">
+                        <span class="hidden-mobile">Swin-UMamba</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+
+  <!-- 樱花特效 -->
+  <script type="text/javascript">
+    var windowWidth = $(window).width();
+    if (windowWidth > 480) {
+      document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+    }
+  </script>
+
+</body>
+</html>
