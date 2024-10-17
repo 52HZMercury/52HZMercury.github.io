@@ -16,28 +16,27 @@
   <meta name="author" content="Mercury">
   <meta name="keywords" content="">
   
-    <meta name="description" content="将SimLVSeg主体的U-Net模型换为SegMamba模型">
+    <meta name="description" content="压缩-激励网络">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SimLVSeg With SegMamba">
-<meta property="og:url" content="http://example.com/2024/09/26/SimLVSegWithSegMamba/index.html">
+<meta property="og:title" content="Squeeze-and-Excitation Networks">
+<meta property="og:url" content="http://example.com/2024/10/17/Squeeze-and-Excitation%20Networks/index.html">
 <meta property="og:site_name" content="Mercury&#39;s blog">
-<meta property="og:description" content="将SimLVSeg主体的U-Net模型换为SegMamba模型">
+<meta property="og:description" content="压缩-激励网络">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/c21d8a824b62089a0560393fd642f014f74a5b54_raw.jpg">
-<meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2024-09-26T13:00:45.059Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241017160341322.png">
+<meta property="article:published_time" content="2024-10-17T07:59:25.000Z">
+<meta property="article:modified_time" content="2024-10-17T09:11:25.127Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
-<meta property="article:tag" content="语义分割">
 <meta property="article:tag" content="论文">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/c21d8a824b62089a0560393fd642f014f74a5b54_raw.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241017160341322.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>SimLVSeg With SegMamba - Mercury&#39;s blog</title>
+  <title>Squeeze-and-Excitation Networks - Mercury&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -214,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SimLVSeg With SegMamba"></span>
+            <span id="subtitle" data-typed-text="Squeeze-and-Excitation Networks"></span>
           
         </div>
 
@@ -225,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-26 12:57" pubdate>
-          2024年9月26日 下午
+        <time datetime="2024-10-17 15:59" pubdate>
+          2024年10月17日 下午
         </time>
       </span>
     
@@ -238,7 +237,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.8k 字
+          1.4k 字
         
       </span>
     
@@ -250,7 +249,7 @@
         
         
           <!-- compatible with older versions-->
-          9 分钟
+          5 分钟
         
       </span>
     
@@ -288,86 +287,35 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SimLVSeg With SegMamba</h1>
+            <h1 style="display: none">Squeeze-and-Excitation Networks</h1>
             
             <div class="markdown-body">
               
-              <h2 id="SimLVSeg">SimLVSeg</h2>
-<p>SimLVSeg使基于视频的网络能够从稀疏注释的超声心动图视频中进行一致的LV分割。SimLVSeg包括具有时间掩蔽的自监督预训练，然后是为从稀疏注释中进行LV分割而定制的弱监督学习。我们展示了SimLVSeg如何在最大的2D+时间超声心动图数据集（EchoNet-Dynamics）上实现93.32%（95%CI 93.21-93.43%）的DICE评分，同时更高效，从而优于最先进的解决方案。SimLVSeg兼容两种类型的视频分割网络：2D超级图像和3D分割。为了展示我们方法的有效性，我们提供了广泛的消融研究，包括预训练设置和各种深度学习主干。我们进一步进行了分布外测试，以展示SimLVSeg在未见分布（CAMUS数据集）上的推广能力。该代码可在<a target="_blank" rel="noopener" href="https://github.com/fadamsyah/SimLVSeg%E4%B8%8A%E5%85%AC%E5%BC%80%E8%8E%B7%E5%8F%96%E3%80%82">https://github.com/fadamsyah/SimLVSeg上公开获取。</a></p>
-<p>SimLVSeg使基于视频的网络能够进行LV分段，从而增强性能和更高的时间一致性。SimLVSeg由两个训练阶段组成：具有时间掩蔽的自我监督预训练和LV分割的弱监督学习，专门设计用于解决稀疏注释（标记）超声心动图视频的挑战。</p>
-<h3 id="结构">结构</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png" srcset="/img/newloading.gif" lazyload alt="3D U-Net架构"></p>
-<p>超声心动图视频由堆叠的2D图像组成。将时间轴视为第三维允许3D模型在超声心动图剪辑上分割LV。因此，3D U-Net被用作架构。如图4所示，我们使用具有残余单元的CNN 作为编码器，其具有5个级，其中级输出被传递到解码器。剩余单元包括两个Conv 2D层、两个实例规范层、两个PReLU激活函数和一个跳过连接。</p>
-<h3 id="数据集">数据集</h3>
-<p>EchoNet-Dynamics是最大的公开2D+Time心脏超声心动图，其显示了人体心脏的顶部四腔视图。提供了约10，030个心脏超声心动图视频，固定帧大小为112 x 112。</p>
-<p>视频长度从28帧到1002帧不等，涵盖多个心跳周期，但只有两个被注释（ED和ES帧）。图1中给出了示例超声心动图序列</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151357434.png" srcset="/img/newloading.gif" lazyload alt="image-20240926151357434"></p>
-<h3 id="实验">实验</h3>
-<p>作者同时还做了多个消融实验，验证不同的主干网络对该框架性能的影响，实验数据如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926152157446.png" srcset="/img/newloading.gif" lazyload alt="Table 2 各种编码器主干的消融研究"></p>
-<p>如表2所示，实验表明性能对编码器主干是稳健的。</p>
-<h2 id="将SegMamba作为主干网络">将SegMamba作为主干网络</h2>
-<p>SegMamba也是一个分析3D超声心动图的网路，不同的是原论文中实验采用的体积数据，而不是2D图像数据加时间。因此，将SegMamba移植过来作为主干网络时，将时间作为第三个轴，即输入的帧数作为<strong>高</strong>，SegMamba在原论文实验中表现同样十分优异。详细的集成后代码可以在这里找到<a target="_blank" rel="noopener" href="https://github.com/52HZMercury/SimLVSeg-with-SegMamba">https://github.com/52HZMercury/SimLVSeg-with-SegMamba</a></p>
-<div class="info info-danger">通道数的变化</div>
-<p>首先需要注意的就是原论文中，SegMamba第一层是使用的4个通道，这里需要初始化为3个通道进行输入，这里解决之后，多半会遇到tensor对不上的问题，接着往下看</p>
-<div class="info info-danger">tensor对不上</div>
-<p>这里tensor对不上的主要原因就是EchoNet-Dynamics数据集是每帧112<em>112的，而SegMamba在原论文中是长宽高为128 * 128 * 128的输入。解决的方法就是把util代码里面的读取视频的代码输出时resize一下，改为128</em>128，至于还有一个128，在SimLVSeg中输入时将帧改为128即可，即对应的<strong>高</strong>。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load_video</span>(<span class="hljs-params">filename: <span class="hljs-built_in">str</span></span>) -&gt; np.ndarray:</span><br>    <span class="hljs-string">&quot;&quot;&quot;Loads a video from a file.</span><br><span class="hljs-string">    Args:</span><br><span class="hljs-string">        filename (str): filename of video</span><br><span class="hljs-string">    Returns:</span><br><span class="hljs-string">        A np.ndarray with dimensions (channels=3, frames, height, width). The</span><br><span class="hljs-string">        values will be uint8&#x27;s ranging from 0 to 255.</span><br><span class="hljs-string">    Raises:</span><br><span class="hljs-string">        FileNotFoundError: Could not find `filename`</span><br><span class="hljs-string">        ValueError: An error occurred while reading the video</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(filename):<br>        <span class="hljs-keyword">raise</span> FileNotFoundError(filename)<br>    capture = cv2.VideoCapture(filename)<br>    <br>    frame_count = <span class="hljs-built_in">int</span>(capture.get(cv2.CAP_PROP_FRAME_COUNT))<br>    frame_width = <span class="hljs-built_in">int</span>(capture.get(cv2.CAP_PROP_FRAME_WIDTH))<br>    frame_height = <span class="hljs-built_in">int</span>(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))<br>    <br>    <span class="hljs-comment"># v = np.zeros((frame_count, frame_height, frame_width, 3), np.uint8)</span><br>    v = np.zeros((frame_count, <span class="hljs-number">128</span>, <span class="hljs-number">128</span>, <span class="hljs-number">3</span>), np.uint8)<br><br>    <span class="hljs-keyword">for</span> count <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(frame_count):<br>        ret, frame = capture.read()<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ret:<br>            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;Failed to load frame #&#123;&#125; of &#123;&#125;.&quot;</span>.<span class="hljs-built_in">format</span>(count, filename))<br>        <span class="hljs-comment">#112*112</span><br>        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)<br><br>        <span class="hljs-comment"># 缩放为128</span><br>        frame = cv2.resize(frame, (<span class="hljs-number">128</span>,<span class="hljs-number">128</span>))<br>        v[count, :, :] = frame<br>    <br>    <span class="hljs-keyword">return</span> v<br></code></pre></td></tr></table></figure>
-<div class="info info-danger">爆显存</div>
-<p>在经历上面的操作后，在实验时，可能会遇到爆显存的错误(3090)，这里的解决方法是，改小精度，将原来的32位改为了16位</p>
-<h3 id="实验结果">实验结果</h3>
-<p>Table.2.    DSC(Dice Similarity Coefficient)</p>
-<table>
-<thead>
-<tr>
-<th>Step</th>
-<th>DSC</th>
-<th>loss</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2235</td>
-<td>0.863</td>
-<td>0.138</td>
-</tr>
-<tr>
-<td>2980</td>
-<td>0.922</td>
-<td>0.079</td>
-</tr>
-<tr>
-<td>4470</td>
-<td>0.914</td>
-<td>0.084</td>
-</tr>
-<tr>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-</tr>
-<tr>
-<td>5689</td>
-<td>0.923</td>
-<td>0.078</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>Both SimLVSeg-3D and SimLVSeg-SI outperform the state-of-the-art,suggesting that the superior performance can be attributed to the SimLVSeg design rather than the selection of the underlying network architectures.</p>
-</blockquote>
-<p>原作者在论文中说是SimLVSeg设计优秀所以性能较好而不是主干网络的选择，从移植SegMamba的实验结构来看确实如此。</p>
-<h2 id="附表">附表</h2>
-<p><strong>U-Net</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926130520778.png" srcset="/img/newloading.gif" lazyload alt="train-dice-loss"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926130813332.png" srcset="/img/newloading.gif" lazyload alt="Train_dsc"></p>
-<p><strong>SegMamba</strong></p>
-<p>version_1</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926131548851.png" srcset="/img/newloading.gif" lazyload alt="train_dice_loss"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926131728341.png" srcset="/img/newloading.gif" lazyload alt="train_dsc"></p>
-<p>version_3</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926142141007.png" srcset="/img/newloading.gif" lazyload alt="train_dice_loss"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926142337259.png" srcset="/img/newloading.gif" lazyload alt="train_dsc"></p>
+              <p>通道注意力的本质是什么，mamba采用“并行扫描算法”而非“卷积”来进行模型的循环计算，其是否也考虑了通道维度上的内容，是否存在和原始的CNN一样对所有通道上的内容一视同仁的问题</p>
+<h2 id="序言">序言</h2>
+<p>在本文中，作者研究了网络设计的一个不同方面-通道之间的关系。引入了一个新的架构单元，称之为挤压和激发（SE）块，其目标是通过显式建模其卷积特征通道之间的相互依赖性来提高网络产生的表示的质量。为此，作者提出了一种允许网络执行特征重新校准的机制，通过该机制，网络可以学习使用全局信息来选择性地强调信息特征并抑制不太有用的特征</p>
+<p>在传统的CNN架构中，通常采用卷积层和池化层来提取图像特征。然而，这种方法并没有明确地对特征通道之间的关系进行建模，导致一些通道对于特定任务的贡献相对较小，而其他通道则更重要。SE模块旨在解决这个问题。</p>
+<h2 id="方法">方法</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241017160341322.png" srcset="/img/newloading.gif" lazyload alt="Fig. 1. A Squeeze-and-Excitation block."></p>
+<p>SE构建块的结构如图1所示。</p>
+<h3 id="Squeeze操作">Squeeze操作</h3>
+<p>这个操作对应上图中的Fsq函数。上面提到了，要找到通道之间的关系，那就是要用到所有通道的信息。论文中简单起见，把每个通道都压缩成一个点，直接求平均，相当于就是这个通道的特征值。这个求平均的过程就是所谓的Squeeze。表达为公式就是：</p>
+<p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>z</mi><mi>c</mi></msub><mo>=</mo><msub><mi>F</mi><mrow><mi>s</mi><mi>q</mi></mrow></msub><mo stretchy="false">(</mo><msub><mi>u</mi><mi>c</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mi>H</mi><mo>×</mo><mi>W</mi></mrow></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>H</mi></munderover><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>W</mi></munderover><msub><mi>u</mi><mi>c</mi></msub><mtext>（</mtext><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mtext>）</mtext></mrow><annotation encoding="application/x-tex">z_c = F_{sq}(u_c)= \frac{1}{ H × W} \sum_{i=1}^H\sum_{j=1}^Wu_c（i,j）
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">q</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3.2421em;vertical-align:-1.4138em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.08125em;">H</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">W</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4138em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">（</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mord cjk_fallback">）</span></span></span></span></span></p>
+<p>uc表示特征图U中的某个通道，zc表示经过压缩之后的向量Z。从公式中可以看出，每个尺寸为H*W的featrue map通道，经过全局平均之后，就只剩一个像素点。所以，一个的featrue map经过squeeze之后，就变成了一个的vector, 计作Z。</p>
+<h3 id="Excitation">Excitation</h3>
+<p>特征图经过压缩后，第二步就是综合这些通道的特征值。论文提出，这个综合方法需要满足两个条件：1.要可以表达非线性关系 2.要可以提取处非互斥的关系 所以，论文提出了一个计算方法：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241017165123118.png" srcset="/img/newloading.gif" lazyload alt="Excitation"></p>
+<p>从上面可以看出，这个Excitation就是两个全联接层,第一个连接层把1* 1* C的vector Z变成一个1* 1* C/r的向量。然后后面跟一个ReLU激活 层。· 第二个连接层把1* 1* C/r的vector重新恢复为一个1* 1* C的向量。然后后面跟一个Sigmod 的激活层。</p>
+<h3 id="Scale">Scale</h3>
+<p>最后，根据图1，作为Squeeze和Excitation操作之后，还需要和原特征图U进行合并，也就是上面提到的“重新校准特征图”。这个合并方法也特别简单，就是把这个向量直接原特征图相乘。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241017165556861.png" srcset="/img/newloading.gif" lazyload alt="Scale"></p>
+<p>从上面的excitation可以得知，s是一个的向量，与一个1* 1* C的特征图相乘的话，再从上面的公式可以看出，就是按通道数一个一个的去把s中的每个元素拿出来与特征图的对 应通道进行相乘，就是一个标量乘以矩阵，所以可以理解就是一个scale的操作，放大缩小而已。讲到这里，感觉就是SE就是提取出了通道中某些特征，或者说某些注意力特征，通过这个s’也就是表示通道的权重的向量，去把这个权重乘以对应的特征图通道，来放大或缩小这个通道的作用。从这个角度上来看，确实就叫做通道注意力机制。</p>
+<p>下面给出了SE与Inception和ResNet合并的方式。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241017162611928.png" srcset="/img/newloading.gif" lazyload alt="Fig. 2.原始Inception模块（左）和SEInception模块（右）的模式"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241017162643314.png" srcset="/img/newloading.gif" lazyload alt="Fig. 3.原始残差模块（左）和SEResNet模块（右）的架构。"></p>
+<h2 id="总结">总结</h2>
+<p>总而言之，SE模块通过引入Squeeze和Excitation操作，通过自适应地学习每个通道的权重，增强了神经网络的表达能力和性能，使网络能够更有效地学习和利用特征通道之间的关系。</p>
 
               
             </div>
@@ -402,8 +350,6 @@
       
         <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
       
-        <a href="/tags/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">#语义分割</a>
-      
         <a href="/tags/%E8%AE%BA%E6%96%87/">#论文</a>
       
     </div>
@@ -416,8 +362,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SimLVSeg With SegMamba</div>
-      <div>http://example.com/2024/09/26/SimLVSegWithSegMamba/</div>
+      <div>Squeeze-and-Excitation Networks</div>
+      <div>http://example.com/2024/10/17/Squeeze-and-Excitation Networks/</div>
     </div>
     <div class="license-meta">
       
@@ -429,7 +375,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月26日</div>
+          <div>2024年10月17日</div>
         </div>
       
       
@@ -459,18 +405,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/10/17/Squeeze-and-Excitation%20Networks/" title="Squeeze-and-Excitation Networks">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Squeeze-and-Excitation Networks</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/09/20/swin-umamba/" title="Swin-UMamba">
-                        <span class="hidden-mobile">Swin-UMamba</span>
+                      <a href="/2024/09/26/SimLVSegWithSegMamba/" title="SimLVSeg With SegMamba">
+                        <span class="hidden-mobile">SimLVSeg With SegMamba</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
