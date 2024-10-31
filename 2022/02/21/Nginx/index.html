@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/IMG_20220413_175730.jpg">
 <meta property="article:published_time" content="2022-02-21T13:36:26.000Z">
-<meta property="article:modified_time" content="2024-03-25T08:37:20.030Z">
+<meta property="article:modified_time" content="2024-10-26T11:03:22.205Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="Nginx">
 <meta name="twitter:card" content="summary_large_image">
@@ -291,56 +291,56 @@
             <div class="markdown-body">
               
               <p>俗话说得好，没有问题是加一层解决不了的，如果有，那就再加一层。Nginx就是这样的一种技术。</p>
-<h1>一、Nginx简介</h1>
+<h2 id="一、Nginx简介">一、Nginx简介</h2>
 <p>Nginx 是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。</p>
 <p>其特点是占有内存少，并发能力强，事实上nginx的并发能力在同类型的网页服务器中表现较好</p>
 <p>Nginx 是一个安装非常的简单、配置文件非常简洁（还能够支持perl语法）、Bug非常少的服务。Nginx 启动特别容易，并且几乎可以做到7*24不间断运行，即使运行数个月也不需要重新启动。你还能够不间断服务的情况下进行软件版本的升级。</p>
-<h1>二、 Nginx的作用</h1>
+<h2 id="二、-Nginx的作用">二、 Nginx的作用</h2>
 <p>Nginx的主要功能有HTTP代理、负载均衡和动静分离。</p>
-<h2 id="1、正向代理">1、正向代理</h2>
-<p><img src="https://img-blog.csdnimg.cn/cccd8f324466473d83ac9883ac2c0ca0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_16,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="正向代理"><br>
+<h3 id="1、正向代理">1、正向代理</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026185635114.png" srcset="/img/newloading.gif" lazyload alt="image-20241026185635114"><br>
 正向代理是代理客户端</p>
-<h2 id="2、反向代理">2、反向代理</h2>
+<h3 id="2、反向代理">2、反向代理</h3>
 <p><img src="https://img-blog.csdnimg.cn/6e3abcc0be4b403594e126738ff1fb05.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="反向代理"><br>
 反向代理是代理服务器端，是web服务器最常用的功能之一</p>
 <p>让你无感知的访问一个域名就能够连接</p>
-<h2 id="3、负载均衡">3、负载均衡</h2>
+<h3 id="3、负载均衡">3、负载均衡</h3>
 <p>Nginx的负载均衡主要有内置策略和扩展策略，内置策略为轮询，加权轮询，Ip hash。扩展策略就非常多了。</p>
 <p><strong>轮询</strong><br>
-<img src="https://img-blog.csdnimg.cn/a9c7782ac9b042429051778ac52e2f1b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="轮询方法"><br>
+<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026185700663.png" srcset="/img/newloading.gif" lazyload alt="image-20241026185700663"><br>
 <strong>加权轮询</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/88ae6e7914094e6b99e49d26c516b75e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="加权轮询"><br>
 <strong>Iphash</strong></p>
 <p>对客户端请求的ip进行hash操作，然后根据hash结果将同一个客户端ip的请求分发给同一台服务器进行处理，可以解决session不共享的问题。<br>
-<img src="https://img-blog.csdnimg.cn/2d0732fd4b384bc9b4324ddac01cc55f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="Iphash"></p>
-<h2 id="4、动静分离">4、动静分离</h2>
+<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026185717165.png" srcset="/img/newloading.gif" lazyload alt="image-20241026185717165"></p>
+<h3 id="4、动静分离">4、动静分离</h3>
 <p>简单的来说就是把一些不需要经过后台处理的文件交由<br>
 静态资源服务器处理，直接从这个服务器加载静态资源，提高速度<br>
-<img src="https://img-blog.csdnimg.cn/d64bf412a841405eb80a9c74775ecead.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_17,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="动静分离"></p>
-<h1>三、安装及注意事项</h1>
-<h2 id="1、windows">1、windows</h2>
+<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026185741359.png" srcset="/img/newloading.gif" lazyload alt="image-20241026185741359"></p>
+<h2 id="三、安装及注意事项">三、安装及注意事项</h2>
+<h3 id="1、windows">1、windows</h3>
 <p>通过官网下载windows版后解压<br>
 <a>http://nginx.org/en/download.html</a></p>
-<p><img src="https://img-blog.csdnimg.cn/b7d440da6b7b4eb483d84bd763ed0270.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026185802339.png" srcset="/img/newloading.gif" lazyload alt="image-20241026185802339"></p>
 <p>启动 直接双击exe 或者cmd</p>
 <p>从配置文件中可以看出nginx默认配置的是80端口<br>
-<img src="https://img-blog.csdnimg.cn/f2ac46e66d8146e08261c4528b5b88db.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_13,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="默认80端口"></p>
+<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026185828849.png" srcset="/img/newloading.gif" lazyload alt="image-20241026185828849"></p>
 <p>配置文件的位置<br>
-<img src="https://img-blog.csdnimg.cn/711c638703dc4581b4943c0318f186b5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="配置文件"></p>
+<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026185851721.png" srcset="/img/newloading.gif" lazyload alt="image-20241026185851721"></p>
 <p>因为是默认80端口，所以这里可以不写,输入IP地址，然后就可以看到欢迎界面</p>
-<p><img src="https://img-blog.csdnimg.cn/3a43ec8102ad4732af051f5719d07a01.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="欢迎界面"></p>
-<h2 id="2、Linux">2、Linux</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026185911519.png" srcset="/img/newloading.gif" lazyload alt="image-20241026185911519"></p>
+<h3 id="2、Linux">2、Linux</h3>
 <p>这里不详解,主要推荐一篇文章<br>
 <a>https://blog.csdn.net/qq_44170721/article/details/109022427</a><br>
 或者直接宝塔安装</p>
 <p><strong>特别注意</strong><br>
 在我使用宝塔面板进行nginx的安装的时候，安装完成后，发现死活进不了欢迎界面，本应正常访问的欢迎页却是找不到页面，并且配置文件也不一样，后来我才发现宝塔上面的是改过的，更适合在拥有图形化界面的宝塔面板中使用，一键傻瓜式操作(都给你弄好了)，之所以会出现提示找不到页面，原因是宝塔把index页欢迎页改成了提示找不到页面，是用于部署了项目后，项目没有加载出来等的提示页面。而官方的nginx则没有这个改动，可以正常显示欢迎页。<br>
-<img src="https://img-blog.csdnimg.cn/b7d43b1ca7874e95a91b74cd6b0bdd48.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="改动后的宝塔i上的nginx的index"></p>
-<p><img src="https://img-blog.csdnimg.cn/84c86d4a2d8e426cb1e6a2a8545c3294.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="安装官方的可以正常显示"></p>
-<h1>四、Nginx的使用</h1>
+<img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026185933727.png" srcset="/img/newloading.gif" lazyload alt="改动后的页面"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026190026783.png" srcset="/img/newloading.gif" lazyload alt="安装官方的可以正常显示"></p>
+<h2 id="四、Nginx的使用">四、Nginx的使用</h2>
 <p>常用的一些命令</p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> <span class="hljs-string">/usr/local/nginx/sbin/</span><br><span class="hljs-string">./nginx</span>  启动<br><span class="hljs-string">./nginx</span> -s stop  停止<br><span class="hljs-string">./nginx</span> -s <span class="hljs-keyword">quit</span>  安全退出<br><span class="hljs-string">./nginx</span> -s <span class="hljs-keyword">reload</span>  重新加载配置文件<br>ps aux|grep nginx  查看nginx进程<br></code></pre></td></tr></table></figure>
-<h1>五、配置文件</h1>
+<h2 id="五、配置文件">五、配置文件</h2>
 <p>在使用nginx的过程中最为重要的就是配置文件的书写</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/nginx/</span>conf    <span class="hljs-comment">#默认的 nginx.conf 文件的地址</span><br></code></pre></td></tr></table></figure>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment">#源文件</span><br><br><span class="hljs-attribute">worker_processes</span>  <span class="hljs-number">1</span>;<br><br><span class="hljs-comment"># 全局块</span><br><span class="hljs-comment"># 从配置文件开始到 events 块之间的内容，主要会设置一些影响nginx 服务器整体运行的配置指令，主要包括配 置运行 Nginx 服务器的用户（组）、允许生成的 worker process 数，进程 PID 存放路径、日志存放路径和类型以 及配置文件的引入等。</span><br><br><span class="hljs-section">events</span> &#123;<br>    <span class="hljs-attribute">worker_connections</span>  <span class="hljs-number">1024</span>;<br>&#125;<br><br><span class="hljs-comment"># events块</span><br><span class="hljs-comment">#主要影响 Nginx 服务器与用户的网络连接，常用的设置包括是否开启对多 work process 下的网络连接进行序列化，是否 允许同时接收多个网络连接，选取哪种事件驱动模型来处理连接请求，每个 word process 可以同时支持的最大连接数等。</span><br><br><span class="hljs-section">http</span> &#123;<br>    <span class="hljs-comment"># http全局块配置的指令包括文件引入、MIME-TYPE 定义、日志自定义、连接超时时间、单链接请求数上限等。</span><br>    <span class="hljs-attribute">include</span>       mime.types;<br>    <span class="hljs-attribute">default_type</span>  application/octet-stream;<br>  <br>    <span class="hljs-attribute">sendfile</span>        <span class="hljs-literal">on</span>;<br>      <br>    <span class="hljs-attribute">keepalive_timeout</span>  <span class="hljs-number">65</span>;<br><br>    <span class="hljs-comment"># 类似虚拟机，可以有多个server配置</span><br>    <span class="hljs-section">server</span> &#123;<br>        <span class="hljs-attribute">listen</span>       <span class="hljs-number">80</span>;<br>        <span class="hljs-comment"># 监听的端口号</span><br>        <br>        <span class="hljs-attribute">server_name</span>  localhost;<br>        <span class="hljs-comment">#服务器地址</span><br>        <br>        <span class="hljs-attribute">location</span> / &#123;<br>            <span class="hljs-attribute">root</span>   html;<br>            <span class="hljs-attribute">index</span>  index.html index.htm;<br>        &#125;<br>       <br>        <span class="hljs-attribute">error_page</span>   <span class="hljs-number">500</span> <span class="hljs-number">502</span> <span class="hljs-number">503</span> <span class="hljs-number">504</span>  /50x.html;<br>        <span class="hljs-attribute">location</span> = /50x.html &#123;<br>            <span class="hljs-attribute">root</span>   html;<br>        &#125;       <br><br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
@@ -363,23 +363,23 @@
 <p>例如</p>
 <p>访问<a target="_blank" rel="noopener" href="http://127.0.0.1/v1/pt/apply/page%E8%BF%99%E4%B8%AA%E5%9C%B0%E5%9D%80">http://127.0.0.1/v1/pt/apply/page这个地址</a></p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs awk">location <span class="hljs-regexp">/v1/</span> &#123;<br>    proxy_pass http:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8899</span>;<br>&#125;<br><br>实际地址：http:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8765</span><span class="hljs-regexp">/v1/</span>pt<span class="hljs-regexp">/apply/</span>page<br><br>location <span class="hljs-regexp">/v1/</span> &#123;<br>    proxy_pass http:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8899</span>/;<br>&#125;<br><br>实际地址：http:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8765</span><span class="hljs-regexp">/pt/</span>apply/page<br></code></pre></td></tr></table></figure>
-<h1>六、部署前端的过程中遇到的各种情况</h1>
-<h2 id="1、前端项目打包">1、前端项目打包</h2>
-<p><img src="https://img-blog.csdnimg.cn/6dac65eecb6c4442b27c6e81b9f2dd61.png" srcset="/img/newloading.gif" lazyload alt="打包"></p>
+<h2 id="六、部署前端的过程中遇到的各种情况">六、部署前端的过程中遇到的各种情况</h2>
+<h3 id="1、前端项目打包">1、前端项目打包</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026190106483.png" srcset="/img/newloading.gif" lazyload alt="image-20241026190106483"></p>
 <p>通过<strong>npm run build</strong>命令</p>
-<p><img src="https://img-blog.csdnimg.cn/b31ea28f204045b68d635f649b8b9eac.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="打包完成"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026190123017.png" srcset="/img/newloading.gif" lazyload alt="image-20241026190123017"></p>
 <p>打包完成后会有一个dist文件夹，这个就是需要部署的项目。</p>
-<h2 id="2、前端打包的时候出现下面的情况">2、前端打包的时候出现下面的情况</h2>
-<p><img src="https://img-blog.csdnimg.cn/233b0814f2b94dedb411b9ed955b2218.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="less-loader"></p>
+<h3 id="2、前端打包的时候出现下面的情况">2、前端打包的时候出现下面的情况</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026190147543.png" srcset="/img/newloading.gif" lazyload alt="image-20241026190147543"></p>
 <p>缺少less_loader导致的，通过<strong>npm install less-loader</strong> 即可。</p>
-<h2 id="3、安装依赖">3、安装依赖</h2>
-<p><img src="https://img-blog.csdnimg.cn/6b01c2e4edd149db8cf3d027b4427a42.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATWVyY3VyeTIuIDA=,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/newloading.gif" lazyload alt="未安装依赖"><br>
+<h3 id="3、安装依赖">3、安装依赖</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026190204146.png" srcset="/img/newloading.gif" lazyload alt="image-20241026190204146"><br>
 一般情况下，前端的项目上传到github等网站上面的时候是忽略了依赖的，所以打包之前需要执行下面的指令进行安装依赖</p>
 <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> install<br><span class="hljs-built_in">npm</span> run serve<br></code></pre></td></tr></table></figure>
-<h2 id="4、页面404">4、页面404</h2>
-<p><img src="https://img-blog.csdnimg.cn/42a2494dc3b14ab5bce9d4d474350a43.png" srcset="/img/newloading.gif" lazyload alt="404"><br>
+<h3 id="4、页面404">4、页面404</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241026190229670.png" srcset="/img/newloading.gif" lazyload alt="image-20241026190229670"><br>
 前端在写axios的时候在访问的路径上面多加了一个back前缀，导致404，这个时候就需要通过nginx配置，把这个/back/给填上。</p>
-<h2 id="5、页面502">5、页面502</h2>
+<h3 id="5、页面502">5、页面502</h3>
 <p>多半是你在测试的时候导致程序报错，停止了服务。</p>
 
               

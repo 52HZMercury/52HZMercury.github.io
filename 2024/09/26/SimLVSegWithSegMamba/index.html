@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/c21d8a824b62089a0560393fd642f014f74a5b54_raw.jpg">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2024-10-24T07:07:54.376Z">
+<meta property="article:modified_time" content="2024-10-31T11:20:08.583Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.9k 字
+          3.7k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          9 分钟
+          12 分钟
         
       </span>
     
@@ -308,6 +308,8 @@
 <p>如表2所示，实验表明性能对编码器主干是稳健的。</p>
 <h2 id="将SegMamba作为主干网络">将SegMamba作为主干网络</h2>
 <p>SegMamba也是一个分析3D超声心动图的网路，不同的是原论文中实验采用的体积数据，而不是2D图像数据加时间。因此，将SegMamba移植过来作为主干网络时，将时间作为第三个轴，即输入的帧数作为<strong>高</strong>，SegMamba在原论文实验中表现同样十分优异。详细的集成后代码可以在这里找到<a target="_blank" rel="noopener" href="https://github.com/52HZMercury/SimLVSeg-with-SegMamba">https://github.com/52HZMercury/SimLVSeg-with-SegMamba</a></p>
+<p>使用的环境</p>
+<p>py3.8  torch 1.12</p>
 <div class="info info-danger">通道数的变化</div>
 <p>首先需要注意的就是原论文中，SegMamba第一层是使用的4个通道，这里需要初始化为3个通道进行输入，这里解决之后，多半会遇到tensor对不上的问题，接着往下看</p>
 <div class="info info-danger">tensor对不上</div>
@@ -358,8 +360,26 @@
 </blockquote>
 <p>原作者在论文中说是SimLVSeg设计优秀所以性能较好而不是主干网络的选择，从移植SegMamba的实验结构来看确实如此。</p>
 <h2 id="改小参数量">改小参数量</h2>
-<p>具体的措施有：将通道数改为原来的1/2，并转为32位精度计算，同时加入通道注意力模块</p>
+<p>具体的措施有：将通道数改为原来的1/2，并转为32位精度计算</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241024150535221.png" srcset="/img/newloading.gif" lazyload alt="改小参数量后"></p>
+<h3 id="加入通道注意力模块">加入通道注意力模块</h3>
+<p>通道再次降低为初始的1/3，即24M的模型,同时加入通道注意力模块</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241031132249277.png" srcset="/img/newloading.gif" lazyload alt="降低为原来的1/3"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241031131654163.png" srcset="/img/newloading.gif" lazyload alt="image-20241031131654163"></p>
+<h3 id="加入MSAA模块">加入MSAA模块</h3>
+<p>加入多尺度注意力聚合模块MSAA</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241031191639676.png" srcset="/img/newloading.gif" lazyload alt="加入MSAA后"></p>
+<p><strong>提出CM-UNet框架</strong>：基于Mamba架构的CM-UNet框架，通过整合CNN和Mamba模块，能够在遥感图像语义分割任务中高效捕捉局部和全局信息。</p>
+<p><strong>设计CSMamba块</strong>：CSMamba块结合了通道和空间注意力机制，将Mamba模块扩展为能够处理图像长程依赖的组件，提升了特征选择和信息融合的精度。</p>
+<p><strong>多尺度注意力聚合模块（MSAA）</strong>：引入MSAA模块，聚合编码器的多尺度特征，通过空间和通道的双重聚合提高特征表达能力，替代传统的跳跃连接，更好地支持解码器的多层次信息融合。</p>
+<p><strong>多输出监督机制</strong>：在解码器的不同层次引入多输出监督，确保各层次逐步细化分割图，从而提升最终分割精度。</p>
+<h4 id="整体结构"><strong>整体结构</strong></h4>
+<p>​    CM-UNet模型结构由ResNet编码器、多尺度注意力聚合模块（MSAA）和CSMamba解码器组成。编码器负责提取多层次特征，MSAA模块融合多尺度特征以增强表达，解码器则利用CSMamba块通过通道和空间注意力机制高效捕捉长程依赖关系，最终生成精细的分割图，并在各层解码器中加入多输出监督以优化分割结果。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241031155302597.png" srcset="/img/newloading.gif" lazyload alt="Fig. 2. Framework of the proposed CM-UNet for remote sensing image semantic segmentation. (a) CM-UNet. (b) CSMamba Block. (c) 2D-SSM Module."></p>
+<p><strong>CNN编码器</strong>：采用ResNet结构作为编码器，用于提取多层次的特征信息。与传统UNet不同，CM-UNet的编码器使用的是多尺度特征提取，以便为后续模块提供更丰富的上下文信息。</p>
+<p><strong>多尺度注意力聚合模块（MSAA）</strong>：在编码器和解码器之间，使用MSAA模块对多尺度特征进行聚合。这个模块通过空间和通道注意力机制对不同尺度的特征进行融合，增强特征表达能力，并取代了UNet中的跳跃连接。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241031155837437.png" srcset="/img/newloading.gif" lazyload alt="Fig. 3. The Multi-Scale Attention Aggregation (MSAA) module."></p>
+<p><strong>CSMamba解码器</strong>：解码器采用CSMamba块，该模块结合通道和空间注意力机制，以及Mamba结构的线性时间复杂度特性，能够有效捕获图像的长程依赖关系。CSMamba解码器逐步上采样特征并生成输出分割图。同时引入多输出监督，在各层解码器中加入监督信号，确保分割图在不同层次上得到精细化生成。</p>
 <h2 id="附表">附表</h2>
 <p><strong>U-Net</strong></p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926130520778.png" srcset="/img/newloading.gif" lazyload alt="train-dice-loss"></p>
