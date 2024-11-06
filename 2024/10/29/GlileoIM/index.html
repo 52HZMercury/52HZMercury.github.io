@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/16245358583901.jpeg">
 <meta property="article:published_time" content="2024-10-29T08:01:52.000Z">
-<meta property="article:modified_time" content="2024-10-29T10:54:13.758Z">
+<meta property="article:modified_time" content="2024-11-06T12:09:46.409Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="IM">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +236,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          453 字
+          763 字
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
           <!-- compatible with older versions-->
-          2 分钟
+          3 分钟
         
       </span>
     
@@ -290,7 +290,9 @@
             
             <div class="markdown-body">
               
-              <h2 id="Websocket模块">Websocket模块</h2>
+              <p>总流程</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241105152704486.png" srcset="/img/newloading.gif" lazyload alt="image-20241105152704486"></p>
+<h2 id="Websocket模块">Websocket模块</h2>
 <h3 id="短轮询">短轮询</h3>
 <h3 id="长轮询">长轮询</h3>
 <h3 id="Websocket长连接">Websocket长连接</h3>
@@ -304,6 +306,27 @@ Tomcat 是基于多线程的架构，每个连接都会分配一个线程,适用
 器，可以轻松处理复杂的协议和数据格式。Netty的扩展性也非常好，可以根据需要添加自定义的组<br>
 件。比如我们可以用netty的pipeline方便的进行前置后置的处理，可以用netty的心跳处理器来检查连<br>
 接的状态。这些都是netty的优势。</p>
+<h2 id="IM顶层设计">IM顶层设计</h2>
+<h3 id="消息可靠ACK">消息可靠ACK</h3>
+<h3 id="消息重复">消息重复</h3>
+<p>发送消息幂等</p>
+<p>​	发送消息的一个随机md5，保证幂等标识 1s内的去重保证，</p>
+<p>接收消息幂等</p>
+<p>​	消息的唯一性，靠消息id来判断</p>
+<p>离线消息推送</p>
+<h3 id="推拉模式">推拉模式</h3>
+<p>推拉结合</p>
+<p>客户端维护一个游标，需要保证唯一性和有效性，全局递增的id</p>
+<h3 id="单聊群聊">单聊群聊</h3>
+<p>抽象出一个房间表，房间id就是会话id</p>
+<p>表设计<a target="_blank" rel="noopener" href="https://drawsql.app/teams/-328/diagrams/-6">单聊群聊 | DrawSQL</a></p>
+<p><a target="_blank" rel="noopener" href="https://drawsql.app/teams/-328/diagrams/-7">会话表 | DrawSQL</a></p>
+<h3 id="消息已读未读">消息已读未读</h3>
+<p>微信最大只展示99条未读数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(<span class="hljs-number">0</span>) <span class="hljs-keyword">from</span><br>(<br>    <span class="hljs-keyword">select</span> <span class="hljs-number">1</span><br>    <span class="hljs-keyword">from</span> msg<br>    <span class="hljs-keyword">where</span> room_id <span class="hljs-operator">=</span> 我房间 <span class="hljs-keyword">and</span> create_time<span class="hljs-operator">&gt;</span>我阅读<br>    Limit <span class="hljs-number">100</span><br>)<br></code></pre></td></tr></table></figure>
+<p>这样未读数最多扫描100条</p>
+<p><a target="_blank" rel="noopener" href="https://drawsql.app/teams/-328/diagrams/-8">消息表 | DrawSQL</a></p>
+<p>redis 存储token</p>
 
               
             </div>

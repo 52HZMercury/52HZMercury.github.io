@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/mmexport1649953059484.jpg">
 <meta property="article:published_time" content="2022-03-07T11:57:14.000Z">
-<meta property="article:modified_time" content="2024-03-25T08:52:08.789Z">
+<meta property="article:modified_time" content="2024-11-06T07:37:56.945Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="database">
 <meta property="article:tag" content="NoSQL">
@@ -368,13 +368,14 @@
 <p>Redis全称remote dictionary server 远程字典服务，是一个使用C语言编写、支持网络、可基于内存亦可持久化的日志型key-Value数据库，并提供了多种语言的API。Redis 是一个开源的，内存中的数据结构存储系统，它可以用作数据库、缓存和消息中间件。 它支持多种类型的数据结构，如 字符串（strings）， 散列（hashes）， 列表（lists）， 集合（sets）， 有序集合（sorted sets） 与范围查询， bitmaps， hyperloglogs 和 地理空间（geospatial） 索引半径查询。 Redis 内置了 复制（replication），LUA脚本（Lua scripting）， LRU驱动事件（LRU eviction），事务（transactions） 和不同级别的 磁盘持久化（persistence）， 并通过 Redis哨兵（Sentinel）和自动分区（Cluster）提供高可用性（high availability）。</p>
 <p>链接: <a target="_blank" rel="noopener" href="https://redis.io/">redis官网</a>  | <a target="_blank" rel="noopener" href="https://github.com/redis">GitHub上的开源地址</a></p>
 <p>不建议windows ，windows端的github上面已经停更很久了，redis推荐linux</p>
-<p><img src="https://img-blog.csdnimg.cn/a13cff236102447e99a52fa50a512053.png" srcset="/img/newloading.gif" lazyload alt="redis官网上的"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241106153635577.png" srcset="/img/newloading.gif" lazyload alt="image-20241106153635577"></p>
 <h2 id="2、安装">2、安装</h2>
 <p>CSDN上面有很多教程，这里不再赘述</p>
 <h1>三、基本指令</h1>
+<p>启动redis</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">../redis-server redis.conf  //启动服务端<br>redis-cli  //进入客户端<br></code></pre></td></tr></table></figure>
 <h2 id="1、切换数据库">1、切换数据库</h2>
-<p>redis 默认有16个数据库<br>
-<img src="https://img-blog.csdnimg.cn/ec8e9de43ea542e89eb0bfff344a6702.png" srcset="/img/newloading.gif" lazyload alt="配置文件里面的"></p>
+<p>redis 默认有16个数据库</p>
 <p>可以使用select进行切换数据库</p>
 <figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">127.0.0.1:6379</span>&gt; select <span class="hljs-number">3</span>                 # 切换数据库<br><br>OK<br><br><span class="hljs-number">127.0.0.1:6379</span><span class="hljs-string">[3]</span>&gt; dbsize                #查看数据库所占的大小 <br><br>(integer) <span class="hljs-number">0</span><br><br><span class="hljs-number">127.0.0.1:6379</span><span class="hljs-string">[3]</span>&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="2、set和get">2、set和get</h2>
