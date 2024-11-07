@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/img-165019.jpg">
 <meta property="article:published_time" content="2022-02-17T13:57:42.000Z">
-<meta property="article:modified_time" content="2024-09-27T09:04:27.861Z">
+<meta property="article:modified_time" content="2024-11-06T12:45:13.050Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="OS">
@@ -291,32 +291,32 @@
             
             <div class="markdown-body">
               
-              <h1>一、Linux简介</h1>
+              <h2 id="一、Linux简介">一、Linux简介</h2>
 <p>此笔记所使用的Linux版本为CentOS 7</p>
 <p>linux的核心思想</p>
 <p><strong>一切皆文件</strong></p>
 <p>现在很多的大型项目都是部署在Linux服务器端，所以Linux地位依然不可动摇，作为一个后端程序员，会Linux是基本功</p>
 <p>Linux最初是由一个芬兰人在上大学的时候出于个人的爱好写出来的，Linux继承了Unix以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统</p>
-<h2 id="1、Linux的版本">1、Linux的版本</h2>
+<h3 id="1、Linux的版本">1、Linux的版本</h3>
 <p>版本一览</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240927165755443.png" srcset="/img/newloading.gif" lazyload alt="版本一览"></p>
 <p>市面上有很多Linux发行版，比如CentOS,Ubuntu，RedHat等等，其中还有kali linux 这个主要是用作安全渗透测试</p>
-<h2 id="2、Linux环境搭建">2、Linux环境搭建</h2>
+<h3 id="2、Linux环境搭建">2、Linux环境搭建</h3>
 <p>略，我这里使用的是阿里云轻量级服务器搭载的CentOS 7操作系统</p>
-<h1>二、Linux基本了解</h1>
-<h2 id="1、关机">1、关机</h2>
+<h2 id="二、Linux基本了解">二、Linux基本了解</h2>
+<h3 id="1、关机">1、关机</h3>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">sync </span><span class="hljs-comment"># 将数据由内存同步到硬盘中。</span><br><br><span class="hljs-keyword">shutdown </span><span class="hljs-comment"># 关机指令，你可以man shutdown 来看一下帮助文档。例如你可以运行如下命令关机：</span><br><br><span class="hljs-keyword">shutdown </span>–h <span class="hljs-number">10</span> <span class="hljs-comment"># 这个命令告诉大家，计算机将在10分钟后关机</span><br><br><span class="hljs-keyword">shutdown </span>–h now <span class="hljs-comment"># 立马关机</span><br><br><span class="hljs-keyword">shutdown </span>–h <span class="hljs-number">20</span>:<span class="hljs-number">25</span> <span class="hljs-comment"># 系统会在今天20:25关机</span><br><br><span class="hljs-keyword">shutdown </span>–h +<span class="hljs-number">10</span> <span class="hljs-comment"># 十分钟后关机</span><br><br><span class="hljs-keyword">shutdown </span>–r now <span class="hljs-comment"># 系统立马重启</span><br><br><span class="hljs-keyword">shutdown </span>–r +<span class="hljs-number">10</span> <span class="hljs-comment"># 系统十分钟后重启</span><br><br>reboot <span class="hljs-comment"># 就是重启，等同于 shutdown –r now</span><br><br>halt <span class="hljs-comment"># 关闭系统，等同于shutdown –h now 和 poweroff</span><br></code></pre></td></tr></table></figure>
 <p>需要注意的是，重启和关机最好都在操作前，进行一下同步操作，在Linux里面，只要指令没有输出，就是指令成功了</p>
-<h2 id="2、系统目录结构">2、系统目录结构</h2>
+<h3 id="2、系统目录结构">2、系统目录结构</h3>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240927165945820.png" srcset="/img/newloading.gif" lazyload alt="image-20240927165945820"></p>
 <p>Linux采用的是树状目录结构，这点和Windows类似</p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">/bin</span>：bin是Binary的缩写, 这个目录存放着最经常使用的命令。<br><br><span class="hljs-string">/boot</span>： 这里存放的是启动Linux时使用的一些核心文件，包括一些连接文件以及镜像文件。<br><br><span class="hljs-string">/dev</span> ： dev是Device<span class="hljs-params">(设备)</span>的缩写, 存放的是Linux的外部设备，在Linux中访问设备的方式和访问文件的方式是相同的。<br><br><span class="hljs-string">/etc</span>： 这个目录用来存放所有的系统管理所需要的配置文件和子目录。<br><br><span class="hljs-string">/home</span>：用户的主目录，在Linux中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的。<br><br><span class="hljs-string">/lib</span>：这个目录里存放着系统最基本的动态连接共享库，其作用类似于Windows里的DLL文件。<br><br><span class="hljs-string">/lost</span>+found：这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。<br><br><span class="hljs-string">/media</span>：linux系统会自动识别一些设备，例如U盘、光驱等等，当识别后，linux会把识别的设备挂载到这个目录下。<br><br><span class="hljs-string">/mnt</span>：系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将光驱挂载在<span class="hljs-string">/mnt/</span>上，然后进入该目录就可以查看光驱里的内容了。<br><br><span class="hljs-string">/opt</span>：这是给主机额外安装软件所摆放的目录。比如你安装一个ORACLE数据库则就可以放到这个目录下。默认是空的。<br><br><span class="hljs-string">/proc</span>：这个目录是一个虚拟的目录，它是系统内存的映射，我们可以通过直接访问这个目录来获取系统信息。<br><br><span class="hljs-string">/root</span>：该目录为系统管理员，也称作超级权限者的用户主目录。<br><br><span class="hljs-string">/sbin</span>：s就是Super User的意思，这里存放的是系统管理员使用的系统管理程序。<br><br><span class="hljs-string">/srv</span>：该目录存放一些服务启动之后需要提取的数据。<br><br><span class="hljs-string">/sys</span>：这是linux2.6内核的一个很大的变化。该目录下安装了2.6内核中新出现的一个文件系统 sysfs 。<br><br><span class="hljs-string">/tmp</span>：这个目录是用来存放一些临时文件的。<br><br><span class="hljs-string">/usr</span>：这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于windows下的program files目录。<br><br><span class="hljs-string">/usr/bin</span>： 系统用户使用的应用程序。<br><br><span class="hljs-string">/usr/sbin</span>： 超级用户使用的比较高级的管理程序和系统守护程序。<br><br><span class="hljs-string">/usr/src</span>： 内核源代码默认的放置目录。<br><br><span class="hljs-string">/var</span>：这个目录中存放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下。包括各种日志文件。<br><br><span class="hljs-string">/run</span>：是一个临时文件系统，存储系统启动以来的信息。当系统重启时，这个目录下的文件应该被删掉或清除。<br><br><span class="hljs-string">/www</span>: 默认放置网站的文件夹，里面拥有wwwroot等默认建站文件夹以及日志文件夹等<br><br><span class="hljs-string">/etc</span> <span class="hljs-string">/sysconfig/network-scripts</span> 网络配置目录<br></code></pre></td></tr></table></figure>
-<h1>三、常见命令</h1>
+<h2 id="三、常见命令">三、常见命令</h2>
 <p>常见命令</p>
-<h2 id="1、xshell的使用">1、xshell的使用</h2>
+<h3 id="1、xshell的使用">1、xshell的使用</h3>
 <p>ctrl+滚轮 调节字体大小</p>
 <p>clear 清屏</p>
-<h2 id="2、cd">2、cd</h2>
+<h3 id="2、cd">2、cd</h3>
 <p>切换目录</p>
 <p><strong>绝对路径：</strong></p>
 <p>路径的写法，由根目录 / 写起，例如：/usr/share/doc 这个目录。</p>
@@ -326,18 +326,18 @@
 <p>补充说明一下</p>
 <p>cd root = cd ~</p>
 <p>cd … 返回上一级目录 （这中间有个空格</p>
-<h2 id="3、ls">3、ls</h2>
+<h3 id="3、ls">3、ls</h3>
 <p>展示当前目录的文件</p>
 <figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mel">[root@iZbp17dj5r3z9624ikd288Z ~] <span class="hljs-keyword">ls</span><br></code></pre></td></tr></table></figure>
 <p>-a 参数 ：all 查看全部的文件 包括隐藏文件</p>
 <p>-l  参数 ：列出所有的文件 包含文件按的属性和权限 没有隐藏文件</p>
 <p>所有的Linux可以组合使用，即可以使用<strong>ls -al</strong>，用以查看所有文件的信息</p>
-<h2 id="4、pwd">4、pwd</h2>
+<h3 id="4、pwd">4、pwd</h3>
 <p>显示当前用户所在的目录</p>
 <figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mel">[root@iZbp17dj5r3z9624ikd288Z ~] <span class="hljs-keyword">pwd</span><br></code></pre></td></tr></table></figure>
 <p>-P ：显示出确实的路径，而非使用连接(link) 路径。</p>
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs autoit"><span class="hljs-meta"># 单纯显示出目前的工作目录</span><br>[root<span class="hljs-symbol">@iZbp17dj5r3z9624ikd288Z</span> ~]<span class="hljs-meta"># pwd</span><br>/root<br><br><span class="hljs-meta"># 如果是链接，要显示真实地址，可以使用 -P参数</span><br>[root<span class="hljs-symbol">@iZbp17dj5r3z9624ikd288Z</span> /]<span class="hljs-meta"># cd bin</span><br>[root<span class="hljs-symbol">@iZbp17dj5r3z9624ikd288Z</span> bin]<span class="hljs-meta"># pwd -P</span><br>/usr/bin<br></code></pre></td></tr></table></figure>
-<h2 id="5、mkdir">5、mkdir</h2>
+<h3 id="5、mkdir">5、mkdir</h3>
 <p>新建文件夹</p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">mkdir 文件夹名字<br></code></pre></td></tr></table></figure>
 <p>递归创建目录（创建多级目录）</p>
@@ -346,7 +346,7 @@
 <p>如果目录不为空文件夹,则删除不会成功，需要删除文件</p>
 <p>需要删除多个目录的话(递归删除) 需要加上-p参数</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">rmdir</span> -p test<span class="hljs-number">1</span>/test<span class="hljs-number">2</span>/test<span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
-<h2 id="6、cp">6、cp</h2>
+<h3 id="6、cp">6、cp</h3>
 <p>拷贝文件</p>
 <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-keyword">cp</span> 文件 新的地方<br></code></pre></td></tr></table></figure>
 <p>选项与参数：</p>
@@ -360,14 +360,14 @@
 <p>-s：复制成为符号连结档 (symbolic link)，亦即『捷径』文件；</p>
 <p>-u：若 destination 比 source 旧才升级 destination ！</p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs arduino"># 复制 root目录下的install.sh 到 home目录下<br>[root@Mercury home]<span class="hljs-meta"># cp /root/install.sh  /home</span><br>[root@Mercury home]<span class="hljs-meta"># ls</span><br>install.sh<br></code></pre></td></tr></table></figure>
-<h2 id="7、rm">7、rm</h2>
+<h3 id="7、rm">7、rm</h3>
 <p>移除文件或者目录</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">rm</span> 文件名<br></code></pre></td></tr></table></figure>
 <p>-f 忽略不存在的文件 不会出现警告， 强制删除</p>
 <p>-r 递归删除目录</p>
 <p>-i 互动 删除询问是否删除</p>
 <p>rm -rf  /  系统中所有的文件全部被删除，（删库跑路）</p>
-<h2 id="8、mv">8、mv</h2>
+<h3 id="8、mv">8、mv</h3>
 <figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cos"><span class="hljs-keyword">mv</span> 文件名 位置/文件名<br></code></pre></td></tr></table></figure>
 <p>移动文件或者目录 重命名文件</p>
 <p>-f 强制移动</p>
@@ -375,8 +375,8 @@
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs autoit"><span class="hljs-meta"># 创建一个文件夹 test</span><br>[root<span class="hljs-symbol">@Mercury</span> home]<span class="hljs-meta"># mkdir test</span><br><br><span class="hljs-meta"># 将复制过来的文件移动到我们创建的目录，并查看</span><br>[root<span class="hljs-symbol">@Mercury</span> home]<span class="hljs-meta"># mv install.sh test</span><br>[root<span class="hljs-symbol">@Mercury</span> home]<span class="hljs-meta"># ls</span><br>test<br>[root<span class="hljs-symbol">@Mercury</span> home]<span class="hljs-meta"># cd test</span><br>[root<span class="hljs-symbol">@Mercury</span> test]<span class="hljs-meta"># ls</span><br>install.sh<br><br><span class="hljs-meta"># 将文件夹重命名，然后查看</span><br>[root<span class="hljs-symbol">@Mercury</span> test]<span class="hljs-meta"># cd ..</span><br>[root<span class="hljs-symbol">@Mercury</span> home]<span class="hljs-meta"># mv test mvtest</span><br>[root<span class="hljs-symbol">@Mercury</span> home]<span class="hljs-meta"># ls</span><br>mvtest<br></code></pre></td></tr></table></figure>
 <p><strong>补充说明</strong></p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">ifconfig</span>  命令查看网络配置<br></code></pre></td></tr></table></figure>
-<h1>四、文件详解</h1>
-<h2 id="1、文件的属性">1、文件的属性</h2>
+<h2 id="四、文件详解">四、文件详解</h2>
+<h3 id="1、文件的属性">1、文件的属性</h3>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240927170101988.png" srcset="/img/newloading.gif" lazyload alt="image-20240927170101988"></p>
 <p>在Linux中第一个字符代表这个文件是目录、文件或链接文件等等：</p>
 <ul>
@@ -405,16 +405,16 @@
 第3、6、9位表示可执行权限，如果用&quot;x&quot;字符表示，则有执行权限，如果用”-&quot;字符表示，则没有执行权限。</p>
 <p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
 <p>因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
-<h2 id="2、修改文件的属性">2、修改文件的属性</h2>
-<h3 id="2-1、chgrp">2.1、chgrp</h3>
+<h3 id="2、修改文件的属性">2、修改文件的属性</h3>
+<h4 id="2-1、chgrp">2.1、chgrp</h4>
 <p><strong>更改文件属组</strong></p>
 <p>chgrp [-R] 属组名 文件名<br>
 -R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</p>
-<h3 id="2-2、chown">2.2、chown</h3>
+<h4 id="2-2、chown">2.2、chown</h4>
 <p><strong>更改文件属主，也可以同时更改文件属组</strong></p>
 <p>chown [–R] 属主名 文件名<br>
 chown [-R] 属主名：属组名 文件名</p>
-<h3 id="2-3、chmod">2.3、chmod</h3>
+<h4 id="2-3、chmod">2.3、chmod</h4>
 <p><strong>更改文件9个属性</strong></p>
 <p>chmod [-R] xyz 文件或目录<br>
 Linux文件属性有两种设置方法，一种是数字，一种是符号。</p>
@@ -427,7 +427,7 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-keyword">chmod</span> <span class="hljs-number">777</span> filename   <span class="hljs-comment">#赋予文件全部权限</span><br></code></pre></td></tr></table></figure>
 <p><strong>补充说明</strong></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">解压文件 tar -zxvf 文件名<br></code></pre></td></tr></table></figure>
-<h2 id="3、查看文件">3、查看文件</h2>
+<h3 id="3、查看文件">3、查看文件</h3>
 <p>Linux系统中使用以下命令来查看文件的内容：</p>
 <ul>
 <li>
@@ -453,7 +453,7 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 </li>
 </ul>
 <p>语法：</p>
-<h3 id="3-1-cat">3.1 cat</h3>
+<h4 id="3-1-cat">3.1 cat</h4>
 <p>选项与参数：</p>
 <ul>
 <li>
@@ -476,10 +476,10 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 </li>
 </ul>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># 查看网络配置: 文件地址 /etc/sysconfig/network-scripts/</span><br><span class="hljs-section">[root@Mercury ~]</span><span class="hljs-comment"># cat /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="hljs-attr">DEVICE</span>=eth0<br><span class="hljs-attr">BOOTPROTO</span>=dhcp<br><span class="hljs-attr">ONBOOT</span>=<span class="hljs-literal">yes</span><br></code></pre></td></tr></table></figure>
-<h3 id="3-2-tac">3.2 tac</h3>
+<h4 id="3-2-tac">3.2 tac</h4>
 <p>tac与cat命令刚好相反，文件内容从最后一行开始显示，可以看出 tac 是 cat 的倒着写！如：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[root@Mercury ~]</span><span class="hljs-comment"># tac /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="hljs-attr">ONBOOT</span>=<span class="hljs-literal">yes</span><br><span class="hljs-attr">BOOTPROTO</span>=dhcp<br><span class="hljs-attr">DEVICE</span>=eth0<br></code></pre></td></tr></table></figure>
-<h3 id="3-3-nl">3.3 nl</h3>
+<h4 id="3-3-nl">3.3 nl</h4>
 <p>显示行号</p>
 <p>语法：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">nl <span class="hljs-selector-attr">[-bnw]</span> 文件<br></code></pre></td></tr></table></figure>
@@ -497,7 +497,7 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 </ul>
 <p>测试：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[root@Mercury ~]</span><span class="hljs-comment"># nl /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="hljs-attr">1DEVICE</span>=eth0<br><span class="hljs-attr">2BOOTPROTO</span>=dhcp<br><span class="hljs-attr">3ONBOOT</span>=<span class="hljs-literal">yes</span><br></code></pre></td></tr></table></figure>
-<h3 id="3-4-more">3.4 more</h3>
+<h4 id="3-4-more">3.4 more</h4>
 <p>一页一页翻动</p>
 <p>在 more 这个程序的运行过程中，你有几个按键可以按的：</p>
 <ul>
@@ -521,7 +521,7 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 </li>
 </ul>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">[root@kuangshen etc]<span class="hljs-comment"># more /etc/csh.login</span><br><span class="hljs-string">....</span><span class="hljs-params">(中间省略)</span><span class="hljs-string">....</span><br><span class="hljs-params">--More--</span><span class="hljs-params">(28%)</span> <span class="hljs-comment"># 重点在这一行喔！你的光标也会在这里等待你的命令</span><br></code></pre></td></tr></table></figure>
-<h3 id="3-5-less">3.5 less</h3>
+<h4 id="3-5-less">3.5 less</h4>
 <p>一页一页翻动，以下实例输出/etc/man.config文件的内容：</p>
 <p>less运行时可以输入的命令有：</p>
 <ul>
@@ -551,14 +551,14 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 </li>
 </ul>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">[root@kuangshen etc]<span class="hljs-comment"># more /etc/csh.login</span><br><span class="hljs-string">....</span><span class="hljs-params">(中间省略)</span><span class="hljs-string">....</span><br>:   <span class="hljs-comment"># 这里可以等待你输入命令！</span><br></code></pre></td></tr></table></figure>
-<h3 id="3-6-head">3.6 head</h3>
+<h4 id="3-6-head">3.6 head</h4>
 <p>取出文件前面几行</p>
 <p>语法：</p>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">head [-n <span class="hljs-built_in">number</span>] 文件<br></code></pre></td></tr></table></figure>
 <p>选项与参数：-n 后面接数字，代表显示几行的意思！</p>
 <p>默认的情况中，显示前面 10 行！若要显示前 20 行，就得要这样：</p>
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autoit">[root<span class="hljs-symbol">@Mercury</span> etc]<span class="hljs-meta"># head -n 20 /etc/csh.login</span><br></code></pre></td></tr></table></figure>
-<h3 id="3-7-tail">3.7 tail</h3>
+<h4 id="3-7-tail">3.7 tail</h4>
 <p>取出文件后面几行</p>
 <p>语法：</p>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">tail [-n <span class="hljs-built_in">number</span>] 文件<br></code></pre></td></tr></table></figure>
@@ -566,17 +566,17 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 <p>-n ：后面接数字，代表显示几行的意思</p>
 <p>默认的情况中，显示最后 10 行！若要显示最后 20 行，就得要这样：</p>
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autoit">[root<span class="hljs-symbol">@Mercury</span> etc]<span class="hljs-meta"># tail -n 20 /etc/csh.login</span><br></code></pre></td></tr></table></figure>
-<h1>五、Linux链接</h1>
+<h2 id="五、Linux链接">五、Linux链接</h2>
 <p>Linux链接的概念分为两种硬链接和软链接</p>
-<h2 id="1、硬链接">1、硬链接</h2>
+<h3 id="1、硬链接">1、硬链接</h3>
 <p>允许一个文件拥有多个路径 用户可以通过这种机制建立硬链接到一些重要文件上，防止误删</p>
 <p>感觉像是文件复制了一份，存在了别的地方，即使原文件已经删除了，这个还是可以访问的</p>
-<h2 id="2、软链接">2、软链接</h2>
+<h3 id="2、软链接">2、软链接</h3>
 <p>类似windows的快捷方式，和硬链接的区别就是，原文件如果已经删除了，这里使用ls查看的时候，该链接会变成红色，且无法打开(打开时会提示错误信息)</p>
-<h1>六、Vim编辑器</h1>
+<h2 id="六、Vim编辑器">六、Vim编辑器</h2>
 <p><strong>三种使用模式</strong><br>
 基本上 vi/vim 共分为三种模式，分别是命令模式（Command mode），输入模式（Insert mode）和底线命令模式（Last line mode）。这三种模式的作用分别是：</p>
-<h2 id="1、命令模式">1、命令模式</h2>
+<h3 id="1、命令模式">1、命令模式</h3>
 <p>用户刚刚启动 vi/vim，便进入了命令模式。</p>
 <p>此状态下敲击键盘动作会被Vim识别为命令，而非输入字符。比如我们此时按下i，并不会输入一个字符，i被当作了一个命令。</p>
 <p>以下是常用的几个命令：</p>
@@ -592,7 +592,7 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 </li>
 </ul>
 <p>若想要编辑文本：启动Vim，进入了命令模式，按下i，切换到输入模式。</p>
-<h2 id="2、输入模式">2、输入模式</h2>
+<h3 id="2、输入模式">2、输入模式</h3>
 <p>在命令模式下按下 <strong>i</strong> 就进入了输入模式。</p>
 <p>在输入模式中，可以使用以下按键：</p>
 <ul>
@@ -624,7 +624,7 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 <p>ESC，退出输入模式，切换到命令模式</p>
 </li>
 </ul>
-<h2 id="3、底线命令模式">3、底线命令模式</h2>
+<h3 id="3、底线命令模式">3、底线命令模式</h3>
 <p>在命令模式下按下 <strong>:</strong> （英文冒号）就进入了底线命令模式。</p>
 <p>底线命令模式可以输入单个或多个字符的命令，可用的命令非常多。</p>
 <p>在底线命令模式中，基本的命令有（已经省略了冒号）：</p>
@@ -639,10 +639,10 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 <p>一般会wq一起使用，保存退出</p>
 <p>按ESC键可随时退出底线命令模式。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240927170200816.png" srcset="/img/newloading.gif" lazyload alt="image-20240927170200816"></p>
-<h1>七、账号用户和磁盘管理</h1>
-<h2 id="1、账号用户管理">1、账号用户管理</h2>
+<h2 id="七、账号用户和磁盘管理">七、账号用户和磁盘管理</h2>
+<h3 id="1、账号用户管理">1、账号用户管理</h3>
 <p>root是Linux系统中的最高权限</p>
-<h3 id="1-1、添加用户">1.1、添加用户</h3>
+<h4 id="1-1、添加用户">1.1、添加用户</h4>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">useradd</span> -选项 用户名<br></code></pre></td></tr></table></figure>
 <p>一些参数说明</p>
 <ul>
@@ -669,23 +669,23 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 实际上就是添加了一个用户的目录</p>
 </li>
 </ul>
-<h3 id="1-2、切换用户">1.2、切换用户</h3>
+<h4 id="1-2、切换用户">1.2、切换用户</h4>
 <p>切换用户的命令为：<strong>su username 【username即你的用户名】</strong></p>
 <p>从普通用户切换到root用户，还可以使用命令：<strong>sudo su</strong></p>
 <p>在终端输入exit或logout或使用快捷方式ctrl+d，可以退回到原来用户，其实ctrl+d也是执行的exit命令</p>
 <p>在切换用户时，如果想在切换用户之后使用新用户的工作环境，可以在su和username之间加-，例如：<strong>【su - root】</strong></p>
 <p>$表示普通用户</p>
 <p>#表示超级用户，也就是root用户</p>
-<h3 id="1-3、删除用户">1.3、删除用户</h3>
+<h4 id="1-3、删除用户">1.3、删除用户</h4>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">userdel</span> 选项 用户名       <span class="hljs-comment">#  删除用户</span><br><br>userdel -r 用户名        <span class="hljs-comment">#  删除用户并删除他的目录页</span><br></code></pre></td></tr></table></figure>
-<h3 id="1-4、修改用户">1.4、修改用户</h3>
+<h4 id="1-4、修改用户">1.4、修改用户</h4>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">usermod</span> 选项 用户名<br></code></pre></td></tr></table></figure>
 <p>例如</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">usermod -d <span class="hljs-regexp">/home/</span><span class="hljs-number">233</span> william<br><br><span class="hljs-comment"># 把William的用户配置文件换到233文件夹</span><br><br><span class="hljs-comment"># 这里的参数和上面的add命令里面的意义是一样的</span><br></code></pre></td></tr></table></figure>
 <p><strong>临时插入</strong></p>
 <p>hostname 查看主机名</p>
 <p>hostname 想改的成名字  即可更改主机名     (不过这是临时的,永久的需要配置文件修改</p>
-<h3 id="1-5-用户的密码设置">1.5 用户的密码设置</h3>
+<h4 id="1-5-用户的密码设置">1.5 用户的密码设置</h4>
 <p>先了解基本的查看所有的用户</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">cat <span class="hljs-regexp">/etc/</span>psaawd<br></code></pre></td></tr></table></figure>
 <p>查看所有的用户，如果你拥有<strong>超级用户</strong>的权限</p>
@@ -693,7 +693,7 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 <p>即可更改，不过输入密码的时候需要注意，Linux是不会显示密码的</p>
 <p><strong>锁定账户</strong></p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">password</span> -l william    锁定账户<br><br><span class="hljs-keyword">password</span> -d william    删除账户的密码，没有密码也能登录<br></code></pre></td></tr></table></figure>
-<h3 id="1-6、用户组管理">1.6、用户组管理</h3>
+<h4 id="1-6、用户组管理">1.6、用户组管理</h4>
 <p><strong>创建一个用户组</strong></p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">groupadd <br>cat <span class="hljs-regexp">/etc/g</span>roup 查看用户组<br></code></pre></td></tr></table></figure>
 <p>创建后会有一个id 可以使用-g 520 指定 若不指定，则会自增</p>
@@ -709,8 +709,8 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 <p>密码存储在 /etc/shadow 里面</p>
 <p>所有的密码都是加密过的</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240927170226061.png" srcset="/img/newloading.gif" lazyload alt="image-20240927170226061"></p>
-<h2 id="2、磁盘管理">2、磁盘管理</h2>
-<h3 id="2-1、df-列出文件系统的磁盘使用量">2.1、df  列出文件系统的磁盘使用量</h3>
+<h3 id="2、磁盘管理">2、磁盘管理</h3>
+<h4 id="2-1、df-列出文件系统的磁盘使用量">2.1、df  列出文件系统的磁盘使用量</h4>
 <ul>
 <li>
 <p>-a ：列出所有的文件系统，包括系统特有的 /proc 等文件系统；</p>
@@ -736,7 +736,7 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240927170259354.png" srcset="/img/newloading.gif" lazyload alt="image-20240927170259354"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240927170331216.png" srcset="/img/newloading.gif" lazyload alt="image-20240927170331216"></p>
-<h3 id="2-2、du-检查磁盘空间使用量">2.2、du  检查磁盘空间使用量</h3>
+<h4 id="2-2、du-检查磁盘空间使用量">2.2、du  检查磁盘空间使用量</h4>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">du <span class="hljs-selector-attr">[-ahskm]</span> 文件或目录名称<br></code></pre></td></tr></table></figure>
 <p>选项与参数：</p>
 <p>-a ：列出所有的文件与目录容量，因为默认仅统计目录底下的文件量而已。</p>
@@ -746,7 +746,7 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 <p>-k ：以 KBytes 列出容量显示；</p>
 <p>-m ：以 MBytes 列出容量显示；</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">du -h --max-depth=1<br>//查看各文件夹所占容量大小<br></code></pre></td></tr></table></figure>
-<h1>八、 进程管理</h1>
+<h2 id="八、-进程管理">八、 进程管理</h2>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">ps</span><br></code></pre></td></tr></table></figure>
 <p>查看档期那系统正在执行的各种进程信息</p>
 <ul>
@@ -767,7 +767,7 @@ Linux文件属性有两种设置方法，一种是数字，一种是符号。</p
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">ps</span> -ef 可以查看到父进程的一些信息<br></code></pre></td></tr></table></figure>
 <p>使用进程树查看</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">pstree -pu</span><br></code></pre></td></tr></table></figure>
-<h1>九、关于部署项目</h1>
+<h2 id="九、关于部署项目">九、关于部署项目</h2>
 <ol>
 <li>springboot的项目直接打包成jar包然后通过xftp上传到云服务器的root目录下</li>
 <li>通过命令 <strong>netstat -anp | grep &lt;端口号&gt;</strong> 查看端口使用情况 <strong>lsof -i : (项目端口号)</strong>  查询当前端口是否有进程在使用</li>
