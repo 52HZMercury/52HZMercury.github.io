@@ -29,33 +29,6 @@
   
   
   <entry>
-    <title>Squeeze-and-Excitation Networks</title>
-    <link href="/2024/10/17/Squeeze-and-Excitation%20Networks/"/>
-    <url>/2024/10/17/Squeeze-and-Excitation%20Networks/</url>
-    
-    <content type="html"><![CDATA[<p>通道注意力的本质是什么，mamba采用“并行扫描算法”而非“卷积”来进行模型的循环计算，其是否也考虑了通道维度上的内容，是否存在和原始的CNN一样对所有通道上的内容一视同仁的问题</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>医学影像</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>深度学习</tag>
-      
-      <tag>论文</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>SimLVSeg With Mamba</title>
     <link href="/2024/09/26/SimLVSegWithMamba/"/>
     <url>/2024/09/26/SimLVSegWithMamba/</url>
@@ -912,9 +885,9 @@
     
     <tags>
       
-      <tag>spring</tag>
-      
       <tag>springboot</tag>
+      
+      <tag>spring</tag>
       
     </tags>
     
