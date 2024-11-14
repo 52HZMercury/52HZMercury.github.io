@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2024-11-12T10:41:24.491Z">
+<meta property="article:modified_time" content="2024-11-14T06:18:19.892Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          6.9k 字
+          7.6k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          22 分钟
+          24 分钟
         
       </span>
     
@@ -440,8 +440,20 @@
 <p>在大内核分割策略下，感受野被扩大，模型可以获得更多局部像素的细节。然而，图像被分割成非重叠的子内核。因此，我们需要一个机制来实现不同子内核之间的通信，以进行长距离依赖性建模。块级 SSM（PaM）。我们引入了一个块级 SSM 层，以在不同的子内核之间传递信息.</p>
 <p>与基于前向扫描方向 SSM 层的原始 Mamba 块不同，LM 块中的每个 SSM 层（包括 PiM 和 PaM）都是双向的。图 2(b) 显示了差异。在原始 Mamba 中，作为一个连续模型，一些信息遗忘发生在早期进入的元素上，而最后进入 Mamba 的元素将保留更多的信息。因此，具有单一扫描方向的原始 Mamba 将更多地关注后部块，而不是通常包含更多器官和病变的特征图的中心区域。为此，我们提出了一个双向 Mamba 结构，通过同时进行前向和后向扫描并叠加输出结果。BiM 有两个优点。首先，模型可以更多地关注图像中心区域的信息块，而不是角落区域。其次，对于每个块，绝对位置信息和与其他块的相对位置信息可以被网络很好地建模。</p>
 <h2 id="LightM-UNet">LightM-UNet</h2>
-<p>参数大大减小</p>
+<p>LightM-UNet，这是一个基于Mamba的轻量级U形分割模型，它在显著降低参数和计算成本的同时实现了最先进的性能,参数大大减小</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241112173154849.png" srcset="/img/newloading.gif" lazyload alt="image-20241112173154849"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241114135927092.png" srcset="/img/newloading.gif" lazyload alt="image-20241114135927092"></p>
+<p>所提出的LightM-UNet的总体架构如图所示。给定一个输入图像 ，其中 、、 和  分别表示3D医疗图像的通道数、高度、宽度和切片数</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241114140118136.png" srcset="/img/newloading.gif" lazyload alt="image-20241114140118136"></p>
+<p>LightM-UNet首先使用深度可分卷积（DWConv）层进行浅层特征提取，生成浅层特征图。随后，LightM-UNet结合三个连续的编码器块（Encoder Blocks）从图像中提取深层特征。在每个编码器块之后，特征图中的通道数翻倍，而分辨率减半。</p>
+<p><strong>Encoder Block</strong></p>
+<p>感觉encoder都差不多</p>
+<p>为了最小化参数数量和计算成本，LightM-UNet采用了仅包含Mamba结构的编码器块来从图像中提取深层特征。</p>
+<p>具体来说，给定一个特征图 $$ F^l \in R^{C \times H \times W \times D }  $$，其中$$ C = 32 \times2^l $$，$$ H = H / 2^l $$，$$ W = W / 2^l $$，$$ D = D / 2^l $$，以及，编码器块首先将特征图展平并转置成的形状，其中$$ L = H \times W \times D $$。</p>
+<p>随后，编码器块使用个连续的RVM层来捕捉全局信息，在最后一个RVM层中通道数增加。此后，编码器块重新调整并转置特征图的形状为 $$ (C \times 2,H,W,D) $$，紧接着进行最大池化操作以降低特征图的分辨率。</p>
+<p>最终，第l个编码器块输出新的特征图$$ F^{l+1} $$，其形状为$$ (C \times 2,H/2,W/2,D/2) $$。</p>
+<p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>L</mi><mo>=</mo><mi>H</mi><mo>×</mo><mi>W</mi><mo>×</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">L = H \times W \times D
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span></span></p>
 
               
             </div>
