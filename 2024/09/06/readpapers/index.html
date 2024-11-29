@@ -16,16 +16,16 @@
   <meta name="author" content="Mercury">
   <meta name="keywords" content="">
   
-    <meta name="description" content="mamba用于分割">
+    <meta name="description" content="论文笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SegMamba">
-<meta property="og:url" content="http://example.com/2024/09/06/segmamba/index.html">
+<meta property="og:url" content="http://example.com/2024/09/06/readpapers/index.html">
 <meta property="og:site_name" content="Mercury&#39;s blog">
-<meta property="og:description" content="mamba用于分割">
+<meta property="og:description" content="论文笔记">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240906134037404.png">
 <meta property="article:published_time" content="2024-09-06T05:36:46.000Z">
-<meta property="article:modified_time" content="2024-10-28T11:25:41.551Z">
+<meta property="article:modified_time" content="2024-11-26T12:35:58.507Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          4.3k 字
+          8.5k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          14 分钟
+          27 分钟
         
       </span>
     
@@ -292,10 +292,11 @@
             
             <div class="markdown-body">
               
-              <p>通道注意力的本质是什么，mamba采用“并行扫描算法”而非“卷积”来进行模型的循环计算，其是否也考虑了通道维度上的内容，是否存在和原始的CNN一样对所有通道上的内容一视同仁的问题</p>
-<h2 id="摘要">摘要</h2>
+              <h2 id="SegMamba">SegMamba</h2>
+<p>通道注意力的本质是什么，mamba采用“并行扫描算法”而非“卷积”来进行模型的循环计算，其是否也考虑了通道维度上的内容，是否存在和原始的CNN一样对所有通道上的内容一视同仁的问题</p>
+<h3 id="摘要">摘要</h3>
 <p>摘要。Transformer 架构在建模全局关系方面表现出色。然而，它在处理高维医学图像时带来了巨大的计算挑战。Mamba 作为一种状态空间模型 (SSM)，最近成为一种用于对序列数据中的长距离依赖关系进行建模的著名方法，凭借其出色的内存效率和计算速度在自然语言处理领域表现出色。受其成功的启发，我们推出了 SegMamba，一种新颖的 3D 医学图像分割 Mamba 模型，旨在有效捕获每个尺度的全体积特征内的长距离依赖关系。与基于 Transformer 的方法相比，我们的 SegMamba 在整个体积特征建模方面表现出色，即使体积特征的分辨率为 64 × 64 × 64（序列长度约为 260k），也能保持卓越的处理速度。在三个数据集上进行的综合实验证明了我们的 SegMamba 的有效性和效率。此外，为了促进 3D 结直肠癌 (CRC) 分割研究，我们贡献了一个新的大规模数据集（名为 CRC-500）。SegMamba 的代码和有关 CRC-500 数据集的信息可在以下位置找到：<a target="_blank" rel="noopener" href="https://github.com/gexing/SegMamba">https://github.com/gexing/SegMamba</a></p>
-<h2 id="模型">模型</h2>
+<h3 id="模型">模型</h3>
 <p>SegMamba 主要由三个组件组成：1）具有多个三向空间 Mamba 块的 3D 特征编码器，用于对不同尺度的全局信息进行建模；2）基于卷积层的 3D 解码器，用于预测分割结果；3）跳跃连接，用于将全局多尺度特征连接到解码器以实现特征重用。图 2 说明了所提出的 SegMamba 的概览。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240906134037404.png" srcset="/img/newloading.gif" lazyload alt="Fig. 2. The overview of the proposed SegMamba."></p>
 <p>对于 3D 医学图像分割而言，全局特征和多尺度特征建模至关重要。Transformer 架构可以提取全局信息，但在处理过长的特征序列时会产生很大的计算负担。为了减少序列长度，基于 Transformer 架构的方法（例如 UNETR）直接将分辨率为 D × H × W 的 3D 输入下采样为 D 16 × H 16 × W 16。然而，这种方法限制了编码多尺度特征的能力，而多尺度特征对于通过解码器预测分割结果至关重要。为了克服这个限制，我们设计了一个 TSMamba 模块，以实现多尺度和全局特征建模，同时在训练和推理期间保持高效率。</p>
@@ -304,9 +305,9 @@
 <p>门控空间卷积 (GSC) Mamba 层通过将 3D 特征展平为 1D 序列来对特征依赖性进行建模。因此，为了在 Mamba 层之前提取空间关系，我们设计了一个门控空间卷积 (GSC) 模块。如图 3 (a) 所示，输入的 3D 特征被送入两个卷积块（一个卷积块包含一个范数、一个卷积和一个非线性层），卷积核大小分别为 3×3×3 和 1×1×1。<br>
 然后将这两个特征逐像素相乘，以类似于门机制 [13] 的信息传输进行控制。最后，使用卷积块进一步融合特征，同时利用残差连接重用输入特征。</p>
 <p>三向 Mamba (ToM) 在 TSMamba 模块中，为了有效地对高维特征的全局信息进行建模，我们设计了一个三向 Mamba 模块，从三个方向计算特征依赖关系。如图 3 (b) 所示，我们将 3D 输入特征展平为三个序列，以执行相应的特征交互并获得融合的 3D 特征。</p>
-<h2 id="结论">结论</h2>
+<h3 id="结论">结论</h3>
 <p>提出了第一种基于 Mamba 的通用 3D 医学图像分割方法，称为 SegMamba。我们设计了一个三向 Mamba (ToM) 模块来增强 3D 特征的顺序建模。然后，为了有效地对空间特征进行建模，我们进一步设计了一个门控空间卷积 (GSC) 模块，以在每个 ToM 模块之前增强空间维度中的特征表示。</p>
-<h2 id="复现实验">复现实验</h2>
+<h3 id="复现实验">复现实验</h3>
 <p>经过一周的安装和配置环境，终于把这个代码给跑了起来，在这里再骂一遍python狗屎的各种版本。超！在看复现数据之前，先了解相关的评价指标</p>
 <p><strong>Dice系数</strong></p>
 <p>Dice系数是一种集合相似度度量函数，通常用于计算两个样本的相似度，取值范围在[0,1]</p>
@@ -399,8 +400,79 @@
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240917131533080.png" srcset="/img/newloading.gif" lazyload alt="tc"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240917131712635.png" srcset="/img/newloading.gif" lazyload alt="wt"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240917131751752.png" srcset="/img/newloading.gif" lazyload alt="et"></p>
-<p>最后附上部分打印的数据</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 第19轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.8111</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8987</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.7715</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8271</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8270890194078957</span><br><span class="hljs-comment"># 第25轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.8550</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.9313</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8168</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/best_model_0<span class="hljs-number">.8677</span>.pt<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8677</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8676834896990973</span><br><span class="hljs-comment"># 第35轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.8839</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.9208</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8588</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/best_model_0<span class="hljs-number">.8878</span>.pt<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8878</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8878393851712278</span><br><span class="hljs-comment"># 第119轮数据</span><br>dices <span class="hljs-keyword">is</span> (tensor(<span class="hljs-number">0.9089</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.9292</span>, dtype=torch.float64), tensor(<span class="hljs-number">0.8559</span>, dtype=torch.float64))<br>model <span class="hljs-keyword">is</span> saved <span class="hljs-keyword">in</span> ./logs/segmamba/model/final_model_0<span class="hljs-number">.8980</span>.pt<br>mean_dice <span class="hljs-keyword">is</span> <span class="hljs-number">0.8980341618483131</span><br></code></pre></td></tr></table></figure>
+<h2 id="SwinUMamba">SwinUMamba</h2>
+<h3 id="摘要-2">摘要</h3>
+<p>摘要：准确的医学图像分割需要融合从局部特征到全局依赖的多尺度信息。然而，现有的方法对远程全局信息建模是具有挑战性的，其中卷积神经网络（CNN）受到其局部感受野的限制，视觉变换器（ViTs）受到其注意力机制的高二次复杂性的影响。最近，基于Mamba的模型以其在长序列建模方面的出色能力而受到广泛关注。一些研究表明，这些模型在各种任务中的性能优于流行的视觉模型，具有更高的精度，更低的内存消耗和更少的计算负担。然而，现有的基于Mamba的模型大多是从头开始训练，并且没有探索预训练的力量。本文介绍了一种新的Mambabased模型Swin-Umamba，它是专门为医学图像分割任务设计的，利用基于ImageNet的预训练的优势。我们的实验结果揭示了基于ImageNet的训练在提高Mamba性能方面的重要作用-SwinUAmba与CNN、ViT和最新的基于Mamba的模型相比，表现出上级性能。值得注意的是，在AbdomenMRI、Encoscopy和Microscopy数据集上，Swin-UAmamba比其最接近的对手U-Mamba_Enc的平均得分高出2.72%。Swin-UAmamba的代码和模型可在www.example.com上公开获得<a target="_blank" rel="noopener" href="https://github.com/JiarunLiu/Swin-UMamba%E3%80%82">https://github.com/JiarunLiu/Swin-UMamba。</a></p>
+<h3 id="引言">引言</h3>
+<p>在本文中，我们提出了一个基于Mamba的网络Swin-UMamba，用于2D医学图像分割。Swin-UMamba使用一个通用的编码器，将预训练的视觉模型的强大功能与一个精心设计的解码器集成在一起，用于医学图像分割任务。此外，我们提出了一个变体结构SwinUMamba†，带有一个基于Mamba的解码器，为高效应用提供更少的参数和更低的FLOP。我们的贡献可以总结如下：</p>
+<h3 id="模型-2">模型</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240920152738522.png" srcset="/img/newloading.gif" lazyload alt="Fig. 1. The overall architecture of Swin-UMamba. Swin-UMamba can leverage the power of vision foundation models by loading the weights of pretrained models. Each block within the blue box was initialized with the ImageNet pretrained weights."></p>
+<p>Swin-Umamba的三个核心部分分别是：1）数据集（即ImageNet），用于提取不同尺度的特征; 2）解码器，具有多个上采样块，用于预测分割结果; 3）跳过连接，用于弥合低级细节和高级语义之间的差距。我们将在下面的章节中介绍Swin-Umamba的详细结构。</p>
+<p><strong>VSS块</strong></p>
+<p>基于[24]的见解，我们将视觉状态空间（VSS）块作为Swin-UMAMBA中的基本单元。VSS块通过采用2D选择性扫描（SS 2D）来解决与2D图像数据相关的挑战。</p>
+<p>Swin-Umamba的编码器可以分为5个阶段。第一阶段是茎阶段。它包含一个卷积层，用于2×下采样，具有7×7内核，填充大小为3，Swin-Umamba的第一阶段与VMamba不同，因为我们更喜欢一个逐渐向下的过程，采样过程，每个阶段进行2×下采样。该策略旨在保留低级别细节，这对医学图像分割很重要[8，32]。第二阶段使用2 × 2补丁大小的补丁嵌入层，将特征分辨率保持在原始图像的1/ 4×，这与VMamba中的嵌入特征相同。后续阶段遵循VMamba-Tiny的设计，其中每个阶段由用于2×下采样的补丁合并层和用于高级特征提取的多个VSS块组成。与ViT不同，由于VSS块的因果性质，我们没有采用Swin-Umamba中的位置嵌入[24]。</p>
+<p><strong>模型结构</strong></p>
+<p>阶段2到阶段5的VSS块的数量分别为{2，2，9，2}。每个阶段之后的特征维度相对于阶段二次增加，导致D = {48，96，192，384，768}。我们使用来自VMamba-Tiny的ImageNet预训练权重初始化VSS块和补丁合并层，如图1所示。值得注意的是，由于片大小和输入通道的差异，片嵌入块没有用预先训练的权重初始化。</p>
+<p>我们遵循常用的U形结构，使用密集的跳跃连接来构建Swin-UAmamba。U-Net及其变体在医学图像分割任务中表现出了显着的效率。该架构利用跳跃连接来恢复低级别细节，并采用编码器-解码器结构来提取高级信息。为了增强U-Net中的原生上采样块，我们引入了两个修改：1）具有剩余连接的额外卷积块以处理跳过连接特征，以及2）每个尺度的额外分割头用于深度监督[33]。</p>
+<p><strong>SwinUMamba†</strong></p>
+<p>为了进一步探索Mamba在医学语义分割中的潜力，我们提出了一种基于Mamba解码器的Swin-Umamba变体，即SwinUMamba†。我们将证明SwinUMamba†可以获得与Swin-Umamba相比具有竞争力的结果，同时使用更少的网络参数和更低的计算负担，Swin-Umamba中源自输入图像和2×下采样特征的跳过连接被删除，因为没有对应于它们的解码块。此外，在1×、1/ 4×、1/ 8×和1/ 16×分辨率下应用了深度监控，并结合了额外的分割头（即，将高维特征映射到K的1 × 1卷积）。结合所有这些修改，网络参数的数量从60 M减少到28 M，在AbdomenMRI数据集上，FLOP从68.0G减少到18.9G。关于网络参数和FLOP数量的进一步统计数据见表1、表2和表3。SwinUMamba†的结构见图2。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240920154002183.png" srcset="/img/newloading.gif" lazyload alt="Fig. 2. The overall architecture of Swin-UMamba†."></p>
+<h3 id="结论-2">结论</h3>
+<p>本研究旨在揭示基于ImageNet的预训练对Mambabased模型在二维医学图像分割中的影响。我们提出了一种新的Mambabased模型Swin-UAmamba及其变体SwinUMamba†，两者都能够利用预训练模型的分割任务的能力。我们在各种医学图像分割数据集上的实验表明，基于ImageNet的预训练对基于Mamba的模型有几个优点，包括上级分割精度、稳定的收敛性、过拟合问题的缓解、数据效率和较低的计算资源消耗。我们相信，我们的研究结果突出了预训练在增强基于Mamba的模型在视觉任务中的性能和效率方面的重要性。</p>
+<h2 id="Mean-teachers-model">Mean teachers  model:</h2>
+<blockquote>
+<p>Tarvainen A, Valpola H. Mean teachers are better role models: Weight-averaged consistency targets improve semi-supervised deep learning results[J]. Advances in neural information processing systems, 2017, 30.</p>
+</blockquote>
+<p>该算法中教师模型不同学生模型一样，并不是每个step都进行权重更新，而是将学生模型连续训练若干step后产生的权重平均值作为更新权重。教师模型使用学生模型的EMA权重，而不是与学生模型共享权重。论文中表示平均模型权重往往会产生一个比直接使用最终权重更精确的模型。它可以在每一个step完成后即刻聚合之前学习到的所有信息，而不仅仅在每一个epoch。此外，由于EMA提高了所有层的输出质量，而不仅仅是最后一层的输出，因此模型能够更好地表征中层乃至高层语义信息。这些方面造就了该模型相对于Temporal ensemble的两个优势。首先，更准确的标签使学生和教师模型之间发生更快的反馈循环，从而产生更好的精度。其次，这种方法适用于大型数据集和在线学习。</p>
+<ol>
+<li>对数据进行两种不同的加噪。</li>
+<li>将不同噪声增强后的两幅图像分别输入到学生模型的和教师模型。</li>
+<li>对输出使用softmax激活，计算学生模型输出与教师模型输出的一致性损失函数， 如果原图像存在label，则还与label计算交叉熵信息损失。</li>
+<li>用梯度下降法更新学生模型的权重，教师模型的权重用学生权重的指数移动平均法（EMA）更新（一部分权重来自历史的教师模型权重，另一部分来自于当前的学生模型的权重）：</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241126163522672.png" srcset="/img/newloading.gif" lazyload alt="image-20241126163522672"></p>
+<p><strong>模型缺点</strong>：</p>
+<ul>
+<li>教师模型的选择对模型性能至关重要。选择一个不合适的教师模型可能会导致性能下降。因此，需要进行一些实验来确定最佳的教师模型。</li>
+<li>Mean Teacher 模型仍然需要一些有标签的数据来进行监督训练，尤其是在初期阶段。这意味着它不适用于完全无监督的情况。</li>
+<li>Mean Teacher 假设有标签和无标签的数据是从相同的数据分布中生成的。如果这个假设不成立，模型性能可能会受到影响。</li>
+<li>Mean Teacher 模型对数据中的噪声和异常值比较敏感。这可能导致模型在存在异常数据的情况下性能下降。</li>
+</ul>
+<h2 id="ABD半监督医学图像分割">ABD半监督医学图像分割</h2>
+<blockquote>
+<p>Chi H, Pang J, Zhang B, et al. Adaptive Bidirectional Displacement for Semi-Supervised Medical Image Segmentation[C]//Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2024: 4070-4080.</p>
+</blockquote>
+<div class = "note note-info">
+论文标题
+<ul>
+    <div>Adaptive Bidirectional Displacement for Semi-Supervised Medical Image Segmentation</div>
+</ul>
+<ul>
+    <div>自适应双向位移半监督医学图像分割</div>
+</ul>
+    代码链接：
+<ul>
+    <div>https://github.com/chyupc/ABD</div>
+</ul>
+</div>
+<h3 id="摘要-3">摘要</h3>
+<p>本文提出了一种自适应双向置换（ABD）方法，用于解决半监督医学图像分割（SSMIS）中的一致性学习挑战。该方法通过设计基于可靠预测置信度的双向补丁置换，生成新的样本，有效抑制了不可控区域，同时保留了输入扰动的影响。此外，为了增强模型对潜在不可控内容的学习能力，提出了针对标记图像的逆置信度双向置换操作，生成了包含更多不可靠信息的样本，以促进模型学习。实验表明，ABD方法在半监督医学图像分割任务中取得了新的最优性能，显著提升了不同基线方法的表现。</p>
+<p><strong>本文贡献：</strong></p>
+<p>作者设计了基于可靠预测置信度的双向补丁置换操作。这一创新点在于，它利用了模型对未标记数据的预测结果，根据置信度将图像划分为可靠和不可靠区域，并通过置换这些区域的补丁来生成新的训练样本。这种方法有效地抑制了不可控区域的影响，同时保留了输入扰动对模型训练的积极作用。</p>
+<p><strong>逆置信度置换策略：</strong> 针对标记数据，作者提出了逆置信度双向置换操作。这一策略通过在高置信度区域内选择相对不可靠的补丁，在低置信度区域内选择相对可靠的补丁进行置换，生成了包含更多不可靠信息的样本。这一创新点有助于模型学习如何更好地处理潜在的不可控内容，提高了模型的泛化能力。</p>
+<p>**实验验证与性能提升：**作者在多个医学图像分割数据集上进行了实验验证，结果表明ABD方法显著提升了半监督医学图像分割的性能。通过与其他先进方法进行比较，ABD方法展现出了优越的性能表现，验证了其在实际应用中的有效性。</p>
+<p>**消融实验与组件重要性分析：**为了深入探究ABD方法中各个组件的重要性，作者们进行了消融实验。通过移除基于可靠预测置信度的双向补丁置换和逆置信度双向置换操作，并观察模型性能的变化，作者们发现这两个组件都对ABD方法的性能提升起到了关键作用。这一分析进一步验证了ABD方法的创新性和有效性。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241126172507003.png" srcset="/img/newloading.gif" lazyload alt="image-20241126172507003"></p>
+<h3 id="自适应双向置换-ABD-方法">自适应双向置换(ABD)方法</h3>
+<p>为了应对半监督医学图像分割中的一致性学习挑战，研究者们提出了一种创新的自适应双向置换（ABD）方法。该方法的核心在于通过设计双向置换操作，生成多样化的训练样本，从而提高模型的一致性学习能力和性能。</p>
+<p>在ABD方法中，首先针对未标记数据设计了基于可靠预测置信度的双向补丁置换。具体而言，对于每个未标记的图像，模型会先对其进行预测，并根据预测结果的置信度将图像划分为可靠区域和不可靠区域。随后，在可靠区域内选择具有高置信度的补丁，并在不可靠区域内选择具有低置信度的补丁进行置换。这种双向置换操作有助于抑制不可控区域的影响，同时保留输入扰动对模型训练的积极作用。</p>
+<h3 id="逆置信度双向置换操作">逆置信度双向置换操作</h3>
+<p>此外，为了进一步增强模型对潜在不可控内容的学习能力，研究者们还提出了针对标记图像的逆置信度双向置换操作。对于每个标记图像，模型同样会先对其进行预测，并根据预测结果的置信度将图像划分为高置信度区域和低置信度区域。然后，在高置信度区域内选择具有低置信度的补丁（即相对不可靠的补丁），在低置信度区域内选择具有高置信度的补丁（即相对可靠的补丁）进行置换。这种逆置信度双向置换操作能够生成包含更多不可靠信息的样本，从而促使模型学习如何更好地处理这些潜在的不可控内容。</p>
+<p>通过这两种置换操作，ABD方法能够生成多样化的训练样本，这些样本不仅包含了原始的图像信息，还引入了额外的扰动和不确定性。这些扰动和不确定性有助于模型在训练过程中学习到更加鲁棒和泛化的特征表示，从而提高其在一致性学习任务中的性能。</p>
+<h2 id="QuadMamba">QuadMamba</h2>
+<blockquote>
+<p>Xie F, Zhang W, Wang Z, et al. QuadMamba: Learning Quadtree-based Selective Scan for Visual State Space Model[J]. arXiv preprint arXiv:2410.06806, 2024.</p>
+</blockquote>
 
               
             </div>
@@ -450,7 +522,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>SegMamba</div>
-      <div>http://example.com/2024/09/06/segmamba/</div>
+      <div>http://example.com/2024/09/06/readpapers/</div>
     </div>
     <div class="license-meta">
       
@@ -492,9 +564,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/09/20/swin-umamba/" title="Swin-UMamba">
+                      <a href="/2024/09/26/SimLVSegWithMamba/" title="SimLVSeg With Mamba 实验">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Swin-UMamba</span>
+                        <span class="hidden-mobile">SimLVSeg With Mamba 实验</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
