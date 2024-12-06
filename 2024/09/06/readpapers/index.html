@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240906134037404.png">
 <meta property="article:published_time" content="2024-09-06T05:36:46.000Z">
-<meta property="article:modified_time" content="2024-11-29T11:48:55.682Z">
+<meta property="article:modified_time" content="2024-12-05T13:44:23.114Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          8.5k 字
+          12k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          27 分钟
+          37 分钟
         
       </span>
     
@@ -473,6 +473,39 @@
 <blockquote>
 <p>Xie F, Zhang W, Wang Z, et al. QuadMamba: Learning Quadtree-based Selective Scan for Visual State Space Model[J]. arXiv preprint arXiv:2410.06806, 2024.</p>
 </blockquote>
+<h2 id="MemSAM">MemSAM</h2>
+<blockquote>
+<p>Deng X, Wu H, Zeng R, et al. MemSAM: Taming Segment Anything Model for Echocardiography Video Segmentation[C]//Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2024: 9622-9631.</p>
+</blockquote>
+<h3 id="引言-2">引言</h3>
+<p>根据世界卫生组织（WHO）的统计，心血管疾病是全球死亡的主要原因。超声心动图是评估心血管功能的重要而独特的工具。由于其便携性、低成本和实时性，超声心动图通常被用作临床实践中的一线检查方法。然而，超声心动图通常需要经验丰富的医生进行手动评估，评估质量严重依赖于医生的专业知识。因此，手动评估之间和观察者之间的差异往往很大。此外，评估需要手动跟踪心室大小，这既费力又费时，而且容易出错。在这方面，临床实践非常需要自动化评估方法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241205155220803.png" srcset="/img/newloading.gif" lazyload alt="图 1. 超声心动图视频分割的挑战：（a）轮廓模糊，（b）斑点噪声，以及（c-d）跨帧（同一视频的两帧）的比例变化。"></p>
+<p>超声心动图评估和诊断通常基于对射血分数和心室容积的解释，这需要从超声心动图视频中准确分割出左心室心内膜等关键结构。然而，自动超声心动图分割一直是一项具有挑战性的任务。</p>
+<p>首先，如图 1 (a,b) 所示，由于超声成像的限制，有很多不利因素影响超声心动图视频的质量，例如低信噪比、斑点噪声、边缘丢失以及由致密肌肉和肋骨等结构引起的阴影，难以识别关键解剖结构的边界。其次，视频内和视频之间的心脏结构形状和尺度变化很大（见图 1 (c,d)）。最后，超声心动图视频的注释是一项劳动密集且耗时的工程，因此医生通常只注释收缩末期和舒张末期帧。最后，我们必须对注释有限且稀疏的超声心动图视频进行分割。</p>
+<p>近年来，许多深度学习方法被提出用于超声心动图视频分割，但由于超声视频质量低、标注有限，这些方法仍然无法取得令人满意的效果。最近，一种大型视觉模型——Segment Anything Model (SAM) 被提出并在许多自然图像分割任务中取得了显著的成功。</p>
+<p>一些研究人员试图将其应用于医学图像分割任务，以利用 SAM 强大的表征能力来缓解训练样本不足的问题。然而，这些研究大多集中在二维图像上，如何将 SAM 应用于医学视频分割仍是一项尚未探索且具有挑战性的任务。将 SAM 直接应用于视频会忽略时间线索，并可能导致时间不一致的分割。例如，如图 1 所示，快速变化的超声心动图视频在目标物体的形状和尺度上存在明显的时间不连续性。此外，大量斑点噪声和伪影造成的边界模糊将极大地阻碍 SAM 释放其表征能力。</p>
+<p>在本文中，我们通过将 SAM 应用于医学视频提出了一种新颖的超声心动图视频分割模型，与自然视频相比，医学视频具有一些独特的特征。我们模型的核心技术是一种时间感知和抗噪声的提示方案。</p>
+<p>具体来说，我们使用包含空间和时间信息的时空记忆来提示当前帧的分割，因此我们将提出的模型称为 MemSAM。在提示过程中，携带时间线索的记忆会逐帧顺序提示视频分割。同时，随着记忆提示传播高级特征，它避免了由掩码传播引起的错误识别问题并提高了表示一致性。为了应对斑点噪声的挑战，我们提出了一种记忆强化机制，该机制利用预测的掩码来提高记忆质量，然后再进行存储。我们在 SAMUS（一种基于 SAM 的医学基础模型）上构建了我们的模型，这使我们的模型更适应医疗数据。最后，我们在两个公开可用的数据集上进行了广泛的实验。我们的贡献可以总结如下：</p>
+<ul>
+<li>我们提出了一种基于 SAM 的新型超声心动图视频分割模型。我们模型的核心组件是一种新的提示方法，它能够提供空间和时间线索，以提高表示一致性和分割准确性。</li>
+<li>我们进一步提出了记忆强化模块，在存储记忆之前对其进行增强，从而减轻记忆提示过程中斑点噪声和运动伪影的不利影响。</li>
+<li>我们在两个公共数据集上对我们的方法进行了广泛的评估，与现有模型相比，我们的模型表现出了最先进的性能。特别是，我们的模型在注释有限的情况下实现了与完全监督方法相当的性能。</li>
+</ul>
+<h3 id="实验">实验</h3>
+<p>我们在两个广泛使用的公开超声心动图数据集 CAMUS 和 EchoNet-Dynamic 上评估了我们的方法。</p>
+<p><strong>CAMUS 数据集</strong>包含 500 个案例，其中包括 2D 心尖双腔和心尖四腔视图视频。CAMUS 为所有帧提供注释。</p>
+<p><strong>EchoNet-Dynamic 数据集</strong>包含 10,030 个 2D 心尖双腔视图视频。每个视频以积分的形式提供左心室的面积。仅标记收缩末期和舒张末期。</p>
+<p>为了全面评估我们的方法在半监督视频分割中的有效性，CAMUS 数据集被改编为两个变体：CAMUS-Full 和 CAMUS-Semi。CAMUS-Full 在训练期间使用所有帧的注释，而 CAMUS-Semi 仅使用舒张末期 (ED) 和收缩末期 (ES) 帧的注释。在测试期间，这两个数据集都使用完整的注释进行评估。我们从数据集中均匀采样视频，将它们裁剪为每帧 10 帧。裁剪确保 ED 帧是第一帧，ES 帧是最后一帧，分辨率调整为 256×256。对于 CAMUS 数据集，我们按 7:1:2 的比例将其分为训练集、验证集和测试集，而我们对 EchoNet-Dynamic 数据集使用原始分割。</p>
+<p>我们采用了广泛使用的指标，例如平均 Dice 系数 (mDice) 和平均并集 (mIoU) 进行分割评估，以及豪斯多夫距离-95% (HD95) 和平均对称表面距离 (ASSD)。我们还报告了这些指标的标准差。此外，我们还报告了左心室射血分数 (LVEF) 的三个统计指标。我们根据 CAMUS 数据集中提供的辛普森双平面圆盘方法 (SMOD) 估计预测 LVEF。</p>
+<p>请注意，不同的实施方法会对最终的 LVEF 结果产生重大影响。SMOD 从心尖二腔和四腔视图的舒张末期和收缩末期时间实例估计 LVEF。与辛普森的单平面规则相比，SMOD 的估计解决方案更准确、更可靠。对于预测和真实 LVEF，我们计算皮尔逊相关系数 (corr)、平均偏差 (bias) 和标准误差 (std)。</p>
+<p><strong>与最先进方法的比较</strong></p>
+<p>我们广泛选取了不同类型的比较方法，包括传统图像分割模型和医学基础模型。三种传统图像分割模型分别为基于CNN的UNet、基于Transformer的SwinUNet和CNN-Transformer混合的H2Former。医学适应的SAM模型包括MedSAM、MSA、SAMed、SonoSAM和SAMUS。其中SonoSAM和SAMUS专注于超声图像。</p>
+<p><strong>定量比较。</strong> 定量比较结果如表 1 所示。在这些最先进的方法中，H2Former 和 SAMUS 在两个数据集上表现相对较好，分别得益于 CNN-Transformer 架构和超声图像优化。然而，如果不利用稀缺注释下视频的时间属性，这些模型仍然落后于我们的方法。实验验证了我们的方法在有限的注释下实现了最先进的性能。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241205161005071.png" srcset="/img/newloading.gif" lazyload alt="image-20241205161005071"></p>
+<p>为了进一步评估我们的方法，我们在 CAMUS-Semi 和 CAMUS-Full 数据集上以相同的设置对其进行了比较。结果如图 5 所示。可以看出，UNet 和 H2Former 等传统方法以及 SonoSAM 和 SAMUS 等超声波专业方法在完整注释的情况下恢复了不错的结果。虽然我们的方法从半监督到全监督设置都有边际收益，但它在这两种情况下仍然优于其他竞争对手。值得注意的是，医学基础模型需要在完全监督下逐帧提示，而我们只需要一个点提示。实验验证了我们的方法使用更少的外部提示实现了与稀疏标签的完整注释相当的性能。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241205161308103.png" srcset="/img/newloading.gif" lazyload alt="图 5. 所提出的方法与最先进的方法在 CAMUS-Semi 和 CAMUS-Full 数据集上的分割性能"></p>
+<h3 id="结论-3">结论</h3>
+<p>在本文中，我们提出了一种用于超声心动图视频分割的新型半监督视频分割框架，旨在有效地将 SAM 扩展到视频领域，并在有限的注释和提示下实现与全监督相当的性能。然而，当初始帧图像非常差时，我们的方法会导致整个视频序列无法准确分割。未来的研究可以研究实现更稳健初始化的技术，并在更多领域测试我们的方法的有效性，并可以进一步探索降低计算成本和轻量化模型的方法。</p>
 
               
             </div>
