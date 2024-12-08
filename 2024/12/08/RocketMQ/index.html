@@ -1,0 +1,1040 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/moon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mercury">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="队列模型的消息中间件，具有高性能、高可靠、高实时、分布式特点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RocketMQ">
+<meta property="og:url" content="http://example.com/2024/12/08/RocketMQ/index.html">
+<meta property="og:site_name" content="Mercury&#39;s blog">
+<meta property="og:description" content="队列模型的消息中间件，具有高性能、高可靠、高实时、分布式特点">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tse4-mm.cn.bing.net/th/id/OIP-C.qcgfphGmlT0oVGoRaRc68AHaEj?w=260&h=180&c=7&r=0&o=5&pid=1.7">
+<meta property="article:published_time" content="2024-12-08T08:07:14.000Z">
+<meta property="article:modified_time" content="2024-12-08T09:48:08.651Z">
+<meta property="article:author" content="Mercury">
+<meta property="article:tag" content="RocketMQ">
+<meta property="article:tag" content="MQ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tse4-mm.cn.bing.net/th/id/OIP-C.qcgfphGmlT0oVGoRaRc68AHaEj?w=260&h=180&c=7&r=0&o=5&pid=1.7">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>RocketMQ - Mercury&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/newloading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Mercury</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/Post%20Page.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="RocketMQ"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-12-08 16:07" pubdate>
+          2024年12月8日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          17k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          55 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">RocketMQ</h1>
+            
+            <div class="markdown-body">
+              
+              <h2 id="一、RockeMQ是什么">一、RockeMQ是什么</h2>
+<p><img src="https://static001.geekbang.org/infoq/ef/ef30fda4951f78891f25a4615cdea81b.png" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<ul>
+<li>是一个队列模型的消息中间件，具有高性能、高可靠、高实时、分布式特点</li>
+<li>Producer、Consumer、队列都可以分布式；</li>
+<li>Producer 向一些队列轮流发送消息，队列集合称为 Topic，Consumer 如果做广播消费，则一个 consumer 实例消费这个 Topic 对应的所有队列，如果做集群消费，则多个 Consumer 实例平均消费这个 topic 对应的队列集合；</li>
+<li>能够保证严格的消息顺序；</li>
+<li>提供丰富的消息拉取模式；</li>
+<li>高效的订阅者水平扩展能力；</li>
+<li>实时的消息订阅机制；</li>
+<li>亿级消息堆积能力；</li>
+<li>较少的依赖。</li>
+</ul>
+<h2 id="二、RocketMQ基本概念">二、RocketMQ基本概念</h2>
+<h3 id="2-1-消息模型（Message-Model）">2.1 消息模型（Message Model）</h3>
+<p>RocketMQ 主要由 Producer、Broker、Consumer 三部分组成，其中 Producer 负责生产消息，Consumer 负责消费消息，Broker 负责存储消息。Broker 在实际部署过程中对应一台服务器，每个 Broker 可以存储多个 Topic 的消息，每个 Topic 的消息也可以分片存储于不同的 Broker。MessageQueue 用于存储消息的物理地址，每个 Topic 中的消息地址存储于多个 MessageQueue 中。ConsumerGroup 由多个 Consumer 实例构成。</p>
+<h3 id="2-2-消息生产者（Producer）">2.2 消息生产者（Producer）</h3>
+<p>负责生产消息，一般由业务系统负责生产消息。一个消息生产者会把业务应用系统里产生的消息发送到 broker 服务器。RocketMQ 提供多种发送方式，同步发送、异步发送、顺序发送、单向发送。同步和异步方式均需要 Broker 返回确认信息，单向发送不需要。</p>
+<h3 id="2-3-消息消费者（Consumer）">2.3 消息消费者（Consumer）</h3>
+<p>负责消费消息，一般是后台系统负责异步消费。一个消息消费者会从 Broker 服务器拉取消息、并将其提供给应用程序。从用户应用的角度而言提供了两种消费形式：拉取式消费、推动式消费。</p>
+<h3 id="2-4-主题（Topic）">2.4 主题（Topic）</h3>
+<p>表示一类消息的集合，每个主题包含若干条消息，每条消息只能属于一个主题，是 RocketMQ 进行消息订阅的基本单位。</p>
+<h3 id="2-5-代理服务器（Broker-Server）">2.5 代理服务器（Broker Server）</h3>
+<p>消息中转角色，负责存储消息、转发消息。代理服务器在 RocketMQ 系统中负责接收从生产者发送来的消息并存储、同时为消费者的拉取请求作准备。代理服务器也存储消息相关的元数据，包括消费者组、消费进度偏移和主题和队列消息等。</p>
+<h3 id="2-6-名字服务（Name-Server）">2.6 名字服务（Name Server）</h3>
+<p>名称服务充当路由消息的提供者。生产者或消费者能够通过名字服务查找各主题相应的 BrokerIP 列表。多个 Namesrv 实例组成集群，但相互独立，没有信息交换。</p>
+<h3 id="2-7-拉取式消费（Pull-Consumer）">2.7 拉取式消费（Pull Consumer）</h3>
+<p>Consumer 消费的一种类型，应用通常主动调用 Consumer 的拉消息方法从 Broker 服务器拉消息、主动权由应用控制。一旦获取了批量消息，应用就会启动消费过程。</p>
+<h3 id="2-8-推动式消费（Push-Consumer）">2.8 推动式消费（Push Consumer）</h3>
+<p>Consumer 消费的一种类型，该模式下 Broker 收到数据后会主动推送给消费端，该消费模式一般实时性较高。</p>
+<h3 id="2-9-生产者组（Producer-Group）">2.9 生产者组（Producer Group）</h3>
+<p>同一类 Producer 的集合，这类 Producer 发送同一类消息且发送逻辑一致。如果发送的是事务消息且原始生产者在发送之后崩溃，则 Broker 服务器会联系同一生产者组的其他生产者实例以提交或回溯消费。</p>
+<h3 id="2-10-消费者组（Consumer-Group）">2.10 消费者组（Consumer Group）</h3>
+<p>同一类 Consumer 的集合，这类 Consumer 通常消费同一类消息且消费逻辑一致。消费者组使得在消息消费方面，实现负载均衡和容错的目标变得非常容易。要注意的是，消费者组的消费者实例必须订阅完全相同的 Topic。RocketMQ 支持两种消息模式：集群消费（Clustering）和广播消费（Broadcasting）。</p>
+<h3 id="2-11-集群消费（Clustering）">2.11 集群消费（Clustering）</h3>
+<p>集群消费模式下,相同 Consumer Group 的每个 Consumer 实例平均分摊消息。</p>
+<h3 id="2-12-广播消费（Broadcasting）">2.12 广播消费（Broadcasting）</h3>
+<p>广播消费模式下，相同 Consumer Group 的每个 Consumer 实例都接收全量的消息。</p>
+<h3 id="2-13-普通顺序消息（Normal-Ordered-Message）">2.13 普通顺序消息（Normal Ordered Message）</h3>
+<p>普通顺序消费模式下，消费者通过同一个消息队列（Topic 分区，称作 Message Queue）收到的消息是有顺序的，不同消息队列收到的消息则可能是无顺序的。</p>
+<h3 id="2-14-严格顺序消息（Strictly-Ordered-Message）">2.14 严格顺序消息（Strictly Ordered Message）</h3>
+<p>严格顺序消息模式下，消费者收到的所有消息均是有顺序的。</p>
+<h3 id="2-15-消息（Message）">2.15 消息（Message）</h3>
+<p>消息系统所传输信息的物理载体，生产和消费数据的最小单位，每条消息必须属于一个主题。RocketMQ 中每个消息拥有唯一的 Message ID，且可以携带具有业务标识的 Key。系统提供了通过 Message ID 和 Key 查询消息的功能。</p>
+<h3 id="2-16-标签（Tag）">2.16 标签（Tag）</h3>
+<p>为消息设置的标志，用于同一主题下区分不同类型的消息。来自同一业务单元的消息，可以根据不同业务目的在同一主题下设置不同标签。标签能够有效地保持代码的清晰度和连贯性，并优化 RocketMQ 提供的查询系统。消费者可以根据 Tag 实现对不同子主题的不同消费逻辑，实现更好的扩展性。</p>
+<h2 id="三、RocketMQ-特性-features">三、RocketMQ 特性(features)</h2>
+<h3 id="3-1-订阅与发布">3.1 订阅与发布</h3>
+<p>消息的发布是指某个生产者向某个 topic 发送消息；消息的订阅是指某个消费者关注了某个 topic 中带有某些 tag 的消息，进而从该 topic 消费数据。</p>
+<h3 id="3-2-消息顺序">3.2 消息顺序</h3>
+<p>消息有序指的是一类消息消费时，能按照发送的顺序来消费。例如：一个订单产生了三条消息分别是订单创建、订单付款、订单完成。消费时要按照这个顺序消费才能有意义，但是同时订单之间是可以并行消费的。RocketMQ 可以严格的保证消息有序。顺序消息分为全局顺序消息与分区顺序消息，全局顺序是指某个 Topic 下的所有消息都要保证顺序；部分顺序消息只要保证每一组消息被顺序消费即可。</p>
+<ul>
+<li>全局顺序</li>
+<li>对于指定的一个 Topic，所有消息按照严格的先入先出（FIFO）的顺序进行发布和消费。适用场景：性能要求不高，所有的消息严格按照 FIFO 原则进行消息发布和消费的场景；</li>
+<li>分区顺序</li>
+<li>对于指定的一个 Topic，所有消息根据 sharding key 进行区块分区。同一个分区内的消息按照严格的 FIFO 顺序进行发布和消费。Sharding key 是顺序消息中用来区分不同分区的关键字段，和普通消息的 Key 是完全不同的概念。</li>
+<li>适用场景：性能要求高，以 sharding key 作为分区字段，在同一个区块中严格的按照 FIFO 原则进行消息发布和消费的场景。</li>
+</ul>
+<h3 id="3-3-消息过滤">3.3 消息过滤</h3>
+<p>RocketMQ 的消费者可以根据 Tag 进行消息过滤，也支持自定义属性过滤。消息过滤目前是在 Broker 端实现的，优点是减少了对于 Consumer 无用消息的网络传输，缺点是增加了 Broker 的负担、而且实现相对复杂。</p>
+<h3 id="3-4-消息可靠性">3.4 消息可靠性</h3>
+<p>RocketMQ 支持消息的高可靠，影响消息可靠性的几种情况：</p>
+<ol>
+<li>Broker 非正常关闭；</li>
+<li>Broker 异常 Crash；</li>
+<li>OS Crash；</li>
+<li>机器掉电，但是能立即恢复供电情况；</li>
+<li>机器无法开机（可能是 cpu、主板、内存等关键设备损坏）；</li>
+<li>磁盘设备损坏；</li>
+</ol>
+<p>1、2、3、4 四种情况都属于硬件资源可立即恢复情况，RocketMQ 在这四种情况下能保证消息不丢，或者丢失少量数据（依赖刷盘方式是同步还是异步）。5、6 属于单点故障，且无法恢复，一旦发生，在此单点上的消息全部丢失。RocketMQ 在这两种情况下，通过异步复制，可保证 99%的消息不丢，但是仍然会有极少量的消息可能丢失。通过同步双写技术可以完全避免单点，同步双写势必会影响性能，适合对消息可靠性要求极高的场合，例如与 Money 相关的应用。注：RocketMQ 从 3.0 版本开始支持同步双写。</p>
+<h3 id="3-5-至少一次">3.5 至少一次</h3>
+<p>至少一次(At least Once)指每个消息必须投递一次。Consumer 先 Pull 消息到本地，消费完成后，才向服务器返回 ack，如果没有消费一定不会 ack 消息，所以 RocketMQ 可以很好的支持此特性。</p>
+<h3 id="3-6-回溯消费">3.6 回溯消费</h3>
+<p>回溯消费是指 Consumer 已经消费成功的消息，由于业务上需求需要重新消费，要支持此功能，Broker 在向 Consumer 投递成功消息后，消息仍然需要保留。并且重新消费一般是按照时间维度，例如由于 Consumer 系统故障，恢复后需要重新消费 1 小时前的数据，那么 Broker 要提供一种机制，可以按照时间维度来回退消费进度。RocketMQ 支持按照时间回溯消费，时间维度精确到毫秒。</p>
+<h3 id="3-7-事务消息">3.7 事务消息</h3>
+<p>RocketMQ 事务消息（Transactional Message）是指应用本地事务和发送消息操作可以被定义到全局事务中，要么同时成功，要么同时失败。RocketMQ 的事务消息提供类似 X/Open XA 的分布事务功能，通过事务消息能达到分布式事务的最终一致。</p>
+<h3 id="3-8-定时消息">3.8 定时消息</h3>
+<p>定时消息（延迟队列）是指消息发送到 broker 后，不会立即被消费，等待特定时间投递给真正的 topic。broker 有配置项 messageDelayLevel，默认值为“1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h”，18 个 level。可以配置自定义 messageDelayLevel。注意，messageDelayLevel 是 broker 的属性，不属于某个 topic。发消息时，设置 delayLevel 等级即可：msg.setDelayLevel(level)。level 有以下三种情况：</p>
+<ul>
+<li>level == 0，消息为非延迟消息；</li>
+<li>1 &lt;= level &lt;= maxLevel，消息延迟特定时间，例如 level == 1，延迟 1s；</li>
+<li>level &gt; maxLevel，则 leve l== maxLevel，例如 level == 20，延迟 2h。</li>
+</ul>
+<p>定时消息会暂存在名为 SCHEDULE_TOPIC_XXXX 的 topic 中，并根据 delayTimeLevel 存入特定的 queue，queueId = delayTimeLevel – 1，即一个 queue 只存相同延迟的消息，保证具有相同发送延迟的消息能够顺序消费。broker 会调度地消费 SCHEDULE_TOPIC_XXXX，将消息写入真实的 topic。需要注意的是，定时消息会在第一次写入和调度写入真实 topic 时都会计数，因此发送数量、tps 都会变高。</p>
+<h3 id="3-9-消息重试">3.9 消息重试</h3>
+<p>Consumer 消费消息失败后，要提供一种重试机制，令消息再消费一次。Consumer 消费消息失败通常可以认为有以下几种情况：</p>
+<ul>
+<li>由于消息本身的原因，例如反序列化失败，消息数据本身无法处理（例如话费充值，当前消息的手机号被注销，无法充值）等。这种错误通常需要跳过这条消息，再消费其它消息，而这条失败的消息即使立刻重试消费，99%也不成功，所以最好提供一种定时重试机制，即过 10 秒后再重试。</li>
+<li>由于依赖的下游应用服务不可用，例如 db 连接不可用，外系统网络不可达等。遇到这种错误，即使跳过当前失败的消息，消费其他消息同样也会报错。这种情况建议应用 sleep 30s，再消费下一条消息，这样可以减轻 Broker 重试消息的压力。</li>
+</ul>
+<p>RocketMQ 会为每个消费组都设置一个 Topic 名称为“%RETRY%+consumerGroup”的重试队列（这里需要注意的是，这个 Topic 的重试队列是针对消费组，而不是针对每个 Topic 设置的），用于暂时保存因为各种异常而导致 Consumer 端无法消费的消息。考虑到异常恢复起来需要一些时间，会为重试队列设置多个重试级别，每个重试级别都有与之对应的重新投递延时，重试次数越多投递延时就越大。RocketMQ 对于重试消息的处理是先保存至 Topic 名称为“SCHEDULE_TOPIC_XXXX”的延迟队列中，后台定时任务按照对应的时间进行 Delay 后重新保存至“%RETRY%+consumerGroup”的重试队列中。</p>
+<h3 id="3-10-消息重投">3.10 消息重投</h3>
+<p>生产者在发送消息时，同步消息失败会重投，异步消息有重试，oneway 没有任何保证。消息重投保证消息尽可能发送成功、不丢失，但可能会造成消息重复，消息重复在 RocketMQ 中是无法避免的问题。消息重复在一般情况下不会发生，当出现消息量大、网络抖动，消息重复就会是大概率事件。另外，生产者主动重发、consumer 负载变化也会导致重复消息。如下方法可以设置消息重试策略：</p>
+<ul>
+<li>retryTimesWhenSendFailed:同步发送失败重投次数，默认为 2，因此生产者会最多尝试发送 retryTimesWhenSendFailed + 1 次。不会选择上次失败的 broker，尝试向其他 broker 发送，最大程度保证消息不丢。超过重投次数，抛出异常，由客户端保证消息不丢。当出现 RemotingException、MQClientException 和部分 MQBrokerException 时会重投。</li>
+<li>retryTimesWhenSendAsyncFailed:异步发送失败重试次数，异步重试不会选择其他 broker，仅在同一个 broker 上做重试，不保证消息不丢。</li>
+<li>retryAnotherBrokerWhenNotStoreOK:消息刷盘（主或备）超时或 slave 不可用（返回状态非 SEND_OK），是否尝试发送到其他 broker，默认 false。十分重要消息可以开启。</li>
+</ul>
+<h3 id="3-11-流量控制">3.11 流量控制</h3>
+<p>生产者流控，因为 broker 处理能力达到瓶颈；消费者流控，因为消费能力达到瓶颈。</p>
+<p><strong>生产者流控：</strong></p>
+<ul>
+<li>commitLog 文件被锁时间超过 osPageCacheBusyTimeOutMills 时，参数默认为 1000ms，返回流控。</li>
+<li>如果开启：</li>
+<li>transientStorePoolEnable == true</li>
+<li>并且 broker 为异步刷盘的主机，且 transientStorePool 中资源不足，拒绝当前 send 请求，返回流控。</li>
+<li>broker 每隔 10ms 检查 send 请求队列头部请求的等待时间，如果超过 waitTimeMillsInSendQueue，默认 200ms，拒绝当前 send 请求，返回流控。</li>
+<li>broker 通过拒绝 send 请求方式实现流量控制。</li>
+</ul>
+<p>注意，生产者流控，不会尝试消息重投。</p>
+<p><strong>消费者流控：</strong></p>
+<ul>
+<li>消费者本地缓存消息数超过 pullThresholdForQueue 时，默认 1000。</li>
+<li>消费者本地缓存消息大小超过 pullThresholdSizeForQueue 时，默认 100MB。</li>
+<li>消费者本地缓存消息跨度超过 consumeConcurrentlyMaxSpan 时，默认 2000。</li>
+<li>消费者流控的结果是降低拉取频率。</li>
+</ul>
+<h3 id="3-12-死信队列">3.12 死信队列</h3>
+<p>死信队列用于处理无法被正常消费的消息。当一条消息初次消费失败，消息队列会自动进行消息重试；达到最大重试次数后，若消费依然失败，则表明消费者在正常情况下无法正确地消费该消息，此时，消息队列 不会立刻将消息丢弃，而是将其发送到该消费者对应的特殊队列中。RocketMQ 将这种正常情况下无法被消费的消息称为死信消息（Dead-Letter Message），将存储死信消息的特殊队列称为死信队列（Dead-Letter Queue）。在 RocketMQ 中，可以通过使用 console 控制台对死信队列中的消息进行重发来使得消费者实例再次进行消费。</p>
+<h2 id="四、RocketMQ-设计">四、RocketMQ 设计</h2>
+<p><strong>消息存储</strong></p>
+<p><img src="https://static001.geekbang.org/infoq/0e/0e6110227a231ecacf1f34afc4c281bb.png" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p>消息存储是 RocketMQ 中最为复杂和最为重要的一部分，接下来分别从 RocketMQ 的消息存储整体架构、RocketMQ 中两种不同的刷盘方式来展开叙述。</p>
+<p><strong>消息存储整体架构</strong></p>
+<p>消息存储架构图中最重要的三个跟消息存储相关的文件构成</p>
+<ul>
+<li>
+<p>CommitLog</p>
+<p>消息主体以及元数据的存储主体，存储 Producer 端写入的消息主体内容,消息内容不是定长的。单个文件大小默认 1G, 文件名长度为 20 位，左边补零，剩余为起始偏移量，比如 00000000000000000000 代表了第一个文件，起始偏移量为 0，文件大小为 1G=1073741824；当第一个文件写满了，第二个文件为 00000000001073741824，起始偏移量为 1073741824，以此类推。消息主要是顺序写入日志文件，当文件满了，写入下一个文件</p>
+</li>
+<li>
+<p>ConsumeQueue</p>
+<p>消息消费队列，引入的目的主要是提高消息消费的性能，由于 RocketMQ 是基于主题 topic 的订阅模式，消息消费是针对主题进行的，如果要遍历 commitlog 文件中根据 topic 检索消息是非常低效的。Consumer 即可根据 ConsumeQueue 来查找待消费的消息。</p>
+<p>其中，ConsumeQueue（逻辑消费队列）作为消费消息的索引，保存了指定 Topic 下的队列消息在 CommitLog 中的起始物理偏移量 offset，消息大小 size 和消息 Tag 的 HashCode 值。consumequeue 文件可以看成是基于 topic 的 commitlog 索引文件，故 consumequeue 文件夹的组织方式如下：topic/queue/file 三层组织结构，具体存储路径为：$HOME/store/consumequeue/{topic}/{queueId}/{fileName}。</p>
+<p>同样 consumequeue 文件采取定长设计，每一个条目共 20 个字节，分别为 8 字节的 commitlog 物理偏移量、4 字节的消息长度、8 字节 tag hashcode，单个文件由 30W 个条目组成，可以像数组一样随机访问每一个条目，每个 ConsumeQueue 文件大小约 5.72M；</p>
+</li>
+<li>
+<p>IndexFile</p>
+<p>IndexFile（索引文件）提供了一种可以通过 key 或时间区间来查询消息的方法。Index 文件的存储位置是：{fileName}，文件名 fileName 是以创建时的时间戳命名的，固定的单个 IndexFile 文件大小约为 400M，一个 IndexFile 可以保存 2000W 个索引，IndexFile 的底层存储设计为在文件系统中实现 HashMap 结构，故 rocketmq 的索引文件其底层实现为 hash 索引。</p>
+</li>
+</ul>
+<p>在 RocketMQ 的消息存储整体架构图中可以看出，RocketMQ 采用的是混合型的存储结构，即为 Broker 单个实例下所有的队列共用一个日志数据文件（即为 CommitLog）来存储。RocketMQ 的混合型存储结构(多个 Topic 的消息实体内容都存储于一个 CommitLog 中)针对 Producer 和 Consumer 分别采用了数据和索引部分相分离的存储结构，Producer 发送消息至 Broker 端，然后 Broker 端使用同步或者异步的方式对消息刷盘持久化，保存至 CommitLog 中。只要消息被刷盘持久化至磁盘文件 CommitLog 中，那么 Producer 发送的消息就不会丢失。正因为如此，Consumer 也就肯定有机会去消费这条消息。当无法拉取到消息后，可以等下一次消息拉取，同时服务端也支持长轮询模式，如果一个消息拉取请求未拉取到消息，Broker 允许等待 30s 的时间，只要这段时间内有新消息到达，将直接返回给消费端。这里，RocketMQ 的具体做法是，使用 Broker 端的后台服务线程—ReputMessageService 不停地分发请求并异步构建 ConsumeQueue（逻辑消费队列）和 IndexFile（索引文件）数据。</p>
+<p><strong>消息刷盘</strong></p>
+<p><img src="https://static001.geekbang.org/infoq/3d/3d5e4e95535ecf80788040eae6d06f39.png" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<ul>
+<li>
+<p>同步刷盘</p>
+<p>只有在消息真正持久化至磁盘后 RocketMQ 的 Broker 端才会真正返回给 Producer 端一个成功的 ACK 响应。同步刷盘对 MQ 消息可靠性来说是一种不错的保障，但是性能上会有较大影响，一般适用于金融业务应用该模式较多。</p>
+</li>
+<li>
+<p>异步刷盘</p>
+<p>能够充分利用 OS 的 PageCache 的优势，只要消息写入 PageCache 即可将成功的 ACK 返回给 Producer 端。消息刷盘采用后台异步线程提交的方式进行，降低了读写延迟，提高了 MQ 的性能和吞吐量。</p>
+</li>
+</ul>
+<h2 id="五、RocketMQ-技术架构">五、RocketMQ 技术架构</h2>
+<p><img src="https://static001.geekbang.org/infoq/ec/ec009f6d1d44d24ac6245e806f993c50.png" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p>RocketMQ 架构上主要分为四部分，如上图所示:</p>
+<ul>
+<li>
+<p>Producer：</p>
+<p>消息发布的角色，支持分布式集群方式部署。Producer 通过 MQ 的负载均衡模块选择相应的 Broker 集群队列进行消息投递，投递的过程支持快速失败并且低延迟。</p>
+</li>
+<li>
+<p>NameServer：</p>
+<p>NameServer 是一个非常简单的 Topic 路由注册中心，其角色类似 Dubbo 中的 zookeeper，支持 Broker 的动态注册与发现。</p>
+<p>主要包括两个功能：Broker 管理，NameServer 接受 Broker 集群的注册信息并且保存下来作为路由信息的基本数据。然后提供心跳检测机制，检查 Broker 是否还存活；路由信息管理，每个 NameServer 将保存关于 Broker 集群的整个路由信息和用于客户端查询的队列信息。然后 Producer 和 Conumser 通过 NameServer 就可以知道整个 Broker 集群的路由信息，从而进行消息的投递和消费。NameServer 通常也是集群的方式部署，各实例间相互不进行信息通讯。</p>
+<p>Broker 是向每一台 NameServer 注册自己的路由信息，所以每一个 NameServer 实例上面都保存一份完整的路由信息。当某个 NameServer 因某种原因下线了，Broker 仍然可以向其它 NameServer 同步其路由信息，Producer,Consumer 仍然可以动态感知 Broker 的路由的信息。</p>
+</li>
+<li>
+<p>BrokerServer：</p>
+<p>Broker 主要负责消息的存储、投递和查询以及服务高可用保证，为了实现这些功能，Broker 包含了以下几个重要子模块。</p>
+<ul>
+<li>
+<p>Remoting Module：</p>
+<p>整个 Broker 的实体，负责处理来自 clients 端的请求。</p>
+</li>
+<li>
+<p>Client Manager：</p>
+<p>负责管理客户端(Producer/Consumer)和维护 Consumer 的 Topic 订阅信息。</p>
+</li>
+<li>
+<p>Store Service：</p>
+<p>提供方便简单的 API 接口处理消息存储到物理硬盘和查询功能。</p>
+</li>
+<li>
+<p>HA Service：</p>
+<p>高可用服务，提供 Master Broker 和 Slave Broker 之间的数据同步功能。</p>
+</li>
+<li>
+<p>Index Service：</p>
+<p>根据特定的 Message key 对投递到 Broker 的消息进行索引服务，以提供消息的快速查询。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://static001.geekbang.org/infoq/bc/bcccd76bb145efdad562728ff6ce5fd8.png" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<h2 id="六、RocketMQ-部署架构">六、RocketMQ 部署架构</h2>
+<p><img src="https://static001.geekbang.org/infoq/45/4558cb2472b8632868204bc3280141b1.png" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p><strong>RocketMQ 网络部署特点</strong></p>
+<ul>
+<li>NameServer 是一个几乎无状态节点，可集群部署，节点之间无任何信息同步。</li>
+<li>Broker 部署相对复杂，Broker 分为 Master 与 Slave，一个 Master 可以对应多个 Slave，但是一个 Slave 只能对应一个 Master，Master 与 Slave 的对应关系通过指定相同的 BrokerName，不同的 BrokerId 来定义，BrokerId 为 0 表示 Master，非 0 表示 Slave。</li>
+<li>Master 也可以部署多个。每个 Broker 与 NameServer 集群中的所有节点建立长连接，定时注册 Topic 信息到所有 NameServer。注意：当前 RocketMQ 版本在部署架构上支持一 Master 多 Slave，但只有 BrokerId=1 的从服务器才会参与消息的读负载。</li>
+<li>Producer 与 NameServer 集群中的其中一个节点（随机选择）建立长连接，定期从 NameServer 获取 Topic 路由信息，并向提供 Topic 服务的 Master 建立长连接，且定时向 Master 发送心跳。Producer 完全无状态，可集群部署。</li>
+<li>Consumer 与 NameServer 集群中的其中一个节点（随机选择）建立长连接，定期从 NameServer 获取 Topic 路由信息，并向提供 Topic 服务的 Master、Slave 建立长连接，且定时向 Master、Slave 发送心跳。</li>
+<li>Consumer 既可以从 Master 订阅消息，也可以从 Slave 订阅消息，消费者在向 Master 拉取消息时，Master 服务器会根据拉取偏移量与最大偏移量的距离（判断是否读老消息，产生读 I/O），以及从服务器是否可读等因素建议下一次是从 Master 还是 Slave 拉取。</li>
+</ul>
+<p>结合部署架构图，描述集群工作流程：</p>
+<ul>
+<li>启动 NameServer，NameServer 起来后监听端口，等待 Broker、Producer、Consumer 连上来，相当于一个路由控制中心。</li>
+<li>Broker 启动，跟所有的 NameServer 保持长连接，定时发送心跳包。心跳包中包含当前 Broker 信息(IP+端口等)以及存储所有 Topic 信息。注册成功后，NameServer 集群中就有 Topic 跟 Broker 的映射关系。</li>
+<li>收发消息前，先创建 Topic，创建 Topic 时需要指定该 Topic 要存储在哪些 Broker 上，也可以在发送消息时自动创建 Topic。</li>
+<li>Producer 发送消息，启动时先跟 NameServer 集群中的其中一台建立长连接，并从 NameServer 中获取当前发送的 Topic 存在哪些 Broker 上，轮询从队列列表中选择一个队列，然后与队列所在的 Broker 建立长连接从而向 Broker 发消息。</li>
+<li>Consumer 跟 Producer 类似，跟其中一台 NameServer 建立长连接，获取当前订阅 Topic 存在哪些 Broker 上，然后直接跟 Broker 建立连接通道，开始消费消息。</li>
+</ul>
+<h2 id="七、RocketMQ-集群部署">七、RocketMQ 集群部署</h2>
+<h3 id="7-1-集群模式">7.1 集群模式</h3>
+<p><strong>单 Master 模式</strong></p>
+<p>这种方式风险较大，一旦 Broker 重启或者宕机时，会导致整个服务不可用。不建议线上环境使用,可以用于本地测试。</p>
+<ul>
+<li>优点：本地开发测试，配置简单，同步刷盘消息不会丢失。</li>
+<li>缺点：不可靠，如果宕机会导致服务不可用。</li>
+</ul>
+<p><strong>多 Master 模式</strong></p>
+<p>一个集群无 Slave，全是 Master，例如 2 个 Master 或者 3 个 Master，这种模式的优缺点如下：</p>
+<ul>
+<li>优点：配置简单，单个 Master 宕机或重启维护对应用无影响，在磁盘配置为 RAID10 时，即使机器宕机不可恢复情况下，由于 RAID10 磁盘非常可靠，消息也不会丢（异步刷盘丢失少量消息，同步刷盘一条不丢），性能最高；</li>
+<li>缺点：单台机器宕机期间，这台机器上未被消费的消息在机器恢复之前不可订阅，消息实时性会受到影响。</li>
+</ul>
+<p><strong>多 Master 多 Slave 模式（异步）</strong></p>
+<p>每个 Master 配置一个 Slave，有多对 Master-Slave，HA 采用异步复制方式，主备有短暂消息延迟（毫秒级），这种模式的优缺点如下：</p>
+<ul>
+<li>优点：即使磁盘损坏，消息丢失的非常少，且消息实时性不会受影响，同时 Master 宕机后，消费者仍然可以从 Slave 消费，而且此过程对应用透明，不需要人工干预，性能同多 Master 模式几乎一样；</li>
+<li>缺点：Master 宕机，磁盘损坏情况下会丢失少量消息。</li>
+</ul>
+<p><strong>多 Master 多 Slave 模式（同步）</strong></p>
+<p>每个 Master 配置一个 Slave，有多对 Master-Slave，HA 采用同步双写方式，即只有主备都写成功，才向应用返回成功，这种模式的优缺点如下：</p>
+<ul>
+<li>优点：数据与服务都无单点故障，Master 宕机情况下，消息无延迟，服务可用性与数据可用性都非常高；</li>
+<li>缺点：性能比异步复制模式略低（大约低 10%左右），发送单个消息的 RT 会略高，且目前版本在主节点宕机后，备机不能自动切换为主机。</li>
+</ul>
+<p><strong>DLedger 集群模式</strong></p>
+<p>RocketMQ-on-DLedger Group 是指一组相同名称的 Broker，至少需要 3 个节点，通过 Raft 自动选举出一个 Leader，其余节点 作为 Follower，并在 Leader 和 Follower 之间复制数据以保证高可用。</p>
+<p>RocketMQ-on-DLedger Group 能自动容灾切换，并保证数据一致。RocketMQ-on-DLedger Group 是可以水平扩展的，也即可以部署任意多个 RocketMQ-on-DLedger Group 同时对外提供服务。</p>
+<ul>
+<li>优点：多节点（至少三个）组成集群，其中一个为 Leader 节点，其余为 Follower 节点组成高可用，能够自动容灾切换。</li>
+<li>缺点：集群成本增加(同一个 group 最少新增一台机器)、RocketMQ4.5 及以后版本才支持。</li>
+</ul>
+<h3 id="7-2-本地测试环境快速搭建-单-Master-模式">7.2 本地测试环境快速搭建(单 Master 模式)</h3>
+<p>环境准备</p>
+<ol>
+<li>jdk1.8+</li>
+<li>rocketmq-all-4.5.0-bin-release</li>
+</ol>
+<p>安装步骤</p>
+<p>1、解压 rocketmq-all-4.5.1-bin-release.zip 到指定目录,如下：</p>
+<p><img src="https://static001.geekbang.org/infoq/36/36303167397808be0b24282de70f07f5.png" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p>benchmark:基础测试脚本目录 / lib:运行依赖包</p>
+<p>bin:命令运维脚本目录 / conf:配置目录</p>
+<p>2、进入 bin 目录下编辑 <a target="_blank" rel="noopener" href="http://runserver.sh">runserver.sh</a> 和 <a target="_blank" rel="noopener" href="http://runborker.sh">runborker.sh</a> 两个文件，调整一下 namesrv 和 broker 的启动的 jvm 内存参数。具体参数大小根据系统环境配置情况而定：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">vim</span> runserver.<span class="hljs-keyword">sh</span><br>JAVA_OPT=<span class="hljs-string">&quot;$&#123;JAVA_OPT&#125; -server -Xms1g -Xmx1g -Xmn512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m&quot;</span><br><br><span class="hljs-keyword">vim</span> runroker.<span class="hljs-keyword">sh</span><br>JAVA_OPT=<span class="hljs-string">&quot;$&#123;JAVA_OPT&#125; -server -Xms1g -Xmx1g -Xmn512m&quot;</span>  <br><span class="hljs-keyword">p</span><span class="hljs-variable">s:broker</span>端本地环境不建议开启堆外内存<br></code></pre></td></tr></table></figure>
+<p>3、根据情况配置 broker 的一些参数</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs vala">brokerClusterName = DefaultCluster<br>brokerName = broker-a<br><span class="hljs-meta"># 0表示master &gt;0表示slave</span><br>brokerId = <span class="hljs-number">0</span><br><span class="hljs-meta"># 几点开始删除文件</span><br>deleteWhen = <span class="hljs-number">04</span><br><span class="hljs-meta"># 文件保留时间，默认48小时</span><br>fileReservedTime = <span class="hljs-number">48</span><br><span class="hljs-meta"># Broker 的角色</span><br><span class="hljs-meta">#- ASYNC_MASTER 异步复制Master</span><br><span class="hljs-meta">#- SYNC_MASTER 同步双写Master</span><br><span class="hljs-meta">#- SLAVE</span><br>brokerRole = ASYNC_MASTER<br><span class="hljs-meta">#刷盘方式</span><br><span class="hljs-meta"># ASYNC_FLUSH 异步刷盘</span><br><span class="hljs-meta"># SYNC_FLUSH 同步刷盘</span><br>flushDiskType = ASYNC_FLUSH<br><br>备注:<br><span class="hljs-meta"># 存储路径</span><br>storePathRootDir=xxx/store<br><span class="hljs-meta"># commitLog存储路径</span><br>storePathCommitLog=xxx/store/commitlog<br><span class="hljs-meta"># 消费队列存储路径</span><br>storePathConsumeQueue=xx/store/pathconsumequeue<br><span class="hljs-meta"># 消息索引存储路径</span><br>storePathIndex=xxx/store/pathindex<br><span class="hljs-meta"># checkpoint 文件存储</span><br>storeCheckpoint=xxx/store/checkpoint<br><span class="hljs-meta"># abort 文件存储</span><br>abortFile=xxx/store/abort<br></code></pre></td></tr></table></figure>
+<p>备注：</p>
+<ul>
+<li>xxx 默认等于 System.getProperty(“user.home”) +File.separator+“store”</li>
+<li>更多其他配置：</li>
+<li>MessageStoreConfig、BrokerConfig 源码类</li>
+<li>根据实际情况配置存储路径，storePathCommitLog 占用空间相对最大</li>
+</ul>
+<p>4、启动 rocketmq, 先启动 namesrv 再启动 broker</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vim">--后台启动namesrv  <br>nohup <span class="hljs-keyword">sh</span> mqnamesrv &amp;  <br>--后台启动broker  <br>export NAMESRV_ADDR=localhos<span class="hljs-variable">t:9876</span>  <br>--如果你在brocker.<span class="hljs-keyword">conf</span>文件中配置了namesrvAddr = localhos<span class="hljs-variable">t:9876</span>就直接用下面的命令  <br>nohup <span class="hljs-keyword">sh</span> mqbroker -<span class="hljs-keyword">c</span> /xxx/rocketmq-<span class="hljs-keyword">all</span>-<span class="hljs-number">4.5</span>.<span class="hljs-number">1</span>-bin-release/<span class="hljs-keyword">conf</span>/broker.<span class="hljs-keyword">conf</span> &amp;  <br>--否则用这个命令  <br>nohup <span class="hljs-keyword">sh</span> mqbroker -n localhos<span class="hljs-variable">t:9876</span> -<span class="hljs-keyword">c</span> /xxx/rocketmq-<span class="hljs-keyword">all</span>-<span class="hljs-number">4.5</span>.<span class="hljs-number">1</span>-bin-release/<span class="hljs-keyword">conf</span>/<br></code></pre></td></tr></table></figure>
+<p>5、查看进程和日志看是否启动成功</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">jps </span>-l  <span class="hljs-keyword">or </span>查看 namesrv.log 和 <span class="hljs-keyword">broker.log </span>日志<br></code></pre></td></tr></table></figure>
+<h2 id="八、本地源码快速搭建调试">八、本地源码快速搭建调试</h2>
+<p><strong>源码获取</strong></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/apache/rocketmq/releases">https://github.com/apache/rocketmq/releases</a></p>
+<p>该网址可下载 source 包，也可以 fork 仓库。</p>
+</blockquote>
+<p><strong>启动 RocketMQ Namesrv</strong></p>
+<p>参考 NameServerInstanceTest 的 startup 方法，编写 main 方法，demo 如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NameServerInstanceTest</span> </span>&#123;<br>    .....<br>      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">final</span> NamesrvConfig namesrvConfig = <span class="hljs-keyword">new</span> NamesrvConfig(); <br>        <span class="hljs-keyword">final</span> NettyServerConfig nettyServerConfig = <span class="hljs-keyword">new</span> NettyServerConfig();<br>        nettyServerConfig.setListenPort(<span class="hljs-number">9876</span>); <span class="hljs-comment">//设置端口</span><br>        <span class="hljs-comment">// 创建 NamesrvController，启动</span><br>        NamesrvController namesrvController = <span class="hljs-keyword">new</span> NamesrvController(namesrvConfig, nettyServerConfig);<br>        namesrvController.initialize();<br>        namesrvController.start();<br>        Thread.sleep(Long.MAX_VALUE); <span class="hljs-comment">//挂起</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>备注:</p>
+<p>运行 main 方法, 显示以下关键字说明启动成功</p>
+<ul>
+<li>NettyEventExecutor service started</li>
+<li>FileWatchService service started</li>
+</ul>
+<p><strong>启动 RocketMQ Broker</strong></p>
+<p>参考 BrokerControllerTest 的 testBrokerRestart 方法，编写 main 方法，demo 如下：</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BrokerControllerTest</span> </span>&#123;<br>    .....<br> <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> void main(<span class="hljs-keyword">String</span>[] args) throws Exception &#123;<br>        NettyServerConfig nettyServerConfig = <span class="hljs-keyword">new</span> <span class="hljs-type">NettyServerConfig</span>();<br>        nettyServerConfig.setListenPort(<span class="hljs-number">10911</span>);<br>        BrokerConfig brokerConfig = <span class="hljs-keyword">new</span> <span class="hljs-type">BrokerConfig</span>();  <span class="hljs-comment">// BrokerConfig 配置</span><br>        brokerConfig.setNamesrvAddr(<span class="hljs-string">&quot;127.0.0.1:9876&quot;</span>); <span class="hljs-comment">// 配置nameServer地址</span><br>        MessageStoreConfig messageStoreConfig = <span class="hljs-keyword">new</span> <span class="hljs-type">MessageStoreConfig</span>();<br>        <span class="hljs-comment">// 创建 BrokerController 对象，并启动</span><br>        BrokerController brokerController = <span class="hljs-keyword">new</span> <span class="hljs-type">BrokerController</span>(<span class="hljs-comment">//</span><br>                brokerConfig,<br>                nettyServerConfig, <br>                <span class="hljs-keyword">new</span> <span class="hljs-type">NettyClientConfig</span>(),<br>                messageStoreConfig);<br>        brokerController.initialize();<br>        brokerController.start();<br>        Thread.sleep(Long.MAX_VALUE); <span class="hljs-comment">//挂起</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>备注:</p>
+<p>运行 main 方法,不报错即可，但是在：NameServerInstanceTest(nameServer)中，发现以下关键字日志，表明 broker 注册 nameServer 成功：new topic registered…等</p>
+<p><strong>启动 RocketMQ Producer</strong></p>
+<p>参考:org.apache.rocketmq.example.quickstart.Producer</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Producer</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> MQClientException, InterruptedException, IOException </span>&#123;<br><br>        DefaultMQProducer producer = <span class="hljs-keyword">new</span> DefaultMQProducer(<span class="hljs-string">&quot;please_rename_unique_group_name&quot;</span>);<br>        <span class="hljs-comment">/*</span><br><span class="hljs-comment">         * Launch the instance.</span><br><span class="hljs-comment">         */</span><br>        producer.setNamesrvAddr(<span class="hljs-string">&quot;127.0.0.1:9876&quot;</span>); <span class="hljs-comment">// 配置nameServer地址</span><br>        producer.start();<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1</span>; i++) &#123; <span class="hljs-comment">// i 可以随便配置</span><br>            <span class="hljs-keyword">try</span> &#123;<br><br>                <span class="hljs-comment">/*</span><br><span class="hljs-comment">                 * Create a message instance, specifying topic, tag and message body.</span><br><span class="hljs-comment">                 */</span><br>                Message msg = <span class="hljs-keyword">new</span> Message(<span class="hljs-string">&quot;abc&quot;</span> <span class="hljs-comment">/* Topic */</span>,<br>                    <span class="hljs-string">&quot;TagA&quot;</span> <span class="hljs-comment">/* Tag */</span>,<br>                    (<span class="hljs-string">&quot;Hello RocketMQ &quot;</span> + i).getBytes(RemotingHelper.DEFAULT_CHARSET) <span class="hljs-comment">/* Message body */</span><br>                );<br><span class="hljs-comment">//                msg.setDelayTimeLevel(10);</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">* Call send message to deliver message to one of brokers.</span><br><span class="hljs-comment">*/</span><br>SendResult sendResult = producer.send(msg);<br><br>                System.out.printf(<span class="hljs-string">&quot;%s%n&quot;</span>, sendResult);<br>            &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                e.printStackTrace();<br>                Thread.sleep(<span class="hljs-number">1000</span>);<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">/*</span><br><span class="hljs-comment">         * Shut down once the producer instance is not longer in use.</span><br><span class="hljs-comment">         */</span><br>        producer.shutdown();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>备注：</p>
+<p>运行 main 方法, 发现日志中包含：</p>
+<p>SendResult [sendStatus=SEND_OK…即发送成功</p>
+<p>**启动 RocketMQ Consumer，**参考：</p>
+<p>org.apache.rocketmq.example.quickstart.Consumer</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Consumer</span> </span>&#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">void</span> main(<span class="hljs-built_in">String</span>[] args) throws InterruptedException, MQClientException &#123;<br>        <span class="hljs-comment">/*</span><br><span class="hljs-comment">         * Instantiate with specified consumer group name.</span><br><span class="hljs-comment">         */</span><br>        DefaultMQPushConsumer consumer = <span class="hljs-keyword">new</span> DefaultMQPushConsumer(<span class="hljs-string">&quot;please_rename_unique_group_name_1&quot;</span>);<br><br>        <span class="hljs-comment">/*</span><br><span class="hljs-comment">         * Specify name server addresses.</span><br><span class="hljs-comment">         * &lt;p/&gt;</span><br><span class="hljs-comment">         *</span><br><span class="hljs-comment">         * Alternatively, you may specify name server addresses via exporting environmental variable: NAMESRV_ADDR</span><br><span class="hljs-comment">         * &lt;pre&gt;</span><br><span class="hljs-comment">         * &#123;@code</span><br><span class="hljs-comment">         * consumer.setNamesrvAddr(&quot;name-server1-ip:9876;name-server2-ip:9876&quot;);</span><br><span class="hljs-comment">         * &#125;</span><br><span class="hljs-comment">         * &lt;/pre&gt;</span><br><span class="hljs-comment">         */</span><br><br>        <span class="hljs-comment">/*</span><br><span class="hljs-comment">         * Specify where to start in case the specified consumer group is a brand new one.</span><br><span class="hljs-comment">         */</span><br>        consumer.setNamesrvAddr(<span class="hljs-string">&quot;127.0.0.1:9876&quot;</span>); <span class="hljs-comment">// 配置nameServer地址</span><br>        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);<br><br>        <span class="hljs-comment">/*</span><br><span class="hljs-comment">         * Subscribe one more more topics to consume.</span><br><span class="hljs-comment">         */</span><br>        consumer.subscribe(<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>);<br><br>        <span class="hljs-comment">/*</span><br><span class="hljs-comment">         *  Register callback to execute on arrival of messages fetched from brokers.</span><br><span class="hljs-comment">         */</span><br>        consumer.registerMessageListener(<span class="hljs-keyword">new</span> <span class="hljs-function"><span class="hljs-title">MessageListenerConcurrently</span>(<span class="hljs-params"></span>)</span> &#123;<br><br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> ConsumeConcurrentlyStatus <span class="hljs-function"><span class="hljs-title">consumeMessage</span>(<span class="hljs-params">List&lt;MessageExt&gt; msgs,</span></span><br><span class="hljs-params"><span class="hljs-function">                ConsumeConcurrentlyContext context</span>)</span> &#123;<br>                System.out.printf(<span class="hljs-string">&quot;%s Receive New Messages: %s %n&quot;</span>, Thread.currentThread().getName(), msgs);<br>                <span class="hljs-keyword">return</span> ConsumeConcurrentlyStatus.CONSUME_SUCCESS;<br>            &#125;<br>        &#125;);<br><br>        <span class="hljs-comment">/*</span><br><span class="hljs-comment">         *  Launch the consumer instance.</span><br><span class="hljs-comment">         */</span><br>        consumer.start();<br><br>        System.out.printf(<span class="hljs-string">&quot;Consumer Started.%n&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>备注：</p>
+<p>运行 main 方法, 发现日志中包含：Receive New Messages…即消费成功</p>
+<h2 id="九、总结">九、总结</h2>
+<p>rocketMq 作为低延迟、高并发、高可用、高可靠的分布式消息中间件，其详细知识点非常多，如需深入，建议源码入坑。</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%BF%90%E7%BB%B4/" class="category-chain-item">运维</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/RocketMQ/">#RocketMQ</a>
+      
+        <a href="/tags/MQ/">#MQ</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>RocketMQ</div>
+      <div>http://example.com/2024/12/08/RocketMQ/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mercury</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年12月8日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/10/29/GlileoIM/" title="GlileoIM">
+                        <span class="hidden-mobile">GlileoIM</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+
+  <!-- 樱花特效 -->
+  <script type="text/javascript">
+    var windowWidth = $(window).width();
+    if (windowWidth > 480) {
+      document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+    }
+  </script>
+
+</body>
+</html>
