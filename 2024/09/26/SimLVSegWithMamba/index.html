@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2024-12-17T08:01:26.446Z">
+<meta property="article:modified_time" content="2024-12-20T11:43:33.831Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -428,6 +428,8 @@
 <p><strong>换成jaccard</strong></p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241217160043633.png" srcset="/img/newloading.gif" lazyload alt="image-20241217160043633"></p>
 <p>效果下降了，也可能是误差，决定再跑一遍</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241220194006242.png" srcset="/img/newloading.gif" lazyload alt="image-20241220194006242"></p>
+<p>好吧，效果依旧不太理想</p>
 <p><strong>在CAMUS数据集</strong></p>
 <p>重写dataset改为该数据集后，DICE和IOU都出现错误：表现为大于1。</p>
 <p>猜想：每个病人只有十几帧，但是segmamba是按128帧设计的，因此输入的是128帧，多出的帧采用零填充，导致有用数据太少。</p>
