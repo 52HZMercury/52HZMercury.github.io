@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2024-12-20T12:13:13.223Z">
+<meta property="article:modified_time" content="2024-12-23T06:27:03.194Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -431,6 +431,8 @@
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241220194006242.png" srcset="/img/newloading.gif" lazyload alt="image-20241220194006242"></p>
 <p>好吧，效果依旧不太理想</p>
 <p><strong>换成tversky</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241223142447888.png" srcset="/img/newloading.gif" lazyload alt="image-20241223142447888"></p>
+<p>效果一般</p>
 <p><strong>在CAMUS数据集</strong></p>
 <p>重写dataset改为该数据集后，DICE和IOU都出现错误：表现为大于1。</p>
 <p>猜想：每个病人只有十几帧，但是segmamba是按128帧设计的，因此输入的是128帧，多出的帧采用零填充，导致有用数据太少。</p>
@@ -558,6 +560,8 @@
 <p><strong>使用CAMUS数据集官方划分的训练集，验证集和测试集</strong></p>
 <p>全监督</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241212153454404.png" srcset="/img/newloading.gif" lazyload alt="image-20241212153454404"></p>
+<p>全监督4batch 4lr</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241223142653089.png" srcset="/img/newloading.gif" lazyload alt="image-20241223142653089"></p>
 <p>弱监督A</p>
 <blockquote>
 <p>这里的弱监督是训练的时候只提取了两帧(舒张末期和收缩末期)，在验证测试时也只测试了这两帧</p>
