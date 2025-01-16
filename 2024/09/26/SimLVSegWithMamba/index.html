@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2025-01-13T08:38:36.296Z">
+<meta property="article:modified_time" content="2025-01-16T07:27:04.771Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          8.5k 字
+          8.6k 字
         
       </span>
     
@@ -607,16 +607,16 @@
 <td>0.1752</td>
 </tr>
 <tr>
-<td>jaccard+SGD</td>
-<td>0.9084</td>
-<td>0.8323</td>
-<td>0.1677</td>
+<td><strong>jaccard+SGD</strong></td>
+<td><strong>0.9084</strong></td>
+<td><strong>0.8323</strong></td>
+<td><strong>0.1677</strong></td>
 </tr>
 <tr>
 <td>diceloss+SGD</td>
-<td></td>
-<td></td>
-<td></td>
+<td>0.9068</td>
+<td>0.8295</td>
+<td>0.0932</td>
 </tr>
 </tbody>
 </table>
@@ -639,13 +639,13 @@
 </tr>
 <tr>
 <td>3D_Unet+diceloss</td>
-<td></td>
-<td></td>
-<td></td>
+<td>0.9112</td>
+<td>0.8369</td>
+<td>0.0906</td>
 </tr>
 </tbody>
 </table>
-<p>其他模型</p>
+<p>其他模型  都是Adaw+Dice</p>
 <table>
 <thead>
 <tr>
@@ -658,24 +658,30 @@
 <tbody>
 <tr>
 <td>LightMUNet</td>
-<td></td>
-<td></td>
-<td></td>
+<td>0.8855</td>
+<td>0.7946</td>
+<td>0.1145</td>
 </tr>
 <tr>
 <td>TMamba3D</td>
-<td></td>
-<td></td>
-<td></td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
 </tr>
 <tr>
 <td>SegFormer3D</td>
-<td></td>
-<td></td>
-<td></td>
+<td>0.9123</td>
+<td>0.8388</td>
+<td>0.0876</td>
 </tr>
 <tr>
 <td>UKAN3D</td>
+<td>0.9091</td>
+<td>0.8334</td>
+<td>0.0910</td>
+</tr>
+<tr>
+<td>UNet_IDC3D</td>
 <td></td>
 <td></td>
 <td></td>
