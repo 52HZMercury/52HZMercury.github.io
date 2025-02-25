@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240906134037404.png">
 <meta property="article:published_time" content="2024-09-06T05:36:46.000Z">
-<meta property="article:modified_time" content="2025-01-13T08:07:04.385Z">
+<meta property="article:modified_time" content="2025-02-25T08:48:50.493Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -419,7 +419,7 @@
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240920154002183.png" srcset="/img/newloading.gif" lazyload alt="Fig. 2. The overall architecture of Swin-UMamba†."></p>
 <p><strong>结论</strong></p>
 <p>本研究旨在揭示基于ImageNet的预训练对Mambabased模型在二维医学图像分割中的影响。我们提出了一种新的Mambabased模型Swin-UAmamba及其变体SwinUMamba†，两者都能够利用预训练模型的分割任务的能力。我们在各种医学图像分割数据集上的实验表明，基于ImageNet的预训练对基于Mamba的模型有几个优点，包括上级分割精度、稳定的收敛性、过拟合问题的缓解、数据效率和较低的计算资源消耗。我们相信，我们的研究结果突出了预训练在增强基于Mamba的模型在视觉任务中的性能和效率方面的重要性。</p>
-<h2 id="Mean-teachers-model">Mean teachers  model:</h2>
+<h2 id="Mean-teachers-model">Mean teachers  model</h2>
 <blockquote>
 <p>Tarvainen A, Valpola H. Mean teachers are better role models: Weight-averaged consistency targets improve semi-supervised deep learning results[J]. Advances in neural information processing systems, 2017, 30.</p>
 </blockquote>
@@ -531,6 +531,10 @@
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241024161331002.png" srcset="/img/newloading.gif" lazyload alt="image-20241024161331002"></p>
 <p>在大内核分割策略下，感受野被扩大，模型可以获得更多局部像素的细节。然而，图像被分割成非重叠的子内核。因此，我们需要一个机制来实现不同子内核之间的通信，以进行长距离依赖性建模。块级 SSM（PaM）。我们引入了一个块级 SSM 层，以在不同的子内核之间传递信息.</p>
 <p>与基于前向扫描方向 SSM 层的原始 Mamba 块不同，LM 块中的每个 SSM 层（包括 PiM 和 PaM）都是双向的。图 2(b) 显示了差异。在原始 Mamba 中，作为一个连续模型，一些信息遗忘发生在早期进入的元素上，而最后进入 Mamba 的元素将保留更多的信息。因此，具有单一扫描方向的原始 Mamba 将更多地关注后部块，而不是通常包含更多器官和病变的特征图的中心区域。为此，我们提出了一个双向 Mamba 结构，通过同时进行前向和后向扫描并叠加输出结果。BiM 有两个优点。首先，模型可以更多地关注图像中心区域的信息块，而不是角落区域。其次，对于每个块，绝对位置信息和与其他块的相对位置信息可以被网络很好地建模。</p>
+<h2 id="Deformable-Attention">Deformable Attention</h2>
+<blockquote>
+<p>Xia Z, Pan X, Song S, et al. Vision transformer with deformable attention[C]//Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 2022: 4794-4803.</p>
+</blockquote>
 
               
             </div>

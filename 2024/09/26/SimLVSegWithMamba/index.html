@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2025-01-16T07:27:04.771Z">
+<meta property="article:modified_time" content="2025-01-23T12:44:37.499Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          8.6k 字
+          9.5k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          27 分钟
+          30 分钟
         
       </span>
     
@@ -292,7 +292,7 @@
             
             <div class="markdown-body">
               
-              <h2 id="SimLVSeg">SimLVSeg</h2>
+              <h2 id="1-主体框架-SimLVSeg">1. 主体框架-SimLVSeg</h2>
 <p>SimLVSeg使基于视频的网络能够从稀疏注释的超声心动图视频中进行一致的LV分割。SimLVSeg包括具有时间掩蔽的自监督预训练，然后是为从稀疏注释中进行LV分割而定制的弱监督学习。我们展示了SimLVSeg如何在最大的2D+时间超声心动图数据集（EchoNet-Dynamics）上实现93.32%（95%CI 93.21-93.43%）的DICE评分，同时更高效，从而优于最先进的解决方案。SimLVSeg兼容两种类型的视频分割网络：2D超级图像和3D分割。为了展示我们方法的有效性，我们提供了广泛的消融研究，包括预训练设置和各种深度学习主干。我们进一步进行了分布外测试，以展示SimLVSeg在未见分布（CAMUS数据集）上的推广能力。该代码可在<a target="_blank" rel="noopener" href="https://github.com/fadamsyah/SimLVSeg%E4%B8%8A%E5%85%AC%E5%BC%80%E8%8E%B7%E5%8F%96%E3%80%82">https://github.com/fadamsyah/SimLVSeg上公开获取。</a></p>
 <p>SimLVSeg使基于视频的网络能够进行LV分段，从而增强性能和更高的时间一致性。SimLVSeg由两个训练阶段组成：具有时间掩蔽的自我监督预训练和LV分割的弱监督学习，专门设计用于解决稀疏注释（标记）超声心动图视频的挑战。</p>
 <h3 id="结构">结构</h3>
@@ -308,7 +308,8 @@
 <p>如表2所示，实验表明性能对编码器主干是稳健的。</p>
 <div class = "note note-danger">注意：这里torch记得用加cuda版本</div>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">CUDA 11.6</span><br>pip install torch==1.12.1+cu116 torchvision==0.13.1+cu116 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu116<br></code></pre></td></tr></table></figure>
-<h2 id="SegMamba">SegMamba</h2>
+<h2 id="2-心脏分割模型">2. 心脏分割模型</h2>
+<h3 id="2-1-模型修改-SegMamba">2.1 模型修改-SegMamba</h3>
 <p>SegMamba也是一个分析3D超声心动图的网路，不同的是原论文中实验采用的体积数据，而不是2D图像数据加时间。因此，将SegMamba移植过来作为主干网络时，将时间作为第三个轴，即输入的帧数作为<strong>高</strong>，SegMamba在原论文实验中表现同样十分优异。详细的集成后代码可以在这里找到<a target="_blank" rel="noopener" href="https://github.com/52HZMercury/SimLVSeg-with-SegMamba">https://github.com/52HZMercury/SimLVSeg-with-SegMamba</a></p>
 <p>使用的环境</p>
 <p>py3.8  torch 1.12</p>
@@ -319,7 +320,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load_video</span>(<span class="hljs-params">filename: <span class="hljs-built_in">str</span></span>) -&gt; np.ndarray:</span><br>    <span class="hljs-string">&quot;&quot;&quot;Loads a video from a file.</span><br><span class="hljs-string">    Args:</span><br><span class="hljs-string">        filename (str): filename of video</span><br><span class="hljs-string">    Returns:</span><br><span class="hljs-string">        A np.ndarray with dimensions (channels=3, frames, height, width). The</span><br><span class="hljs-string">        values will be uint8&#x27;s ranging from 0 to 255.</span><br><span class="hljs-string">    Raises:</span><br><span class="hljs-string">        FileNotFoundError: Could not find `filename`</span><br><span class="hljs-string">        ValueError: An error occurred while reading the video</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(filename):<br>        <span class="hljs-keyword">raise</span> FileNotFoundError(filename)<br>    capture = cv2.VideoCapture(filename)<br>    <br>    frame_count = <span class="hljs-built_in">int</span>(capture.get(cv2.CAP_PROP_FRAME_COUNT))<br>    frame_width = <span class="hljs-built_in">int</span>(capture.get(cv2.CAP_PROP_FRAME_WIDTH))<br>    frame_height = <span class="hljs-built_in">int</span>(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))<br>    <br>    <span class="hljs-comment"># v = np.zeros((frame_count, frame_height, frame_width, 3), np.uint8)</span><br>    v = np.zeros((frame_count, <span class="hljs-number">128</span>, <span class="hljs-number">128</span>, <span class="hljs-number">3</span>), np.uint8)<br><br>    <span class="hljs-keyword">for</span> count <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(frame_count):<br>        ret, frame = capture.read()<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ret:<br>            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;Failed to load frame #&#123;&#125; of &#123;&#125;.&quot;</span>.<span class="hljs-built_in">format</span>(count, filename))<br>        <span class="hljs-comment">#112*112</span><br>        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)<br><br>        <span class="hljs-comment"># 缩放为128</span><br>        frame = cv2.resize(frame, (<span class="hljs-number">128</span>,<span class="hljs-number">128</span>))<br>        v[count, :, :] = frame<br>    <br>    <span class="hljs-keyword">return</span> v<br></code></pre></td></tr></table></figure>
 <div class="info info-danger">爆显存</div>
 <p>在经历上面的操作后，在实验时，可能会遇到爆显存的错误(3090)，这里的解决方法是，改小精度，将原来的32位改为了16位</p>
-<h3 id="实验结果">实验结果</h3>
+<h4 id="实验结果">实验结果</h4>
 <p>Table.2.    DSC(Dice Similarity Coefficient)</p>
 <table>
 <thead>
@@ -361,10 +362,10 @@
 <p>Both SimLVSeg-3D and SimLVSeg-SI outperform the state-of-the-art,suggesting that the superior performance can be attributed to the SimLVSeg design rather than the selection of the underlying network architectures.</p>
 </blockquote>
 <p>原作者在论文中说是SimLVSeg设计优秀所以性能较好而不是主干网络的选择，从移植SegMamba的实验结构来看确实如此。</p>
-<h3 id="改小参数量">改小参数量</h3>
+<h4 id="改小参数量">改小参数量</h4>
 <p>具体的措施有：将通道数改为原来的1/2，并转为32位精度计算</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241024150535221.png" srcset="/img/newloading.gif" lazyload alt="改小参数量后"></p>
-<h3 id="加入通道注意力模块">加入通道注意力模块</h3>
+<h4 id="加入通道注意力模块">加入通道注意力模块</h4>
 <div class = "note note-success">Squeeze-and-Excitation Networks</div>
 <p><strong>序言</strong></p>
 <p>在本文中，作者研究了网络设计的一个不同方面-通道之间的关系。引入了一个新的架构单元，称之为挤压和激发（SE）块，其目标是通过显式建模其卷积特征通道之间的相互依赖性来提高网络产生的表示的质量。为此，作者提出了一种允许网络执行特征重新校准的机制，通过该机制，网络可以学习使用全局信息来选择性地强调信息特征并抑制不太有用的特征</p>
@@ -399,7 +400,7 @@
 <p>通道再次降低为初始的1/3，即24M的模型,同时加入通道注意力模块,即上面的压缩激励</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241031132249277.png" srcset="/img/newloading.gif" lazyload alt="降低为原来的1/3"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241031131654163.png" srcset="/img/newloading.gif" lazyload alt="image-20241031131654163"></p>
-<h3 id="加入MSAA模块">加入MSAA模块</h3>
+<h4 id="加入MSAA模块">加入MSAA模块</h4>
 <div class = "note note-success"> CM-UNet: Hybrid CNN-Mamba UNet for Remote Sensing Image Semantic Segmentation</div>
 <p>加入多尺度注意力聚合模块MSAA</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241031191639676.png" srcset="/img/newloading.gif" lazyload alt="加入MSAA后"></p>
@@ -414,45 +415,130 @@
 <p><strong>多尺度注意力聚合模块（MSAA）</strong>：在编码器和解码器之间，使用MSAA模块对多尺度特征进行聚合。这个模块通过空间和通道注意力机制对不同尺度的特征进行融合，增强特征表达能力，并取代了UNet中的跳跃连接。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241031155837437.png" srcset="/img/newloading.gif" lazyload alt="Fig. 3. The Multi-Scale Attention Aggregation (MSAA) module."></p>
 <p><strong>CSMamba解码器</strong>：解码器采用CSMamba块，该模块结合通道和空间注意力机制，以及Mamba结构的线性时间复杂度特性，能够有效捕获图像的长程依赖关系。CSMamba解码器逐步上采样特征并生成输出分割图。同时引入多输出监督，在各层解码器中加入监督信号，确保分割图在不同层次上得到精细化生成。</p>
-<h3 id="参数量降为24-1M">参数量降为24.1M</h3>
+<h4 id="参数量降为24-1M">参数量降为24.1M</h4>
 <p>CVPR 2024 的MemSAM</p>
 <blockquote>
 <p>Deng X, Wu H, Zeng R, et al. MemSAM: Taming Segment Anything Model for Echocardiography Video Segmentation[C]//Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2024: 9622-9631.</p>
 </blockquote>
 <p>该论文实验结果</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241129162620958.png" srcset="/img/newloading.gif" lazyload alt="image-20241129162620958"></p>
-<p><strong>在EchoNet-Dynamic数据集上</strong></p>
+<p>camus-semi和camus-full</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250122092934985.png" srcset="/img/newloading.gif" lazyload alt="image-20250122092934985"></p>
+<p>后续实验参见后续数据集实验部分</p>
+<h3 id="2-2-模型修改-LightM-UNet">2.2 模型修改-LightM-UNet</h3>
+<p>运行环境版本：</p>
+<p>LightM-UNet，这是一个基于Mamba的轻量级U形分割模型，它在显著降低参数和计算成本的同时实现了最先进的性能,参数大大减小</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241112173154849.png" srcset="/img/newloading.gif" lazyload alt="image-20241112173154849"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241114135927092.png" srcset="/img/newloading.gif" lazyload alt="image-20241114135927092"></p>
+<p>所提出的LightM-UNet的总体架构如图所示。给定一个输入图像 ，其中 、、 和  分别表示3D医疗图像的通道数、高度、宽度和切片数</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241114140118136.png" srcset="/img/newloading.gif" lazyload alt="image-20241114140118136"></p>
+<p>LightM-UNet首先使用深度可分卷积（DWConv）层进行浅层特征提取，生成浅层特征图。随后，LightM-UNet结合三个连续的编码器块（Encoder Blocks）从图像中提取深层特征。在每个编码器块之后，特征图中的通道数翻倍，而分辨率减半。</p>
+<p><strong>Encoder Block</strong></p>
+<p>感觉encoder都差不多</p>
+<p>为了最小化参数数量和计算成本，LightM-UNet采用了仅包含Mamba结构的编码器块来从图像中提取深层特征。</p>
+<p>具体来说，给定一个特征图 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>F</mi><mi>l</mi></msup><mo>∈</mo><msup><mi>R</mi><mrow><mi>C</mi><mo>×</mo><mi>H</mi><mo>×</mo><mi>W</mi><mo>×</mo><mi>D</mi></mrow></msup></mrow><annotation encoding="application/x-tex">F^l \in R^{C \times H \times W \times D }</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8882em;vertical-align:-0.0391em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8413em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight" style="margin-right:0.08125em;">H</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">W</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">D</span></span></span></span></span></span></span></span></span></span></span></span>，其中<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>=</mo><mn>32</mn><mo>×</mo><msup><mn>2</mn><mi>l</mi></msup></mrow><annotation encoding="application/x-tex">C = 32 \times2^l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">32</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span></span></span>，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>=</mo><mi>H</mi><mi mathvariant="normal">/</mi><msup><mn>2</mn><mi>l</mi></msup></mrow><annotation encoding="application/x-tex">H = H / 2^l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0991em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">/</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span></span></span>，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>=</mo><mi>W</mi><mi mathvariant="normal">/</mi><msup><mn>2</mn><mi>l</mi></msup></mrow><annotation encoding="application/x-tex">W = W / 2^l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0991em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mord">/</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span></span></span>，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>=</mo><mi>D</mi><mi mathvariant="normal">/</mi><msup><mn>2</mn><mi>l</mi></msup></mrow><annotation encoding="application/x-tex">D = D / 2^l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0991em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord">/</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span></span></span>，以及，编码器块首先将特征图展平并转置成的形状，其中<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mi>H</mi><mo>×</mo><mi>W</mi><mo>×</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">L = H \times W \times D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span>。</p>
+<p>随后，编码器块使用个连续的RVM层来捕捉全局信息，在最后一个RVM层中通道数增加。此后，编码器块重新调整并转置特征图的形状为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>C</mi><mo>×</mo><mn>2</mn><mo separator="true">,</mo><mi>H</mi><mo separator="true">,</mo><mi>W</mi><mo separator="true">,</mo><mi>D</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(C \times 2,H,W,D)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">)</span></span></span></span>，紧接着进行最大池化操作以降低特征图的分辨率。</p>
+<p>最终，第l个编码器块输出新的特征图<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>F</mi><mrow><mi>l</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">F^{l+1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span>，其形状为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>C</mi><mo>×</mo><mn>2</mn><mo separator="true">,</mo><mi>H</mi><mi mathvariant="normal">/</mi><mn>2</mn><mo separator="true">,</mo><mi>W</mi><mi mathvariant="normal">/</mi><mn>2</mn><mo separator="true">,</mo><mi>D</mi><mi mathvariant="normal">/</mi><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(C \times 2,H/2,W/2,D/2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">/2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mord">/2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord">/2</span><span class="mclose">)</span></span></span></span>。</p>
+<p><strong>Residual Vision Mamba Layer (RVM Layer)</strong></p>
+<p>LightM-UNet提出了RVM层以增强原始的SSM块，用于图像深层语义特征提取。具体来说，LightM-UNet利用先进的残差连接和调整因子进一步增强了SSM的长距离空间建模能力，几乎不引入新的参数和计算复杂性。</p>
+<p><strong>实验</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241114184622536.png" srcset="/img/newloading.gif" lazyload alt="image-20241114184622536"></p>
+<p>LightM-UNet以其极低的参数数量脱颖而出，仅使用了1.09M个参数。与nnU-Net和U-Mamba相比，参数分别减少了99.14%和99.55%</p>
+<h4 id="加入通道注意力特征融合">加入通道注意力特征融合</h4>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241119155343122.png" srcset="/img/newloading.gif" lazyload alt="image-20241119155343122"></p>
+<p>同时实验时加入mIOU评价指标</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241128123310222.png" srcset="/img/newloading.gif" lazyload alt="image-20241128123310222"></p>
+<h2 id="3-数据集实验">3. 数据集实验</h2>
+<h3 id="3-1-EchoNet-Dynamic">3.1 EchoNet-Dynamic</h3>
 <p>小segmamba实验结果(DiceLoss)</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241202155209382.png" srcset="/img/newloading.gif" lazyload alt="image-20241202155209382"></p>
 <p>DICE和IOU都比该文高，其中DICE高0.11个点，IOU高0.84</p>
-<p><strong>换成jaccard</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241217160043633.png" srcset="/img/newloading.gif" lazyload alt="image-20241217160043633"></p>
-<p>效果下降了，也可能是误差，决定再跑一遍</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241220194006242.png" srcset="/img/newloading.gif" lazyload alt="image-20241220194006242"></p>
-<p>好吧，效果依旧不太理想</p>
-<p><strong>换成tversky</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241223142447888.png" srcset="/img/newloading.gif" lazyload alt="image-20241223142447888"></p>
+<p>其他的损失函数</p>
+<table>
+<thead>
+<tr>
+<th>segmamba-24.1M</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>diceloss</td>
+<td><strong>0.9289</strong></td>
+<td><strong>0.8673</strong></td>
+<td><strong>0.0718</strong></td>
+</tr>
+<tr>
+<td>jaccard</td>
+<td>0.9276</td>
+<td>0.8650</td>
+<td>0.1353</td>
+</tr>
+<tr>
+<td>jaccard</td>
+<td>0.9267</td>
+<td>0.8635</td>
+<td>0.1367</td>
+</tr>
+<tr>
+<td>tversky</td>
+<td>0.9272</td>
+<td>0.8643</td>
+<td>0.0687</td>
+</tr>
+</tbody>
+</table>
 <p>效果一般</p>
-<p><strong>在CAMUS数据集</strong></p>
+<h3 id="3-2-CAMUS">3.2 CAMUS</h3>
 <p>重写dataset改为该数据集后，DICE和IOU都出现错误：表现为大于1。</p>
 <p>猜想：每个病人只有十几帧，但是segmamba是按128帧设计的，因此输入的是128帧，多出的帧采用零填充，导致有用数据太少。</p>
 <p>方案：使用每个病人原始的数据，进行重复，直到填满128帧。</p>
 <p>并不是这个原因，是因为拼接的函数有点问题，改完之后可以正常显示数据，但是还不完善，只能使用一个batchsize</p>
 <p>下面再来测试几种填充之后的实验差别</p>
-<p>type1:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241203154356256.png" srcset="/img/newloading.gif" lazyload alt="image-20241203154356256"></p>
-<p>type2:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241203154228577.png" srcset="/img/newloading.gif" lazyload alt="image-20241203154228577"></p>
-<p>type3:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241203193005161.png" srcset="/img/newloading.gif" lazyload alt="image-20241203193005161"></p>
-<p>type4:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241203193037852.png" srcset="/img/newloading.gif" lazyload alt="image-20241203193037852"></p>
+<table>
+<thead>
+<tr>
+<th>填充方式</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type1</td>
+<td>0.9123</td>
+<td>0.8459</td>
+<td>0.0950</td>
+</tr>
+<tr>
+<td>type2</td>
+<td>0.9301</td>
+<td>0.8708</td>
+<td>0.0779</td>
+</tr>
+<tr>
+<td>type3</td>
+<td>0.9234</td>
+<td>0.8603</td>
+<td>0.0846</td>
+</tr>
+<tr>
+<td>type4</td>
+<td>0.9265</td>
+<td>0.8650</td>
+<td>0.0859</td>
+</tr>
+</tbody>
+</table>
 <p>综合来看type2的padding效果最好，后续在type2上继续实验</p>
 <p>将所有的消融实验做一个表格，包括</p>
 <table>
 <thead>
 <tr>
-<th></th>
+<th>segmamba-24.1M</th>
 <th>DICE</th>
 <th>IOU</th>
 <th>loss</th>
@@ -558,36 +644,146 @@
 </tbody>
 </table>
 <p><strong>使用CAMUS数据集官方划分的训练集，验证集和测试集</strong></p>
-<p>全监督</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241212153454404.png" srcset="/img/newloading.gif" lazyload alt="image-20241212153454404"></p>
-<p>全监督4batch 4lr</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241223142653089.png" srcset="/img/newloading.gif" lazyload alt="image-20241223142653089"></p>
-<p>弱监督A</p>
-<blockquote>
-<p>这里的弱监督是训练的时候只提取了两帧(舒张末期和收缩末期)，在验证测试时也只测试了这两帧</p>
-</blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241212153606065.png" srcset="/img/newloading.gif" lazyload alt="image-20241212153606065"></p>
-<p>弱监督B</p>
-<blockquote>
-<p>这个弱监督也是训练的时候只提取两帧，但是验证和测试时是全周期数据</p>
-</blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241212190536204.png" srcset="/img/newloading.gif" lazyload alt="image-20241212190536204"></p>
-<p>可以看到，效果非常的垃圾。。。</p>
-<p><strong>使用SAM模型划分的训练集，验证集和测试集</strong></p>
-<p>//todo</p>
-<h2 id="Echo-Pediatric">Echo-Pediatric</h2>
-<p>该数据需要首先进行预处理，使用split列中的数字划分训练集，验证集和测试集。这里使用的是&lt;8的数据为训练集，==8的为验证集，其余的为测试集。</p>
-<p>除此之外，该数据集中有部分脏数据需要进行处理，比如VolumeTracings.csv中部分X,Y数据为空，Frame为No Systolic,需要删除，以及部分数据标注时有误，只有144帧，但标注时标注了序号为第144帧，导致越界错误。</p>
-<p>先使用了jaccard的dsc只有0.9063，iou为0.8288</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250109154150304.png" srcset="/img/newloading.gif" lazyload alt="image-20250109154150304"></p>
-<p>考虑到这个数据集和echodynamic类似。因此，接着使用diceloss进行测试，效果差不多，dsc为0.9045，iou为0.8256</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250109154249431.png" srcset="/img/newloading.gif" lazyload alt="image-20250109154249431"></p>
-<p>数据集的处理有点问题，重新跑一遍：</p>
-<p>segmamba模型</p>
 <table>
 <thead>
 <tr>
-<th>segmamba</th>
+<th>segmamba-24.1M</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全监督</td>
+<td>0.9377</td>
+<td>0.8828</td>
+<td>0.1208</td>
+</tr>
+<tr>
+<td>全监督_4bt-4lr</td>
+<td>0.9406</td>
+<td>0.8879</td>
+<td>0.1193</td>
+</tr>
+<tr>
+<td>弱监督A</td>
+<td>0.9391</td>
+<td>0.8852</td>
+<td>0.1150</td>
+</tr>
+<tr>
+<td>弱监督B</td>
+<td>0.2071</td>
+<td>0.1155</td>
+<td>0.9697</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>这里的弱监督A是训练的时候只提取了两帧(舒张末期和收缩末期)，在验证测试时也只测试了这两帧；弱监督B也是训练的时候只提取两帧，但是验证和测试时是全周期数据，可以看到，效果非常的垃圾。。。</p>
+</blockquote>
+<p><strong>使用SAM模型划分的训练集，验证集和测试集</strong></p>
+<table>
+<thead>
+<tr>
+<th>segmamba-24.1M</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dice+Adaw_4bt-3lr</td>
+<td>0.9427</td>
+<td>0.8917</td>
+<td>0.0681</td>
+</tr>
+<tr>
+<td>jaccard+Adaw_4bt-4lr</td>
+<td><strong>0.9431</strong></td>
+<td><strong>0.8924</strong></td>
+<td><strong>0.1143</strong></td>
+</tr>
+<tr>
+<td>jaccard+Adaw_4bt-3lr</td>
+<td>0.9414</td>
+<td>0.8893</td>
+<td>0.1215</td>
+</tr>
+</tbody>
+</table>
+<p>在3D_UNet上</p>
+<table>
+<thead>
+<tr>
+<th>3D_UNet</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dice+Adaw_4lr+split_SAM</td>
+<td>0.9457</td>
+<td>0.8970</td>
+<td>0.0633</td>
+</tr>
+<tr>
+<td>dice+Adaw_4lr+split_CAMUS</td>
+<td>0.9440</td>
+<td>0.8940</td>
+<td>0.0631</td>
+</tr>
+<tr>
+<td>dice+Adaw_2lr+split_SAM</td>
+<td>0.9430</td>
+<td>0.8922</td>
+<td>0.0933</td>
+</tr>
+<tr>
+<td>dice+Adaw_2lr+split_CAMUS</td>
+<td>0.9351</td>
+<td>0.8782</td>
+<td>0.0954</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-3-Echo-Pediatric">3.3 Echo-Pediatric</h3>
+<p>该数据需要首先进行预处理，使用split列中的数字划分训练集，验证集和测试集。这里使用的是&lt;8的数据为训练集，==8的为验证集，其余的为测试集。</p>
+<p>除此之外，该数据集中有部分脏数据需要进行处理，比如VolumeTracings.csv中部分X,Y数据为空，Frame为No Systolic,需要删除，以及部分数据标注时有误，只有144帧，但标注时标注了序号为第144帧，导致越界错误。</p>
+<p>先使用了jaccard的dsc只有0.9063，iou为0.8288；考虑到这个数据集和echodynamic类似。因此，接着使用diceloss进行测试，效果差不多，dsc为0.9045，iou为0.8256</p>
+<table>
+<thead>
+<tr>
+<th>segmamba-24.1M</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>jaccard+Adaw</td>
+<td>0.9063</td>
+<td>0.8288</td>
+<td>0.0938</td>
+</tr>
+<tr>
+<td>diceloss+Adaw</td>
+<td>0.9045</td>
+<td>0.8256</td>
+<td>0.1748</td>
+</tr>
+</tbody>
+</table>
+<p>数据集的处理有点问题，重新跑一遍：</p>
+<table>
+<thead>
+<tr>
+<th>segmamba-24.1M</th>
 <th>dsc</th>
 <th>iou</th>
 <th>loss</th>
@@ -607,10 +803,10 @@
 <td>0.1752</td>
 </tr>
 <tr>
-<td><strong>jaccard+SGD</strong></td>
-<td><strong>0.9084</strong></td>
-<td><strong>0.8323</strong></td>
-<td><strong>0.1677</strong></td>
+<td>jaccard+SGD</td>
+<td>0.9084</td>
+<td>0.8323</td>
+<td>0.1677</td>
 </tr>
 <tr>
 <td>diceloss+SGD</td>
@@ -618,9 +814,15 @@
 <td>0.8295</td>
 <td>0.0932</td>
 </tr>
+<tr>
+<td><strong>hccdice+Adaw_4lr</strong></td>
+<td><strong>0.9115</strong></td>
+<td><strong>0.8374</strong></td>
+<td><strong>0.0892</strong></td>
+</tr>
 </tbody>
 </table>
-<p>3D_Unet模型</p>
+<p>3D_Unet模型  Adaw</p>
 <table>
 <thead>
 <tr>
@@ -645,7 +847,7 @@
 </tr>
 </tbody>
 </table>
-<p>其他模型  都是Adaw+Dice</p>
+<p>其他模型  都是Adaw+DiceLoss</p>
 <table>
 <thead>
 <tr>
@@ -680,37 +882,33 @@
 <td>0.8334</td>
 <td>0.0910</td>
 </tr>
+</tbody>
+</table>
+<p>UNet_IDC3D模型</p>
+<table>
+<thead>
 <tr>
-<td>UNet_IDC3D</td>
-<td></td>
-<td></td>
-<td></td>
+<th>model name</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UNet_IDC3D+diceLoss</td>
+<td>0.9112</td>
+<td>0.8368</td>
+<td>/</td>
+</tr>
+<tr>
+<td>UNet_IDC3D+hccdice</td>
+<td>0.9137</td>
+<td>0.8412</td>
+<td>0.0866</td>
 </tr>
 </tbody>
 </table>
-<h2 id="LightM-UNet">LightM-UNet</h2>
-<p>运行环境版本：</p>
-<p>LightM-UNet，这是一个基于Mamba的轻量级U形分割模型，它在显著降低参数和计算成本的同时实现了最先进的性能,参数大大减小</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241112173154849.png" srcset="/img/newloading.gif" lazyload alt="image-20241112173154849"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241114135927092.png" srcset="/img/newloading.gif" lazyload alt="image-20241114135927092"></p>
-<p>所提出的LightM-UNet的总体架构如图所示。给定一个输入图像 ，其中 、、 和  分别表示3D医疗图像的通道数、高度、宽度和切片数</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241114140118136.png" srcset="/img/newloading.gif" lazyload alt="image-20241114140118136"></p>
-<p>LightM-UNet首先使用深度可分卷积（DWConv）层进行浅层特征提取，生成浅层特征图。随后，LightM-UNet结合三个连续的编码器块（Encoder Blocks）从图像中提取深层特征。在每个编码器块之后，特征图中的通道数翻倍，而分辨率减半。</p>
-<p><strong>Encoder Block</strong></p>
-<p>感觉encoder都差不多</p>
-<p>为了最小化参数数量和计算成本，LightM-UNet采用了仅包含Mamba结构的编码器块来从图像中提取深层特征。</p>
-<p>具体来说，给定一个特征图 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>F</mi><mi>l</mi></msup><mo>∈</mo><msup><mi>R</mi><mrow><mi>C</mi><mo>×</mo><mi>H</mi><mo>×</mo><mi>W</mi><mo>×</mo><mi>D</mi></mrow></msup></mrow><annotation encoding="application/x-tex">F^l \in R^{C \times H \times W \times D }</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8882em;vertical-align:-0.0391em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8413em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight" style="margin-right:0.08125em;">H</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">W</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">D</span></span></span></span></span></span></span></span></span></span></span></span>，其中<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>=</mo><mn>32</mn><mo>×</mo><msup><mn>2</mn><mi>l</mi></msup></mrow><annotation encoding="application/x-tex">C = 32 \times2^l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">32</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span></span></span>，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>=</mo><mi>H</mi><mi mathvariant="normal">/</mi><msup><mn>2</mn><mi>l</mi></msup></mrow><annotation encoding="application/x-tex">H = H / 2^l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0991em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">/</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span></span></span>，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>=</mo><mi>W</mi><mi mathvariant="normal">/</mi><msup><mn>2</mn><mi>l</mi></msup></mrow><annotation encoding="application/x-tex">W = W / 2^l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0991em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mord">/</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span></span></span>，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>=</mo><mi>D</mi><mi mathvariant="normal">/</mi><msup><mn>2</mn><mi>l</mi></msup></mrow><annotation encoding="application/x-tex">D = D / 2^l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0991em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord">/</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span></span></span>，以及，编码器块首先将特征图展平并转置成的形状，其中<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mi>H</mi><mo>×</mo><mi>W</mi><mo>×</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">L = H \times W \times D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span>。</p>
-<p>随后，编码器块使用个连续的RVM层来捕捉全局信息，在最后一个RVM层中通道数增加。此后，编码器块重新调整并转置特征图的形状为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>C</mi><mo>×</mo><mn>2</mn><mo separator="true">,</mo><mi>H</mi><mo separator="true">,</mo><mi>W</mi><mo separator="true">,</mo><mi>D</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(C \times 2,H,W,D)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">)</span></span></span></span>，紧接着进行最大池化操作以降低特征图的分辨率。</p>
-<p>最终，第l个编码器块输出新的特征图<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>F</mi><mrow><mi>l</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">F^{l+1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span>，其形状为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>C</mi><mo>×</mo><mn>2</mn><mo separator="true">,</mo><mi>H</mi><mi mathvariant="normal">/</mi><mn>2</mn><mo separator="true">,</mo><mi>W</mi><mi mathvariant="normal">/</mi><mn>2</mn><mo separator="true">,</mo><mi>D</mi><mi mathvariant="normal">/</mi><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(C \times 2,H/2,W/2,D/2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord">/2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mord">/2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord">/2</span><span class="mclose">)</span></span></span></span>。</p>
-<p><strong>Residual Vision Mamba Layer (RVM Layer)</strong></p>
-<p>LightM-UNet提出了RVM层以增强原始的SSM块，用于图像深层语义特征提取。具体来说，LightM-UNet利用先进的残差连接和调整因子进一步增强了SSM的长距离空间建模能力，几乎不引入新的参数和计算复杂性。</p>
-<p><strong>实验</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241114184622536.png" srcset="/img/newloading.gif" lazyload alt="image-20241114184622536"></p>
-<p>LightM-UNet以其极低的参数数量脱颖而出，仅使用了1.09M个参数。与nnU-Net和U-Mamba相比，参数分别减少了99.14%和99.55%</p>
-<h3 id="加入通道注意力特征融合">加入通道注意力特征融合</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241119155343122.png" srcset="/img/newloading.gif" lazyload alt="image-20241119155343122"></p>
-<p>同时实验时加入mIOU评价指标</p>
-<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241128123310222.png" srcset="/img/newloading.gif" lazyload alt="image-20241128123310222"></p>
 
               
             </div>
