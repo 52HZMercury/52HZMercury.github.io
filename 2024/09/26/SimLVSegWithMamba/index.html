@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2025-02-28T07:38:33.634Z">
+<meta property="article:modified_time" content="2025-03-12T08:49:53.245Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          9.6k 字
+          9.9k 字
         
       </span>
     
@@ -454,7 +454,7 @@
 <p>选择二：Right Diagonal Two-way(RD 双向扫描)</p>
 <p>聚焦于图的中心</p>
 <p>选择三：使用Hilbert曲线 (Hilbert 扫描)</p>
-<p>通过递归的分形结构，将高维空间（如二维平面）连续地映射到一维直线上，同时尽可能保持局部区域的邻近性</p>
+<p>通过递归的分形结构，将高维空间（如二维平面）连续地映射到一维直线上，同时尽可能保持局部区域的邻近性,Hilbert曲线以及其离散近似表示方法都非常实用，因为其将多维空间转换为一维空间的方法很好地保留了空间邻近性。（x，y）是一个单元方格中的点，d代表该点在Hilbert曲线上的位置，而由于其空间的邻近性，在单元格上近似的点，其对应Hilbert的d值也比较接近。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250228153319794.png" srcset="/img/newloading.gif" lazyload alt="image-20250228153319794"></p>
 <h2 id="3-数据集实验">3. 数据集实验</h2>
 <h3 id="3-1-EchoNet-Dynamic">3.1 EchoNet-Dynamic</h3>
@@ -828,6 +828,18 @@
 <td><strong>0.8374</strong></td>
 <td><strong>0.0892</strong></td>
 </tr>
+<tr>
+<td>hccdice+Adaw_4lr (resize 128)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>hccdice+Adaw_4lr (padding 128)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 <p>3D_Unet模型  Adaw</p>
@@ -914,6 +926,31 @@
 <td>0.9137</td>
 <td>0.8412</td>
 <td>0.0866</td>
+</tr>
+</tbody>
+</table>
+<p>改进为斜向（右对角线）扫描后的segmamba-RDscan</p>
+<table>
+<thead>
+<tr>
+<th>segmamba-HBscan</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>jaccard+Adaw_4lr</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
