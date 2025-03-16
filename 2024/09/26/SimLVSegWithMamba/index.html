@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2025-03-14T05:46:16.744Z">
+<meta property="article:modified_time" content="2025-03-16T05:34:03.823Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          32 分钟
+          33 分钟
         
       </span>
     
@@ -767,6 +767,37 @@
 </tr>
 </tbody>
 </table>
+<p>改进hibertScan后   使用SAM的划分方式</p>
+<table>
+<thead>
+<tr>
+<th>segmamba-HBscan</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hccdice+SGD</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="3-3-Echo-Pediatric">3.3 Echo-Pediatric</h3>
 <p>该数据需要首先进行预处理，使用split列中的数字划分训练集，验证集和测试集。这里使用的是&lt;8的数据为训练集，==8的为验证集，其余的为测试集。</p>
 <p>除此之外，该数据集中有部分脏数据需要进行处理，比如VolumeTracings.csv中部分X,Y数据为空，Frame为No Systolic,需要删除，以及部分数据标注时有误，只有144帧，但标注时标注了序号为第144帧，导致越界错误。</p>
@@ -925,7 +956,7 @@
 </tr>
 </tbody>
 </table>
-<p>改进为斜向（右对角线）扫描后的segmamba-HBscan</p>
+<p>改进为希尔伯特曲线扫描后的segmamba-HBscan</p>
 <p>填充到128*128规格的两种方式的实验</p>
 <table>
 <thead>
@@ -944,10 +975,10 @@
 <td>0.0923</td>
 </tr>
 <tr>
-<td><strong>hccdice+Adaw_4lr (padding 128)</strong></td>
-<td><strong>0.9122</strong></td>
-<td><strong>0.8386</strong></td>
-<td><strong>0.0884</strong></td>
+<td>hccdice+Adaw_4lr (padding 128)</td>
+<td>0.9122</td>
+<td>0.8386</td>
+<td>0.0884</td>
 </tr>
 </tbody>
 </table>
@@ -964,15 +995,21 @@
 <tbody>
 <tr>
 <td>hccdice+Adaw_4lr</td>
-<td></td>
-<td></td>
-<td></td>
+<td>0.9126</td>
+<td>0.8393</td>
+<td>0.0882</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>jaccard+Adaw_4lr  savepic</td>
+<td>0.9115</td>
+<td>0.8374</td>
+<td>0.1628</td>
+</tr>
+<tr>
+<td>**hccdice+SGD ** savepic</td>
+<td><strong>0.9128</strong></td>
+<td><strong>0.8396</strong></td>
+<td><strong>0.0877</strong></td>
 </tr>
 </tbody>
 </table>
