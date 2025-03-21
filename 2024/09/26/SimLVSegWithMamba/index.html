@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2025-03-20T10:30:31.361Z">
+<meta property="article:modified_time" content="2025-03-21T09:18:40.273Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          40 分钟
+          42 分钟
         
       </span>
     
@@ -977,6 +977,7 @@
 </tbody>
 </table>
 <p>采用不同扫描方向实验这里都统一采用  tversky   + Adaw_4bt-5lr type6 all 32F 60Epoch     0:西 1:北 2:东 3:南</p>
+<p>第一轮的数据可能是没加MRscan的数据。。。</p>
 <table>
 <thead>
 <tr>
@@ -988,56 +989,56 @@
 </thead>
 <tbody>
 <tr>
-<td>0  + -</td>
-<td>0.9434</td>
-<td>0.8929</td>
-<td>0.0602</td>
+<td>0 + -</td>
+<td>0.9427 / 0.9408</td>
+<td>/</td>
+<td>/</td>
 </tr>
 <tr>
-<td>1  + -</td>
-<td>0.9426</td>
-<td>0.8915</td>
-<td>0.0605</td>
+<td>1 + -</td>
+<td>0.9367 / 0.9401</td>
+<td>/</td>
+<td>/</td>
 </tr>
 <tr>
-<td>2  + -</td>
-<td>0.9427</td>
-<td>0.8916</td>
-<td>0.0604</td>
+<td>2 + -</td>
+<td><strong>0.9416 / 0.9435</strong></td>
+<td><strong>0.8931</strong></td>
+<td><strong>0.0589</strong></td>
 </tr>
 <tr>
-<td>3  + -</td>
-<td>0.9420</td>
-<td>0.8904</td>
+<td>3 + -</td>
+<td>0.9425 / 0.9418</td>
+<td>/</td>
+<td>/</td>
+</tr>
+<tr>
+<td>0 - +</td>
+<td>0.9418 / 0.9405</td>
+<td>/</td>
+<td>/</td>
+</tr>
+<tr>
+<td>1 - +</td>
+<td>0.9385 / 0.9407</td>
+<td>/</td>
+<td>/</td>
+</tr>
+<tr>
+<td>2 - +</td>
+<td>0.9401 / 0.9413</td>
+<td>0.8892</td>
 <td>0.0617</td>
 </tr>
 <tr>
-<td>0  - +</td>
-<td>0.9435</td>
-<td>0.8930</td>
-<td>0.0597</td>
-</tr>
-<tr>
-<td>1  - +</td>
-<td><strong>0.9438</strong></td>
-<td><strong>0.8937</strong></td>
-<td><strong>0.0582</strong></td>
-</tr>
-<tr>
-<td>2  - +</td>
-<td>0.9409</td>
-<td>0.8884</td>
-<td>0.0614</td>
-</tr>
-<tr>
-<td>3  - +</td>
-<td>0.9407</td>
-<td>0.8881</td>
-<td>0.0621</td>
+<td>3 - +</td>
+<td>0.9410 / 0.9413</td>
+<td>/</td>
+<td>/</td>
 </tr>
 </tbody>
 </table>
-<p>消融实验 减去MRscan</p>
+<p>消融实验 减去MRscan 采用 tversky   + Adaw_4bt-5lr type6 all 32F 60Epoch</p>
 <table>
 <thead>
 <tr>
@@ -1071,6 +1072,36 @@
 <td>0.9409</td>
 <td>0.8884</td>
 <td>0.0636</td>
+</tr>
+<tr>
+<td>后面统一采用tversky   + Adaw_4bt-5lr type6 all 32F 60Epoch</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tversky   + Adaw_4bt-5lr type6 all 32F 60Epoch</td>
+<td>0.9407</td>
+<td>0.8881</td>
+<td>0.0621</td>
+</tr>
+<tr>
+<td>tversky   + Adaw_4bt-5lr type6 all 32F 60Epoch</td>
+<td>0.9409</td>
+<td>0.8884</td>
+<td>0.0614</td>
+</tr>
+<tr>
+<td>tversky   + Adaw_4bt-5lr type6 all 32F 60Epoch</td>
+<td>0.9420</td>
+<td>0.8904</td>
+<td>0.0617</td>
+</tr>
+<tr>
+<td>tversky   + Adaw_4bt-5lr type6 all 32F 60Epoch</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -1256,6 +1287,18 @@
 <td>0.8386</td>
 <td>0.0884</td>
 </tr>
+<tr>
+<td>hccdice  + Adaw_4bt-5lr  32F</td>
+<td><strong>0.9137</strong></td>
+<td><strong>0.8412</strong></td>
+<td><strong>0.0870</strong></td>
+</tr>
+<tr>
+<td>tversky  + Adaw_4bt-5lr  32F</td>
+<td>0.9105</td>
+<td>0.8357</td>
+<td>0.0835</td>
+</tr>
 </tbody>
 </table>
 <p>segmamba-HBscan</p>
@@ -1330,19 +1373,13 @@
 <td>0.8356</td>
 <td>0.0809</td>
 </tr>
-<tr>
-<td>dice  + Adaw_4bt-5lr  32F</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
 </tbody>
 </table>
-<p>更换了不同的扫描方向1 - +</p>
+<p>更换了不同的扫描方向</p>
 <table>
 <thead>
 <tr>
-<th>segmamba-MRscan</th>
+<th>segmamba-MRscan  2 + -</th>
 <th>dsc</th>
 <th>iou</th>
 <th>loss</th>
@@ -1356,13 +1393,164 @@
 <td></td>
 </tr>
 <tr>
-<td>tversky  + Adaw_4bt-5lr  32F</td>
+<td>-</td>
+<td>out1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
 <td>out2</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
+<td>-</td>
+<td>out3</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>segmamba-MRscan  3 + -</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hccdice  + Adaw_4bt-5lr  32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>segmamba-MRscan  0 + -</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hccdice  + Adaw_4bt-5lr  32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>segmamba-MRscan  0 - +</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hccdice  + Adaw_4bt-5lr  32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>不同的损失测试</p>
+<table>
+<thead>
+<tr>
+<th>segmamba-MRscan  方向待定</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hccdice  + Adaw_4bt-5lr  32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tversky  + Adaw_4bt-5lr  32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td>dice  + Adaw_4bt-5lr  32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>jaccard  + Adaw_4bt-5lr  32F</td>
 <td></td>
 <td></td>
 <td></td>
