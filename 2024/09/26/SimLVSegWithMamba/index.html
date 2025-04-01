@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2025-03-27T05:35:42.074Z">
+<meta property="article:modified_time" content="2025-04-01T08:16:28.950Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          14k 字
+          15k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          44 分钟
+          48 分钟
         
       </span>
     
@@ -510,6 +510,178 @@
 </tbody>
 </table>
 <p>效果一般</p>
+<p>改为使用<strong>moore扫描</strong></p>
+<p>方向实验</p>
+<table>
+<thead>
+<tr>
+<th>segmamba-MRscan</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dice  + Adaw_4bt-4lr  32F  0 + -</td>
+<td>out</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td>out3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>dice  + Adaw_4bt-4lr  32F  3 + -</td>
+<td>out1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td>out4</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>dice  + Adaw_4bt-4lr  32F  2 + -</td>
+<td>out2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td>out5</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>学习率实验</p>
+<table>
+<thead>
+<tr>
+<th>segmamba-MRscan</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dice  + Adaw_16bt-4lr  32F  0 + -</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>dice  + Adaw_16bt-8lr  32F  0 + -</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>dice  + Adaw_16bt-16lr  32F  0 + -</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>损失实验</p>
+<table>
+<thead>
+<tr>
+<th>segmamba-MRscan  0 + -</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dice  + Adaw_16bt-8lr  32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>jaccard  + Adaw_16bt-8lr  32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>dice+Jaccard + Adaw_16bt-8lr  32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0.8 dice+ 0.2 Jaccard + Adaw_16bt-8lr  32F</td>
+<td>*</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0.2 dice+ 0.8 Jaccard + Adaw_16bt-8lr  32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="3-2-CAMUS">3.2 CAMUS</h3>
 <p>重写dataset改为该数据集后，DICE和IOU都出现错误：表现为大于1。</p>
 <p>猜想：每个病人只有十几帧，但是segmamba是按128帧设计的，因此输入的是128帧，多出的帧采用零填充，导致有用数据太少。</p>
@@ -989,7 +1161,7 @@
 </thead>
 <tbody>
 <tr>
-<td>0 + -</td>
+<td>0 + -    *</td>
 <td>0.9427 / 0.9408/0.9396/0.9413</td>
 <td>/</td>
 <td>/</td>
@@ -1001,19 +1173,19 @@
 <td>0.0635</td>
 </tr>
 <tr>
-<td>2 + -</td>
+<td>2 + -    *</td>
 <td><strong>0.9416 / 0.9435/0.9421/0.9426</strong></td>
 <td><strong>0.8931</strong></td>
 <td><strong>0.0589</strong></td>
 </tr>
 <tr>
-<td>3 + -</td>
+<td>3 + -    *</td>
 <td>0.9425 / 0.9418/0.9426/0.9421</td>
 <td>0.8914</td>
 <td>0.0602</td>
 </tr>
 <tr>
-<td>0 - +</td>
+<td>0 - +    *</td>
 <td>0.9418 / 0.9405/0.9421/0.9416</td>
 <td>0.8906</td>
 <td>0.0597</td>
@@ -1099,6 +1271,116 @@
 </tr>
 <tr>
 <td>tversky   + Adaw_4bt-5lr type6 all 32F 60Epoch</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>学习率实验</p>
+<table>
+<thead>
+<tr>
+<th>segmamba-MRscan 2 + -</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tversky   + Adaw_4bt-4lr type6 all 32F</td>
+<td>0.942372</td>
+<td>0.8910</td>
+<td>0.0631</td>
+</tr>
+<tr>
+<td>-</td>
+<td>0.941797</td>
+<td>0.8899</td>
+<td>0.0627</td>
+</tr>
+<tr>
+<td>tversky   + Adaw_4bt-5lr type6 all 32F</td>
+<td>0.941884</td>
+<td>0.8901</td>
+<td>0.0606</td>
+</tr>
+<tr>
+<td>-</td>
+<td>0.941728</td>
+<td>0.8898</td>
+<td>0.0621</td>
+</tr>
+</tbody>
+</table>
+<p>损失实验</p>
+<table>
+<thead>
+<tr>
+<th>segmamba-MRscan 2 + -</th>
+<th>dsc</th>
+<th>iou</th>
+<th>loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dice   + Adaw_4bt-5lr type6 all 32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>jaccard   + Adaw_4bt-5lr type6 all 32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>dice+Jaccard + Adaw_4bt-5lr type6 all 32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0.2 dice+ 0.8 Jaccard + Adaw_4bt-5lr type6 all 32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0.8 dice+ 0.2 Jaccard + Adaw_4bt-5lr type6 all 32F</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
 <td></td>
 <td></td>
 <td></td>
@@ -1338,15 +1620,15 @@
 </tr>
 <tr>
 <td>hccdice+SGD_16bt-0.3lr  32F</td>
-<td></td>
-<td></td>
-<td></td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
 </tr>
 <tr>
 <td>tversky  + Adaw_4bt-5lr  32F</td>
-<td></td>
-<td></td>
-<td></td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
 </tr>
 </tbody>
 </table>
@@ -1412,9 +1694,9 @@
 </tr>
 <tr>
 <td>-</td>
-<td>out</td>
-<td></td>
-<td></td>
+<td>0.9122</td>
+<td>0.8386</td>
+<td>0.0886</td>
 </tr>
 <tr>
 <td>hccdice  + Adaw_4bt-6lr  32F</td>
@@ -1460,15 +1742,15 @@
 </tr>
 <tr>
 <td>hccdice  + SGD_ 4bt-0.1lr 32F</td>
-<td>out1</td>
-<td></td>
-<td></td>
+<td>0.9120</td>
+<td>0.8383</td>
+<td>0.0884</td>
 </tr>
 <tr>
 <td>-</td>
-<td>out4</td>
-<td></td>
-<td></td>
+<td>0.9044</td>
+<td>0.8255</td>
+<td>0.0964</td>
 </tr>
 </tbody>
 </table>
@@ -1490,21 +1772,21 @@
 </tr>
 <tr>
 <td>-</td>
-<td><strong>0.9149</strong></td>
-<td><strong>0.8431</strong></td>
-<td><strong>0.0859</strong></td>
+<td>0.9149</td>
+<td>0.8431</td>
+<td>0.0859</td>
 </tr>
 <tr>
 <td>hccdice  + SGD_ 4bt-0.1lr 32F</td>
-<td>out2</td>
-<td></td>
-<td></td>
+<td>0.9082</td>
+<td>0.8319</td>
+<td>0.0923</td>
 </tr>
 <tr>
 <td>-</td>
-<td>out5</td>
-<td></td>
-<td></td>
+<td>0.9127</td>
+<td>0.8395</td>
+<td>0.0876</td>
 </tr>
 </tbody>
 </table>
@@ -1532,15 +1814,15 @@
 </tr>
 <tr>
 <td>hccdice  + SGD_ 4bt-0.1lr 32F</td>
-<td>out3</td>
-<td></td>
-<td></td>
+<td>0.9131</td>
+<td>0.8402</td>
+<td>0.0872</td>
 </tr>
 <tr>
 <td>-</td>
-<td></td>
-<td></td>
-<td></td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
 </tr>
 </tbody>
 </table>
@@ -1566,7 +1848,7 @@
 <table>
 <thead>
 <tr>
-<th>segmamba-MRscan  方向待定</th>
+<th>segmamba-MRscan  0 + -</th>
 <th>dsc</th>
 <th>iou</th>
 <th>loss</th>
@@ -1574,37 +1856,104 @@
 </thead>
 <tbody>
 <tr>
-<td>hccdice  + Adaw_4bt-5lr  32F</td>
-<td></td>
-<td></td>
-<td></td>
+<td>hccdice  + Adaw_4bt-4lr  32F</td>
+<td>0.9114</td>
+<td>0.8373</td>
+<td>0.0895</td>
 </tr>
 <tr>
-<td>tversky  + Adaw_4bt-5lr  32F</td>
-<td></td>
-<td></td>
-<td></td>
+<td>tversky  + Adaw_4bt-4lr  32F</td>
+<td>0.9093</td>
+<td>0.8337</td>
+<td>0.0861</td>
 </tr>
 <tr>
-<td>dice  + Adaw_4bt-5lr  32F</td>
-<td></td>
-<td></td>
-<td></td>
+<td>-</td>
+<td>0.9089</td>
+<td>0.8331</td>
+<td>0.0848</td>
 </tr>
 <tr>
-<td>jaccard  + Adaw_4bt-5lr  32F</td>
-<td></td>
-<td></td>
-<td></td>
+<td>dice  + Adaw_4bt-4lr  32F</td>
+<td>0.9151</td>
+<td>0.8434</td>
+<td>0.0852</td>
 </tr>
 <tr>
-<td>focal  + Adaw_4bt-5lr  32F</td>
-<td></td>
-<td></td>
-<td></td>
+<td>-</td>
+<td>0.9151</td>
+<td>0.8435</td>
+<td>0.0851</td>
+</tr>
+<tr>
+<td>jaccard  + Adaw_4bt-4lr  32F</td>
+<td>0.916061</td>
+<td>0.8451</td>
+<td>0.1551</td>
+</tr>
+<tr>
+<td>-</td>
+<td>0.9158</td>
+<td>0.8448</td>
+<td>0.1556</td>
+</tr>
+<tr>
+<td>focal  + Adaw_4bt-4lr  32F</td>
+<td>0.9133</td>
+<td>0.8405</td>
+<td>0.0096</td>
+</tr>
+<tr>
+<td>-</td>
+<td>0.9153</td>
+<td>0.8439</td>
+<td>0.0091</td>
+</tr>
+<tr>
+<td>dice+Jaccard + Adaw_4bt-4lr  32F</td>
+<td>0.9134</td>
+<td>0.8407</td>
+<td>0.1233</td>
+</tr>
+<tr>
+<td>-</td>
+<td>0.915999</td>
+<td>0.8450</td>
+<td>0.1198</td>
+</tr>
+<tr>
+<td>0.8 dice+ 0.2 Jaccard + Adaw_4bt-4lr  32F</td>
+<td><strong>0.9167</strong></td>
+<td><strong>0.8462</strong></td>
+<td><strong>0.0976</strong></td>
+</tr>
+<tr>
+<td>-</td>
+<td>0.9159</td>
+<td>0.8448</td>
+<td>0.0986</td>
+</tr>
+<tr>
+<td>0.2 dice+ 0.8 Jaccard + Adaw_4bt-4lr  32F</td>
+<td>0.9160</td>
+<td>0.8451</td>
+<td>0.1410</td>
+</tr>
+<tr>
+<td>-</td>
+<td>0.9137</td>
+<td>0.8412</td>
+<td>0.1446</td>
 </tr>
 </tbody>
 </table>
+<h2 id="4-消融实验">4. 消融实验</h2>
+<p>待研究，参考其他论文</p>
+<ul>
+<li>24.1 baseline</li>
+<li>不同损失</li>
+<li>不同扫描方式</li>
+</ul>
 
               
             </div>
@@ -1696,9 +2045,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/10/29/GlileoIM/" title="GlileoIM">
+                      <a href="/2024/10/29/Gelato/" title="GelatoIM">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">GlileoIM</span>
+                        <span class="hidden-mobile">GelatoIM</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
