@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2025-04-09T07:10:31.669Z">
+<meta property="article:modified_time" content="2025-04-09T09:29:10.187Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -656,6 +656,12 @@
 <td>0.9324</td>
 <td>0.8734</td>
 <td>0.0562</td>
+</tr>
+<tr>
+<td>0.3 dice + 0.1 jaccard + 0.3 tversky + 0.3 focal                    v230</td>
+<td>out6</td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -1291,7 +1297,7 @@
 </tr>
 </tbody>
 </table>
-<p>损失实验</p>
+<p>损失实验  mean</p>
 <table>
 <thead>
 <tr>
@@ -1303,62 +1309,26 @@
 </thead>
 <tbody>
 <tr>
-<td>dice   + Adaw_4bt-5lr type6 all 32F</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>-</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>jaccard   + Adaw_4bt-5lr type6 all 32F</td>
-<td></td>
-<td></td>
+<td>tversky</td>
+<td>0.9391</td>
+<td>0.8864</td>
 <td></td>
 </tr>
 <tr>
 <td>-</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>dice+Jaccard + Adaw_4bt-5lr type6 all 32F</td>
-<td></td>
+<td>0.9392</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>-</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>0.2 dice+ 0.8 Jaccard + Adaw_4bt-5lr type6 all 32F</td>
-<td></td>
+<td>0.3 dice + 0.1 jaccard + 0.3 tversky + 0.3 focal        v228</td>
+<td>out4</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>-</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>0.8 dice+ 0.2 Jaccard + Adaw_4bt-5lr type6 all 32F</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>-</td>
-<td></td>
+<td>-                                                                                       v229</td>
+<td>out5</td>
 <td></td>
 <td></td>
 </tr>
@@ -1970,6 +1940,18 @@
 <td>0.8452</td>
 <td>0.0727</td>
 </tr>
+<tr>
+<td>0.3 dice + 0.1jaccard + 0.3 tversky + 0.3 focal                  v231</td>
+<td>out7</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-                                                                                                v232</td>
+<td>out8</td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 <h2 id="4-sota实验">4. sota实验</h2>
@@ -2231,7 +2213,7 @@
 <th>+ mooreScan  - fusionLoss</th>
 <th>dsc</th>
 <th>iou</th>
-<th>asd</th>
+<th>assd</th>
 <th>sen</th>
 <th>hd95</th>
 </tr>
@@ -2239,18 +2221,18 @@
 <tbody>
 <tr>
 <td>v191</td>
-<td>0.9323</td>
-<td>0.8733</td>
-<td>1.0627</td>
-<td>0.9252</td>
-<td></td>
+<td>0.9300±0.0301</td>
+<td>0.8706±0.0498</td>
+<td>/</td>
+<td>0.9248±0.0608</td>
+<td>/</td>
 </tr>
 <tr>
-<td>v194</td>
-<td>0.9326</td>
-<td>0.8738</td>
-<td>1.0627</td>
-<td>0.9298</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -2277,7 +2259,7 @@
 <th>- mooreScan  + fusionLoss</th>
 <th>dsc</th>
 <th>iou</th>
-<th>asd</th>
+<th>assd</th>
 <th>sen</th>
 <th>hd95</th>
 </tr>
@@ -2330,12 +2312,12 @@
 </thead>
 <tbody>
 <tr>
-<td>v2</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>v210</td>
+<td>0.9301± 0.0008</td>
+<td>0.8706±0.0014</td>
+<td>/</td>
+<td>0.9284±0.0016</td>
+<td>/</td>
 </tr>
 <tr>
 <td></td>
@@ -2417,14 +2399,22 @@
 <th>+ mooreScan  + fusionLoss (ours)</th>
 <th>dsc</th>
 <th>iou</th>
-<th>asd</th>
+<th>assd</th>
 <th>sen</th>
 <th>hd95</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>v222  output2</td>
+<td>v224</td>
+<td>0.9380±0.0246</td>
+<td>0.8843±0.0422</td>
+<td>0.6270±0.2047</td>
+<td>0.9463±0.0426</td>
+<td>2.1007±0.6488</td>
+</tr>
+<tr>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -2432,15 +2422,7 @@
 <td></td>
 </tr>
 <tr>
-<td>v223  output3</td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>v224 output4</td>
 <td></td>
 <td></td>
 <td></td>
@@ -2448,7 +2430,7 @@
 <td></td>
 </tr>
 <tr>
-<td>v225 output5</td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
