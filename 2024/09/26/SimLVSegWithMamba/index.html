@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2025-04-09T09:29:10.187Z">
+<meta property="article:modified_time" content="2025-04-11T08:56:19.487Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          54 分钟
+          55 分钟
         
       </span>
     
@@ -468,6 +468,8 @@
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250320133405712.png" srcset="/img/newloading.gif" lazyload alt="image-20250320133405712"></p>
 <p>和希尔伯特曲线类似，是希尔伯特曲线的循环版本，不过是从中间开始，首尾闭合</p>
 <h2 id="3-数据集实验">3. 数据集实验</h2>
+<p>SAM的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250411150318395.png" srcset="/img/newloading.gif" lazyload alt="image-20250411150318395"></p>
 <h3 id="3-1-EchoNet-Dynamic">3.1 EchoNet-Dynamic</h3>
 <p>小segmamba实验结果(DiceLoss)</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20241202155209382.png" srcset="/img/newloading.gif" lazyload alt="image-20241202155209382"></p>
@@ -658,9 +660,9 @@
 <td>0.0562</td>
 </tr>
 <tr>
-<td>0.3 dice + 0.1 jaccard + 0.3 tversky + 0.3 focal                    v230</td>
-<td>out6</td>
-<td></td>
+<td>mean 0.3 dice + 0.1 jaccard + 0.3 tversky + 0.3 focal         v230</td>
+<td>0.9267</td>
+<td>0.8658</td>
 <td></td>
 </tr>
 </tbody>
@@ -1322,14 +1324,14 @@
 </tr>
 <tr>
 <td>0.3 dice + 0.1 jaccard + 0.3 tversky + 0.3 focal        v228</td>
-<td>out4</td>
-<td></td>
+<td>0.9391</td>
+<td>0.8863</td>
 <td></td>
 </tr>
 <tr>
 <td>-                                                                                       v229</td>
-<td>out5</td>
-<td></td>
+<td>0.9339</td>
+<td>0.8772</td>
 <td></td>
 </tr>
 </tbody>
@@ -1941,15 +1943,15 @@
 <td>0.0727</td>
 </tr>
 <tr>
-<td>0.3 dice + 0.1jaccard + 0.3 tversky + 0.3 focal                  v231</td>
-<td>out7</td>
-<td></td>
+<td>(mean)0.3 dice + 0.1jaccard + 0.3 tversky + 0.3 focal      v231</td>
+<td>0.9079</td>
+<td>0.8359</td>
 <td></td>
 </tr>
 <tr>
-<td>-                                                                                                v232</td>
-<td>out8</td>
-<td></td>
+<td>(mean)-                                                                                    v232</td>
+<td>0.9071</td>
+<td>0.8340</td>
 <td></td>
 </tr>
 </tbody>
@@ -1969,22 +1971,22 @@
 <tbody>
 <tr>
 <td>LightMUNet</td>
-<td>0.8855</td>
-<td>0.7946</td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td>SegFormer3D</td>
-<td>0.9123</td>
-<td>0.8388</td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td>UKAN3D</td>
-<td>0.9091</td>
-<td>0.8334</td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -2018,22 +2020,22 @@
 <tbody>
 <tr>
 <td>LightMUNet</td>
-<td>0.8855</td>
-<td>0.7946</td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td>SegFormer3D</td>
-<td>0.9123</td>
-<td>0.8388</td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td>UKAN3D</td>
-<td>0.9091</td>
-<td>0.8334</td>
+<td></td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -2119,11 +2121,11 @@
 <thead>
 <tr>
 <th>扫描方式</th>
-<th>mdsc ± std</th>
-<th>miou ± std</th>
-<th>masd ± std</th>
-<th>msen ± std</th>
-<th>mhd95 ± std</th>
+<th>dsc</th>
+<th>iou</th>
+<th>assd</th>
+<th>sen</th>
+<th>hd95</th>
 </tr>
 </thead>
 <tbody>
@@ -2167,7 +2169,7 @@
 <th>- mooreScan  - fusionLoss</th>
 <th>dsc</th>
 <th>iou</th>
-<th>asd</th>
+<th>assd</th>
 <th>sen</th>
 <th>hd95</th>
 </tr>
@@ -2221,11 +2223,11 @@
 <tbody>
 <tr>
 <td>v191</td>
-<td>0.9300±0.0301</td>
-<td>0.8706±0.0498</td>
-<td>/</td>
-<td>0.9248±0.0608</td>
-<td>/</td>
+<td>0.9300</td>
+<td>0.8706</td>
+<td>0.1312</td>
+<td>0.9248</td>
+<td>1.0608</td>
 </tr>
 <tr>
 <td></td>
@@ -2312,12 +2314,12 @@
 </thead>
 <tbody>
 <tr>
-<td>v210</td>
-<td>0.9301± 0.0008</td>
-<td>0.8706±0.0014</td>
-<td>/</td>
-<td>0.9284±0.0016</td>
-<td>/</td>
+<td><strong>v210</strong></td>
+<td>0.9326</td>
+<td>0.8737</td>
+<td>0.1319</td>
+<td>0.9284</td>
+<td>1.0390</td>
 </tr>
 <tr>
 <td></td>
@@ -2356,108 +2358,6 @@
 <th>asd</th>
 <th>sen</th>
 <th>hd95</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>- mooreScan  - fusionLoss   (baseline)</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>+ mooreScan  - fusionLoss</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- mooreScan  + fusionLoss</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>+ mooreScan  + fusionLoss (ours)</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>+ mooreScan  + fusionLoss (ours)</th>
-<th>dsc</th>
-<th>iou</th>
-<th>assd</th>
-<th>sen</th>
-<th>hd95</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>v224</td>
-<td>0.9380±0.0246</td>
-<td>0.8843±0.0422</td>
-<td>0.6270±0.2047</td>
-<td>0.9463±0.0426</td>
-<td>2.1007±0.6488</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="5-3-Echo-Pediatric">5.3 Echo-Pediatric</h3>
-<p>选用方向0 + -</p>
-<table>
-<thead>
-<tr>
-<th>扫描方式</th>
-<th>mdsc ± std</th>
-<th>miou ± std</th>
-<th>massd ± std</th>
-<th>msen ± std</th>
-<th>mhd95 ± std</th>
 </tr>
 </thead>
 <tbody>
@@ -2663,6 +2563,108 @@
 <th>+ mooreScan  + fusionLoss (ours)</th>
 <th>dsc</th>
 <th>iou</th>
+<th>assd</th>
+<th>sen</th>
+<th>hd95</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v233 out</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v234 out1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-3-Echo-Pediatric">5.3 Echo-Pediatric</h3>
+<p>选用方向0 + -</p>
+<table>
+<thead>
+<tr>
+<th>扫描方式</th>
+<th>dsc</th>
+<th>iou</th>
+<th>assd</th>
+<th>msen</th>
+<th>hd95</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>- mooreScan  - fusionLoss   (baseline)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>+ mooreScan  - fusionLoss</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- mooreScan  + fusionLoss</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>+ mooreScan  + fusionLoss (ours)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>- mooreScan  - fusionLoss (baseline)</th>
+<th>dsc</th>
+<th>iou</th>
 <th>asd</th>
 <th>sen</th>
 <th>hd95</th>
@@ -2670,7 +2672,7 @@
 </thead>
 <tbody>
 <tr>
-<td>v216 output</td>
+<td>v237 out4</td>
 <td></td>
 <td></td>
 <td></td>
@@ -2678,7 +2680,7 @@
 <td></td>
 </tr>
 <tr>
-<td>v217 output1</td>
+<td>v238 out5</td>
 <td></td>
 <td></td>
 <td></td>
@@ -2692,6 +2694,168 @@
 <td></td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>+ mooreScan  - fusionLoss</th>
+<th>dsc</th>
+<th>iou</th>
+<th>asd</th>
+<th>sen</th>
+<th>hd95</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v235  out2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v236 out3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>- mooreScan  + fusionLoss</th>
+<th>dsc</th>
+<th>iou</th>
+<th>asd</th>
+<th>sen</th>
+<th>hd95</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v239 out6</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v240 out7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>+ mooreScan  + fusionLoss (ours)</th>
+<th>dsc</th>
+<th>iou</th>
+<th>assd</th>
+<th>sen</th>
+<th>hd95</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v216</td>
+<td>0.9084</td>
+<td>0.8367</td>
+<td>0.2525</td>
+<td>0.9169</td>
+<td>1.5949</td>
+</tr>
+<tr>
+<td>v217</td>
+<td>0.9073</td>
+<td>0.8352</td>
+<td>0.2610</td>
+<td>0.9163</td>
+<td>1.6054</td>
+</tr>
+<tr>
+<td><strong>v201</strong></td>
+<td>0.9165</td>
+<td>0.8458</td>
+<td>0.1977</td>
+<td>0.9349</td>
+<td>1.3210</td>
 </tr>
 <tr>
 <td></td>
