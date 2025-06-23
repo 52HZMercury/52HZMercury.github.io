@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/kongxianblog.png">
 <meta property="article:published_time" content="2022-06-29T12:12:46.000Z">
-<meta property="article:modified_time" content="2025-06-20T06:53:37.412Z">
+<meta property="article:modified_time" content="2025-06-23T05:38:43.945Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="Algorithm">
 <meta property="article:tag" content="leetcode">
@@ -237,7 +237,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          176k 字
+          177k 字
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
           <!-- compatible with older versions-->
-          551 分钟
+          553 分钟
         
       </span>
     
@@ -1308,6 +1308,19 @@ pre：永远指向待反转区域的第一个节点 left 的前一个节点，�
 <p>如果剩余字符小于 2k 但大于或等于 k 个，则反转前 k 个字符，其余字符保持原样。</p>
 <p>这个需要特别注意一下翻转尾部的位置，其他的翻转操作和上面的那道题一样</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">reverseStr</span><span class="hljs-params">(String s, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>        <span class="hljs-keyword">char</span>[] str = s.toCharArray();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; str.length; i = i + <span class="hljs-number">2</span> * k)&#123;<br>            <span class="hljs-keyword">int</span> head = i;<br>            <span class="hljs-comment">//判断末尾的够不够k.从而确定反转区间的尾部位置</span><br>            <span class="hljs-keyword">int</span> tail = i + k - <span class="hljs-number">1</span> &gt; str.length - <span class="hljs-number">1</span> ? str.length - <span class="hljs-number">1</span> : i + k - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span>(tail &gt; head)&#123;<br>                <span class="hljs-keyword">char</span> temp = str[head];<br>                str[head] = str[tail];<br>                str[tail] = temp;<br>                head++;<br>                tail--;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> String(str);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-words-in-a-string/description/">151. 反转字符串中的单词 - 力扣（LeetCode）</a></p>
+<p>题意：如题所示，将字符串里面的每一个单词进行翻转</p>
+<p>思路：使用分割函数，分割每一个单词，然后从后向前重新排列</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">reverseWords</span><span class="hljs-params">(String s)</span> </span>&#123;<br>        <span class="hljs-comment">// 去除字符串首尾空格</span><br>        s = s.trim();<br>        <span class="hljs-comment">// 如果字符串为空，直接返回空字符串</span><br>        <span class="hljs-keyword">if</span> (s.isEmpty()) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>        &#125;<br>        <br>        <span class="hljs-comment">// 使用正则表达式分割字符串（匹配一个或多个空格）</span><br>        String[] words = s.split(<span class="hljs-string">&quot;\\s+&quot;</span>);<br>        StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder();<br>        <br>        <span class="hljs-comment">// 从后向前遍历单词数组</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = words.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            sb.append(words[i]);<br>            <span class="hljs-comment">// 在单词之间添加空格（最后一个单词后不添加）</span><br>            <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span>) &#123;<br>                sb.append(<span class="hljs-string">&quot; &quot;</span>);<br>            &#125;<br>        &#125;<br>        <br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>正则表达式中\s匹配任何空白字符，包括空格、制表符、换页符等等, 等价于[ \f\n\r\t\v]</p>
+<ul>
+<li>\f -&gt; 匹配一个换页</li>
+<li>\n -&gt; 匹配一个换行符</li>
+<li>\r -&gt; 匹配一个回车符</li>
+<li>\t -&gt; 匹配一个制表符</li>
+<li>\v -&gt; 匹配一个垂直制表符</li>
+</ul>
+<p>而<code>\s+</code>则表示匹配任意多个上面的字符。另因为反斜杠在Java里是转义字符，所以在Java里，我们要这么用<code>\\s+</code></p>
 <h3 id="使用StringBuilder">使用StringBuilder</h3>
 <p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1064">54. 替换数字（第八期模拟笔试）</a></p>
 <p>题意：给定一个字符串 s，它包含小写字母和数字字符，请编写一个函数，将字符串中的字母字符保持不变，而将每个数字字符替换为number。例如，对于输入字符串 “a1b2c3”，函数应该将其转换为 “anumberbnumbercnumber”。对于输入字符串 “a5b”，函数应该将其转换为 “anumberb”</p>
