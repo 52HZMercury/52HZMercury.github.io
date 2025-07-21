@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/c71b3ec7.jpg">
 <meta property="article:published_time" content="2022-06-29T12:12:46.000Z">
-<meta property="article:modified_time" content="2025-07-03T06:52:31.501Z">
+<meta property="article:modified_time" content="2025-07-17T09:19:14.147Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="Algorithm">
 <meta property="article:tag" content="leetcode">
@@ -237,7 +237,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          184k 字
+          185k 字
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
           <!-- compatible with older versions-->
-          576 分钟
+          579 分钟
         
       </span>
     
@@ -623,6 +623,16 @@ pre：永远指向待反转区域的第一个节点 left 的前一个节点，�
 <p>窗口的结束位置如何移动：窗口的结束位置就是遍历数组的指针，也就是for循环里的索引。</p>
 <p><img src="https://file.kamacoder.com/pics/20210312160441942.png" srcset="/img/newloading.gif" lazyload alt=""></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">minSubArrayLen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> target, <span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> res = Integer.MAX_VALUE;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> right = <span class="hljs-number">0</span>;right &lt; nums.length;right++)&#123;<br>            sum += nums[right];<br>            <span class="hljs-keyword">while</span>(sum &gt;= target)&#123;<br>                <span class="hljs-keyword">int</span> len = right - left + <span class="hljs-number">1</span>;<br>                res = Math.min(res,len);<br>                sum -= nums[left++];<span class="hljs-comment">//注意这里的位置，要先把长度计算完之后在移动</span><br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res == Integer.MAX_VALUE ? <span class="hljs-number">0</span> : res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sliding-window-maximum/description/">239. 滑动窗口最大值 - 力扣（LeetCode）</a>一道hard题</p>
+<p>题意：给一个滑动窗口，范围为k，找到这个窗口滑动时里面的最大值</p>
+<p>思路：首先，暴力估计过不了，所以采用维持一个单调队列的方法，队列头的就是当前窗口的最大值，在维持的时候，需要注意</p>
+<p>设计单调队列的时候，pop，和push操作要保持如下规则：</p>
+<ol>
+<li>pop(value)：如果窗口移除的元素value等于单调队列的出口元素，那么队列弹出元素，否则不用任何操作</li>
+<li>push(value)：如果push的元素value大于入口元素的数值，那么就将队列入口的元素弹出，直到push元素的数值小于等于队列入口元素的数值为止</li>
+</ol>
+<p><img src="https://file1.kamacoder.com/i/algo/239.%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC-2.gif" srcset="/img/newloading.gif" lazyload alt="解题思路"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] maxSlidingWindow(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> k) &#123;<br>        Deque&lt;Integer&gt; deque = <span class="hljs-keyword">new</span> ArrayDeque&lt;&gt;();<br>        <span class="hljs-comment">//里面存储的是序号</span><br>        <span class="hljs-keyword">int</span>[] max = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[nums.length - k + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">int</span> idx = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; nums.length;i++)&#123;<br>            <span class="hljs-comment">//窗口移动，窗口移除的元素value等于单调队列的出口元素，那么队列弹出元素，否则不用任何操作</span><br>            <span class="hljs-keyword">while</span>(!deque.isEmpty() &amp;&amp; deque.peekFirst() &lt; i - k + <span class="hljs-number">1</span>)&#123;<br>                deque.removeFirst();<br>            &#125;<br><br>            <span class="hljs-comment">//维持单调</span><br>            <span class="hljs-keyword">while</span>(!deque.isEmpty() &amp;&amp; nums[deque.peekLast()] &lt; nums[i])&#123;<br>                deque.removeLast();<br>            &#125;<br><br>            deque.addLast(i);<br><br>            <span class="hljs-keyword">if</span>(i &gt;= k - <span class="hljs-number">1</span>)&#123;<br>                max[idx++] = nums[deque.peekFirst()];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> max;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="树">树</h2>
 <h3 id="遍历">遍历</h3>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-inorder-traversal/">94. 二叉树的中序遍历 - 力扣（LeetCode）</a>一道简单的中序遍历的题，唯一需要值得注意的就是返回的list</p>
