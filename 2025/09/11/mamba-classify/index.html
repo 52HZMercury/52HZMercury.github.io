@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-a.haoyishu.com/article/content/8059/df015c9b-95d7-4f11-bbb1-59e2795ed459.jpg">
 <meta property="article:published_time" content="2025-09-11T12:57:25.000Z">
-<meta property="article:modified_time" content="2025-09-25T09:57:49.246Z">
+<meta property="article:modified_time" content="2025-09-25T14:22:58.212Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="论文">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          83 字
+          525 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          1 分钟
+          2 分钟
         
       </span>
     
@@ -292,7 +292,7 @@
             
             <div class="markdown-body">
               
-              <h2 id="medmamba复现实验">medmamba复现实验</h2>
+              <h2 id="medmamba复现">medmamba复现</h2>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250925140820005.png" srcset="/img/newloading.gif" lazyload alt="image-20250925140820005"></p>
 <p>faec实验</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250925154043117.png" srcset="/img/newloading.gif" lazyload alt="image-20250925154043117"></p>
@@ -305,7 +305,7 @@
 <th>f1</th>
 <th>precision</th>
 <th>recall</th>
-<th>spe</th>
+<th>specificity</th>
 </tr>
 </thead>
 <tbody>
@@ -317,6 +317,85 @@
 <td>1.0</td>
 <td>0.1818</td>
 <td>1.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="MIMamba">MIMamba</h2>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_4   fold_1</td>
+<td>0.375</td>
+<td>0.533333</td>
+<td>0.545454</td>
+<td>0.375</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Experiment_4   fold_2</td>
+<td>0.34375</td>
+<td>0.558441</td>
+<td>0.511628</td>
+<td>0.34375</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Experiment_5   fold_1</td>
+<td>0.75</td>
+<td>0.699999</td>
+<td>0.636364</td>
+<td>0.699999</td>
+<td>0.583333</td>
+</tr>
+<tr>
+<td>Experiment_5   fold_2</td>
+<td>0.71875</td>
+<td>0.670995</td>
+<td>0.571428</td>
+<td>0.6</td>
+<td>0.545454</td>
+</tr>
+<tr>
+<td>Experiment_5   fold_3</td>
+<td>0.71875</td>
+<td>0.636363</td>
+<td>0.470588</td>
+<td>0.571428</td>
+<td>0.4</td>
+</tr>
+<tr>
+<td>Experiment_5   fold_4</td>
+<td>0.71875</td>
+<td>0.590909</td>
+<td>0.470588</td>
+<td>0.571428</td>
+<td>0.4</td>
+</tr>
+<tr>
+<td>Experiment_5   fold_5</td>
+<td>0.625</td>
+<td>0.490909</td>
+<td>0.4</td>
+<td>0.4</td>
+<td>0.4</td>
+</tr>
+<tr>
+<td>Experiment_5   avg</td>
+<td><strong>0.70625</strong></td>
+<td><strong>0.617835</strong></td>
+<td><strong>0.509794</strong></td>
+<td><strong>0.568571</strong></td>
+<td><strong>0.425757</strong></td>
 </tr>
 </tbody>
 </table>

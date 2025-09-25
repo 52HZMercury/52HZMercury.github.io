@@ -37,7 +37,7 @@
     <link href="/2025/09/11/mamba-classify/"/>
     <url>/2025/09/11/mamba-classify/</url>
     
-    <content type="html"><![CDATA[<h2 id="medmamba复现实验">medmamba复现实验</h2><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250925140820005.png" alt="image-20250925140820005"></p><p>faec实验</p><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250925154043117.png" alt="image-20250925154043117"></p><table><thead><tr><th>name</th><th>acc</th><th>auc</th><th>f1</th><th>precision</th><th>recall</th><th>spe</th></tr></thead><tbody><tr><td>faec</td><td>0.71875</td><td>0.7013</td><td>0.3077</td><td>1.0</td><td>0.1818</td><td>1.0</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<h2 id="medmamba复现">medmamba复现</h2><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250925140820005.png" alt="image-20250925140820005"></p><p>faec实验</p><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250925154043117.png" alt="image-20250925154043117"></p><table><thead><tr><th>name</th><th>acc</th><th>auc</th><th>f1</th><th>precision</th><th>recall</th><th>specificity</th></tr></thead><tbody><tr><td>faec</td><td>0.71875</td><td>0.7013</td><td>0.3077</td><td>1.0</td><td>0.1818</td><td>1.0</td></tr></tbody></table><h2 id="MIMamba">MIMamba</h2><table><thead><tr><th>name</th><th>acc</th><th>auc</th><th>f1</th><th>precision</th><th>recall</th></tr></thead><tbody><tr><td>Experiment_4   fold_1</td><td>0.375</td><td>0.533333</td><td>0.545454</td><td>0.375</td><td>1.0</td></tr><tr><td>Experiment_4   fold_2</td><td>0.34375</td><td>0.558441</td><td>0.511628</td><td>0.34375</td><td>1.0</td></tr><tr><td>Experiment_5   fold_1</td><td>0.75</td><td>0.699999</td><td>0.636364</td><td>0.699999</td><td>0.583333</td></tr><tr><td>Experiment_5   fold_2</td><td>0.71875</td><td>0.670995</td><td>0.571428</td><td>0.6</td><td>0.545454</td></tr><tr><td>Experiment_5   fold_3</td><td>0.71875</td><td>0.636363</td><td>0.470588</td><td>0.571428</td><td>0.4</td></tr><tr><td>Experiment_5   fold_4</td><td>0.71875</td><td>0.590909</td><td>0.470588</td><td>0.571428</td><td>0.4</td></tr><tr><td>Experiment_5   fold_5</td><td>0.625</td><td>0.490909</td><td>0.4</td><td>0.4</td><td>0.4</td></tr><tr><td>Experiment_5   avg</td><td><strong>0.70625</strong></td><td><strong>0.617835</strong></td><td><strong>0.509794</strong></td><td><strong>0.568571</strong></td><td><strong>0.425757</strong></td></tr></tbody></table>]]></content>
     
     
     <categories>
@@ -941,9 +941,9 @@
     
     <tags>
       
-      <tag>springboot</tag>
-      
       <tag>spring</tag>
+      
+      <tag>springboot</tag>
       
     </tags>
     
