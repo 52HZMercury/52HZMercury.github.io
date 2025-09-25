@@ -37,7 +37,7 @@
     <link href="/2025/09/11/mamba-classify/"/>
     <url>/2025/09/11/mamba-classify/</url>
     
-    <content type="html"><![CDATA[<h2 id="medmamba复现实验">medmamba复现实验</h2>]]></content>
+    <content type="html"><![CDATA[<h2 id="medmamba复现实验">medmamba复现实验</h2><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250925140820005.png" alt="image-20250925140820005"></p><p>faec实验</p><p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250925154043117.png" alt="image-20250925154043117"></p><table><thead><tr><th>name</th><th>acc</th><th>auc</th><th>f1</th><th>precision</th><th>recall</th><th>spe</th></tr></thead><tbody><tr><td>faec</td><td>0.71875</td><td>0.7013</td><td>0.3077</td><td>1.0</td><td>0.1818</td><td>1.0</td></tr></tbody></table>]]></content>
     
     
     <categories>
@@ -941,9 +941,9 @@
     
     <tags>
       
-      <tag>spring</tag>
-      
       <tag>springboot</tag>
+      
+      <tag>spring</tag>
       
     </tags>
     
