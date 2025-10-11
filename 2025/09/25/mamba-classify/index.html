@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-a.haoyishu.com/article/content/8059/df015c9b-95d7-4f11-bbb1-59e2795ed459.jpg">
 <meta property="article:published_time" content="2025-09-25T12:57:25.000Z">
-<meta property="article:modified_time" content="2025-10-10T10:36:47.701Z">
+<meta property="article:modified_time" content="2025-10-11T12:27:50.658Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="论文">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.5k 字
+          3.3k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          8 分钟
+          11 分钟
         
       </span>
     
@@ -302,9 +302,9 @@
 <p>双路径异构特征提取</p>
 <p>独立编码路径：为二腔室（2C）和四腔室（4C）切面分别设计专用Mamba块，适应不同视角的局部结构特征。<br>
 2C路径：聚焦左心室前壁、心尖部运动异常（早期心梗敏感区域）。</p>
-<p><img src="http://files.cn-healthcare.com/upload/20210402/wximg/88381617318407114" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20251011130229693.png" srcset="/img/newloading.gif" lazyload alt="image-20251011130229693"></p>
 <p>4C路径：捕获室间隔、侧壁运动及整体心室协调性（诊断关键指标)。</p>
-<p><img src="http://files.cn-healthcare.com/upload/20210402/wximg/33621617318406449" srcset="/img/newloading.gif" lazyload alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20251011130312755.png" srcset="/img/newloading.gif" lazyload alt="image-20251011130312755"></p>
 <p>动态门控融合模块（DGFM）：引入可学习的门控权重，自适应融合双路径特征（公式示例）：</p>
 <p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>F</mi><mrow><mi>f</mi><mi>u</mi><mi>s</mi><mi>e</mi><mi>d</mi></mrow></msub><mo>=</mo><mi>σ</mi><mo stretchy="false">(</mo><msub><mi>W</mi><mi>g</mi></msub><mo>⋅</mo><mo stretchy="false">[</mo><msub><mi>F</mi><mrow><mn>2</mn><mi>C</mi></mrow></msub><mo separator="true">,</mo><msub><mi>F</mi><mrow><mn>4</mn><mi>C</mi></mrow></msub><mo stretchy="false">]</mo><mo stretchy="false">)</mo><mo>⊙</mo><msub><mi>F</mi><mrow><mn>2</mn><mi>C</mi></mrow></msub><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>σ</mi><mo stretchy="false">(</mo><msub><mi>W</mi><mi>g</mi></msub><mo>⋅</mo><mo stretchy="false">[</mo><msub><mi>F</mi><mrow><mn>2</mn><mi>C</mi></mrow></msub><mo separator="true">,</mo><msub><mi>F</mi><mrow><mn>4</mn><mi>C</mi></mrow></msub><mo stretchy="false">]</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>⊙</mo><msub><mi>F</mi><mrow><mn>4</mn><mi>C</mi></mrow></msub></mrow><annotation encoding="application/x-tex">F_{fused} = \sigma(W_g \cdot [F_{2C}, F_{4C}]) \odot F_{2C} + (1-\sigma(W_g \cdot [F_{2C}, F_{4C}])) \odot F_{4C}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10764em;">f</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">se</span><span class="mord mathnormal mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">g</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">])</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⊙</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">g</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">]))</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⊙</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
@@ -612,39 +612,39 @@
 </tr>
 <tr>
 <td>Experiment_8   fold_2</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>0.75</td>
+<td>0.816666</td>
+<td>0.666666</td>
+<td>0.666666</td>
+<td>0.666666</td>
+<td>0.8</td>
 </tr>
 <tr>
 <td>Experiment_8  fold_3</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>0.71875</td>
+<td>0.858333</td>
+<td>0.571428</td>
+<td>0.666666</td>
+<td>0.5</td>
+<td>0.85</td>
 </tr>
 <tr>
 <td>Experiment_8   fold_4</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>0.65625</td>
+<td>0.8658</td>
+<td>0.0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
 </tr>
 <tr>
 <td>Experiment_8   fold_5</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>0.6875</td>
+<td>0.796536</td>
+<td>0.583333</td>
+<td>0.538461</td>
+<td>0.636363</td>
+<td>0.714285</td>
 </tr>
 <tr>
 <td>Experiment_8  (监控auc)</td>
@@ -654,6 +654,123 @@
 <td></td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td>Experiment_9   fold_1</td>
+<td>0.75</td>
+<td>0.879166</td>
+<td>0.5</td>
+<td>1.0</td>
+<td>0.333333</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Experiment_9   fold_2</td>
+<td>0.65625</td>
+<td>0.695833</td>
+<td>0.153846</td>
+<td>1.0</td>
+<td>0.083333</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Experiment_9  fold_3</td>
+<td>0.65625</td>
+<td>0.770833</td>
+<td>0.153846</td>
+<td>1.0</td>
+<td>0.083333</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Experiment_9   fold_4</td>
+<td>0.6875</td>
+<td>0.649350</td>
+<td>0.166666</td>
+<td>1.0</td>
+<td>0.090909</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Experiment_9   fold_5</td>
+<td>0.75</td>
+<td>0.761904</td>
+<td>0.5</td>
+<td>0.8</td>
+<td>0.363636</td>
+<td>0.952380</td>
+</tr>
+<tr>
+<td>Experiment_9  (监控precision)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_10   fold_1</td>
+<td>0.84375</td>
+<td>0.875</td>
+<td>0.814814</td>
+<td>0.733333</td>
+<td>0.916666</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>Experiment_10   fold_2</td>
+<td>0.78125</td>
+<td>0.75</td>
+<td>0.695652</td>
+<td>0.727272</td>
+<td>0.666666</td>
+<td>0.85</td>
+</tr>
+<tr>
+<td>Experiment_10  fold_3</td>
+<td>0.84375</td>
+<td>0.85</td>
+<td>0.761904</td>
+<td>0.888888</td>
+<td>0.666666</td>
+<td>0.949999</td>
+</tr>
+<tr>
+<td>Experiment_10   fold_4</td>
+<td>0.75</td>
+<td>0.779220</td>
+<td>0.692307</td>
+<td>0.6</td>
+<td>0.818181</td>
+<td>0.714285</td>
+</tr>
+<tr>
+<td>Experiment_10   fold_5</td>
+<td>0.625</td>
+<td>0.675324</td>
+<td>0.625</td>
+<td>0.476190</td>
+<td>0.909090</td>
+<td>0.476190</td>
+</tr>
+<tr>
+<td>Experiment_10  (监控f1)</td>
+<td><strong>0.7688</strong></td>
+<td><strong>0.7859</strong></td>
+<td><strong>0.7179</strong></td>
+<td><strong>0.6851</strong></td>
+<td><strong>0.7955</strong></td>
+<td><strong>0.7581</strong></td>
+</tr>
+<tr>
+<td>Experiment_11   fold_5</td>
+<td>0.65625</td>
+<td>0.645021</td>
+<td>0.645161</td>
+<td>0.5</td>
+<td>0.909090</td>
+<td>0.523809</td>
 </tr>
 </tbody>
 </table>
