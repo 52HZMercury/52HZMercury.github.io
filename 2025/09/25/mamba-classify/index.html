@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-a.haoyishu.com/article/content/8059/df015c9b-95d7-4f11-bbb1-59e2795ed459.jpg">
 <meta property="article:published_time" content="2025-09-25T12:57:25.000Z">
-<meta property="article:modified_time" content="2025-10-21T09:25:15.504Z">
+<meta property="article:modified_time" content="2025-10-22T15:26:25.365Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="论文">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          6.8k 字
+          8.6k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          22 分钟
+          27 分钟
         
       </span>
     
@@ -1363,7 +1363,7 @@
 <td>0.85</td>
 </tr>
 <tr>
-<td>Experiment_42  fold_1  reflect  out1</td>
+<td>Experiment_42  fold_1  reflect</td>
 <td>0.71875</td>
 <td>0.745833</td>
 <td>0.666666</td>
@@ -1391,7 +1391,86 @@
 </tr>
 </tbody>
 </table>
-<p>cross-ssm   interpolate  完整实验</p>
+<p>hidden size降低到256再试试</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_60  fold_1  repeat</td>
+<td>0.75</td>
+<td>0.766666</td>
+<td>0.636363</td>
+<td>0.699999</td>
+<td>0.583333</td>
+<td>0.85</td>
+</tr>
+<tr>
+<td>Experiment_61  fold_1  interpolate</td>
+<td>0.78125</td>
+<td>0.829166</td>
+<td>0.666666</td>
+<td>0.777777</td>
+<td>0.583333</td>
+<td>0.899999</td>
+</tr>
+<tr>
+<td>Experiment_62  fold_1  random_repeat</td>
+<td>0.8125</td>
+<td>0.8083</td>
+<td>0.7692</td>
+<td>0.714285</td>
+<td>0.833333</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>Experiment_63  fold_1  cyclic</td>
+<td>0.78125</td>
+<td>0.716666</td>
+<td>0.72</td>
+<td>0.6923</td>
+<td>0.75</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>Experiment_64  fold_1  reflect</td>
+<td>0.78125</td>
+<td>0.795833</td>
+<td>0.666666</td>
+<td>0.777777</td>
+<td>0.583333</td>
+<td>0.899999</td>
+</tr>
+<tr>
+<td>Experiment_65  fold_1  noise</td>
+<td>0.8125</td>
+<td>0.795833</td>
+<td>0.75</td>
+<td>0.75</td>
+<td>0.75</td>
+<td>0.85</td>
+</tr>
+<tr>
+<td>Experiment_66  fold_1  random</td>
+<td>0.78125</td>
+<td>0.7875</td>
+<td>0.695652</td>
+<td>0.727272</td>
+<td>0.666666</td>
+<td>0.85</td>
+</tr>
+</tbody>
+</table>
+<p>cross-ssm</p>
 <table>
 <thead>
 <tr>
@@ -1407,6 +1486,60 @@
 <tbody>
 <tr>
 <td>Experiment_45  fold_1</td>
+<td>0.84375</td>
+<td>0.858333</td>
+<td>0.761904</td>
+<td>0.888888</td>
+<td>0.666666</td>
+<td>0.949999</td>
+</tr>
+<tr>
+<td>Experiment_45  fold_1</td>
+<td>0.78125</td>
+<td>0.8</td>
+<td>0.72</td>
+<td>0.692307</td>
+<td>0.75</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>Experiment_46  fold_1</td>
+<td>0.71875</td>
+<td>0.704166</td>
+<td>0.666666</td>
+<td>0.6</td>
+<td>0.75</td>
+<td>0.699999</td>
+</tr>
+<tr>
+<td>Experiment_47  fold_1</td>
+<td>0.78125</td>
+<td>0.758333</td>
+<td>0.695652</td>
+<td>0.727272</td>
+<td>0.666666</td>
+<td>0.85</td>
+</tr>
+<tr>
+<td>Experiment_48  fold_1 b8</td>
+<td>0.78125</td>
+<td>0.779166</td>
+<td>0.72</td>
+<td>0.692307</td>
+<td>0.75</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>Experiment_49  fold_1 b16</td>
+<td>0.78125</td>
+<td>0.758333</td>
+<td>0.740740</td>
+<td>0.666666</td>
+<td>0.833333</td>
+<td>0.75</td>
+</tr>
+<tr>
+<td>增加模型feat[32, 64, 128, 256]</td>
 <td></td>
 <td></td>
 <td></td>
@@ -1415,7 +1548,34 @@
 <td></td>
 </tr>
 <tr>
-<td>Experiment_45  fold_2</td>
+<td>Experiment_50  fold_1 b8</td>
+<td>0.78125</td>
+<td>0.741666</td>
+<td>0.740740</td>
+<td>0.666666</td>
+<td>0.833333</td>
+<td>0.75</td>
+</tr>
+<tr>
+<td>Experiment_51  fold_1 b8</td>
+<td>0.78125</td>
+<td>0.7875</td>
+<td>0.758620</td>
+<td>0.647058</td>
+<td>0.916666</td>
+<td>0.699999</td>
+</tr>
+<tr>
+<td>Experiment_52  fold_1 b8</td>
+<td>0.75</td>
+<td>0.804166</td>
+<td>0.714285</td>
+<td>0.625</td>
+<td>0.833333</td>
+<td>0.699999</td>
+</tr>
+<tr>
+<td>改回了填充到32帧</td>
 <td></td>
 <td></td>
 <td></td>
@@ -1424,7 +1584,25 @@
 <td></td>
 </tr>
 <tr>
-<td>Experiment_45  fold_3</td>
+<td>Experiment_53  fold_1</td>
+<td>0.78125</td>
+<td>0.779166</td>
+<td>0.72</td>
+<td>0.6923</td>
+<td>0.75</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>Experiment_54  fold_1</td>
+<td>0.78125</td>
+<td>0.7625</td>
+<td>0.666666</td>
+<td>0.7777</td>
+<td>0.583333</td>
+<td>0.899999</td>
+</tr>
+<tr>
+<td>增大hidden size   512</td>
 <td></td>
 <td></td>
 <td></td>
@@ -1433,7 +1611,25 @@
 <td></td>
 </tr>
 <tr>
-<td>Experiment_45  fold_4</td>
+<td>Experiment_56  fold_1</td>
+<td>0.71875</td>
+<td>0.666666</td>
+<td>0.666666</td>
+<td>0.6</td>
+<td>0.75</td>
+<td>0.699999</td>
+</tr>
+<tr>
+<td>Experiment_57  fold_1</td>
+<td>0.78125</td>
+<td>0.729166</td>
+<td>0.666666</td>
+<td>0.777777</td>
+<td>0.583333</td>
+<td>0.899999</td>
+</tr>
+<tr>
+<td>hidden size   256</td>
 <td></td>
 <td></td>
 <td></td>
@@ -1442,13 +1638,93 @@
 <td></td>
 </tr>
 <tr>
-<td>Experiment_45  fold_5</td>
+<td>Experiment_58  fold_1</td>
+<td>0.78125</td>
+<td>0.754166</td>
+<td>0.740740</td>
+<td>0.666666</td>
+<td>0.833333</td>
+<td>0.75</td>
+</tr>
+<tr>
+<td>hidden size   768</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td>Experiment_59  fold_1</td>
+<td>0.78125</td>
+<td>0.7875</td>
+<td>0.6315</td>
+<td>0.8571</td>
+<td>0.5</td>
+<td>0.9499</td>
+</tr>
+</tbody>
+</table>
+<p>前面的损失都是bce</p>
+<p>损失</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_67  fold_1  focal</td>
+<td>0.6875</td>
+<td>0.770833</td>
+<td>0.545454</td>
+<td>0.6</td>
+<td>0.5</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>Experiment_68  fold_1  dice</td>
+<td>0.75</td>
+<td>0.779166</td>
+<td>0.6</td>
+<td>0.75</td>
+<td>0.5</td>
+<td>0.899999</td>
+</tr>
+<tr>
+<td>Experiment_69  fold_1  bce_dice</td>
+<td>0.75</td>
+<td>0.729166</td>
+<td>0.636363</td>
+<td>0.699999</td>
+<td>0.583333</td>
+<td>0.85</td>
+</tr>
+<tr>
+<td>Experiment_70  fold_1  tversky</td>
+<td><strong>0.875</strong></td>
+<td><strong>0.829166</strong></td>
+<td><strong>0.846153</strong></td>
+<td><strong>0.785714</strong></td>
+<td><strong>0.916666</strong></td>
+<td><strong>0.85</strong></td>
+</tr>
+<tr>
+<td>Experiment_71  fold_1  asymmetric</td>
+<td>0.78125</td>
+<td>0.766666</td>
+<td>0.72</td>
+<td>0.6923</td>
+<td>0.75</td>
+<td>0.8</td>
 </tr>
 </tbody>
 </table>
