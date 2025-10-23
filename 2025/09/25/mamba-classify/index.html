@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-a.haoyishu.com/article/content/8059/df015c9b-95d7-4f11-bbb1-59e2795ed459.jpg">
 <meta property="article:published_time" content="2025-09-25T12:57:25.000Z">
-<meta property="article:modified_time" content="2025-10-22T15:26:25.365Z">
+<meta property="article:modified_time" content="2025-10-23T14:15:13.059Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="论文">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          8.6k 字
+          11k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          27 分钟
+          33 分钟
         
       </span>
     
@@ -454,7 +454,8 @@
 </tr>
 </tbody>
 </table>
-<h3 id="MIMamba">MIMamba</h3>
+<h2 id="MIMamba">MIMamba</h2>
+<h3 id="camus数据集">camus数据集</h3>
 <p>camus A2C的实验</p>
 <table>
 <thead>
@@ -1725,6 +1726,434 @@
 <td>0.6923</td>
 <td>0.75</td>
 <td>0.8</td>
+</tr>
+</tbody>
+</table>
+<p>tversky 完整实验</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_70  fold_1</td>
+<td>0.875</td>
+<td>0.829166</td>
+<td>0.846153</td>
+<td>0.785714</td>
+<td>0.916666</td>
+<td>0.85</td>
+</tr>
+<tr>
+<td>Experiment_70  fold_2</td>
+<td>0.75</td>
+<td>0.675</td>
+<td>0.666666</td>
+<td>0.666666</td>
+<td>0.666666</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>Experiment_70  fold_3</td>
+<td>0.71875</td>
+<td>0.691666</td>
+<td>0.526315</td>
+<td>0.714285</td>
+<td>0.416666</td>
+<td>0.899999</td>
+</tr>
+<tr>
+<td>Experiment_70  fold_4</td>
+<td>0.71875</td>
+<td>0.718614</td>
+<td>0.608695</td>
+<td>0.583333</td>
+<td>0.636363</td>
+<td>0.761904</td>
+</tr>
+<tr>
+<td>Experiment_70  fold_5</td>
+<td>0.5625</td>
+<td>0.597402</td>
+<td>0.533333</td>
+<td>0.421052</td>
+<td>0.727272</td>
+<td>0.476190</td>
+</tr>
+</tbody>
+</table>
+<p><strong>还是改为16帧吧</strong></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_74  fold_1</td>
+<td>0.84375</td>
+<td>0.770833</td>
+<td>0.782608</td>
+<td>0.818181</td>
+<td>0.75</td>
+<td>0.899999</td>
+</tr>
+<tr>
+<td>Experiment_74  fold_2</td>
+<td>0.6875</td>
+<td>0.645833</td>
+<td>0.375</td>
+<td>0.75</td>
+<td>0.25</td>
+<td>0.949999</td>
+</tr>
+<tr>
+<td>Experiment_74  fold_3</td>
+<td>0.6875</td>
+<td>0.6875</td>
+<td>0.5454</td>
+<td>0.6</td>
+<td>0.5</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>Experiment_74  fold_4</td>
+<td>0.78125</td>
+<td>0.744588</td>
+<td>0.666666</td>
+<td>0.699999</td>
+<td>0.636363</td>
+<td>0.857142</td>
+</tr>
+<tr>
+<td>Experiment_74  fold_5</td>
+<td>0.6875</td>
+<td>0.670995</td>
+<td>0.583333</td>
+<td>0.538461</td>
+<td>0.636363</td>
+<td>0.714285</td>
+</tr>
+</tbody>
+</table>
+<p>bce损失</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_75  fold_1</td>
+<td>0.8125</td>
+<td>0.7666</td>
+<td>0.75</td>
+<td>0.75</td>
+<td>0.75</td>
+<td>0.85</td>
+</tr>
+<tr>
+<td>Experiment_75  fold_2</td>
+<td>0.6875</td>
+<td>0.637499</td>
+<td>0.444444</td>
+<td>0.666666</td>
+<td>0.333333</td>
+<td>0.899999</td>
+</tr>
+<tr>
+<td>Experiment_75  fold_3</td>
+<td>0.6875</td>
+<td>0.612499</td>
+<td>0.583333</td>
+<td>0.583333</td>
+<td>0.583333</td>
+<td>0.75</td>
+</tr>
+<tr>
+<td>Experiment_75  fold_4</td>
+<td>0.75</td>
+<td>0.766233</td>
+<td>0.555555</td>
+<td>0.714285</td>
+<td>0.454545</td>
+<td>0.904761</td>
+</tr>
+<tr>
+<td>Experiment_75  fold_5</td>
+<td>0.59375</td>
+<td>0.683982</td>
+<td>0.580645</td>
+<td>0.449999</td>
+<td>0.818181</td>
+<td>0.476190</td>
+</tr>
+</tbody>
+</table>
+<p>去掉模块</p>
+<p>bce</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_76  fold_1</td>
+<td>0.8125</td>
+<td>0.8292</td>
+<td>0.7273</td>
+<td>0.8</td>
+<td>0.6667</td>
+<td>0.8999</td>
+</tr>
+<tr>
+<td>Experiment_76  fold_2</td>
+<td>0.75</td>
+<td>0.7083</td>
+<td>0.6923</td>
+<td>0.6429</td>
+<td>0.75</td>
+<td>0.75</td>
+</tr>
+<tr>
+<td>Experiment_76  fold_3</td>
+<td>0.75</td>
+<td>0.7916</td>
+<td>0.6364</td>
+<td>0.6999</td>
+<td>0.5833</td>
+<td>0.85</td>
+</tr>
+<tr>
+<td>Experiment_76  fold_4</td>
+<td>0.78125</td>
+<td>0.7359</td>
+<td>0.6666</td>
+<td>0.6999</td>
+<td>0.6363</td>
+<td>0.8571</td>
+</tr>
+<tr>
+<td>Experiment_76  fold_5</td>
+<td>0.4375</td>
+<td>0.5757</td>
+<td>0.5263</td>
+<td>0.3703</td>
+<td>0.9090</td>
+<td>0.1904</td>
+</tr>
+</tbody>
+</table>
+<p>只加上gated</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_77  fold_1</td>
+<td>out1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_77  fold_2</td>
+<td>out2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_77  fold_3</td>
+<td>out3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_77  fold_4</td>
+<td>out4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_77  fold_5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>融合比例</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_  fold_1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_  fold_2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_  fold_3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_  fold_4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_  fold_5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="hmc数据集">hmc数据集</h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_73  fold_1</td>
+<td>0.84375</td>
+<td>0.884057</td>
+<td>0.888888</td>
+<td>0.909090</td>
+<td>0.869565</td>
+<td>0.777777</td>
+</tr>
+<tr>
+<td>Experiment_73  fold_2</td>
+<td>0.75</td>
+<td>0.744588</td>
+<td>0.826086</td>
+<td>0.759999</td>
+<td>0.904761</td>
+<td>0.454545</td>
+</tr>
+<tr>
+<td>Experiment_73  fold_3</td>
+<td>0.6875</td>
+<td>0.647058</td>
+<td>0.75</td>
+<td>0.652174</td>
+<td>0.882352</td>
+<td>0.466666</td>
+</tr>
+<tr>
+<td>Experiment_73  fold_4</td>
+<td>0.6875</td>
+<td>0.536796</td>
+<td>0.807692</td>
+<td>0.677419</td>
+<td>1.0</td>
+<td>0.090909</td>
+</tr>
+<tr>
+<td>Experiment_73  fold_5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
