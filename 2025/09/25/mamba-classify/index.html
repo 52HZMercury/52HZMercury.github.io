@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-a.haoyishu.com/article/content/8059/df015c9b-95d7-4f11-bbb1-59e2795ed459.jpg">
 <meta property="article:published_time" content="2025-09-25T12:57:25.000Z">
-<meta property="article:modified_time" content="2025-10-29T09:13:06.347Z">
+<meta property="article:modified_time" content="2025-10-29T09:23:53.544Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="论文">
@@ -292,12 +292,13 @@
             
             <div class="markdown-body">
               
-              <h2 id="medmamba复现">medmamba复现</h2>
+              <h2 id="1-medmamba复现">1. medmamba复现</h2>
+<p>想首先尝试一下medmamba的实验复现，用做后续的基础架构</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20251017161649103.png" srcset="/img/newloading.gif" lazyload alt="网络结构图"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20250925140820005.png" srcset="/img/newloading.gif" lazyload alt="实验结果"></p>
 <p>是二维的，不好改，还是改改之前的分割网络看看</p>
-<h2 id="echo-mi">echo-mi</h2>
-<h3 id="idea">idea</h3>
+<h2 id="2-echo-mi实验">2. echo-mi实验</h2>
+<h3 id="2-1-idea">2.1 idea</h3>
 <p>使用双切面（二腔室+四腔室）超声心动图数据训练Mamba模型诊断早期心梗的需求，设计了一个创新性的双路径时空融合Mamba架构（Dual-Path Spatiotemporal Fusion Mamba, DPSF-Mamba）。该架构针对性解决多切面心脏超声的时空特征融合问题，核心思路如下：</p>
 <p>一、核心改造思路</p>
 <p>双路径异构特征提取</p>
@@ -359,7 +360,7 @@
 方案：引入跨切面知识蒸馏，用完整数据训练教师网络指导单切面学生网络。<br>
 挑战2：超声伪影干扰<br>
 方案：在Mamba前端加入对抗去噪模块（如Conditional GAN）。</p>
-<h3 id="faec-advance实验">faec_advance实验</h3>
+<h3 id="2-2-faec-advance实验">2.2 faec_advance实验</h3>
 <table>
 <thead>
 <tr>
@@ -454,8 +455,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="MIMamba">MIMamba</h2>
-<h3 id="camus数据集">camus数据集</h3>
+<h2 id="3-MIMamba实验">3. MIMamba实验</h2>
+<p>改造之前的分割网络的mamba用于分类</p>
+<h3 id="3-1-camus数据集">3.1 camus数据集</h3>
 <p>camus A2C的实验</p>
 <table>
 <thead>
@@ -2096,8 +2098,8 @@
 </tr>
 </tbody>
 </table>
-<h4 id="mamba-echoprimevideo">mamba+echoprimevideo</h4>
-<p>使用两个分支对两个切面的数据进行提取，echo_prime和mamba进行提取</p>
+<h4 id="3-1-1-mamba-echoprime-video">3.1.1 mamba+echoprime video</h4>
+<p>使用两个分支对两个切面的数据进行提取，echo_prime和mamba进行提取，最后一起送入分类器</p>
 <p>mamba: A2C切面的数据</p>
 <p>echo_prime: A4C切面的数据</p>
 <p>融合: 通道拼接</p>
@@ -2487,8 +2489,8 @@
 </tr>
 </tbody>
 </table>
-<h4 id="mamba-echoprime-text-video">mamba+echoprime text video</h4>
-<p>在mamba的decoder部分加入知识向量</p>
+<h4 id="3-1-2-mamba-echoprime-text-video">3.1.2 mamba+echoprime text video</h4>
+<p>在mamba的decoder部分加入三层知识向量</p>
 <p>mamba: A4C切面的数据</p>
 <p>echo_prime: A2C切面的数据</p>
 <p>融合: 通道拼接</p>
@@ -3047,7 +3049,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="hmc数据集">hmc数据集</h3>
+<h3 id="3-2-hmc数据集">3.2 hmc数据集</h3>
 <p>简单的先尝试，效果非常的糟糕</p>
 <table>
 <thead>
@@ -3109,7 +3111,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="mamba-echoprime">mamba+echoprime</h4>
+<h4 id="3-2-1-mamba-echoprime-video">3.2.1 mamba+echoprime video</h4>
 <p>mamba: A4C切面的数据</p>
 <p>echo_prime: A2C切面的数据</p>
 <p>融合: 通道拼接</p>
@@ -4009,7 +4011,8 @@
 </tr>
 </tbody>
 </table>
-<h4 id="mamba-echoprime-text-video-2">mamba+echoprime text video</h4>
+<h4 id="3-2-2-mamba-echoprime-text-video">3.2.2 mamba+echoprime text video</h4>
+<p>加入知识向量</p>
 <p>mamba: A4C切面的数据</p>
 <p>echo_prime: A2C切面的数据</p>
 <p>都加入了知识向量</p>
@@ -4085,8 +4088,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="sota实验">sota实验</h2>
-<h3 id="camus">camus</h3>
+<h2 id="4-sota实验">4. sota实验</h2>
+<h3 id="4-1-camus">4.1 camus</h3>
 <table>
 <thead>
 <tr>
@@ -4147,8 +4150,8 @@
 </tr>
 </tbody>
 </table>
-<h3 id="hmc">hmc</h3>
-<h2 id="示意图">示意图</h2>
+<h3 id="4-2-hmc">4.2 hmc</h3>
+<h2 id="5-示意图">5. 示意图</h2>
 <p>Exp_115可视化ROC</p>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20251029165752231.png" srcset="/img/newloading.gif" lazyload alt="image-20251029165752231"></p>
 
