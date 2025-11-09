@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-a.haoyishu.com/article/content/8059/df015c9b-95d7-4f11-bbb1-59e2795ed459.jpg">
 <meta property="article:published_time" content="2025-09-25T12:57:25.000Z">
-<meta property="article:modified_time" content="2025-11-06T09:21:38.763Z">
+<meta property="article:modified_time" content="2025-11-09T15:42:29.092Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="论文">
@@ -239,7 +239,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          24k 字
+          26k 字
         
       </span>
     
@@ -251,7 +251,7 @@
         
         
           <!-- compatible with older versions-->
-          76 分钟
+          81 分钟
         
       </span>
     
@@ -4104,42 +4104,51 @@
 <tbody>
 <tr>
 <td>Experiment_127  fold_1</td>
-<td>1</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>0.90625</td>
+<td>0.8792</td>
+<td>0.9387</td>
+<td>0.8846</td>
+<td>1.0</td>
+<td>0.6666</td>
 </tr>
 <tr>
 <td>Experiment_127  fold_2</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>0.8125</td>
+<td>0.9264</td>
+<td>0.8333</td>
+<td>1.0</td>
+<td>0.7142</td>
+<td>1.0</td>
 </tr>
 <tr>
 <td>Experiment_127  fold_3</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>0.8125</td>
+<td>0.8666</td>
+<td>0.8</td>
+<td>0.9230</td>
+<td>0.7058</td>
+<td>0.9333</td>
 </tr>
 <tr>
 <td>Experiment_127  fold_4</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>0.75</td>
+<td>0.8138</td>
+<td>0.7894</td>
+<td>0.8823</td>
+<td>0.7142</td>
+<td>0.8181</td>
 </tr>
 <tr>
 <td>Experiment_127  fold_5</td>
+<td>0.8125</td>
+<td>0.8225</td>
+<td>0.8571</td>
+<td>0.8571</td>
+<td>0.8571</td>
+<td>0.7272</td>
+</tr>
+<tr>
+<td>Experiment_127</td>
 <td></td>
 <td></td>
 <td></td>
@@ -4147,8 +4156,278 @@
 <td></td>
 <td></td>
 </tr>
+</tbody>
+</table>
+<p>学习率1e-6  b16   损失：bce</p>
+<table>
+<thead>
 <tr>
-<td>Experiment_127</td>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_128  fold_1</td>
+<td>0.875</td>
+<td>0.9178</td>
+<td>0.9166</td>
+<td>0.8799</td>
+<td>0.9565</td>
+<td>0.6666</td>
+</tr>
+<tr>
+<td>Experiment_128  fold_2</td>
+<td>0.75</td>
+<td>0.7878</td>
+<td>0.7894</td>
+<td>0.8823</td>
+<td>0.7142</td>
+<td>0.8181</td>
+</tr>
+<tr>
+<td>Experiment_128  fold_3</td>
+<td>0.84375</td>
+<td>0.9098</td>
+<td>0.8387</td>
+<td>0.9285</td>
+<td>0.7647</td>
+<td>0.9333</td>
+</tr>
+<tr>
+<td>Experiment_128  fold_4</td>
+<td>0.78125</td>
+<td>0.8225</td>
+<td>0.8108</td>
+<td>0.9375</td>
+<td>0.7142</td>
+<td>0.9090</td>
+</tr>
+<tr>
+<td>Experiment_128  fold_5</td>
+<td>0.84375</td>
+<td>0.8658</td>
+<td>0.8780</td>
+<td>0.8999</td>
+<td>0.8571</td>
+<td>0.8181</td>
+</tr>
+<tr>
+<td>Experiment_128</td>
+<td>0.81875</td>
+<td>0.86072</td>
+<td>0.84474</td>
+<td>0.90562</td>
+<td>0.78136</td>
+<td>0.84722</td>
+</tr>
+</tbody>
+</table>
+<p>学习率1e-6  b12   损失：bce</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_129  fold_1</td>
+<td>0.90625</td>
+<td>0.9371</td>
+<td>0.9361</td>
+<td>0.9166</td>
+<td>0.9565</td>
+<td>0.7777</td>
+</tr>
+<tr>
+<td>Experiment_129  fold_2</td>
+<td>0.75</td>
+<td>0.7922</td>
+<td>0.7999</td>
+<td>0.8421</td>
+<td>0.7619</td>
+<td>0.7272</td>
+</tr>
+<tr>
+<td>Experiment_129  fold_3</td>
+<td>0.84375</td>
+<td>0.8549</td>
+<td>0.8387</td>
+<td>0.9285</td>
+<td>0.7647</td>
+<td>0.9333</td>
+</tr>
+<tr>
+<td>Experiment_129  fold_4</td>
+<td>0.75</td>
+<td>0.7965</td>
+<td>0.7894</td>
+<td>0.8823</td>
+<td>0.7142</td>
+<td>0.8181</td>
+</tr>
+<tr>
+<td>Experiment_129  fold_5</td>
+<td>0.84375</td>
+<td>0.8614</td>
+<td>0.8717</td>
+<td>0.9444</td>
+<td>0.8095</td>
+<td>0.9090</td>
+</tr>
+<tr>
+<td>Experiment_129</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>学习率1e-6  b4   损失：bce</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_130  fold_1</td>
+<td>0.90625</td>
+<td>0.9516</td>
+<td>0.9333</td>
+<td>0.9545</td>
+<td>0.9130</td>
+<td>0.8888</td>
+</tr>
+<tr>
+<td>Experiment_130  fold_2</td>
+<td>0.78125</td>
+<td>0.7835</td>
+<td>0.8372</td>
+<td>0.8181</td>
+<td>0.8571</td>
+<td>0.6363</td>
+</tr>
+<tr>
+<td>Experiment_130  fold_3</td>
+<td>0.84375</td>
+<td>0.8784</td>
+<td>0.8387</td>
+<td>0.9285</td>
+<td>0.7647</td>
+<td>0.9333</td>
+</tr>
+<tr>
+<td>Experiment_130  fold_4</td>
+<td>0.78125</td>
+<td>0.8</td>
+<td>0.8205</td>
+<td>0.8888</td>
+<td>0.7619</td>
+<td>0.8181</td>
+</tr>
+<tr>
+<td>Experiment_130  fold_5</td>
+<td>0.84375</td>
+<td>0.8484</td>
+<td>0.8717</td>
+<td>0.9444</td>
+<td>0.8095</td>
+<td>0.9090</td>
+</tr>
+<tr>
+<td>Experiment_130</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_131  fold_1</td>
+<td>0.9375</td>
+<td>0.9565</td>
+<td>0.9545</td>
+<td>1.0</td>
+<td>0.9130</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Experiment_131  fold_2</td>
+<td>0.8125</td>
+<td>0.8701</td>
+<td>0.85</td>
+<td>0.8947</td>
+<td>0.8095</td>
+<td>0.8181</td>
+</tr>
+<tr>
+<td>Experiment_131  fold_3</td>
+<td>0.875</td>
+<td>0.9568</td>
+<td>0.8947</td>
+<td>0.8095</td>
+<td>1.0</td>
+<td>0.9333</td>
+</tr>
+<tr>
+<td>Experiment_131  fold_4</td>
+<td>0.8125</td>
+<td>0.8744</td>
+<td>0.85</td>
+<td>0.8947</td>
+<td>0.8095</td>
+<td>0.8181</td>
+</tr>
+<tr>
+<td>Experiment_131  fold_5   1</td>
+<td>0.84375</td>
+<td>0.8831</td>
+<td>0.8717</td>
+<td>0.9444</td>
+<td>0.8095</td>
+<td>0.9090</td>
+</tr>
+<tr>
+<td>Experiment_131</td>
 <td></td>
 <td></td>
 <td></td>
