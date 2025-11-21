@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2025-11-21T09:22:36.861Z">
+<meta property="article:modified_time" content="2025-11-21T10:59:34.047Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -3631,33 +3631,33 @@ WFL 的权重仅在数学上定义但未说明理由：是凭经验选择的吗�
 <thead>
 <tr>
 <th style="text-align:left">主要方向</th>
-<th style="text-align:left">核心修改意见（总结）</th>
+<th style="text-align:left">核心修改意见</th>
 <th style="text-align:left">建议的解决措施</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><strong>方法清晰度与可复现性</strong></td>
-<td style="text-align:left"><strong>审稿人1, 2, 3均指出：</strong> 方法描述模糊，关键细节缺失（如Stem模块、跳跃连接方式、CASS与Mamba的集成、摩尔曲线选择机制、WFL超参数、时空处理逻辑），导致难以理解和复现。</td>
+<td style="text-align:left"><strong>方法细节</strong></td>
+<td style="text-align:left"><strong>审稿人1, 2, 3均指出：</strong> 方法描述模糊，关键细节缺失（如Stem模块、跳跃连接方式、CASS与Mamba的集成、多阶摩尔曲线选择机制、WFL超参数、时空处理逻辑），导致难以理解和复现。</td>
 <td style="text-align:left">1. <strong>彻底重写方法章节</strong>：用更清晰的文字和重新绘制的图表（如Fig.2）详细解释每个模块。 2. <strong>补充所有缺失细节</strong>：明确说明架构设计、超参数值（如WFL的x,y,z）、摩尔曲线阶数k的选择规则、输入张量维度D等。 3. <strong>公开代码和模型</strong>：在修订稿中承诺并在录用后立即公开代码和配置，这是最有力的回应。</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>实验充分性与公平性</strong></td>
-<td style="text-align:left"><strong>审稿人1, 3均指出：</strong> - 基线对比不足，缺少与近期SOTA方法（如MemSAM, MedSAM, SegMamba变体）的对比。 - 扫描策略对比不完整（缺少与Hilbert曲线等的比较）。 - 效率声称不完整（仅参数量，缺FLOPs、推理时间等）。</td>
-<td style="text-align:left">1. <strong>增补sota实验</strong>：加入审稿人3建议的多个最新基线模型（如MemSAM, Mamba-UNet，LKM-UNet，SegMamba），并在相同条件下进行公平比较。 2. <strong>扩展对比实验</strong>：将摩尔曲线与希尔伯特曲线等更多扫描策略进行对比，并在所有三个数据集上进行验证。 3. <strong>补充效率数据</strong>：在结果表格中增加GFLOPs、推理速度（FPS）和内存消耗等指标，全面评估效率。</td>
+<td style="text-align:left"><strong>增加实验</strong></td>
+<td style="text-align:left"><strong>审稿人1, 3均指出：</strong> - 基线对比不足，缺少与近期SOTA方法的对比。 - 扫描策略对比不完整（缺少与Hilbert曲线等的比较）。- WFL等组件的必要性未通过充分的消融实验证明。 - 效率声称不完整（仅参数量，缺FLOPs、推理时间等）。</td>
+<td style="text-align:left">1. <strong>增补sota实验</strong>：加入审稿人3建议的多个最新基线模型（如 Mamba-UNet，LKM-UNet，SegMamba，其他引入了替代扫描策略的mamba），并在相同条件下进行公平比较。 2. <strong>扩展对比实验</strong>：将摩尔曲线与希尔伯特曲线等更多空间填充扫描策略进行对比，并在所有三个数据集上进行验证。 3. <strong>WFL的组件消融实验</strong> ：增加对WFL各损失分量的逐项消融，证明其组合的必要性  4. <strong>补充效率数据</strong>：在结果表格中增加GFLOPs、推理速度（FPS）和内存消耗等指标，全面评估效率。</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>论证严谨性与统计支持</strong></td>
-<td style="text-align:left"><strong>审稿人1, 2, 3均指出：</strong> - 性能提升的统计显著性未验证。 - WFL等组件的必要性未通过充分的消融实验证明。 - 训练周期（60 epochs）是否足够未验证。</td>
-<td style="text-align:left">1. <strong>进行统计检验</strong>：对关键对比结果（如vs. SOTA, vs. M1/M2）进行统计显著性检验（如p值），并在文中报告。 2. <strong>深化消融研究</strong>：增加对WFL各损失分量的逐项消融，证明其组合的必要性。 3. <strong>证明训练充分性</strong>：在补充材料中提供训练/验证集的损失和Dice系数收敛曲线，证明60 epochs已足够。</td>
+<td style="text-align:left"><strong>实验细节</strong></td>
+<td style="text-align:left"><strong>审稿人1, 2, 3均指出：</strong> - 性能提升的统计显著性未验证。 - 训练周期（60 epochs）是否足够未验证。- 缺乏临床指标（如EF评估误差）来证明实际价值。</td>
+<td style="text-align:left">1. <strong>进行统计检验</strong>：对关键对比结果（如vs. SOTA, vs. M1/M2）进行统计显著性检验（如p值），并在文中报告。  2. <strong>证明训练充分性</strong>：在补充材料中提供训练/验证集的损失和Dice系数收敛曲线，证明60 epochs已足够。3. <strong>补充临床指标</strong>：计算并报告左心室容积（EDV, ESV）和射血分数（EF）的误差与相关性，强化学术价值。</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>结果可视化与临床相关性</strong></td>
-<td style="text-align:left"><strong>审稿人1, 2, 3均指出：</strong> - 定性对比不足，缺少与SOTA方法的可视化效果图。 - 现有可视化（如注意力热图）模糊，缺乏解释。 - 缺乏临床指标（如EF评估误差）来证明实际价值。</td>
-<td style="text-align:left">1. <strong>增加定性对比</strong>：提供所提方法与主要SOTA基线在挑战性案例上的分割效果对比图，用高对比度轮廓清晰展示优势。 2. <strong>优化并解释可视化</strong>：提高图片分辨率，清晰说明注意力热图源自网络的哪个部分，并叠加GT轮廓作为参考。 3. <strong>补充临床指标</strong>：计算并报告左心室容积（EDV, ESV）和射血分数（EF）的误差与相关性，强化学术价值。</td>
+<td style="text-align:left"><strong>可视化</strong></td>
+<td style="text-align:left"><strong>审稿人1, 2, 3均指出：</strong> - 定性对比不足，缺少与SOTA方法的可视化效果图。 - 现有可视化（如注意力热图）模糊，缺乏解释。</td>
+<td style="text-align:left">1. <strong>增加定性对比</strong>：提供所提方法与主要SOTA基线在挑战性案例上的分割效果对比图，用高对比度轮廓清晰展示优势。 2. <strong>优化并解释可视化</strong>：提高图片分辨率，清晰说明注意力热图源自网络的哪个部分，并叠加GT轮廓作为参考。</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>格式、表述与细节纠正</strong></td>
+<td style="text-align:left"><strong>格式</strong></td>
 <td style="text-align:left"><strong>审稿人1, 2, 3均指出：</strong> - 表格中的加粗格式错误（对非最优结果加粗）。 - 文本中存在矛盾描述（如M1/M2的配置）。 - 方法名称“EchoMamba”可能已被占用。</td>
 <td style="text-align:left">1. <strong>彻底检查并修正</strong>：仔细检查所有表格，确保只对性能最优的指标加粗。 2. <strong>统一并更正文本</strong>：修正关于M1/M2描述的矛盾之处，确保全文表述一致。 3. <strong>考虑重命名</strong>：认真考虑审稿人3的建议，为方法寻找一个更具独特性的新名称，以避免混淆。</td>
 </tr>
