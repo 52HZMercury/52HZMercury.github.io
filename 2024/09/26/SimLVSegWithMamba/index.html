@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2025-07-23T06:59:04.742Z">
+<meta property="article:modified_time" content="2025-11-21T09:22:36.861Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          21k 字
+          27k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          67 分钟
+          84 分钟
         
       </span>
     
@@ -3541,6 +3541,125 @@
 <td>1.5952</td>
 <td>3.9662</td>
 <td>0.9183</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-修改意见">7. 修改意见</h2>
+<p><strong>AE（执行编辑）</strong>：审稿人对本文进行了详细评估，其意见如下。根据审稿人的反馈和我本人对稿件的评估，本文应仔细修改。作者应确保方法细节、实验设置等得到清晰阐明。请针对审稿人的意见提供逐点说明。请注意，最终录用取决于您修改的质量以及审稿人对您修改的完全满意。</p>
+<p><strong>审稿人 #1：</strong></p>
+<p><strong>总结</strong>：该稿件目前形式存在方法缺乏清晰度、实验验证不足以及声称未得到充分证实等显著问题。<br>
+<strong>主要问题：</strong></p>
+<ol>
+<li><strong>方法清晰度和可复现性不足：</strong>
+<ol>
+<li>图 2 模糊不清：图 2(a)、2(b) 和 2© 之间的关系不明确。图 2© 是描绘了两个连续的编码器层，还是 CASS 模块本身的详细示意图？</li>
+<li>缺失架构细节：关键组件未定义。&quot;Stem&quot;模块未描述。此外，未说明解码器中&quot;跳跃连接&quot;是如何实现的（例如，逐元素相加、拼接或任何其他融合方法）。</li>
+<li>CASS/SSM 集成不清晰：图 2© 尤其令人困惑，因为它似乎只显示了扫描操作，而没有明确集成状态空间模型块，而这是基于 Mamba 的架构的基础。</li>
+<li>强烈建议作者修改所有方法图和描述以提高清晰度，并公开其代码以确保可复现性。</li>
+</ol>
+</li>
+<li>论文指出摩尔曲线阶数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>∈</mo><mrow><mn>3</mn><mo separator="true">,</mo><mn>4</mn><mo separator="true">,</mo><mn>5</mn><mo separator="true">,</mo><mn>6</mn></mrow></mrow><annotation encoding="application/x-tex">k \in {3, 4, 5, 6}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">4</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">6</span></span></span></span></span> 是基于特征图大小 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>i</mi></msub><mo>×</mo><msub><mi>W</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">H_i \times W_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &quot;自动&quot;选择的。然而，这种选择机制没有明确定义。公式 (5) 和 (6) 描述了曲线的属性，但没有提供用于在不同编码器层级选择 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 的显式映射函数或规则。</li>
+<li><strong>WFL 模块的消融实验和细节不足：</strong>
+<ol>
+<li>缺失超参数：公式 (7) 中损失分量的权重 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">x, y, z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span> 从未指定。也缺少关于不同权重分布如何影响分割性能的分析。</li>
+<li>缺失组件消融实验：缺少一个关键的消融研究。作者应消融 WFL 的各个组件（例如，基线 vs. +Jaccard vs. +Dice vs. +Focal）以证明所有三个组件的必要性。</li>
+<li>基线损失函数不明确：对于 M1 实验（无 WFL），论文没有说明使用了哪种损失函数作为替代。</li>
+</ol>
+</li>
+<li><strong>实验对比不完整：</strong>
+<ol>
+<li>缺失扫描策略比较：核心声称是摩尔曲线的优越性。这应该与其他常见的空间填充曲线扫描方法进行基准测试，最著名的是希尔伯特曲线。</li>
+<li>相关工作空白：相关工作部分未能讨论其他引入了替代扫描策略的基于 Mamba 的模型，这将是最相关的基线比较。</li>
+<li>统计显著性：许多报告的性能提升是微小的。作者必须进行统计显著性检验（例如，报告配对 t 检验的 p 值），特别是对于&quot;我们的方法&quot;与&quot;前三名 SOTA 方法&quot;以及&quot;我们的方法&quot;与 M1/M2 的关键比较，以确认改进具有统计相关性。</li>
+</ol>
+</li>
+<li><strong>效率声称无充分依据</strong>：作者声称&quot;模型效率和实时处理&quot;，但仅报告了参数量。这是不够的。需要进行计算效率的综合比较，包括 GFLOPs、推理时间和训练时间，并与 SOTA 方法一起在表格中呈现。</li>
+<li><strong>可视化有限</strong>：提供的可视化（图 4, 6）仅显示了消融实验结果。为了证实优越性的声称，论文必须包括所提方法与对比 SOTA 方法在所有三个数据集的具有挑战性的案例上的定性视觉比较。建议使用高对比度的轮廓线。</li>
+</ol>
+<p><strong>次要问题：</strong></p>
+<ol>
+<li>消融描述中的矛盾：第 4.4 节中存在明显矛盾。文本描述 M2 为&quot;在 M1 中保留 WFL 模块，同时移除 CASS…&quot;。然而，表 3 显示 M1 具有 CASS 而没有 WFL。这一定是文本中的笔误，需要更正。</li>
+<li>注意力可视化模糊：在图 5 中，&quot;注意力机制&quot;热图的来源模糊不清。作者应说明此可视化源自网络的哪个部分（例如，哪一层，哪种注意力）。此外，应叠加真实分割掩码作为 ROI 的参考。</li>
+<li>缺失实现细节：
+<ol>
+<li>张量 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>×</mo><mi>H</mi><mo>×</mo><mi>W</mi><mo>×</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">C \times H \times W \times D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span> 的输入维度 D 在数据集预处理或方法部分从未指定。</li>
+<li>图 2© 的逻辑非常令人困惑。它在视觉上暗示两个&quot;有噪声的&quot;特征图相结合产生了一个干净的 ROI，这是不直观的，需要明确的解释。</li>
+</ol>
+</li>
+</ol>
+<p><strong>审稿人 #2：</strong></p>
+<p>本文提出了 EchoMamba，一种基于摩尔曲线引导的三维状态空间模型，用于超声心动图视频中的左心室分割，具有显著的创新性，但也存在需要修改的关键空白。</p>
+<p><strong>优点：</strong></p>
+<ol>
+<li>曲线自适应选择性扫描模块将摩尔曲线与 Mamba 集成，有效解决了传统线性扫描的端-始不连续性问题，与心动周期的时空周期性相吻合。多阶曲线映射平衡了全局解剖拓扑和局部边缘特征，缓解了超声图像各向异性分辨率的问题。</li>
+<li>加权融合损失结合了 Jaccard、Dice 和 Focal 损失，针对超声心动图中类别不平衡和边界模糊的关键痛点。</li>
+<li>在三个数据集上的实验表明，相较于 SOTA 方法，在 Dice、IoU 和边界指标上表现更优，同时 24.1M 的参数量保持了轻量级潜力，利于临床部署。</li>
+</ol>
+<p><strong>主要关切：</strong></p>
+<ol>
+<li><strong>方法清晰度与可复现性</strong><br>
+WFL 的权重仅在数学上定义但未说明理由：是凭经验选择的吗？没有消融或对比实验验证最优值，削弱了损失函数的严谨性。<br>
+摩尔曲线生成（例如，坐标转换到 [0, L-1]×[0, L-1]）和曲线阶数选择（3-6）缺乏原理说明。CASS 与 Mamba 状态更新之间的交互仍不清楚。</li>
+<li><strong>实验设计缺陷</strong><br>
+表 2 中，参数量错误地将&quot;我们的方法&quot;加粗，尽管 24.1M 并非最小（例如，UKAN3D：9.1M，SegFormer3D：7.5M）。表 3 也对非最优数据加粗（例如，CAMUS 的 ASSD 中&quot;我们的方法&quot;是 1.36，而 M2 的是 1.31），误导读者——必须更正格式。<br>
+60 个训练周期的充分性未得到验证：没有提供收敛曲线或分析来确认模型达到了稳定性能，可能危及结果的可靠性。</li>
+<li><strong>其他</strong><br>
+注意力热图模糊；隐藏状态演化缺乏解剖结构映射，降低了临床可信度。</li>
+</ol>
+<p><strong>修改建议：</strong></p>
+<ol>
+<li>更正表 2 和表 3 中的加粗，严格与最优性能对齐：仅对每个指标在所有对比方法中排名第一的值加粗（例如，在表 2 中，移除&quot;我们的方法&quot;在&quot;参数量&quot;下的加粗，因为它不是最小的；在表 3 中，调整如 CAMUS ASSD 等指标的加粗以突出表现最佳的条目）。</li>
+<li>验证 60 个训练周期的充分性：要么提供收敛曲线（例如，训练/验证损失、Dice 系数随周期的变化趋势）以确认模型在 60 个周期达到了稳定性能，要么进行更多周期（例如 200 或更多）的补充实验以排除不完全收敛对结果的影响。</li>
+<li>将扫描策略消融研究（比较摩尔、扫描、垂直和对角线扫描）扩展到所有三个数据集，而不仅限于 EchoNet-Peds。这将验证摩尔曲线扫描在不同数据分布下的普适性。</li>
+<li>提高可视化图的清晰度（例如，图 4, 5, 6）：增加图像分辨率以确保分割轮廓、注意力热图区域以及扫描策略之间的差异等细节可辨。</li>
+</ol>
+<p><strong>审稿人 #3：</strong></p>
+<p>该稿件提出了一种基于摩尔空间填充曲线引导的状态空间方法，用于超声心动图视频中的左心室分割。该方法结合了曲线自适应选择性扫描（闭环摩尔扫描）、跨编码器尺度的多阶映射策略以及加权损失（Jaccard + Dice + Focal）。在 EchoNet-Dynamic、CAMUS 和 EchoNet-Peds 上的实验报告了有竞争力的数值，并显示摩尔扫描优于几种简单替代方案。该方向很有前景，但在方法规范、基线的公平性、临床相关性、泛化性、效率报告和可复现性方面存在重大空白。我建议<strong>重大修改</strong>。此外，请考虑重命名该方法：&quot;EchoMamba&quot;这一名称已在其他已发表工作中出现，可能会在索引和引用中引起混淆。</p>
+<ol>
+<li>基线套件遗漏了几个 2024-2025 年强大且广泛采用的比较器。除了已引用的 CNN/Transformer/扩散和 SAM 衍生的基线外，请包括：(i) 具有可靠时空记忆提示的 MemSAM；(ii) MedSAM 或类似的高容量基础模型作为通用基线；(iii) 近期基于 Mamba/SSM 的医学分割模型（例如，SegMamba 变体）。匹配训练预算和硬件，并报告精度-速度-内存的权衡。没有这些，增量价值难以判断。</li>
+<li>论文解释了空间摩尔映射，但没有说明用于形成 SSM 输入的时空交织方式：特征是逐帧扫描然后跨时间拼接、跨帧交织，还是以滑动窗口方式打包；循环状态如何跨帧传递；以及如何处理重置/填充；还有训练和推理中使用的窗口长度。</li>
+<li>Jaccard、Dice 和 Focal 分量的权重，以及 Focal 参数（α, γ），未按数据集报告，也未说明其选择理由。</li>
+<li>声称优于 SAM 风格和扩散基线的说法需要更强的公平性文档。对于每个比较器，请指定提示协议（点/框，记忆长度，关键帧策略）、微调程度、数据增强和计算预算对等性。对于非提示模型（例如 UKAN3D 或 Transformer 基线），记录推荐的超参数、早停标准和模型选择标准。没有这些，比较可能有利于所提出的方法。</li>
+<li>核心假设——闭环扫描改善了 ES↔ED 边界稳定性和周期性一致性——主要得到通用分割指标和定性可视化的支持。请添加相位条件指标（例如，按心脏相位分箱的 Dice/HD95）和临床有意义的结果，如 EDV/ESV/EF 误差和相关性，以证明切实的临床益处。</li>
+<li>包括跨数据集/设备迁移（例如，在 EchoNet-Dynamic 上训练 → 在 CAMUS 上测试），按供应商/帧率分层，并评估非周期性模式（例如，心律失常）或提供代理分析。报告关键增益的置信区间和统计显著性。讨论部分承认对非周期性运动的适应性有限——请量化这一局限性。</li>
+<li>报告吞吐量（fps）、每序列延迟、内存使用情况和 FLOPs/MACs，最好有设备上的测量结果（例如，笔记本/移动 GPU）。在相同硬件和数值精度下，绘制与代表性 Transformer/Mamba/SAM 基线的精度-速度边界图。这对于旨在实时或近实时使用的视频分割系统至关重要。</li>
+<li>定义所有常数（例如，公式中的 ε），并阐明多阶映射中的舍入/边界规则。关于摩尔路径是&quot;可学习的&quot;的陈述是模糊的，因为摩尔曲线是确定性的：请澄清实际学习的是什么（例如，阶数选择、门控或参数化遍历）。记录完整的预处理/后处理（裁剪、归一化、时间采样）、确切的数据分割和训练计划。发布代码/配置和训练好的权重以便验证。</li>
+<li>加强实验设计以反映当前文献并相应调整框架：(a) 添加具有时序记忆提示的 MemSAM；(b) 包括 MedSAM（如果可行，还包括嵌入式/高效变体）以说明临床可部署性；© 添加 SegMamba 或密切相关的 SSM 基线作为代表。一些医学领域模型，如 VM-UNet / Mamba-UNet/ LoG-VMamba/ LKM-UNet/H-vmunet, nnunet。</li>
+</ol>
+<p><strong>总结</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">主要方向</th>
+<th style="text-align:left">核心修改意见（总结）</th>
+<th style="text-align:left">建议的解决措施</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>方法清晰度与可复现性</strong></td>
+<td style="text-align:left"><strong>审稿人1, 2, 3均指出：</strong> 方法描述模糊，关键细节缺失（如Stem模块、跳跃连接方式、CASS与Mamba的集成、摩尔曲线选择机制、WFL超参数、时空处理逻辑），导致难以理解和复现。</td>
+<td style="text-align:left">1. <strong>彻底重写方法章节</strong>：用更清晰的文字和重新绘制的图表（如Fig.2）详细解释每个模块。 2. <strong>补充所有缺失细节</strong>：明确说明架构设计、超参数值（如WFL的x,y,z）、摩尔曲线阶数k的选择规则、输入张量维度D等。 3. <strong>公开代码和模型</strong>：在修订稿中承诺并在录用后立即公开代码和配置，这是最有力的回应。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>实验充分性与公平性</strong></td>
+<td style="text-align:left"><strong>审稿人1, 3均指出：</strong> - 基线对比不足，缺少与近期SOTA方法（如MemSAM, MedSAM, SegMamba变体）的对比。 - 扫描策略对比不完整（缺少与Hilbert曲线等的比较）。 - 效率声称不完整（仅参数量，缺FLOPs、推理时间等）。</td>
+<td style="text-align:left">1. <strong>增补sota实验</strong>：加入审稿人3建议的多个最新基线模型（如MemSAM, Mamba-UNet，LKM-UNet，SegMamba），并在相同条件下进行公平比较。 2. <strong>扩展对比实验</strong>：将摩尔曲线与希尔伯特曲线等更多扫描策略进行对比，并在所有三个数据集上进行验证。 3. <strong>补充效率数据</strong>：在结果表格中增加GFLOPs、推理速度（FPS）和内存消耗等指标，全面评估效率。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>论证严谨性与统计支持</strong></td>
+<td style="text-align:left"><strong>审稿人1, 2, 3均指出：</strong> - 性能提升的统计显著性未验证。 - WFL等组件的必要性未通过充分的消融实验证明。 - 训练周期（60 epochs）是否足够未验证。</td>
+<td style="text-align:left">1. <strong>进行统计检验</strong>：对关键对比结果（如vs. SOTA, vs. M1/M2）进行统计显著性检验（如p值），并在文中报告。 2. <strong>深化消融研究</strong>：增加对WFL各损失分量的逐项消融，证明其组合的必要性。 3. <strong>证明训练充分性</strong>：在补充材料中提供训练/验证集的损失和Dice系数收敛曲线，证明60 epochs已足够。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>结果可视化与临床相关性</strong></td>
+<td style="text-align:left"><strong>审稿人1, 2, 3均指出：</strong> - 定性对比不足，缺少与SOTA方法的可视化效果图。 - 现有可视化（如注意力热图）模糊，缺乏解释。 - 缺乏临床指标（如EF评估误差）来证明实际价值。</td>
+<td style="text-align:left">1. <strong>增加定性对比</strong>：提供所提方法与主要SOTA基线在挑战性案例上的分割效果对比图，用高对比度轮廓清晰展示优势。 2. <strong>优化并解释可视化</strong>：提高图片分辨率，清晰说明注意力热图源自网络的哪个部分，并叠加GT轮廓作为参考。 3. <strong>补充临床指标</strong>：计算并报告左心室容积（EDV, ESV）和射血分数（EF）的误差与相关性，强化学术价值。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>格式、表述与细节纠正</strong></td>
+<td style="text-align:left"><strong>审稿人1, 2, 3均指出：</strong> - 表格中的加粗格式错误（对非最优结果加粗）。 - 文本中存在矛盾描述（如M1/M2的配置）。 - 方法名称“EchoMamba”可能已被占用。</td>
+<td style="text-align:left">1. <strong>彻底检查并修正</strong>：仔细检查所有表格，确保只对性能最优的指标加粗。 2. <strong>统一并更正文本</strong>：修正关于M1/M2描述的矛盾之处，确保全文表述一致。 3. <strong>考虑重命名</strong>：认真考虑审稿人3的建议，为方法寻找一个更具独特性的新名称，以避免混淆。</td>
 </tr>
 </tbody>
 </table>
