@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240926151034932.png">
 <meta property="article:published_time" content="2024-09-26T04:57:25.000Z">
-<meta property="article:modified_time" content="2025-11-27T13:24:55.874Z">
+<meta property="article:modified_time" content="2025-12-01T09:16:26.108Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          87 分钟
+          89 分钟
         
       </span>
     
@@ -2406,6 +2406,91 @@
 </tr>
 </tbody>
 </table>
+<h3 id="4-4-显著性">4.4 显著性</h3>
+<p>echo-dynamic</p>
+<table>
+<thead>
+<tr>
+<th>model name</th>
+<th>dsc</th>
+<th>iou</th>
+<th>assd</th>
+<th>HD95</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3d u-net    v304</td>
+<td>93.05 - 93.38</td>
+<td>87.05 - 87.55</td>
+<td>1.10 - 1.14</td>
+<td>2.66 - 2.82</td>
+</tr>
+<tr>
+<td>SegFormer3D    v305</td>
+<td>92.94 - 93.24</td>
+<td>86.83 - 87.31</td>
+<td>1.11 - 1.15</td>
+<td>2.68 - 2.78</td>
+</tr>
+<tr>
+<td>UKAN3D    v341</td>
+<td>93.04 - 93.36</td>
+<td>87.02 - 87.52</td>
+<td>1.10 - 1.14</td>
+<td>2.61 - 2.73</td>
+</tr>
+<tr>
+<td>mooremamba</td>
+<td>93.13 - 93.43</td>
+<td>87.17 - 87.65</td>
+<td>1.08 - 1.12</td>
+<td>2.62-2.73</td>
+</tr>
+</tbody>
+</table>
+<p>camus</p>
+<table>
+<thead>
+<tr>
+<th>model name</th>
+<th>dsc</th>
+<th>iou</th>
+<th>assd</th>
+<th>HD95</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3d u-net   v321</td>
+<td>92.81 - 94.75</td>
+<td>86.79 - 89.77</td>
+<td>2.59 - 3.05</td>
+<td>7.35 - 10.61</td>
+</tr>
+<tr>
+<td>SegFormer3D    v312</td>
+<td>92.09 - 94.83</td>
+<td>85.91 - 89.53</td>
+<td>1.17 - 3.09</td>
+<td>3.645 - 4.90</td>
+</tr>
+<tr>
+<td>UKAN3D   v347</td>
+<td>93.26 - 94.50</td>
+<td>87.44 - 89.48</td>
+<td>1.69 - 1.79</td>
+<td>3.65 - 4.03</td>
+</tr>
+<tr>
+<td>mooremamba V268</td>
+<td>93.77 - 94.83</td>
+<td>88.31 - 90.11</td>
+<td>1.31 - 1.40</td>
+<td>2.78 - 3.08</td>
+</tr>
+</tbody>
+</table>
 <h2 id="5-消融实验">5. 消融实验</h2>
 <ul>
 <li>24.1 baseline</li>
@@ -3428,45 +3513,45 @@
 <tbody>
 <tr>
 <td>横线</td>
-<td>0.9137</td>
-<td>0.8411</td>
+<td>91.37</td>
+<td>84.11</td>
 <td>1.75</td>
 <td>4.50</td>
 </tr>
 <tr>
 <td>竖线</td>
-<td>0.9061</td>
-<td>0.8283</td>
+<td>90.61</td>
+<td>82.83</td>
 <td>1.76</td>
 <td>4.31</td>
 </tr>
 <tr>
 <td>斜线</td>
-<td>0.9121</td>
-<td>0.8384</td>
+<td>91.21</td>
+<td>83.84</td>
 <td>1.65</td>
 <td>4.17</td>
 </tr>
 <tr>
 <td>希尔伯特</td>
-<td>0.9222</td>
-<td>0.8556</td>
-<td></td>
-<td></td>
+<td>92.22</td>
+<td>85.56</td>
+<td>1.62</td>
+<td>3.99</td>
 </tr>
 <tr>
 <td>Z阶</td>
-<td>0.9189</td>
-<td>0.8500</td>
-<td></td>
-<td></td>
+<td>91.89</td>
+<td>85.00</td>
+<td>1.90</td>
+<td>4.83</td>
 </tr>
 <tr>
 <td>moore</td>
-<td>0.9243</td>
-<td>0.8593</td>
-<td>1.5865</td>
-<td>3.9167</td>
+<td>92.43</td>
+<td>85.93</td>
+<td>1.59</td>
+<td>3.92</td>
 </tr>
 </tbody>
 </table>
@@ -3611,8 +3696,8 @@
 <td><strong>V390</strong></td>
 <td>0.9222</td>
 <td>0.8556</td>
-<td></td>
-<td></td>
+<td>1.6232</td>
+<td>3.9901</td>
 </tr>
 </tbody>
 </table>
@@ -3646,8 +3731,8 @@
 <td><strong>V394</strong></td>
 <td>0.9189</td>
 <td>0.8500</td>
-<td></td>
-<td></td>
+<td>1.9004</td>
+<td>4.8258</td>
 </tr>
 </tbody>
 </table>
@@ -3665,45 +3750,45 @@
 <tbody>
 <tr>
 <td>横线</td>
-<td>0.9213</td>
-<td>0.8542</td>
+<td>92.13</td>
+<td>85.42</td>
 <td>1.30</td>
 <td>3.52</td>
 </tr>
 <tr>
 <td>竖线</td>
-<td>0.9186</td>
-<td>0.8495</td>
-<td></td>
-<td></td>
+<td>91.86</td>
+<td>84.95</td>
+<td>1.17</td>
+<td>2.81</td>
 </tr>
 <tr>
 <td>斜线</td>
-<td>0.9179</td>
-<td>0.8482</td>
-<td></td>
-<td></td>
+<td>91.79</td>
+<td>84.82</td>
+<td>1.15</td>
+<td>2.78</td>
 </tr>
 <tr>
 <td>希尔伯特</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>91.97</td>
+<td>85.13</td>
+<td>1.17</td>
+<td>2.83</td>
 </tr>
 <tr>
 <td>Z阶</td>
-<td>0.9311</td>
-<td>0.8712</td>
-<td></td>
-<td></td>
+<td>93.11</td>
+<td>87.12</td>
+<td>1.14</td>
+<td>2.74</td>
 </tr>
 <tr>
 <td>moore</td>
-<td>0.9328</td>
-<td>0.8741</td>
-<td>1.1050</td>
-<td>2.6789</td>
+<td>93.28</td>
+<td>87.41</td>
+<td>1.11</td>
+<td>2.68</td>
 </tr>
 </tbody>
 </table>
@@ -3716,7 +3801,6 @@
 <th>iou</th>
 <th>assd</th>
 <th>hd95</th>
-<th>sen</th>
 </tr>
 </thead>
 <tbody>
@@ -3726,7 +3810,6 @@
 <td>0.8542</td>
 <td>1.2950</td>
 <td>3.5227</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -3746,8 +3829,8 @@
 <td><strong>V382</strong></td>
 <td>0.9186</td>
 <td>0.8495</td>
-<td></td>
-<td></td>
+<td>1.1692</td>
+<td>2.8081</td>
 </tr>
 </tbody>
 </table>
@@ -3767,8 +3850,8 @@
 <td><strong>V384</strong></td>
 <td>0.9179</td>
 <td>0.8482</td>
-<td></td>
-<td></td>
+<td>1.152</td>
+<td>2.7794</td>
 </tr>
 </tbody>
 </table>
@@ -3786,10 +3869,17 @@
 <tbody>
 <tr>
 <td>V405</td>
-<td>out1</td>
+<td>0.9180</td>
+<td>0.8485</td>
 <td></td>
 <td></td>
-<td></td>
+</tr>
+<tr>
+<td><strong>V406</strong></td>
+<td>0.9197</td>
+<td>0.8513</td>
+<td>1.1674</td>
+<td>2.8261</td>
 </tr>
 </tbody>
 </table>
@@ -3809,15 +3899,8 @@
 <td><strong>V393</strong></td>
 <td>0.9311</td>
 <td>0.8712</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>1.138</td>
+<td>2.7374</td>
 </tr>
 </tbody>
 </table>
@@ -3835,45 +3918,45 @@
 <tbody>
 <tr>
 <td>横线</td>
-<td>0.9266</td>
-<td>0.8632</td>
-<td>1.9351</td>
-<td>3.8131</td>
+<td>92.66</td>
+<td>86.32</td>
+<td>1.94</td>
+<td>3.81</td>
 </tr>
 <tr>
 <td>竖线</td>
-<td>0.9298</td>
-<td>0.8688</td>
-<td></td>
-<td></td>
+<td>92.98</td>
+<td>86.88</td>
+<td>1.57</td>
+<td>3.48</td>
 </tr>
 <tr>
 <td>斜线</td>
-<td>0.9345</td>
-<td>0.8771</td>
-<td></td>
-<td></td>
+<td>93.45</td>
+<td>87.71</td>
+<td>1.79</td>
+<td>4.99</td>
 </tr>
 <tr>
 <td>希尔伯特</td>
-<td>0.9343</td>
-<td>0.8767</td>
-<td></td>
-<td></td>
+<td>93.43</td>
+<td>87.67</td>
+<td>1.55</td>
+<td>3.41</td>
 </tr>
 <tr>
 <td>Z阶</td>
-<td>0.9315</td>
-<td>0.8718</td>
-<td></td>
-<td></td>
+<td>93.15</td>
+<td>87.18</td>
+<td>1.52</td>
+<td>3.52</td>
 </tr>
 <tr>
 <td>moore</td>
-<td>0.9430</td>
-<td>0.8921</td>
-<td>1.3594</td>
-<td>2.9324</td>
+<td>94.30</td>
+<td>89.21</td>
+<td>1.36</td>
+<td>2.93</td>
 </tr>
 </tbody>
 </table>
@@ -3914,8 +3997,8 @@
 <td><strong>V385</strong></td>
 <td>0.9298</td>
 <td>0.8688</td>
-<td></td>
-<td></td>
+<td>1.5653</td>
+<td>3.4846</td>
 </tr>
 </tbody>
 </table>
@@ -3935,8 +4018,8 @@
 <td><strong>V386</strong></td>
 <td>0.9345</td>
 <td>0.8771</td>
-<td></td>
-<td></td>
+<td>1.7853</td>
+<td>4.9893</td>
 </tr>
 </tbody>
 </table>
@@ -3956,8 +4039,8 @@
 <td><strong>V387</strong></td>
 <td>0.9343</td>
 <td>0.8767</td>
-<td></td>
-<td></td>
+<td>1.5482</td>
+<td>3.4110</td>
 </tr>
 <tr>
 <td>V388</td>
@@ -3984,8 +4067,8 @@
 <td><strong>V389</strong></td>
 <td>0.9315</td>
 <td>0.8718</td>
-<td></td>
-<td></td>
+<td>1.5158</td>
+<td>3.5174</td>
 </tr>
 </tbody>
 </table>
