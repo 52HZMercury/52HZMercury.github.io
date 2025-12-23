@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.ccnta.cn/uploadfile/2020/0810/20200810104627782.png">
 <meta property="article:published_time" content="2025-09-11T12:57:25.000Z">
-<meta property="article:modified_time" content="2025-12-15T08:47:05.315Z">
+<meta property="article:modified_time" content="2025-12-16T12:10:20.322Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          7.8k 字
+          8.6k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          25 分钟
+          27 分钟
         
       </span>
     
@@ -752,6 +752,170 @@
 </tr>
 </tbody>
 </table>
+<h3 id="使用nnunet">使用nnunet</h3>
+<p>Abdominal_Infrarenal</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>test_dsc</th>
+<th>test_cldsc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_48</td>
+<td>64.49</td>
+<td>64.38</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Abdominal_Suprarenal</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>test_dsc</th>
+<th>test_cldsc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_49</td>
+<td>61.15</td>
+<td>55.88</td>
+</tr>
+<tr>
+<td></td>
+<td>out1</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Ascending_Arch部位</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>test_dsc</th>
+<th>test_cldsc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_49</td>
+<td>83.47</td>
+<td>71.47</td>
+</tr>
+</tbody>
+</table>
+<p>Descending_Thoracic</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>test_dsc</th>
+<th>test_cldsc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_49</td>
+<td>71.37</td>
+<td>69.96</td>
+</tr>
+</tbody>
+</table>
+<p>DIS</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>test_dsc</th>
+<th>test_cldsc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_49</td>
+<td>75.42</td>
+<td>72.77</td>
+</tr>
+</tbody>
+</table>
+<p>DIS_Abdominal_Infrarenal</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>test_dsc</th>
+<th>test_cldsc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_49</td>
+<td>65.25</td>
+<td>60.18</td>
+</tr>
+</tbody>
+</table>
+<p>DIS_Abdominal_Suprarenal</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>test_dsc</th>
+<th>test_cldsc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_49</td>
+<td>61.47</td>
+<td>54.40</td>
+</tr>
+</tbody>
+</table>
+<p>DIS_Ascending_Arch</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>test_dsc</th>
+<th>test_cldsc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_49</td>
+<td>85.45</td>
+<td>80.53</td>
+</tr>
+</tbody>
+</table>
+<p>DIS_Descending_Thoracic</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>test_dsc</th>
+<th>test_cldsc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_50</td>
+<td>71.74</td>
+<td>59.20</td>
+</tr>
+</tbody>
+</table>
 <h3 id="前期汇总">前期汇总</h3>
 <table>
 <thead>
@@ -816,6 +980,62 @@
 <td>67.22</td>
 <td>80.97</td>
 <td>82.88</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>nnunet</th>
+<th>Dice</th>
+<th>clDice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Abdominal_Infrarenal</td>
+<td>64.49</td>
+<td>64.38</td>
+</tr>
+<tr>
+<td>Abdominal_Suprarenal</td>
+<td>61.15</td>
+<td>55.88</td>
+</tr>
+<tr>
+<td>Ascending_Arch</td>
+<td>83.47</td>
+<td>71.47</td>
+</tr>
+<tr>
+<td>Descending_Thoracic</td>
+<td>71.37</td>
+<td>69.96</td>
+</tr>
+<tr>
+<td>DIS</td>
+<td>75.42</td>
+<td>72.77</td>
+</tr>
+<tr>
+<td>DIS_Abdominal_Infrarenal</td>
+<td>65.25</td>
+<td>60.18</td>
+</tr>
+<tr>
+<td>DIS_Abdominal_Suprarenal</td>
+<td>61.47</td>
+<td>54.40</td>
+</tr>
+<tr>
+<td>DIS_Ascending_Arch</td>
+<td>85.45</td>
+<td>80.53</td>
+</tr>
+<tr>
+<td>DIS_Descending_Thoracic</td>
+<td>71.74</td>
+<td>59.20</td>
 </tr>
 </tbody>
 </table>
