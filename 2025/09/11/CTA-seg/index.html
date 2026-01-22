@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.ccnta.cn/uploadfile/2020/0810/20200810104627782.png">
 <meta property="article:published_time" content="2025-09-11T12:57:25.000Z">
-<meta property="article:modified_time" content="2025-12-16T12:10:20.322Z">
+<meta property="article:modified_time" content="2026-01-22T10:43:16.316Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          8.6k 字
+          8.9k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          27 分钟
+          28 分钟
         
       </span>
     
@@ -1166,6 +1166,93 @@
 <td>nnunet</td>
 <td>77.14</td>
 <td>67.23</td>
+</tr>
+</tbody>
+</table>
+<h3 id="AI-ERCP">AI-ERCP</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260122171828066.png" srcset="/img/newloading.gif" lazyload alt="image-20260122171828066"></p>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>dice</th>
+<th>iou</th>
+<th>cldice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unet                            e54</td>
+<td>0.6424</td>
+<td>0.5851</td>
+<td>0.6488</td>
+</tr>
+<tr>
+<td>segformer3d             e63</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>segmamba                 e56</td>
+<td>0.6014</td>
+<td>0.5572</td>
+<td>0.6026</td>
+</tr>
+<tr>
+<td>EM-Mamba                e57</td>
+<td>0.5904</td>
+<td>0.5510</td>
+<td>0.5966</td>
+</tr>
+<tr>
+<td>LKM-Unet                   e58</td>
+<td>0.6470</td>
+<td>0.5903</td>
+<td>0.6372</td>
+</tr>
+<tr>
+<td>LoG-VMamba</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LightMUnet                e62</td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
+</tr>
+<tr>
+<td>UKAN3D                      e61</td>
+<td>0.6530</td>
+<td>0.5926</td>
+<td>0.6545</td>
+</tr>
+</tbody>
+</table>
+<p>使用新的代码处理的数据集  （ 不如之前那个</p>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>dice</th>
+<th>iou</th>
+<th>cldice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unet                             e59</td>
+<td>0.5080</td>
+<td>0.5031</td>
+<td>0.5077</td>
+</tr>
+<tr>
+<td>UKAN3D                     e60</td>
+<td>0.6423</td>
+<td>0.5855</td>
+<td>0.6444</td>
 </tr>
 </tbody>
 </table>
