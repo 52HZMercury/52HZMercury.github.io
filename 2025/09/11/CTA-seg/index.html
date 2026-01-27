@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.ccnta.cn/uploadfile/2020/0810/20200810104627782.png">
 <meta property="article:published_time" content="2025-09-11T12:57:25.000Z">
-<meta property="article:modified_time" content="2026-01-22T10:47:30.281Z">
+<meta property="article:modified_time" content="2026-01-27T11:39:19.655Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          8.9k 字
+          10k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          28 分钟
+          32 分钟
         
       </span>
     
@@ -1188,34 +1188,34 @@
 <td>0.6488</td>
 </tr>
 <tr>
-<td>segformer3d             e63</td>
-<td>out1</td>
-<td></td>
-<td></td>
+<td>segformer3d             e70</td>
+<td>0.5753</td>
+<td>0.5382</td>
+<td>0.5845</td>
 </tr>
 <tr>
-<td>segmamba                 e56</td>
-<td>0.6014</td>
-<td>0.5572</td>
-<td>0.6026</td>
+<td>segmamba                 e73</td>
+<td>0.6203</td>
+<td>0.5686</td>
+<td>0.6257</td>
 </tr>
 <tr>
-<td>EM-Mamba                e57</td>
-<td>0.5904</td>
-<td>0.5510</td>
-<td>0.5966</td>
+<td>EM-Mamba                e75</td>
+<td>0.6181</td>
+<td>0.5667</td>
+<td>0.6197</td>
 </tr>
 <tr>
-<td>LKM-Unet                   e58</td>
-<td>0.6470</td>
-<td>0.5903</td>
-<td>0.6372</td>
+<td>LKM-Unet                   e78</td>
+<td>0.7375</td>
+<td>0.6538</td>
+<td>0.7792</td>
 </tr>
 <tr>
-<td>LoG-VMamba</td>
-<td></td>
-<td></td>
-<td></td>
+<td>LoG-VMamba            e80</td>
+<td>0.7258</td>
+<td>0.6433</td>
+<td>0.7725</td>
 </tr>
 <tr>
 <td>LightMUnet                e62</td>
@@ -1224,10 +1224,202 @@
 <td>/</td>
 </tr>
 <tr>
-<td>UKAN3D                      e61</td>
+<td>UKAN3D                     e61</td>
 <td>0.6530</td>
 <td>0.5926</td>
 <td>0.6545</td>
+</tr>
+</tbody>
+</table>
+<p>segformer3d</p>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>dice</th>
+<th>iou</th>
+<th>cldice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>e63</td>
+<td>0.5293</td>
+<td>0.5124</td>
+<td>0.5350</td>
+</tr>
+<tr>
+<td><strong>e70</strong></td>
+<td><strong>0.5753</strong></td>
+<td><strong>0.5382</strong></td>
+<td><strong>0.5845</strong></td>
+</tr>
+<tr>
+<td>e71</td>
+<td>0.5641</td>
+<td>0.5291</td>
+<td>0.5766</td>
+</tr>
+<tr>
+<td>e83</td>
+<td>out2</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>segmamba</p>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>dice</th>
+<th>iou</th>
+<th>cldice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>e56</td>
+<td>0.6014</td>
+<td>0.5572</td>
+<td>0.6026</td>
+</tr>
+<tr>
+<td>e72</td>
+<td>0.6043</td>
+<td>0.5566</td>
+<td>0.6190</td>
+</tr>
+<tr>
+<td><strong>e73</strong></td>
+<td><strong>0.6203</strong></td>
+<td><strong>0.5686</strong></td>
+<td><strong>0.6257</strong></td>
+</tr>
+</tbody>
+</table>
+<p>EM-Mamba</p>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>dice</th>
+<th>iou</th>
+<th>cldice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>e57</td>
+<td>0.5904</td>
+<td>0.5510</td>
+<td>0.5966</td>
+</tr>
+<tr>
+<td>e74</td>
+<td>0.6035</td>
+<td>0.5562</td>
+<td>0.6204</td>
+</tr>
+<tr>
+<td><strong>e75</strong></td>
+<td><strong>0.6181</strong></td>
+<td><strong>0.5667</strong></td>
+<td><strong>0.6197</strong></td>
+</tr>
+</tbody>
+</table>
+<p>LKM-Unet</p>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>dice</th>
+<th>iou</th>
+<th>cldice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>e58</td>
+<td>0.6470</td>
+<td>0.5903</td>
+<td>0.6372</td>
+</tr>
+<tr>
+<td>e77</td>
+<td>0.7277</td>
+<td>0.6457</td>
+<td>0.7619</td>
+</tr>
+<tr>
+<td><strong>e78</strong></td>
+<td><strong>0.7375</strong></td>
+<td><strong>0.6538</strong></td>
+<td><strong>0.7792</strong></td>
+</tr>
+</tbody>
+</table>
+<p>LoG-VMamba</p>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>dice</th>
+<th>iou</th>
+<th>cldice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>e64</td>
+<td>0.6004</td>
+<td>0.5584</td>
+<td>0.5859</td>
+</tr>
+<tr>
+<td>e79</td>
+<td>0.7235</td>
+<td>0.6410</td>
+<td>0.7626</td>
+</tr>
+<tr>
+<td><strong>e80</strong></td>
+<td><strong>0.7258</strong></td>
+<td><strong>0.6433</strong></td>
+<td><strong>0.7725</strong></td>
+</tr>
+</tbody>
+</table>
+<p>UKAN3D</p>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>dice</th>
+<th>iou</th>
+<th>cldice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>e61</td>
+<td>0.6530</td>
+<td>0.5926</td>
+<td>0.6545</td>
+</tr>
+<tr>
+<td>e81</td>
+<td>out3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>e82</td>
+<td>out4</td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -1253,6 +1445,109 @@
 <td>0.6423</td>
 <td>0.5855</td>
 <td>0.6444</td>
+</tr>
+</tbody>
+</table>
+<p><strong>新的数据预处理</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 增加清晰度</span><br>pixdim: [<span class="hljs-number">0.8</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">1.5</span>]<br>spatial_size: [<span class="hljs-number">160</span>, <span class="hljs-number">160</span>, <span class="hljs-number">96</span>]<br>spatial_size: [<span class="hljs-number">64</span>, <span class="hljs-number">64</span>, <span class="hljs-number">64</span>]<br><span class="hljs-comment"># 调整HU</span><br>a_min: -<span class="hljs-number">20</span><br>a_max: <span class="hljs-number">250</span><br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>dice</th>
+<th>iou</th>
+<th>cldice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unet                            e65</td>
+<td>0.6009</td>
+<td>0.5514</td>
+<td>0.6261</td>
+</tr>
+<tr>
+<td>UKAN3D                     e66</td>
+<td>0.5843</td>
+<td>0.5412</td>
+<td>0.5966</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 增加清晰度</span><br>pixdim: [<span class="hljs-number">0.8</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">1.5</span>]<br>spatial_size: [<span class="hljs-number">160</span>, <span class="hljs-number">160</span>, <span class="hljs-number">96</span>]<br>spatial_size: [<span class="hljs-number">96</span>, <span class="hljs-number">96</span>, <span class="hljs-number">96</span>]<br><span class="hljs-comment"># 调整HU</span><br>a_min: -<span class="hljs-number">20</span><br>a_max: <span class="hljs-number">250</span><br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>dice</th>
+<th>iou</th>
+<th>cldice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unet                            e67</td>
+<td>0.5444</td>
+<td>0.5173</td>
+<td>0.5503</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 增加清晰度</span><br>pixdim: [<span class="hljs-number">0.8</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">1.5</span>]<br>spatial_size: [<span class="hljs-number">160</span>, <span class="hljs-number">160</span>, <span class="hljs-number">96</span>]<br>spatial_size: [<span class="hljs-number">64</span>, <span class="hljs-number">64</span>, <span class="hljs-number">64</span>]<br><span class="hljs-comment"># 调整HU</span><br>a_min: -<span class="hljs-number">125</span><br>a_max: <span class="hljs-number">250</span><br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>dice</th>
+<th>iou</th>
+<th>cldice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unet                            e68</td>
+<td>0.6037</td>
+<td>0.5534</td>
+<td>0.6206</td>
+</tr>
+</tbody>
+</table>
+<p>加上上述调整的情况下，调整正负比例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">pos: <span class="hljs-number">3</span><br>neg: <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>dice</th>
+<th>iou</th>
+<th>cldice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unet                            e69</td>
+<td>0.5209</td>
+<td>0.5048</td>
+<td>0.5246</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">resize:<br><span class="hljs-comment">#   spatial_size: [192, 128, 96]</span><br>    spatial_size: [<span class="hljs-number">512</span>, <span class="hljs-number">512</span>, <span class="hljs-number">96</span>]<br>    mode: <span class="hljs-string">&quot;constant&quot;</span><br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>dice</th>
+<th>iou</th>
+<th>cldice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unet                            e76</td>
+<td>0.5552</td>
+<td>0.5273</td>
+<td>0.5412</td>
 </tr>
 </tbody>
 </table>
