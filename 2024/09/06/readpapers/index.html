@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20240906134037404.png">
 <meta property="article:published_time" content="2024-09-06T05:36:46.000Z">
-<meta property="article:modified_time" content="2025-11-20T08:33:53.972Z">
+<meta property="article:modified_time" content="2026-01-28T09:43:41.250Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="语义分割">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          16k 字
+          17k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          52 分钟
+          53 分钟
         
       </span>
     
@@ -634,6 +634,21 @@
 <li>MFRG：融合特征通道的均值、最大值统计信息，计算模态间交叉相关性和模态内自相关性，通过校准因子自适应增强有效特征。</li>
 <li>MORG：结合普通卷积与空洞卷积提取多感受野特征，通过均值卷积分离模态特征并移除，保留结构信息。</li>
 </ul>
+<h2 id="TM-Mamba">TM-Mamba</h2>
+<p>mamba的选择机制</p>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260128152300850.png" srcset="/img/newloading.gif" lazyload alt="image-20260128152300850"></p>
+<p>它用的是 <strong>Mamba（状态空间模型）</strong>，但做了一个<strong>关键改造</strong>：</p>
+<blockquote>
+<p>👉 <strong>Mamba 里有一套“选择机制（selection mechanism）”</strong><br>
+👉 原来：只由当前动作决定<br>
+👉 现在：<strong>由「动作 + 文本」共同决定</strong></p>
+</blockquote>
+<p>这篇论文不是“用文本来对齐动作”， 而是“用文本来控制模型在时间维度上的记忆策略”。</p>
+<ol>
+<li>文本真正参与了“时间建模”，怎么在时间上传播信息，本身就由文本决定</li>
+<li>文本不是逐词对齐，也不是注意力暴力匹配，没有token × frame 的巨大 attention，只有文本作为全局条件，控制“记 or 不记”</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260128152549561.png" srcset="/img/newloading.gif" lazyload alt="image-20260128152549561"></p>
 
               
             </div>
