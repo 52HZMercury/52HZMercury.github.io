@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-a.haoyishu.com/article/content/8059/df015c9b-95d7-4f11-bbb1-59e2795ed459.jpg">
 <meta property="article:published_time" content="2025-09-25T12:57:25.000Z">
-<meta property="article:modified_time" content="2026-02-06T08:44:58.037Z">
+<meta property="article:modified_time" content="2026-02-24T03:33:40.003Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="论文">
@@ -239,7 +239,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          43k 字
+          42k 字
         
       </span>
     
@@ -251,7 +251,7 @@
         
         
           <!-- compatible with older versions-->
-          135 分钟
+          132 分钟
         
       </span>
     
@@ -8302,6 +8302,66 @@
 </tr>
 </tbody>
 </table>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_156  fold_1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_156  fold_2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_156  fold_3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_156  fold_4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_156  fold_5</td>
+<td>0.71875</td>
+<td>0.8268</td>
+<td>0.7567</td>
+<td>0.875</td>
+<td>0.6666</td>
+<td>0.8181</td>
+</tr>
+</tbody>
+</table>
 <p>-语义校准  +二腔切面</p>
 <table>
 <thead>
@@ -8372,23 +8432,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="8-关于写作">8. 关于写作</h2>
-<h3 id="8-1-创新点1">8.1 创新点1</h3>
-<p><strong>利用文本对记忆的多层特征进行校准</strong>Mamba 选择性记忆与语义门控的“分层协同精调”</p>
-<p><code>KnowledgeFusion</code> 作用在<strong>多个尺度</strong>上。</p>
-<ul>
-<li><strong>表述逻辑：</strong> Mamba 负责在时空维度上“决定记录什么”，而文本向量负责在语义维度上“决定纠正什么”。</li>
-<li><strong>创新描述：</strong> 模型将 Mamba 的**长程选择性扫描能力（Long-range Selective Scan）<strong>与多级</strong>语义门控融合（Gated Fusion）**相结合。Mamba 编码器在底层利用 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mn>6</mn></mrow><annotation encoding="application/x-tex">S6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">6</span></span></span></span> 算法自动捕捉视频中的解剖结构运动，而 Decoder 阶段通过注入文本知识向量，对 Mamba 提取的抽象状态进行“语义校准”。</li>
-<li><strong>机制深度：</strong> 这种“先扫描、后校准”的策略，利用了文本向量作为<strong>语义锚点</strong>，对 Mamba 可能遗漏的关键病灶特征（如特定的室壁运动异常）进行增强，对扫描过程中的成像伪影进行抑制</li>
-</ul>
-<h3 id="8-2-创新点2">8.2 创新点2</h3>
-<p><strong>多视图</strong> 双路径时空特征与临床语义的“高阶关联增强”</p>
-<ul>
-<li><strong>表述逻辑：</strong> 融合了“经过 Mamba 压缩的时空特征”和“经过文本精调的视觉特征”。</li>
-<li><strong>创新描述：</strong> 不同于简单的单流网络，本模型构建了双路径学习框架。路径 A 利用 Mamba 的选择性状态空间有效地压缩了高维度的 A4C 视频序列；路径 B 利用 EchoPrime 编码器实现了文本引导的 A2C 特征精调。</li>
-<li><strong>学术意义：</strong> 通过 <code>ClsMLP</code> 实现两者的非线性融合，模型实际上是在执行一种<strong>临床决策仿真</strong>：既参考了 Mamba 捕捉到的动态物理运动（Spatio-temporal selection），又参考了临床文本定义的解剖学逻辑（Semantic refinement），显著提升了二分类任务的稳健性。</li>
-</ul>
-<p>Unlike previous Transformer-based methods that suffer from quadratic complexity, our model leverages the <strong>Selective State Space (Mamba)</strong> to efficiently capture dynamic cardiac motions. The core innovation lies in a <strong>Text-Guided Refinement strategy</strong>: we utilize cross-modal similarity to activate relevant clinical priors, which subsequently act as <strong>semantic governors</strong> to refine the selective memory states of the Mamba backbone at multiple scales.</p>
 
               
             </div>
