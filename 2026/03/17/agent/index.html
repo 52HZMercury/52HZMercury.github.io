@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260311170051927.png">
 <meta property="article:published_time" content="2026-03-17T06:17:25.000Z">
-<meta property="article:modified_time" content="2026-03-18T09:03:41.664Z">
+<meta property="article:modified_time" content="2026-03-23T06:56:27.378Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +236,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3.6k 字
+          6.8k 字
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
           <!-- compatible with older versions-->
-          12 分钟
+          22 分钟
         
       </span>
     
@@ -408,7 +408,7 @@
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260317164411081.png" srcset="/img/newloading.gif" lazyload alt="image-20260317164411081"></p>
 <p>使用框架的SupervisorAgent能力，可以自动的帮助我们管理PlanAgent和ExecutorAgent之间的执行扭转，其核心就是流程控制，与Plan对象在整个流程中的传递而已。</p>
 <h2 id="面试相关">面试相关</h2>
-<h3 id="使用场景">使用场景</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260323130325563.png" srcset="/img/newloading.gif" lazyload alt="image-20260323130325563"></p>
 <p><strong>简单介绍一下你设计的几个Agent</strong><br>
 在项目里一共实现了3个Agent，分别是知识库Agent、对话Agent和运维Agent。</p>
 <ul>
@@ -419,21 +419,11 @@
 </ul>
 <p><strong>ReAct和Plan-Execute-Replan有什么区别？</strong></p>
 <ul>
-<li>
-<p>ReAct适合边想边做，没有固定步骤</p>
-</li>
-<li>
-<p>Plan-Execute-Replan适合处理复杂任务，先拆解步骤，再执行，根据执行结果判断要不要修改计划</p>
-</li>
-<li>
-<p>所以在我的项目中，对话场景用ReAct，因为用户问题灵活，需实时决策。它的职责是处理开放式的，多轮的业务咨询，比如回答某个API怎么用，特点是灵活，能根据对话历史动态决定下一步做什么，但执行链条不会预设得特别长。</p>
-</li>
-<li>
-<p>运维场景用Plan-Execute-Replan，比如专门处理告警。它的职责是接受一个明确目标，然后制定一个可能包含多步骤的排查计划，并严格按计划调用各工具执行。</p>
-</li>
-<li>
-<p>它们底层共享同一套工具集和知识库，但工作模式和目标不同。</p>
-</li>
+<li>ReAct适合边想边做，没有固定步骤</li>
+<li>Plan-Execute-Replan适合处理复杂任务，先拆解步骤，再执行，根据执行结果判断要不要修改计划</li>
+<li>所以在我的项目中，对话场景用ReAct，因为用户问题灵活，需实时决策。它的职责是处理开放式的，多轮的业务咨询，比如回答某个API怎么用，特点是灵活，能根据对话历史动态决定下一步做什么，但执行链条不会预设得特别长。</li>
+<li>运维场景用Plan-Execute-Replan，比如专门处理告警。它的职责是接受一个明确目标，然后制定一个可能包含多步骤的排查计划，并严格按计划调用各工具执行。</li>
+<li>它们底层共享同一套工具集和知识库，但工作模式和目标不同</li>
 </ul>
 <p><strong>你的工具集有哪些Tool，分别有什么功能？</strong></p>
 <ul>
@@ -466,6 +456,96 @@
 </ul>
 </li>
 </ul>
+<p><strong>你的系统如何避免大模型产生幻觉？</strong><br>
+大模型幻觉是AI应用中最需要关注的问题，我主要从四个方面来控制：</p>
+<ul>
+<li>第一是强约束的Prompt设计，在系统Prompt中明确要求：&quot;严格按照文档内容回答，不允许使用文档外的任何信<br>
+息”、”如果不知道答案，明确说不知道，不要编造”。这样可以从源头上约束大模型的输出。</li>
+<li>第二是RAG增强，通过检索相关文档片段，给大模型提供可靠的事实依据。在对话Agent中，我会把召回的文档片段明确标记为”参考文档”，让大模型基于这些文档来回答。</li>
+<li>第三是相似度阈值过滤，我设置了0.8的高阈值。如果召回的文档相似度低于这个值，说明知识库中没有相关信息，这时会直接告诉用户”知识库中暂无相关信息”，而不是让大模型凭空猜测。</li>
+<li>第四是人工反馈闭环，我在系统中加入了功能。用户如果觉得回答不准确，可以点击反馈，后台会记录logid并通知到群里。我会人工分析原因，如果是文档缺失就补充文档，如果是prompt问题就优化prompt。</li>
+</ul>
+<p>通过这四层防护，大部分情况下都能给出可靠的答案</p>
+<p><strong>为什么选择 MCP 协议？相比 Function Calling 的优势？</strong></p>
+<ul>
+<li>
+<p><strong>解耦与标准化：</strong> 传统的 Function Calling 需要为每个模型、每个工具手动编写 JSON Schema。如果我有 10 个运维工具要接入 3 个不同的模型，维护成本是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mo>×</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">10 \times 3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">10</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">3</span></span></span></span>。MCP 建立了一个标准，工具（Server）和 AI（Client）之间通过协议对接，实现“一次编写，到处运行”。</p>
+</li>
+<li>
+<p><strong>富上下文传输：</strong> 传统方式只传简单的参数。MCP 支持从本地文件、数据库、甚至实时日志流中，以标准化的方式向 Agent 提供海量的只读上下文，而不占用过多的 Prompt 空间。</p>
+</li>
+<li>
+<p><strong>生态复用：</strong> 我们可以直接复用社区现成的 MCP Server（如 GitHub、MySQL、Sentry），而无需自己从头封装接口。在 WAgent 中，我们通过 MCP 快速集成了现有的运维监控系统。</p>
+</li>
+</ul>
+<p>我们可以把MCP想象成电脑的USB-C接口，键盘、U盘、显示器就是不同的MCPServer，它们提供各自独特的功能。电脑就是Agent，它作为MCPClient，通过统一的USB-C接口（即MCP协议)来连接和使用所有外设（MCP Server)。</p>
+<p><strong>mcp和skills的区别</strong></p>
+<p>mcp connects model to data , skills teach model what to do with that data</p>
+<p>即核心区别就是mcp是给大模型提供数据的，比如昨天的销售记录，而skills是教大模型怎么处理这些数据，是一份说明文档</p>
+<p><strong>图编排（Graph Orchestration）的实现与痛点</strong></p>
+<p>我们在 WAgent 中使用了基于 <strong>图 (Graph)</strong> 的编排逻辑（类似于 Java 版的 LangGraph 思路），替代了传统的线性 Chain。</p>
+<ul>
+<li><strong>如何实现：</strong> 我们将不同的 Agent（Knowledge Agent, Chat Agent, Ops Agent）定义为 <strong>Node（节点）</strong>，将业务逻辑判断定义为 <strong>Edge（边）</strong>。利用图驱动引擎，根据前一个节点的输出来决定下一个流向。</li>
+<li><strong>解决的痛点：</strong>
+<ul>
+<li><strong>解决“循环”问题：</strong> 运维任务经常需要循环（比如：检查状态 -&gt; 未就绪 -&gt; 等待 -&gt; 再检查）。线性 Chain 无法优雅处理循环，而图天然支持环路。</li>
+<li><strong>逻辑可视化：</strong> 复杂的运维流程（如故障排查、自动扩容）逻辑极深。图编排让我们可以将流程可视化，极大地降低了调试和后期维护的复杂度。</li>
+<li><strong>细粒度控制：</strong> 我们可以针对图中的某个特定节点（如“高危操作确认”）强制加入人工校验逻辑。</li>
+</ul>
+</li>
+</ul>
+<p><strong>RAG 准确率与响应速度的优化</strong></p>
+<p>针对运维场景中“文档多、日志杂、实时性强”的特点，我们做了以下优化：</p>
+<ul>
+<li>
+<p><strong>查询策略优化</strong>:</p>
+<ul>
+<li><strong>Multi Query - 多查询策略</strong>: 一个问题，多种问法</li>
+<li><strong>RAG-Fusion - 多查询结果融合策略</strong>: RAG-Fusion是Multi Query的<strong>进化版</strong>，不仅生成多个查询，还使用了**倒数排序融合（Reciprocal Rank Fusion, RRF）**算法来合并结果，RRF只关心排名，不关心绝对分数</li>
+<li><strong>Decomposition - 问题分解策略</strong>：把一个复杂问题拆解成多个简单的子问题，逐个击破</li>
+<li><strong>Step Back问答回退策略</strong>: 不直接回答具体问题，而是先生成一个更抽象、更通用的&quot;回退问题&quot;，从更高层次理解用户意图，然后再回答原问题</li>
+<li><strong>HyDE（假设性文档嵌入）</strong>：1. 让LLM先&quot;编&quot;一个假的答案（可能包含错误，但没关系）2. 把这个假答案转成向量 3. 用假答案的向量去搜索真实文档</li>
+</ul>
+</li>
+<li>
+<p><strong>准确率优化（Precision）：</strong></p>
+<ul>
+<li><strong>混合搜索（Hybrid Search）：</strong> 结合 <strong>向量搜索（语义）</strong> 和 <strong>关键词搜索（BM25/精确匹配）</strong>。运维中很多专有名词（如特定的 Error Code）用向量搜索容易偏移，混合搜索能大幅提升召回率。</li>
+<li><strong>重排序（Reranking）：</strong> 在粗排召回 Top 20 后，使用特定的 Rerank 模型进行精排，确保最相关的排故文档排在第一位。</li>
+<li><strong>父子文档切分（Parent-Document Retrieval）：</strong> 检索时匹配小的 Chunk，但给模型提供其所在的整个段落上下文，解决信息碎片化问题。</li>
+<li><strong>CRAG：纠错检索增强生成</strong>：CRAG的全称是<strong>Corrective Retrieval-Augmented Generation</strong>（纠错检索增强生成）。简单来说，CRAG就是给RAG系统加了一个&quot;质检员&quot;，在把检索结果交给LLM之前，先检查一下这些内容靠不靠谱</li>
+</ul>
+</li>
+<li>
+<p><strong>响应速度优化（Speed）：</strong></p>
+<ul>
+<li><strong>多级缓存：</strong> 针对高频故障问题，我们在 Embedding 层加入了 Redis 缓存，命中则直接返回。</li>
+<li><strong>流式输出（SSE）：</strong> 正如项目中提到的，我们利用 SSE 技术，让模型边检索边生成，减少用户的首屏等待时间。</li>
+</ul>
+</li>
+</ul>
+<p><strong>上下文压缩</strong></p>
+<p>10轮/70%</p>
+<p>当对话轮数增多，我们会把之前的对话内容进行处理，比如对前30轮历史对话进行总结摘要，作为长期记忆。</p>
+<p>这个问题在实际使用中确实会遇到，我设计了一个分层记忆管理机制：</p>
+<ul>
+<li>第一层是滑动窗口记忆，保留最近5轮对话的完整内容，这部分会直接放入prompt中，保证对话的连贯性。</li>
+<li>第二层是摘要记忆，当对话轮数超过5轮时，会把第5轮之前的对话进行摘要压缩。摘要会保留关键信息，比如用户提到的核心问题、重要参数、已经解决的问题等，把10轮对话压缩成2-3句话。</li>
+<li>第三层是向量记忆，所有历史对话都会向量化存储在向量数据库中。当用户提到”之前说的那个问题”时，可以通过向量检索找回历史对话内容。</li>
+</ul>
+<p>这三层记忆相互配合，既保证了短期对话的连贯性，又支持长期对话的信息检索，还避免了上下文窗口溢出的问题。在实现上，我会在每次调用大模型前检查token数量，如果超过阈值（比如上下文窗口的80%），就触发摘要压缩逻辑。这样可以确保系统稳定运行。</p>
+<p><strong>多Agent协同</strong></p>
+<p>多agent协同主要有三种设计模式：层级模式，平等协同，流水线</p>
+<p>Multi-Agent在我的项目中主要体现在Plan-Execute-Replan模式中，通过Planner、Executor、Replanner三个子<br>
+Agent协作完成复杂任务。<br>
+协作机制主要是通过共享上下文来实现的：<br>
+。首先有一个全局的Context，里面包含了任务目标、执行计划、当前步骤、历史结果等信息<br>
+。Planner读取任务目标，生成结构化的执行计划，更新到Context中<br>
+。Executor读取Context中的当前步骤，调用对应工具，将结果写回Context<br>
+。Replanner读取执行结果，评估是否需要调整计划，更新Context中的计划和步骤<br>
+。这样循环往复，直到任务完成<br>
+这种设计的好处是每个Agent职责单一，Planner只负责规划不执行，Executor只负责执行不规划，Replanner只<br>
+负责评估不具体干活。另外，这三个Agent底层可以使用不同的大模型，比如Planner用推理能力强的模型，Executor用速度快的模型，这样可以在性能和成本之间做权衡。</p>
 <p><strong>你做这个项目遇到过什么困难/挑战？</strong><br>
 其实最大的困难是在于写文档，之前的告警处理手册其实是很多人都会往里面加东西，很多步骤可能表述的不是很清晰，最蛋疼的是有些超链接，链接到其他文档，写的不完整</p>
 <ul>
