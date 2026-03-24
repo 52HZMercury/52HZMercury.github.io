@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260311170051927.png">
 <meta property="article:published_time" content="2026-03-17T06:17:25.000Z">
-<meta property="article:modified_time" content="2026-03-23T06:56:27.378Z">
+<meta property="article:modified_time" content="2026-03-24T09:52:05.097Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +236,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          6.8k 字
+          9k 字
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
           <!-- compatible with older versions-->
-          22 分钟
+          29 分钟
         
       </span>
     
@@ -409,36 +409,144 @@
 <p>使用框架的SupervisorAgent能力，可以自动的帮助我们管理PlanAgent和ExecutorAgent之间的执行扭转，其核心就是流程控制，与Plan对象在整个流程中的传递而已。</p>
 <h2 id="面试相关">面试相关</h2>
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260323130325563.png" srcset="/img/newloading.gif" lazyload alt="image-20260323130325563"></p>
-<p><strong>简单介绍一下你设计的几个Agent</strong><br>
-在项目里一共实现了3个Agent，分别是知识库Agent、对话Agent和运维Agent。</p>
+<p><strong>cusor</strong></p>
+<p>好用的skills:</p>
 <ul>
-<li>知识库Agent的核心目标是作为团队文档管理和AI应用的基础设施，通过自动化流程，将我们日常积累的文档<br>
-（告警处理手册、技术方案、错误码文档），转化为可被AI高效检索的向量，为后续的RAG提供了高质量的向量数据支撑。举个最常见的例子，当我们想根据一个模糊的回忆找文档的时候，可以根据模糊的提问快速检索到对应文档，不再需要再嵌套目录里面一个一个翻了。</li>
-<li>对话Agent本质上是一个基于大模型+知识库构造的<strong>ReAct</strong>模式智能交互系统。你可以把它看作是一个能够像真人一样理解问题、调用知识库检索并给出精准回答的小助手。它最重要的使命就是帮助团队挡掉高频的重复咨询，加速问题解决，从而提高整体的工作效率。</li>
-<li>运维Agent是为了解决值班排查问题的痛点而做的。运维Agent主要是使用了<strong>Plan-Execute-Replan</strong>设计模式，自动规划排查步骤，通过调用各平台的API，实现跨系统联动，一站式完成排查。这些告警从服务错误、性能波动，到中间件异常、下游依赖故障，告警太多了。传统的处理方式往往依赖于人工排查：看告警、查日志、查监控，最终才能判断问题的根源。整个过程重复、耗时，特别是在晚上或节假日，响应效率和准确性更是难以保障，值班的时候告警一多就很痛苦。运维Agent可以通过调用各平台的API，实现跨系统联动，一站式完成排查。例如，它可以自动从告警中提取接口名和时间范围，查询日志、查询监控、查询告警处理手册，将所有信息汇总成一份结构化的故障排查报告。</li>
+<li>pptx  : 自动生成ppt</li>
+<li>skill-creator:  AI 根据你的需求，自己写一个新的 Skill</li>
 </ul>
+<p><strong>openclaw</strong></p>
+<p><strong>agent的组成部分</strong></p>
+<p>大语言模型，规划模块，记忆模块，工具集</p>
+<p><strong>简单介绍一下你设计的几个Agent</strong><br>
+在项目里一共实现了2个Agent，分别是知识库Agent、对话Agent和运维Agent。</p>
+<p>知识库的核心目标是作为团队文档管理和AI应用的基础设施，通过自动化流程，将我们日常积累的文档<br>
+（<strong>告警处理手册、技术方案、错误码文档</strong>），转化为可被AI高效检索的向量，为后续的RAG提供了高质量的向量数据支撑。举个最常见的例子，当我们想根据一个模糊的回忆找文档的时候，可以根据模糊的提问快速检索到对应文档，不再需要再嵌套目录里面一个一个翻了。</p>
+<ul>
+<li>
+<p>对话Agent本质上是一个基于大模型+知识库构造的<strong>ReAct</strong>模式智能交互系统。你可以把它看作是一个能够像真人一样理解问题、调用知识库检索并给出精准回答的小助手。它最重要的使命就是帮助团队挡掉高频的重复咨询，加速问题解决，从而提高整体的工作效率。</p>
+<ul>
+<li>输入：用户对话</li>
+</ul>
+</li>
+<li>
+<p>运维Agent是为了解决值班排查问题的痛点而做一个<strong>Multi-Agent(多智能体)<strong>的。运维Agent主要是使用了</strong>Plan-Execute-Replan</strong>设计模式，有<strong>Plan-Execute-Replan这三个agent</strong>，运维Agent可以通过调用各平台的API，实现跨系统联动，一站式完成排查。可以自动从告警中提取接口名和时间范围，查询日志、查询历史工单、查询监控、查询告警处理手册，将所有信息汇总成一份结构化的故障排查报告。</p>
+<ul>
+<li>输入：<strong>告警信息</strong>(alertname、description) + <strong>召回的处理文档</strong> (告警触发) ；输出：结构化计划(SON格式），包含步骤描述、工具调用参数、预期结果</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260324143041307.png" srcset="/img/newloading.gif" lazyload alt="image-20260324143041307"></p>
 <p><strong>ReAct和Plan-Execute-Replan有什么区别？</strong></p>
 <ul>
 <li>ReAct适合边想边做，没有固定步骤</li>
 <li>Plan-Execute-Replan适合处理复杂任务，先拆解步骤，再执行，根据执行结果判断要不要修改计划</li>
 <li>所以在我的项目中，对话场景用ReAct，因为用户问题灵活，需实时决策。它的职责是处理开放式的，多轮的业务咨询，比如回答某个API怎么用，特点是灵活，能根据对话历史动态决定下一步做什么，但执行链条不会预设得特别长。</li>
-<li>运维场景用Plan-Execute-Replan，比如专门处理告警。它的职责是接受一个明确目标，然后制定一个可能包含多步骤的排查计划，并严格按计划调用各工具执行。</li>
+<li>运维场景用Plan-Execute-Replan，比如专门处理告警。它的职责是<strong>接受一个明确目标</strong>，然后制定一个可能包含多步骤的排查计划，并严格按计划调用各工具执行。</li>
 <li>它们底层共享同一套工具集和知识库，但工作模式和目标不同</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>Plan-Execute-Replan</th>
+<th>ReAct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心思路</td>
+<td>先拆步骤，按计划执行，动态调整</td>
+<td>边想边做，每步临场决策</td>
+</tr>
+<tr>
+<td>有没有全局计划</td>
+<td>有，一开始就生成完整计划</td>
+<td>没有，走一步看一步</td>
+</tr>
+<tr>
+<td>适合什么场景</td>
+<td>多步骤、流程化的复杂任务(运维排查、报告生成)</td>
+<td>灵活探索类任务（开放问答、信息检索)</td>
+</tr>
+<tr>
+<td>任务进度</td>
+<td>可追踪，知道执行到第几步了</td>
+<td>不太好追踪，因为没有预设步骤</td>
+</tr>
+<tr>
+<td>应对变化</td>
+<td>通过Replan机制调整计划</td>
+<td>天然灵活，每步都能变方向</td>
+</tr>
+<tr>
+<td>Agent数量</td>
+<td>Multi-Agent协作 (Planner + Executor + Replanner)</td>
+<td>通常是单Agent完成所有事</td>
+</tr>
+</tbody>
+</table>
 <p><strong>你的工具集有哪些Tool，分别有什么功能？</strong></p>
 <ul>
 <li>其实设计tool就是要思考Agent需要哪些功能</li>
-<li>首先想到的是知识库召回工具，从向量数据库中召回最相关的3份片段</li>
-<li>然后是日志查询工具，日志查询是通过腾讯云日志平台的MCP实现的，他们的MCP支持用自然语言查询日志</li>
-<li>还有告警查询工具，对接监控系统的/alerts接口，直接获取当前活跃告警信息</li>
-<li>其实在测试过程中，我还发现大模型不能精准知道当前时刻的时间，所以还编写了一个时间查询工具，为Agent提供实时时间信息</li>
-<li>最后还有一个联网查询工具，集成外部搜索引擎，让大模型也有搜谷歌的能力</li>
+<li>首先想到的是<strong>知识库召回工具</strong>，从向量数据库中召回最相关的3份片段</li>
+<li>然后是<strong>日志查询工具</strong>，日志查询是通过腾讯云日志平台的MCP实现的，他们的MCP支持用自然语言查询日志</li>
+<li>还有<strong>告警查询工具</strong>，对接监控系统的/alerts接口，直接获取当前活跃告警信息</li>
+<li>其实在测试过程中，我还发现大模型不能精准知道当前时刻的时间，所以还编写了一个<strong>时间查询工具</strong>，为Agent提供实时时间信息,辅助告警持续时长的计算</li>
+<li>最后还有一个<strong>联网查询工具</strong>，集成外部搜索引擎，让大模型也有搜谷歌的能力</li>
 </ul>
+<p><strong>向量数据库的选型对比</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Milvus</th>
+<th>Pinecone</th>
+<th>PGVector(PostgreSQL插件)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>部署方式</td>
+<td>私有化/云端 (Docker/K8s)</td>
+<td>仅 SaaS</td>
+<td>插件集成</td>
+</tr>
+<tr>
+<td>开源</td>
+<td>是</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td>扩展性</td>
+<td><strong>极强 (分布式)</strong></td>
+<td>强 (自动)</td>
+<td>弱 (单机垂直)</td>
+</tr>
+<tr>
+<td>索引算法</td>
+<td>全面 (HNSW, IVF, etc.)</td>
+<td>闭源优化</td>
+<td>较少 (HNSW, IVFFlat)</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td><strong>大规模、私有化、复杂运维</strong></td>
+<td>快速原型、海外业务</td>
+<td>中小规模、强事务关联</td>
+</tr>
+</tbody>
+</table>
 <p><strong>你的项目用的是什么模型？</strong></p>
 <ul>
 <li>向量模型我使用的是阿里的text-embedding-v4</li>
 <li>语言模型我使用的是qwen3-max</li>
 </ul>
+<p>因为是在国内使用，公司使用，所以选择模型最好还是选择国内的。<br>
+搭建RAG时选择合适的embedding模型很重要，Huggingface有一个MTEB(Massive Multilingual Text<br>
+EmbeddingBenchmark)评测标准是一个业界比较公认的标准。<br>
+打开MTEB的官网，阿里的模型就排在第三，所以embedding就选择使用阿里的模型了</p>
 <p><strong>召回与重排的区别是什么？</strong></p>
 <ul>
 <li>召回：快速捞出相关片段
@@ -459,26 +567,54 @@
 <p><strong>你的系统如何避免大模型产生幻觉？</strong><br>
 大模型幻觉是AI应用中最需要关注的问题，我主要从四个方面来控制：</p>
 <ul>
-<li>第一是强约束的Prompt设计，在系统Prompt中明确要求：&quot;严格按照文档内容回答，不允许使用文档外的任何信<br>
-息”、”如果不知道答案，明确说不知道，不要编造”。这样可以从源头上约束大模型的输出。</li>
+<li>第一是强约束的Prompt设计，在系统Prompt中明确要求：&quot;严格按照文档内容回答，不允许使用文档外的任何信息”、”如果不知道答案，明确说不知道，不要编造”。这样可以从源头上约束大模型的输出。</li>
 <li>第二是RAG增强，通过检索相关文档片段，给大模型提供可靠的事实依据。在对话Agent中，我会把召回的文档片段明确标记为”参考文档”，让大模型基于这些文档来回答。</li>
 <li>第三是相似度阈值过滤，我设置了0.8的高阈值。如果召回的文档相似度低于这个值，说明知识库中没有相关信息，这时会直接告诉用户”知识库中暂无相关信息”，而不是让大模型凭空猜测。</li>
 <li>第四是人工反馈闭环，我在系统中加入了功能。用户如果觉得回答不准确，可以点击反馈，后台会记录logid并通知到群里。我会人工分析原因，如果是文档缺失就补充文档，如果是prompt问题就优化prompt。</li>
 </ul>
 <p>通过这四层防护，大部分情况下都能给出可靠的答案</p>
+<p><strong>大模型怎么发现tools的</strong></p>
+<ol>
+<li>直接在代码里把工具列表发给大模型。在 <code>tools</code> 数组里写好 <code>read_log</code>、<code>restart_service</code> 的描述(StringAI 可以对tool统一管理，在tools上加上注解就好了)</li>
+<li>mcp握手，当 Agent 启动或连接到一个新的 MCP Server 时，MCP Server 会返回一个 JSON 列表，包含工具的名称、详细描述、参数 Schema</li>
+</ol>
 <p><strong>为什么选择 MCP 协议？相比 Function Calling 的优势？</strong></p>
+<p>不同LLM厂商返回的工具调用指令格式各不相同，MCP(Anthropic )创建了一个标准化的中间层，像&quot;通用适配器&quot;一样统一LLM与外部工具调用的交互方式。实现编写一次工具，可以在各个模型之间运行</p>
+<p>它把复杂的连接逻辑拆解成了三个角色：</p>
 <ul>
-<li>
-<p><strong>解耦与标准化：</strong> 传统的 Function Calling 需要为每个模型、每个工具手动编写 JSON Schema。如果我有 10 个运维工具要接入 3 个不同的模型，维护成本是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mo>×</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">10 \times 3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">10</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">3</span></span></span></span>。MCP 建立了一个标准，工具（Server）和 AI（Client）之间通过协议对接，实现“一次编写，到处运行”。</p>
-</li>
-<li>
-<p><strong>富上下文传输：</strong> 传统方式只传简单的参数。MCP 支持从本地文件、数据库、甚至实时日志流中，以标准化的方式向 Agent 提供海量的只读上下文，而不占用过多的 Prompt 空间。</p>
-</li>
-<li>
-<p><strong>生态复用：</strong> 我们可以直接复用社区现成的 MCP Server（如 GitHub、MySQL、Sentry），而无需自己从头封装接口。在 WAgent 中，我们通过 MCP 快速集成了现有的运维监控系统。</p>
-</li>
+<li><strong>MCP Host (客户端):</strong> 比如 Claude Desktop、IDE（Cursor/VS Code），或者我们正在做的 <strong>WAgent 后端</strong>。它是发起请求的一方。</li>
+<li><strong>MCP Server (服务端):</strong> 这是一个轻量级的程序，它负责暴露特定的功能。比如一个“MySQL MCP Server”，它知道怎么查数据库，并将结果按 MCP 格式返回。</li>
+<li><strong>Local/Remote Resources (资源):</strong> 实际的数据（数据库、本地文件、API）。</li>
 </ul>
-<p>我们可以把MCP想象成电脑的USB-C接口，键盘、U盘、显示器就是不同的MCPServer，它们提供各自独特的功能。电脑就是Agent，它作为MCPClient，通过统一的USB-C接口（即MCP协议)来连接和使用所有外设（MCP Server)。</p>
+<p>为什么它比传统的 Function Calling 强？</p>
+<p>在 WAgent 项目里，如果你直接用传统的工具调用，你需要给模型写很长的 <code>Description</code>，还得处理各种 API 鉴权和格式转换。而 MCP 带来了以下变革：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th><strong>传统方式 (Function Calling)</strong></th>
+<th><strong>MCP 模式</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>复用性(解耦)</td>
+<td>针对每个模型（GPT, Claude, DeepSeek）都要写适配代码。</td>
+<td>一次编写，到处运行。一个 MCP Server 可以被任何支持该协议的客户端调用。</td>
+</tr>
+<tr>
+<td>生态系统</td>
+<td>需要自己造轮子。</td>
+<td>社区已经有现成的 Server（GitHub, Google Drive, Slack, Postgres），直接插拔使用。</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>模型直接接触 API Key，风险高。</td>
+<td>逻辑在本地 Server 运行，模型只下达指令，不接触敏感凭证。</td>
+</tr>
+</tbody>
+</table>
+<p>我们可以把MCP想象成电脑的USB-C接口，键盘、U盘、显示器就是不同的MCPServer，它们提供各自独特的功能。电脑就是Agent，它作为MCPClient，通过统一的USB-C接口（即MCP协议)来连接和使用所有外设（MCP Server)</p>
 <p><strong>mcp和skills的区别</strong></p>
 <p>mcp connects model to data , skills teach model what to do with that data</p>
 <p>即核心区别就是mcp是给大模型提供数据的，比如昨天的销售记录，而skills是教大模型怎么处理这些数据，是一份说明文档</p>
@@ -524,6 +660,16 @@
 </ul>
 </li>
 </ul>
+<p><strong>RRF（Reciprocal Rank Fusion，倒数排名融合）</strong></p>
+<p>RRF 的逻辑非常简单且暴力：它不看各个搜索引擎给出的具体分数，<strong>只看排名</strong>。</p>
+<p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>R</mi><mi>R</mi><mi>F</mi><mi>s</mi><mi>c</mi><mi>o</mi><mi>r</mi><mi>e</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo><mo>=</mo><munder><mo>∑</mo><mrow><mi>r</mi><mo>∈</mo><mi>R</mi></mrow></munder><mfrac><mn>1</mn><mrow><mi>k</mi><mo>+</mo><mi>r</mi><mi>a</mi><mi>n</mi><mi>k</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">RRFscore(d) = \sum_{r \in R} \frac{1}{k + rank(d)}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">RRF</span><span class="mord mathnormal">score</span><span class="mopen">(</span><span class="mord mathnormal">d</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.6431em;vertical-align:-1.3217em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.8557em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.3217em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal" style="margin-right:0.03148em;">ank</span><span class="mopen">(</span><span class="mord mathnormal">d</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<ul>
+<li><strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">d</span></span></span></span></strong>: 某个被检索出来的文档。</li>
+<li><strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></strong>: 所有的检索系统集合（如 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">{</mo><mi>B</mi><mi>M</mi><mn>25</mn><mo separator="true">,</mo><mi>V</mi><mi>e</mi><mi>c</mi><mi>t</mi><mi>o</mi><mi>r</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{BM25, Vector\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathnormal" style="margin-right:0.10903em;">BM</span><span class="mord">25</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mord mathnormal">ec</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">or</span><span class="mclose">}</span></span></span></span>）。</li>
+<li><strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mi>a</mi><mi>n</mi><mi>k</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">rank(d)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal" style="margin-right:0.03148em;">ank</span><span class="mopen">(</span><span class="mord mathnormal">d</span><span class="mclose">)</span></span></span></span></strong>: 文档 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">d</span></span></span></span> 在该系统中的排名（从 1 开始）。</li>
+<li><strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></strong>: 一个常数（通常设为 <strong>60</strong>），用来平滑排名带来的权重差异。</li>
+</ul>
 <p><strong>上下文压缩</strong></p>
 <p>10轮/70%</p>
 <p>当对话轮数增多，我们会把之前的对话内容进行处理，比如对前30轮历史对话进行总结摘要，作为长期记忆。</p>
@@ -546,13 +692,29 @@ Agent协作完成复杂任务。<br>
 。这样循环往复，直到任务完成<br>
 这种设计的好处是每个Agent职责单一，Planner只负责规划不执行，Executor只负责执行不规划，Replanner只<br>
 负责评估不具体干活。另外，这三个Agent底层可以使用不同的大模型，比如Planner用推理能力强的模型，Executor用速度快的模型，这样可以在性能和成本之间做权衡。</p>
+<p><strong>SSE技术</strong></p>
+<ul>
+<li>SSE和WebSocket都是实现实时通信的技术，但原理和适用场景不同。SSE，也就是服务器发送事件，它是基于HTTP协议的。它的工作方式是，客户端发起一个普通的HTTP请求，但服务器不立即关闭连接，而是保持这个连接打开，并按照特定的格式(text/event-stream)持续地、一段一段地向客户端推送数据。</li>
+<li>而WebSocket是一个独立的协议，它在初次连接时通过HTTP协议进行握手，握手成功后，连接就升级为<br>
+WebSocket协议，之后双方就可以在这个连接上进行全双工的双向通信了，服务器可以随时发消息给客户端，客户端也可以随时发消息给服务器。</li>
+</ul>
+<p>在选择时，我会考虑：如果需要双向实时交互，比如在线聊天、协同编辑，肯定选WebSocket。<br>
+如果只需要服务器向客户端推送实时数据，比如股票行情、通知、或者像我项目里的AI对话流，SSE就足够且更<br>
+简单，因为它基于HTTP，不需要处理新的协议，后端实现和调试也方便一些。</p>
+<p>选择SSE主要是出于简单和够用的考虑，我们的场景主要是服务器向浏览器单向推送AI生成的文本，不需要双向<br>
+通信，SSE的协议比WebSocket更轻量，实现起来也简单，对于流式文本这种场景非常适。用户体验就像是在看<br>
+一个人实时打字。</p>
+<p>SSE基于HTTP协议，不需要特殊的协议支持，使用标准的HTTP连接。在建立连接后，<strong>将HTTP头部的Content-</strong><br>
+<strong>Type改成text/event-stream</strong>就可以了，后续发送消息要按照SSE数据格式发送。<br>
+SSE的数据格式非常简单，每条消息由多个字段组成，每个字段由字段名、冒号和字段值组成，以换行符分隔。</p>
 <p><strong>你做这个项目遇到过什么困难/挑战？</strong><br>
 其实最大的困难是在于写文档，之前的告警处理手册其实是很多人都会往里面加东西，很多步骤可能表述的不是很清晰，最蛋疼的是有些超链接，链接到其他文档，写的不完整</p>
 <ul>
 <li>那对于我们做RAG来说，第一步就是要把文档写完整完善，否则会影响召回的质量，以及大模型的判断</li>
 <li>另外我觉得印象比较深刻的点在于，这个项目是我实习到时候偷摸做的，因为实习的时候安排我也值班。</li>
-<li>值班我就发现了这些痛点，太浪费时间了值班。老是要翻日志看监控，回复很多相同的问题。说白了就是比较打杂，维护老项目。让我打杂但是我不能真打杂浪费时间啊，所以我偷偷做这个项目，好在最后做出来了，不论是对其他人值班，还是对自己值班，真有帮助。我还觉得挺有成就感的。</li>
+<li>值班我就发现了这些痛点，太浪费时间了值班。老是要翻日志看监控，回复很多相同的问题。说白了就是比较打杂，维护老项目。让我打杂但是我不能真打杂浪费时间啊，所以我偷偷做这个项目，好在最后做出来了，不论是对其他人值班，还是对自己值班，真有帮助。我还觉得挺有成就感的</li>
 </ul>
+<p>多模态能力</p>
 <p><strong>改进方向</strong></p>
 <ul>
 <li>增加多模态能力</li>
