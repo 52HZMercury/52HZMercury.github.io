@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260325153648652.png">
 <meta property="article:published_time" content="2026-03-17T06:17:25.000Z">
-<meta property="article:modified_time" content="2026-04-07T11:01:28.164Z">
+<meta property="article:modified_time" content="2026-04-08T05:15:22.265Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +236,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          21k 字
+          22k 字
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
           <!-- compatible with older versions-->
-          67 分钟
+          68 分钟
         
       </span>
     
@@ -447,10 +447,14 @@
 <li><strong>Token 优化</strong>：Agent 是“Token 吞噬者”，OpenClaw 采用了动态上下文裁剪。</li>
 <li><strong>评估体系（Evals）</strong>：如何量化 Agent 的成功率？面试官看重你是否拥有一套基于 <strong>Task Success Rate</strong> 的自动化测试方案。</li>
 </ul>
+<p>openclaw的记忆机制：三层，</p>
+<p>会话记忆：agents/main/sessions/f4fc3f5.json，json格式，保留了 Agent 的思考过程（CoT）、工具调用（Tool Calls）、API 耗时以及系统元数据</p>
+<p>长期记忆：workspace/memory.md  用户喜好，重要的事实</p>
+<p>日常记忆：workspace/memory/2026-03-27.md  日常记忆，只追加</p>
 <p><strong>agent的组成部分</strong></p>
 <p>大语言模型，规划模块，记忆模块，工具集</p>
 <p><strong>简单介绍一下你设计的几个Agent</strong><br>
-在项目里一共实现了2个Agent，分别是知识库Agent、对话Agent和运维Agent。</p>
+在项目里一共实现了2个Agent，分别是对话Agent和运维Agent，同时还做了RAG。</p>
 <p>知识库的核心目标是作为团队文档管理和AI应用的基础设施，通过自动化流程，将我们日常积累的文档<br>
 （<strong>告警处理手册、技术方案、错误码文档</strong>），转化为可被AI高效检索的向量，为后续的RAG提供了高质量的向量数据支撑。举个最常见的例子，当我们想根据一个模糊的回忆找文档的时候，可以根据模糊的提问快速检索到对应文档，不再需要再嵌套目录里面一个一个翻了。</p>
 <ul>
@@ -561,6 +565,8 @@
 <th>Milvus</th>
 <th>Pinecone</th>
 <th>PGVector(PostgreSQL插件)</th>
+<th>Chroma</th>
+<th>Qdrant</th>
 </tr>
 </thead>
 <tbody>
@@ -569,30 +575,40 @@
 <td>私有化/云端 (Docker/K8s)</td>
 <td>仅 SaaS</td>
 <td>插件集成</td>
+<td>无原生持久化存储，依赖外部数据库</td>
+<td>单机稍弱，分布式提升有限</td>
 </tr>
 <tr>
 <td>开源</td>
 <td>是</td>
 <td>否</td>
 <td>是</td>
+<td><strong>Python 环境</strong></td>
+<td></td>
 </tr>
 <tr>
 <td>扩展性</td>
 <td><strong>极强 (分布式)</strong></td>
 <td>强 (自动)</td>
 <td>弱 (单机垂直)</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td>索引算法</td>
 <td>全面 (HNSW, IVF, etc.)</td>
 <td>闭源优化</td>
 <td>较少 (HNSW, IVFFlat)</td>
+<td></td>
+<td>高并发场景下吞吐量有限</td>
 </tr>
 <tr>
 <td>适用场景</td>
 <td><strong>大规模、私有化、复杂运维</strong></td>
 <td>快速原型、海外业务</td>
 <td>中小规模、强事务关联</td>
+<td>轻量级，API 简单</td>
+<td>分布式性能不如 Milvus</td>
 </tr>
 </tbody>
 </table>
@@ -788,11 +804,12 @@ WebSocket协议，之后双方就可以在这个连接上进行全双工的双�
 <strong>Type改成text/event-stream</strong>就可以了，后续发送消息要按照SSE数据格式发送。<br>
 SSE的数据格式非常简单，每条消息由多个字段组成，每个字段由字段名、冒号和字段值组成，以换行符分隔。</p>
 <p><strong>agent的评价指标</strong></p>
-<p>成功率 (Success Rate / Pass@1): Agent 独立完成预设运维任务（如“查出昨晚 2 点 CPU 飙升的原因”）的百分比。</p>
-<p>重规划次数 (Re-plan Count): 在 <code>Plan-Execute-Replan</code> 模式下，Agent 纠正错误的平均轮数。</p>
-<p>工具调用准确率 (Tool Call Accuracy)</p>
-<p>端到端全链路延迟 (E2E Latency):</p>
-<p>Token 消耗与成本 (Cost per Task)</p>
+<p>任务成功率 (Success Rate / Pass@1):</p>
+<p>​     Agent 独立完成预设运维任务（如“查出昨晚 2 点 CPU 飙升的原因”）的百分比。</p>
+<p>效率：</p>
+<p>​	平均用了多少步，重规划次数 (Re-plan Count): 在 <code>Plan-Execute-Replan</code> 模式下，Agent 纠正错误的平均轮数。</p>
+<p>​	工具调用准确率 (Tool Call Accuracy)</p>
+<p>​	Token 消耗与成本 (Cost per Task)</p>
 <p><strong>prompt设计</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><code class="hljs java">你是 Planner Agent，同时承担 Replanner 角色，负责：<br>    <span class="hljs-number">1.</span> 读取当前输入任务 &#123;input&#125; 以及 Executor 的最近反馈 &#123;executor_feedback&#125;。<br>    <span class="hljs-number">2.</span> 分析 Prometheus 告警、日志、内部文档等信息，制定可执行的下一步步骤。<br>    <span class="hljs-number">3.</span> 在执行阶段，输出 JSON，包含 decision (PLAN|EXECUTE|FINISH)、step 描述、预期要调用的工具、以及必要的上下文。<br>    <span class="hljs-number">4.</span> 调用任何腾讯云日志/主题相关工具时，region 参数必须使用连字符格式（如 ap-guangzhou），若不确定请省略以使用默认值。<br>    <span class="hljs-number">5.</span> 严格禁止编造数据，只能引用工具返回的真实内容；如果连续 <span class="hljs-number">3</span> 次调用同一工具仍失败或返回空结果，需停止该方向并在最终报告的结论部分说明<span class="hljs-string">&quot;无法完成&quot;</span>的原因。<br><br>    ## 最终报告输出要求（CRITICAL）<br><br>    当 decision=FINISH 时，你必须：<br>    <span class="hljs-number">1.</span> **不要输出 JSON 格式**<br>    <span class="hljs-number">2.</span> **直接输出完整的 Markdown 格式报告文本**<br>    <span class="hljs-number">3.</span> **报告必须严格遵循以下模板**：<br><br>    # 告警分析报告<br>   <br>    ---<br>   <br>    ## 📋 活跃告警清单<br>   <br>    | 告警名称 | 级别 | 目标服务 | 首次触发时间 | 最新触发时间 | 状态 |<br>    |---------|------|----------|-------------|-------------|------|<br>    | [告警<span class="hljs-number">1</span>名称] | [级别] | [服务名] | [时间] | [时间] | 活跃 |<br>    | [告警<span class="hljs-number">2</span>名称] | [级别] | [服务名] | [时间] | [时间] | 活跃 |<br>   <br>    ---<br>   <br>    ## 🔍 告警根因分析<span class="hljs-number">1</span> - [告警名称]<br>   <br>    ### 告警详情<br>    - **告警级别**: [级别]<br>   - **受影响服务**: [服务名]<br>   - **持续时间**: [X分钟]<br><br>   ### 症状描述<br>       [根据监控指标描述症状]<br><br>       ### 日志证据<br>       [引用查询到的关键日志]<br><br>       ### 根因结论<br>       [基于证据得出的根本原因]<br><br>       ---<br><br>       ## 🛠️ 处理方案执行<span class="hljs-number">1</span> - [告警名称]<br><br>       ### 已执行的排查步骤<br>       <span class="hljs-number">1.</span> [步骤<span class="hljs-number">1</span>]<br>       <span class="hljs-number">2.</span> [步骤<span class="hljs-number">2</span>]<br><br>       ### 处理建议<br>       [给出具体的处理建议]<br><br>       ### 预期效果<br>       [说明预期的效果]<br><br>       ---<br><br>       ## 🔍 告警根因分析<span class="hljs-number">2</span> - [告警名称]<br>       [如果有第<span class="hljs-number">2</span>个告警，重复上述格式]<br><br>       ---<br><br>       ## 📊 结论<br><br>       ### 整体评估<br>       [总结所有告警的整体情况]<br><br>       ### 关键发现<br>       - [发现<span class="hljs-number">1</span>]<br>       - [发现<span class="hljs-number">2</span>]<br><br>       ### 后续建议<br>       <span class="hljs-number">1.</span> [建议<span class="hljs-number">1</span>]<br>       <span class="hljs-number">2.</span> [建议<span class="hljs-number">2</span>]<br><br>       ### 风险评估<br>       [评估当前风险等级和影响范围]<br><br><br>       **重要提醒**：<br>       - 最终输出必须是纯 Markdown 文本，不要包含 JSON 结构<br>       - 不要使用 <span class="hljs-string">&quot;finalReport&quot;</span>: <span class="hljs-string">&quot;...&quot;</span> 这样的格式<br>           - 直接从 <span class="hljs-string">&quot;# 告警分析报告&quot;</span> 开始输出<br>           - 所有内容必须基于工具查询的真实数据，严禁编造<br>           - 如果某个步骤失败，在结论中如实说明，不要跳过<br><br></code></pre></td></tr></table></figure>
 <p>一、流式输出</p>
@@ -1158,9 +1175,10 @@ SSE的数据格式非常简单，每条消息由多个字段组成，每个字�
 <li>
 <p>Embedding模型如何选型？中英文文档混合场景，如何选择合适的Embedding模型，平衡效果与速度？</p>
 </li>
-<li>
-<p>向量检索中，余弦相似度、点积、欧氏距离的实际应用差异？如何选择？</p>
-</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260408112909280.png" srcset="/img/newloading.gif" lazyload alt="image-20260408112909280"></p>
+<ol start="50">
+<li>向量检索中，余弦相似度、点积、欧氏距离的实际应用差异？如何选择？</li>
 </ol>
 <p>余弦：只关注两个向量在多维空间中的“夹角”，完全忽略向量的绝对长度</p>
 <p>点积：既看方向，又看长度。方向越一致、向量本身的绝对值越大，得分越高</p>
