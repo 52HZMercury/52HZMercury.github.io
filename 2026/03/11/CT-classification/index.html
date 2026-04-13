@@ -25,11 +25,11 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260311170051927.png">
 <meta property="article:published_time" content="2026-03-11T12:57:25.000Z">
-<meta property="article:modified_time" content="2026-03-30T11:33:59.652Z">
+<meta property="article:modified_time" content="2026-04-13T13:32:31.771Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
-<meta property="article:tag" content="分类">
 <meta property="article:tag" content="论文">
+<meta property="article:tag" content="分类">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260311170051927.png">
   
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          4.3k 字
+          4.8k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          14 分钟
+          15 分钟
         
       </span>
     
@@ -484,7 +484,75 @@
 </tr>
 </tbody>
 </table>
+<p>改为五折</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>fold</th>
+<th>acc</th>
+<th>auc</th>
+<th>ppv</th>
+<th>npv</th>
+<th>rec</th>
+<th>spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_260413-0815</td>
+<td>0</td>
+<td>0.8333</td>
+<td>0.9306</td>
+<td>0.5000</td>
+<td>0.9118</td>
+<td>0.5714</td>
+<td>0.8857</td>
+</tr>
+<tr>
+<td>exp_260413-0935</td>
+<td>1</td>
+<td>0.8333</td>
+<td>0.7102</td>
+<td>0.0000</td>
+<td>0.8333</td>
+<td>0.0000</td>
+<td>1.0000</td>
+</tr>
+<tr>
+<td>exp_260413-1143</td>
+<td>2</td>
+<td>0.8810</td>
+<td>0.9510</td>
+<td>1.0000</td>
+<td>0.8750</td>
+<td>0.2857</td>
+<td>1.0000</td>
+</tr>
+<tr>
+<td>exp_</td>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>exp_</td>
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="新的数据">新的数据</h3>
+<p>其他医院</p>
 <p>img + CA + CAC + 临床文本</p>
 <table>
 <thead>
@@ -533,6 +601,84 @@
 <td>1.0</td>
 <td>0.0</td>
 </tr>
+</tbody>
+</table>
+<p>华西的</p>
+<p>img + CA + CAC + 临床文本</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>acc</th>
+<th>auc</th>
+<th>ppv</th>
+<th>npv</th>
+<th>rec</th>
+<th>spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_260409-1755</td>
+<td>0.7328</td>
+<td>0.6619</td>
+<td>0.7328</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>exp_260410-1453</td>
+<td>0.6957</td>
+<td>0.6776</td>
+<td>0.6957</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>exp_260410-1558</td>
+<td>0.7381</td>
+<td>0.8554</td>
+<td>0.6923</td>
+<td>0.8125</td>
+<td>0.8571</td>
+<td>0.6190</td>
+</tr>
+</tbody>
+</table>
+<p>华西的部分做训练，部分做验证，其他医院全部为验证，减少临床文本  只保留标绿的列</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>acc</th>
+<th>auc</th>
+<th>ppv</th>
+<th>npv</th>
+<th>rec</th>
+<th>spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_</td>
+<td>out1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
 <tr>
 <td></td>
 <td></td>
@@ -578,9 +724,9 @@
       
         <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
       
-        <a href="/tags/%E5%88%86%E7%B1%BB/">#分类</a>
-      
         <a href="/tags/%E8%AE%BA%E6%96%87/">#论文</a>
+      
+        <a href="/tags/%E5%88%86%E7%B1%BB/">#分类</a>
       
     </div>
   
