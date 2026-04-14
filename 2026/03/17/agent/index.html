@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260325153648652.png">
 <meta property="article:published_time" content="2026-03-17T06:17:25.000Z">
-<meta property="article:modified_time" content="2026-04-10T09:00:20.237Z">
+<meta property="article:modified_time" content="2026-04-14T02:53:15.043Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -248,7 +248,7 @@
         
         
           <!-- compatible with older versions-->
-          68 分钟
+          70 分钟
         
       </span>
     
@@ -451,6 +451,11 @@
 <p>会话记忆：agents/main/sessions/f4fc3f5.json，json格式，保留了 Agent 的思考过程（CoT）、工具调用（Tool Calls）、API 耗时以及系统元数据</p>
 <p>长期记忆：workspace/memory.md  用户喜好，重要的事实</p>
 <p>日常记忆：workspace/memory/2026-03-27.md  日常记忆，只追加</p>
+<p>claude code 的上下文管理</p>
+<p>当上下文接近满载时，CC 会按以下优先级依次尝试压缩，从最轻量到最激进：</p>
+<p>第一层：Microcompact（微压缩）： 这是最日常、最无感的“保洁”操作。它会直接清理掉那些“已经没用”的旧工具执行结果，比如几轮前的终端输出、搜索结果等，只保留对话本身。这个过程不调用大模型，几乎不消耗时间。  第二层：Autocompact（自动压缩）： 当上下文达到一个预设阈值（例如，200K 窗口用到 167K token）时会自动触发。它会调用一个轻量级模型（如 Haiku）将整段对话历史生成一份结构化的摘要，然后用这份摘要替换掉原始历史，再恢复最近的关键信息，让任务无缝继续。</p>
+<p>第三层：Full Compact（全量压缩）： 这是真正的“大扫除”。当自动压缩仍不够时，它会将整个对话历史进行更彻底的摘要，可能只保留最近的几个文件和一份宏大的总结，中间的推理过程会被丢弃。</p>
+<p>第四层：Reactive Compact（反应式压缩）： 这是最后的“抢救”手段。如果前几步都失败，API 直接报错“上下文太长”，这时会强制触发一次或多次压缩，通过裁剪最老的对话来解决问题。如果连续失败，系统会暂时停止重试以避免浪费资源。</p>
 <p><strong>agent的组成部分</strong></p>
 <p>大语言模型，规划模块，记忆模块，工具集</p>
 <p><strong>简单介绍一下你设计的几个Agent</strong><br>
