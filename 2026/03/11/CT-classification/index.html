@@ -25,11 +25,11 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260311170051927.png">
 <meta property="article:published_time" content="2026-03-11T12:57:25.000Z">
-<meta property="article:modified_time" content="2026-04-17T07:38:09.641Z">
+<meta property="article:modified_time" content="2026-05-30T09:26:57.868Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
-<meta property="article:tag" content="论文">
 <meta property="article:tag" content="分类">
+<meta property="article:tag" content="论文">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260311170051927.png">
   
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          5k 字
+          5.9k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          16 分钟
+          19 分钟
         
       </span>
     
@@ -706,13 +706,258 @@
 </thead>
 <tbody>
 <tr>
-<td>exp_</td>
-<td>out1</td>
+<td>exp_260417-1536</td>
+<td>0.7941</td>
+<td>0.6621</td>
+<td>0.0000</td>
+<td>0.7941</td>
+<td>0.0000</td>
+<td>1.0000</td>
+</tr>
+</tbody>
+</table>
+<p>新划分</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">exp</th>
+<th>acc</th>
+<th>auc</th>
+<th>ppv</th>
+<th>npv</th>
+<th>rec</th>
+<th>spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">exp_260420-1455</td>
+<td>0.7952</td>
+<td>0.6433</td>
+<td>0.0000</td>
+<td>0.7952</td>
+<td>0.0000</td>
+<td>1.0000</td>
+</tr>
+<tr>
+<td style="text-align:center">exp_260421-2052</td>
+<td>0.7952</td>
+<td>0.6459</td>
+<td>0.0000</td>
+<td>0.7952</td>
+<td>0.0000</td>
+<td>1.0000</td>
+</tr>
+<tr>
+<td style="text-align:center">exp_260423-1506</td>
+<td>0.6555</td>
+<td>0.6277</td>
+<td>0.3158</td>
+<td>0.7200</td>
+<td>0.1765</td>
+<td>0.8471</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>acc</th>
+<th>auc</th>
+<th>ppv</th>
+<th>npv</th>
+<th>rec</th>
+<th>spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_260423-1538</td>
+<td>0.7708</td>
+<td>0.7234</td>
+<td>0.8333</td>
+<td>0.7564</td>
+<td>0.4412</td>
+<td>0.9516</td>
+</tr>
+</tbody>
+</table>
+<p>两个验证集</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>acc</th>
+<th>auc</th>
+<th>ppv</th>
+<th>npv</th>
+<th>rec</th>
+<th>spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_260427-0029  huaxi</td>
+<td>0.6071</td>
+<td>0.5957</td>
+<td>0.3913</td>
+<td>0.6885</td>
+<td>0.3214</td>
+<td>0.7500</td>
+</tr>
+<tr>
+<td>exp_260427-0029  other</td>
+<td>0.8889</td>
+<td>0.9444</td>
+<td>0.7500</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>0.8333</td>
+</tr>
+</tbody>
+</table>
+<p>device-30-success</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>acc</th>
+<th>auc</th>
+<th>ppv</th>
+<th>npv</th>
+<th>rec</th>
+<th>spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>拉跨</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>跑华西</p>
+<p>bad-value</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>acc</th>
+<th>auc</th>
+<th>ppv</th>
+<th>npv</th>
+<th>rec</th>
+<th>spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_260519-0707</td>
+<td>0.7609</td>
+<td>0.6107</td>
+<td>0.2222</td>
+<td>0.7984</td>
+<td>0.0714</td>
+<td>0.9364</td>
+</tr>
+<tr>
+<td>exp_260519-1335   *</td>
+<td>0.6522</td>
+<td>0.6097</td>
+<td>0.2826</td>
+<td>0.8370</td>
+<td>0.4643</td>
+<td>0.7000</td>
+</tr>
+</tbody>
+</table>
+<p>再用华西权重跑other</p>
+<p>bad-value</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>acc</th>
+<th>auc</th>
+<th>ppv</th>
+<th>npv</th>
+<th>rec</th>
+<th>spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_260520-0927</td>
+<td>0.8889</td>
+<td>0.8750</td>
+<td>0.8333</td>
+<td>0.9167</td>
+<td>0.8333</td>
+<td>0.9167</td>
+</tr>
+</tbody>
+</table>
+<p>全部的数据</p>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>acc</th>
+<th>auc</th>
+<th>ppv</th>
+<th>npv</th>
+<th>rec</th>
+<th>spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_260526-1541</td>
+<td>0.8929</td>
+<td>0.8712</td>
+<td>0.7143</td>
+<td>0.9524</td>
+<td>0.8333</td>
+<td>0.9091</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>exp</th>
+<th>acc</th>
+<th>auc</th>
+<th>ppv</th>
+<th>npv</th>
+<th>rec</th>
+<th>spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp_260519-1335 *   (huaxi)</td>
+<td>0.6522</td>
+<td>0.6097</td>
+<td>0.2826</td>
+<td>0.8370</td>
+<td>0.4643</td>
+<td>0.7000</td>
+</tr>
+<tr>
+<td>exp_260526-1541 (other)</td>
+<td>0.8929</td>
+<td>0.8712</td>
+<td>0.7143</td>
+<td>0.9524</td>
+<td>0.8333</td>
+<td>0.9091</td>
 </tr>
 </tbody>
 </table>
@@ -750,9 +995,9 @@
       
         <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
       
-        <a href="/tags/%E8%AE%BA%E6%96%87/">#论文</a>
-      
         <a href="/tags/%E5%88%86%E7%B1%BB/">#分类</a>
+      
+        <a href="/tags/%E8%AE%BA%E6%96%87/">#论文</a>
       
     </div>
   

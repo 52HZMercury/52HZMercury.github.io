@@ -25,11 +25,11 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-a.haoyishu.com/article/content/8059/df015c9b-95d7-4f11-bbb1-59e2795ed459.jpg">
 <meta property="article:published_time" content="2025-09-25T12:57:25.000Z">
-<meta property="article:modified_time" content="2026-02-24T03:33:40.003Z">
+<meta property="article:modified_time" content="2026-06-14T08:48:39.669Z">
 <meta property="article:author" content="Mercury">
 <meta property="article:tag" content="深度学习">
-<meta property="article:tag" content="论文">
 <meta property="article:tag" content="分类">
+<meta property="article:tag" content="论文">
 <meta property="article:tag" content="mamba">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://img-a.haoyishu.com/article/content/8059/df015c9b-95d7-4f11-bbb1-59e2795ed459.jpg">
@@ -239,7 +239,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          42k 字
+          63k 字
         
       </span>
     
@@ -251,7 +251,7 @@
         
         
           <!-- compatible with older versions-->
-          132 分钟
+          197 分钟
         
       </span>
     
@@ -6130,6 +6130,7 @@
 <p><img src="https://cdn.jsdelivr.net/gh/52HZMercury/img/blog/image-20260128145509130.png" srcset="/img/newloading.gif" lazyload alt="image-20260128145509130"></p>
 <h2 id="5-sota实验">5. sota实验</h2>
 <h3 id="5-1-camus">5.1 camus</h3>
+<p>汇总</p>
 <table>
 <thead>
 <tr>
@@ -6143,15 +6144,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>BI-Mamba</td>
-<td>78.75</td>
-<td>73.45</td>
-<td>64.87</td>
-<td>85.01</td>
-<td>54.85</td>
-<td>/</td>
-</tr>
 <tr>
 <td>CARL</td>
 <td>83.75</td>
@@ -6180,7 +6172,61 @@
 <td>/</td>
 </tr>
 <tr>
-<td>MIMamba</td>
+<td>E-ViM³</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E-ViM³ + plugin</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>XFMamba</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>XFMamba + plugin</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>BI-Mamba</td>
+<td>78.75</td>
+<td>73.45</td>
+<td>64.87</td>
+<td>85.01</td>
+<td>54.85</td>
+<td>/</td>
+</tr>
+<tr>
+<td>BI-Mamba + plugin</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DK-Mamba</td>
 <td><strong>85.00</strong></td>
 <td><strong>83.15</strong></td>
 <td><strong>77.78</strong></td>
@@ -6190,7 +6236,78 @@
 </tr>
 </tbody>
 </table>
+<p>BI-mamba + plugin</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>acc</th>
+<th>auc</th>
+<th>f1</th>
+<th>precision</th>
+<th>recall</th>
+<th>specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment_157   fold_1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_157   fold_2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_157   fold_3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_157   fold_4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_157   fold_5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Experiment_157</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="5-2-hmc">5.2 hmc</h3>
+<p>汇总</p>
 <table>
 <thead>
 <tr>
@@ -6211,15 +6328,6 @@
 <td>81.57</td>
 <td>88.26</td>
 <td>77.64</td>
-<td>/</td>
-</tr>
-<tr>
-<td>BI-Mamba</td>
-<td>77.50</td>
-<td>73.07</td>
-<td>83.85</td>
-<td>78.12</td>
-<td>91.59</td>
 <td>/</td>
 </tr>
 <tr>
@@ -6259,7 +6367,61 @@
 <td>/</td>
 </tr>
 <tr>
-<td>MIMamba</td>
+<td>E-ViM³</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E-ViM³ + plugin</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>XFMamba</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>XFMamba + plugin</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>BI-Mamba</td>
+<td>77.50</td>
+<td>73.07</td>
+<td>83.85</td>
+<td>78.12</td>
+<td>91.59</td>
+<td>/</td>
+</tr>
+<tr>
+<td>BI-Mamba + plugin</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DK-Mamba</td>
 <td><strong>86.25</strong></td>
 <td><strong>91.08</strong></td>
 <td><strong>88.99</strong></td>
@@ -8432,6 +8594,568 @@
 </tr>
 </tbody>
 </table>
+<h2 id="8-序列长度实验">8. 序列长度实验</h2>
+<table>
+<thead>
+<tr>
+<th>Backbone</th>
+<th>Plugin</th>
+<th>8 Frames AUC</th>
+<th>16 Frames AUC</th>
+<th>32 Frames AUC</th>
+<th>Avg. Gain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E-ViM³</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E-ViM³ + plugin</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>XFMamba</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>XFMamba + plugin</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>BI-Mamba</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>BI-Mamba + plugin</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DK-Mamba</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-审稿意见">9. 审稿意见</h2>
+<p>Reviewer #1</p>
+<p>Questions</p>
+<ul>
+<li>\3. Please categorize the relevance of the paper (you may choose more than one). Note the different assessment criteria for the different paper categories as outlined in the Reviewer Guidelines: <a target="_blank" rel="noopener" href="https://conferences.miccai.org/2026/en/REVIEWER-GUIDELINES.html">https://conferences.miccai.org/2026/en/REVIEWER-GUIDELINES.html</a>
+<ul>
+<li>MIC</li>
+</ul>
+</li>
+<li>\4. How would you describe the paper?
+<ul>
+<li>Both</li>
+</ul>
+</li>
+<li>\5. Please describe the main contribution of the paper.
+<ul>
+<li>This study proposes DK-Mamba, a domain knowledge-fused multi-view state space model for echocardiographic analysis of myocardial infarction. To address the bottleneck that existing Mamba models are prone to selective memory distortion and miss critical pathological features in low-signal-to-noise-ratio multi-view ultrasound videos, built upon Mamba as the backbone, the model adopts a double refinement strategy: first, the domain knowledge-guided feature refinement module injects clinical prior knowledge to calibrate the selective features; then, the stable anatomical consensus provided by the A2C view is used to perform secondary calibration on the dynamic features of the A4C view. It finally achieves state-of-the-art performance in the myocardial infarction classification task on both the CAMUS and HMC-QU datasets.</li>
+</ul>
+</li>
+<li>\6. Please list the major strengths of the paper. For example, you could highlight a novel formulation, an original way to use data, a demonstration of clinical feasibility, a novel application, a particularly strong evaluation, or anything else that is a strong aspect of this work. Please provide details, for instance, if a method is novel, explain what aspect is novel and why this is interesting.
+<ul>
+<li>1.DK-Mamba deeply integrates clinical domain knowledge with multi-view anatomical consensus, and its structural design is reasonable. It solves the bottleneck problem that Mamba is prone to selective memory distortion and misses critical pathological features in low signal-to-noise ratio ultrasound videos.<br>
+2.Experimental results show that DK-Mamba achieves state-of-the-art performance on both the CAMUS and HMC-QU myocardial infarction datasets. In particular, it achieves significant improvements in various metrics that are crucial for clinical diagnosis, and effectively reduces the missed detection rate.</li>
+</ul>
+</li>
+<li>\7. Please list the major weaknesses of the paper. Please provide details: for instance, if you state that a formulation, way of using data, demonstration of clinical feasibility, or application is not novel, then you must provide specific references to prior work.
+<ul>
+<li>1.The abstract contains excessive background information. Quantitative experimental results and dataset sample sizes should be added (e.g., F1-score, ACC metrics, and the quantitative improvements over existing state-of-the-art methods).<br>
+2.Definitions of A4C and A2C should be provided, along with detailed explanations of why A4C is prone to missing tiny lesions and why A2C can provide anatomical consensus. In addition, the dataset introduction should be revised to explicitly state whether both datasets include the two views for each case.<br>
+3.The main contributions in the introduction are ambiguous and may lead to the misunderstanding that this paper proposes fundamental improvements to the Mamba model itself. It is recommended to completely rewrite the main contributions section to clarify the actual innovations of this work.<br>
+4.The parameter freezing status of the two pre-trained encoders (EchoPrimeVideoEncoder and EchoPrimeTextEncoder) should be clearly marked in the corresponding figures.<br>
+5.The full name of GSC is not provided when it first appears in Figure 1, even though it is a common consensus in the field.<br>
+<a target="_blank" rel="noopener" href="http://6.It">6.It</a> should be explicitly clarified whether the video feature fv by EchoPrimeVideoEncoder corresponds to the A2C view, the A4C view, or both.<br>
+7.The authoritative source of the text prompts used for the pre-trained text encoder should be clearly stated.<br>
+8.When calculating the cosine similarity, the rationale for using dual-view features should be explained. In addition, there is an inconsistency in the figures: Figure 1(a) does not show A2C as an input to the DKFR module, but Figure 1(b) does.<br>
+9.Equations (3) and (4) require further explanation of their physical meanings and design motivations, rather than just presenting mathematical expressions.<br>
+10.The disclosure of experimental settings is insufficient. The complete data preprocessing pipeline should be added, and the reason for uniformly sampling 16 frames should be explained to improve the reproducibility of the model. In addition, the authors did not mention the basic settings of the loss function or provide a brief introduction to each evaluation metric.<br>
+11.The comparison methods in Table 1 are few and outdated. More representative state-of-the-art models from the past three years (2023-2026) should be added for fair comparison.<br>
+12.Table 2 shows that DK-Mamba has a significantly larger parameter count and higher computational cost compared to single-view baseline models. The statement “maintaining a relatively balanced computational efficiency” in the original text needs further clarification. In addition, the computational efficiency analysis of DK-Mamba under the dual-view setting is missing.</li>
+</ul>
+</li>
+<li>\8. Please rate the clarity and organization of the paper.
+<ul>
+<li>Satisfactory</li>
+</ul>
+</li>
+<li>\9. Please comment on the reproducibility of the paper. Please be aware that providing code and data is a plus, but not a requirement for acceptance.
+<ul>
+<li>The submission has provided an anonymized link to the source code, dataset, or any other dependencies.</li>
+</ul>
+</li>
+<li>\10. Code of Ethics Check. Based on your review and your understanding of the MICCAI Scientific Code of Ethics, do you believe this submission may involve a potential ethics concern or violation? Reviewers are expected to familiarize themselves with the MICCAI Scientific Code of Ethics before completing this assessment: <a target="_blank" rel="noopener" href="https://miccai.org/index.php/about-miccai/policies/scientific-code-of-ethics/">https://miccai.org/index.php/about-miccai/policies/scientific-code-of-ethics/</a>
+<ul>
+<li>No</li>
+</ul>
+</li>
+<li>\13. Rate the paper on a scale of 1-6, 6 being the strongest (6-4: accept; 3-1: reject). Please use the entire range of the distribution. Spreading the score helps create a distribution for decision-making.
+<ul>
+<li>\4. Weak Accept — marginally above the acceptance threshold, but would not mind if rejected, dependent on rebuttal</li>
+</ul>
+</li>
+<li>\14. Please justify your recommendation. What were the major factors that led you to your overall score for this paper?
+<ul>
+<li>This paper proposes DK-Mamba for myocardial infarction echocardiographic analysis by fusing domain knowledge and multi-view anatomical consensus, which alleviates Mamba’s memory distortion issue and achieves state-of-the-art performance on two datasets. These merits positively influenced my score.<br>
+Ambiguous contributions and missing implementation details; and unsupported computational efficiency claims. These factors collectively determined my overall score.</li>
+</ul>
+</li>
+<li>\16. In view of your answers above and your overall experience, how would you rate your confidence in your review?
+<ul>
+<li>Confident but not absolutely certain (3)</li>
+</ul>
+</li>
+</ul>
+<p>Reviewer #2</p>
+<p>Questions</p>
+<ul>
+<li>
+<p>\3. Please categorize the relevance of the paper (you may choose more than one). Note the different assessment criteria for the different paper categories as outlined in the Reviewer Guidelines: <a target="_blank" rel="noopener" href="https://conferences.miccai.org/2026/en/REVIEWER-GUIDELINES.html">https://conferences.miccai.org/2026/en/REVIEWER-GUIDELINES.html</a></p>
+<ul>
+<li>MIC</li>
+</ul>
+</li>
+<li>
+<p>\4. How would you describe the paper?</p>
+<ul>
+<li>Application study</li>
+</ul>
+</li>
+<li>
+<p>\5. Please describe the main contribution of the paper.</p>
+<ul>
+<li>This paper proposes DK-Mamba, a multi-view echocardiography model for myocardial infarction analysis. The main idea is to refine Mamba features in two stages: first through domain knowledge guidance using prompt-based semantic priors, and then through cross-view anatomical refinement using complementary echo views. The paper tries to make Mamba more reliable in noisy ultrasound videos by correcting its features with both clinical knowledge and multi-view consistency.</li>
+</ul>
+</li>
+<li>
+<p>\6. Please list the major strengths of the paper. For example, you could highlight a novel formulation, an original way to use data, a demonstration of clinical feasibility, a novel application, a particularly strong evaluation, or anything else that is a strong aspect of this work. Please provide details, for instance, if a method is novel, explain what aspect is novel and why this is interesting.</p>
+<ul>
+<li>
+<p>The overall intuition is easy to appreciate. In echocardiography, different views often provide complementary information, so using A4C and A2C together for MI-related analysis makes a lot of sense. The idea of first using semantic priors to guide the model and then using another view to stabilize the decision is also quite natural from a clinical perspective.</p>
+<p>The paper has a clear story. The proposed Double Refinement framework is easy to follow conceptually: one stage tries to correct the features with domain knowledge, and the second stage tries to make them more anatomically consistent across views. This gives the method a coherent narrative, which helps the reader understand what the model is trying to do and why.</p>
+<p>Finally, the paper includes both quantitative results and some qualitative analysis (e.g., Grad-CAM visualizations, ablation study results).</p>
+</li>
+</ul>
+</li>
+<li>
+<p>\7. Please list the major weaknesses of the paper. Please provide details: for instance, if you state that a formulation, way of using data, demonstration of clinical feasibility, or application is not novel, then you must provide specific references to prior work.</p>
+<ul>
+<li>
+<p>The paper does not fully separate the effect of the proposed method from the effect of strong external priors. In particular, the DKFR module relies on frozen EchoPrime video and text encoders, which are already powerful pretrained models. It is hard to tell how much of the improvement comes from the proposed refinement mechanism itself.</p>
+<p>I was also not fully convinced by the baseline selection. Several of the compared methods are not specifically designed for myocardial infarction detection in echocardiography, so the state-of-the-art claim feels a bit less strong than it first appears. I would have found the empirical case more convincing if the paper compared more directly against task-matched and domain-matched baselines.</p>
+<p>The use of CAMUS also raises some questions. The paper explains that CAMUS does not originally provide MI labels, so the authors added ischemia/wall-motion annotations and filtered the dataset. That is understandable from a practical point of view, but it also makes the benchmark less standard and somewhat harder to interpret in terms of reproducibility.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>\8. Please rate the clarity and organization of the paper.</p>
+<ul>
+<li>Satisfactory</li>
+</ul>
+</li>
+<li>
+<p>\9. Please comment on the reproducibility of the paper. Please be aware that providing code and data is a plus, but not a requirement for acceptance.</p>
+<ul>
+<li>The authors claimed to release the source code and/or dataset upon acceptance of the submission.</li>
+</ul>
+</li>
+<li>
+<p>\10. Code of Ethics Check. Based on your review and your understanding of the MICCAI Scientific Code of Ethics, do you believe this submission may involve a potential ethics concern or violation? Reviewers are expected to familiarize themselves with the MICCAI Scientific Code of Ethics before completing this assessment: <a target="_blank" rel="noopener" href="https://miccai.org/index.php/about-miccai/policies/scientific-code-of-ethics/">https://miccai.org/index.php/about-miccai/policies/scientific-code-of-ethics/</a></p>
+<ul>
+<li>No</li>
+</ul>
+</li>
+<li>
+<p>\13. Rate the paper on a scale of 1-6, 6 being the strongest (6-4: accept; 3-1: reject). Please use the entire range of the distribution. Spreading the score helps create a distribution for decision-making.</p>
+<ul>
+<li>\3. Weak Reject — marginally below the acceptance threshold, but would not mind if accepted, dependent on rebuttal</li>
+</ul>
+</li>
+<li>
+<p>\14. Please justify your recommendation. What were the major factors that led you to your overall score for this paper?</p>
+<ul>
+<li>My score here was a little bit cautious. The clinical intuition is good, and I can see why the idea of combining domain knowledge with multi-view refinement is appealing. But I was not fully convinced by the experimental support: the baseline choice feels a bit uneven, the CAMUS setup is not fully standard, and it is hard to separate the effect of the proposed method from the benefit of strong external priors. I thought the idea was quite interesting, but the evidence felt less strong than the paper’s narrative.</li>
+</ul>
+</li>
+<li>
+<p>\16. In view of your answers above and your overall experience, how would you rate your confidence in your review?</p>
+<ul>
+<li>Confident but not absolutely certain (3)</li>
+</ul>
+</li>
+</ul>
+<p>Reviewer #3</p>
+<p>Questions</p>
+<ul>
+<li>\3. Please categorize the relevance of the paper (you may choose more than one). Note the different assessment criteria for the different paper categories as outlined in the Reviewer Guidelines: <a target="_blank" rel="noopener" href="https://conferences.miccai.org/2026/en/REVIEWER-GUIDELINES.html">https://conferences.miccai.org/2026/en/REVIEWER-GUIDELINES.html</a>
+<ul>
+<li>MIC</li>
+</ul>
+</li>
+<li>\4. How would you describe the paper?
+<ul>
+<li>Methodological contribution</li>
+</ul>
+</li>
+<li>\5. Please describe the main contribution of the paper.
+<ul>
+<li>This paper proposes a Domain Knowledge-Refined State Space Model for myocardial infarction (MI) diagnosis with three main contributions. First, expert-level clinical prior knowledge is incorporated into the Mamba architecture to improve pathological feature extraction robustness in low-SNR ultrasound images. Second, a Double Refinement Mechanism is introduced: semantic knowledge vectors first correct bias in Mamba’s selective states for precise MI localization, followed by cross-view anatomical consensus from the A2C pathway to further calibrate A4C dynamic features. This dual-path strategy effectively prevents key pathological features from being overlooked.</li>
+</ul>
+</li>
+<li>\6. Please list the major strengths of the paper. For example, you could highlight a novel formulation, an original way to use data, a demonstration of clinical feasibility, a novel application, a particularly strong evaluation, or anything else that is a strong aspect of this work. Please provide details, for instance, if a method is novel, explain what aspect is novel and why this is interesting.
+<ul>
+<li>The major strengths of this paper are as follows:<br>
+1.The integration of expert-level clinical prior knowledge into the Mamba architecture is well-motivated and directly addresses a practical limitation of existing vision-only models in medical ultrasound analysis.<br>
+2.The two-stage Double Refinement Mechanism effectively mitigate the risk of missing subtle pathological features under low-SNR conditions by combining semantic knowledge-guided refinement with cross-view anatomical information.</li>
+</ul>
+</li>
+<li>\7. Please list the major weaknesses of the paper. Please provide details: for instance, if you state that a formulation, way of using data, demonstration of clinical feasibility, or application is not novel, then you must provide specific references to prior work.
+<ul>
+<li>The major weaknesses of this paper are as follows:<br>
+\1. The overall methodological novelty of the paper is limited. The backbone relies on an existing U-shaped Mamba architecture, and the proposed additions including A2C/A4C interaction weights and textual feature fusion involve relatively straightforward operations such as simple feature concatenation, which lack sufficient technical novelty.<br>
+\2. As observed in Fig. 1 and the dataset description, the text data contains rich semantic information beyond image inputs. However, all compared multi-view baselines only accept images as input, creating an unfair comparison. Since the proposed method benefits from additional textual modality, it should be compared against multimodal methods that similarly take both image and text as inputs.<br>
+\3. Several compared methods, such as LoG-VMamba and LKM-UNet, are primarily designed for segmentation tasks and only accept image inputs, making them inappropriate baselines for this classification task. Given the growing body of Mamba-based multimodal classification research in recent years, the paper should include more relevant and task-aligned comparisons to better situate its contributions.</li>
+</ul>
+</li>
+<li>\8. Please rate the clarity and organization of the paper.
+<ul>
+<li>Satisfactory</li>
+</ul>
+</li>
+<li>\9. Please comment on the reproducibility of the paper. Please be aware that providing code and data is a plus, but not a requirement for acceptance.
+<ul>
+<li>The submission has provided an anonymized link to the source code, dataset, or any other dependencies.</li>
+</ul>
+</li>
+<li>\10. Code of Ethics Check. Based on your review and your understanding of the MICCAI Scientific Code of Ethics, do you believe this submission may involve a potential ethics concern or violation? Reviewers are expected to familiarize themselves with the MICCAI Scientific Code of Ethics before completing this assessment: <a target="_blank" rel="noopener" href="https://miccai.org/index.php/about-miccai/policies/scientific-code-of-ethics/">https://miccai.org/index.php/about-miccai/policies/scientific-code-of-ethics/</a>
+<ul>
+<li>No</li>
+</ul>
+</li>
+<li>\13. Rate the paper on a scale of 1-6, 6 being the strongest (6-4: accept; 3-1: reject). Please use the entire range of the distribution. Spreading the score helps create a distribution for decision-making.
+<ul>
+<li>\3. Weak Reject — marginally below the acceptance threshold, but would not mind if accepted, dependent on rebuttal</li>
+</ul>
+</li>
+<li>\14. Please justify your recommendation. What were the major factors that led you to your overall score for this paper?
+<ul>
+<li>The overall score primarily reflects two major concerns. First, the methodological novelty of this paper is insufficient. The proposed framework essentially combines an existing Mamba encoder with textual feature integration during decoding, which does not constitute a substantial technical contribution. Second, the experimental comparisons are incomplete and potentially unfair, as the proposed method leverages additional textual modality while all baselines are image-only, and several compared methods are designed for segmentation rather than classification. These concerns are detailed in the major weaknesses above.</li>
+</ul>
+</li>
+<li>\16. In view of your answers above and your overall experience, how would you rate your confidence in your review?
+<ul>
+<li>Very confident (4)</li>
+</ul>
+</li>
+</ul>
+<h3 id="中文的">中文的</h3>
+<p><strong>审稿人 #1</strong></p>
+<p><strong>问题</strong></p>
+<ul>
+<li><strong>3. 请对论文的相关性进行分类（可多选）。请注意不同论文类别的评估标准，详见审稿指南：<a target="_blank" rel="noopener" href="https://conferences.miccai.org/2026/en/REVIEWER-GUIDELINES.html">https://conferences.miccai.org/2026/en/REVIEWER-GUIDELINES.html</a></strong>
+<ul>
+<li>MIC</li>
+</ul>
+</li>
+<li><strong>4. 您如何描述这篇论文？</strong>
+<ul>
+<li>两者兼具</li>
+</ul>
+</li>
+<li><strong>5. 请描述论文的主要贡献。</strong>
+<ul>
+<li>本研究提出了 DK-Mamba，一种融合领域知识的多视图状态空间模型，用于心肌梗死的超声心动图分析。为解决现有 Mamba 模型在低信噪比多视图超声视频中易出现选择性记忆失真并遗漏关键病理特征的瓶颈，该模型以 Mamba 为骨干，采用双重精炼策略：首先，领域知识引导的特征精炼模块注入临床先验知识以校准选择性特征；然后，利用 A2C 切面提供的稳定解剖学共识，对 A4C 切面的动态特征进行二次校准。最终，在 CAMUS 和 HMC-QU 两个数据集的心肌梗死分类任务上均取得了最先进的性能。</li>
+</ul>
+</li>
+<li><strong>6. 请列出论文的主要优点。例如，您可以强调新颖的公式化表述、独特的数据使用方式、临床可行性的展示、新颖的应用、特别有力的评估，或任何其他体现本工作优势的方面。请提供细节，例如，如果方法新颖，请解释哪方面新颖及其为何有趣。</strong>
+<ul>
+<li>
+<ol>
+<li>DK-Mamba 深度融合了临床领域知识与多视图解剖学共识，其结构设计合理。解决了 Mamba 在低信噪比超声视频中易出现选择性记忆失真并遗漏关键病理特征的瓶颈问题。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>实验结果表明，DK-Mamba 在 CAMUS 和 HMC-QU 心肌梗死数据集上均达到了最先进的性能。尤其是在对临床诊断至关重要的多项指标上取得了显著提升，并有效降低了漏检率。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>7. 请列出论文的主要缺点。请提供细节：例如，如果您指出某种公式化表述、数据使用方式、临床可行性展示或应用不具备新颖性，则必须提供先前工作的具体参考文献。</strong>
+<ul>
+<li>
+<ol>
+<li>摘要包含过多背景信息。应添加定量实验结果和数据集样本量（例如，F1-score、ACC 指标，以及相较于现有最先进方法的定量改进幅度）。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>应给出 A4C 和 A2C 的定义，并详细解释为何 A4C 易遗漏微小病灶，以及为何 A2C 能提供解剖学共识。此外，数据集介绍部分应修改，明确说明两个数据集是否每个病例都包含这两个切面。</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>引言中的主要贡献表述模糊，可能导致读者误以为本文对 Mamba 模型本身提出了根本性改进。建议完全重写主要贡献部分，以阐明本工作的实际创新点。</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>两个预训练编码器（EchoPrimeVideoEncoder 和 EchoPrimeTextEncoder）的参数冻结状态应在相应图中明确标示。</li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li>GSC 的全称在图 1 首次出现时未提供，尽管这在本领域是常识。</li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li>应明确指出 EchoPrimeVideoEncoder 提取的视频特征 fv 是对应 A2C 切面、A4C 切面，还是两者。</li>
+</ol>
+</li>
+<li>
+<ol start="7">
+<li>应明确说明用于预训练文本编码器的文本提示的权威来源。</li>
+</ol>
+</li>
+<li>
+<ol start="8">
+<li>在计算余弦相似度时，应解释使用双视图特征的理由。此外，图片存在不一致：图 1(a) 未显示 A2C 作为 DKFR 模块的输入，但图 1(b) 显示了。</li>
+</ol>
+</li>
+<li>
+<ol start="9">
+<li>公式 (3) 和 (4) 需进一步解释其物理含义和设计动机，而非仅仅罗列数学表达式。</li>
+</ol>
+</li>
+<li>
+<ol start="10">
+<li>实验设置披露不足。应补充完整的数据预处理流程，并解释统一采样 16 帧的原因，以提高模型的可复现性。此外，作者未提及损失函数的基本设置，也未对各评估指标进行简要介绍。</li>
+</ol>
+</li>
+<li>
+<ol start="11">
+<li>表 1 中的对比方法较少且陈旧。应增加更多近三年（2023-2026 年）具有代表性的最新模型进行公平对比。</li>
+</ol>
+</li>
+<li>
+<ol start="12">
+<li>表 2 显示，与单视图基线模型相比，DK-Mamba 的参数量和计算成本明显更大。原文中“保持相对平衡的计算效率”这一表述需进一步澄清。此外，缺少 DK-Mamba 在双视图设置下的计算效率分析。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>8. 请评价论文的清晰度和组织结构。</strong>
+<ul>
+<li>满意</li>
+</ul>
+</li>
+<li><strong>9. 请评价论文的可复现性。请注意，提供代码和数据是加分项，但并非接收的必要条件。</strong>
+<ul>
+<li>投稿已提供源代码、数据集或任何其他依赖项的匿名链接。</li>
+</ul>
+</li>
+<li><strong>10. 科研道德检查。基于您的审稿以及您对 MICCAI 科研道德规范的理解，您认为此投稿是否可能涉及潜在的道德问题或违规？审稿人应在完成此评估前熟悉 MICCAI 科研道德规范：<a target="_blank" rel="noopener" href="https://miccai.org/index.php/about-miccai/policies/scientific-code-of-ethics/">https://miccai.org/index.php/about-miccai/policies/scientific-code-of-ethics/</a></strong>
+<ul>
+<li>否</li>
+</ul>
+</li>
+<li><strong>13. 请按 1-6 分给论文打分，6 分为最高分（6-4 分：接收；3-1 分：拒稿）。请充分利用整个分数范围。分数的分布有助于决策。</strong>
+<ul>
+<li><strong>4. 弱接受</strong> —— 略高于接收阈值，但不介意被拒，取决于 rebuttal 表现</li>
+</ul>
+</li>
+<li><strong>14. 请说明您的推荐理由。导致您给出该总分的主要因素是什么？</strong>
+<ul>
+<li>本文提出了 DK-Mamba，通过融合领域知识和多视图解剖学共识进行心肌梗死超声心动图分析，缓解了 Mamba 的记忆失真问题，并在两个数据集上取得了最先进的性能。这些优点对我的评分产生了积极影响。</li>
+<li>贡献表述模糊，实现细节缺失，且计算效率的声明缺乏依据。这些因素共同决定了我的总体评分。</li>
+</ul>
+</li>
+<li><strong>16. 鉴于您以上的回答及您的整体经验，您如何评价您对本次审稿的信心程度？</strong>
+<ul>
+<li>有信心但不完全确定 (3)</li>
+</ul>
+</li>
+</ul>
+<p><strong>审稿人 #2</strong></p>
+<p><strong>问题</strong></p>
+<ul>
+<li><strong>3. 请对论文的相关性进行分类（可多选）。请注意不同论文类别的评估标准，详见审稿指南：<a target="_blank" rel="noopener" href="https://conferences.miccai.org/2026/en/REVIEWER-GUIDELINES.html">https://conferences.miccai.org/2026/en/REVIEWER-GUIDELINES.html</a></strong>
+<ul>
+<li>MIC</li>
+</ul>
+</li>
+<li><strong>4. 您如何描述这篇论文？</strong>
+<ul>
+<li>应用研究</li>
+</ul>
+</li>
+<li><strong>5. 请描述论文的主要贡献。</strong>
+<ul>
+<li>本文提出了 DK-Mamba，一种用于心肌梗死分析的多视图超声心动图模型。其主要思想是分两个阶段精炼 Mamba 特征：首先通过使用基于提示的语义先验进行领域知识引导，然后利用互补的超声切面进行跨视图解剖精炼。论文试图通过临床知识和多视图一致性来修正 Mamba 在噪声超声视频中的特征，使其更加可靠。</li>
+</ul>
+</li>
+<li><strong>6. 请列出论文的主要优点。例如，您可以强调新颖的公式化表述、独特的数据使用方式、临床可行性的展示、新颖的应用、特别有力的评估，或任何其他体现本工作优势的方面。请提供细节，例如，如果方法新颖，请解释哪方面新颖及其为何有趣。</strong>
+<ul>
+<li>整体思路易于理解。在超声心动图中，不同切面通常提供互补信息，因此结合使用 A4C 和 A2C 进行心梗相关分析非常有意义。从临床角度看，先使用语义先验引导模型，再使用另一视图稳定决策的思路也相当自然。</li>
+<li>论文故事清晰。所提出的双重精炼框架在概念上易于理解：一个阶段尝试用领域知识修正特征，第二阶段尝试使这些特征在视图间更具解剖学一致性。这赋予了该方法连贯的叙事，有助于读者理解模型试图做什么以及为何这么做。</li>
+<li>最后，论文同时包含了定量结果和一些定性分析（例如，Grad-CAM 可视化、消融研究结果）。</li>
+</ul>
+</li>
+<li><strong>7. 请列出论文的主要缺点。请提供细节：例如，如果您指出某种公式化表述、数据使用方式、临床可行性展示或应用不具备新颖性，则必须提供先前工作的具体参考文献。</strong>
+<ul>
+<li>论文未能充分将所提方法的效果与强大外部先验的效果分离开。特别是，DKFR 模块依赖于冻结的 EchoPrime 视频和文本编码器，这些已经是强大的预训练模型。很难判断有多少改进是来自所提出的精炼机制本身。</li>
+<li>我也未能完全信服基线的选择。几个对比方法并非专门为超声心动图中的心肌梗死检测而设计，因此最先进的声明感觉比乍看起来要弱一些。如果论文能更直接地与任务匹配、领域匹配的基线进行比较，其实证案例会更有说服力。</li>
+<li>CAMUS 数据集的使用也存在一些疑问。论文解释说 CAMUS 原本不提供心梗标签，因此作者添加了缺血/室壁运动标注并过滤了数据集。从实践角度看这可以理解，但也使得该基准不那么标准，且在可复现性方面有些难以解释。</li>
+</ul>
+</li>
+<li><strong>8. 请评价论文的清晰度和组织结构。</strong>
+<ul>
+<li>满意</li>
+</ul>
+</li>
+<li><strong>9. 请评价论文的可复现性。请注意，提供代码和数据是加分项，但并非接收的必要条件。</strong>
+<ul>
+<li>作者声明将在论文被接收后公开源代码和/或数据集。</li>
+</ul>
+</li>
+<li><strong>10. 科研道德检查。基于您的审稿以及您对 MICCAI 科研道德规范的理解，您认为此投稿是否可能涉及潜在的道德问题或违规？审稿人应在完成此评估前熟悉 MICCAI 科研道德规范：<a target="_blank" rel="noopener" href="https://miccai.org/index.php/about-miccai/policies/scientific-code-of-ethics/">https://miccai.org/index.php/about-miccai/policies/scientific-code-of-ethics/</a></strong>
+<ul>
+<li>否</li>
+</ul>
+</li>
+<li><strong>13. 请按 1-6 分给论文打分，6 分为最高分（6-4 分：接收；3-1 分：拒稿）。请充分利用整个分数范围。分数的分布有助于决策。</strong>
+<ul>
+<li><strong>3. 弱拒绝</strong> —— 略低于接收阈值，但不介意被接收，取决于 rebuttal 表现</li>
+</ul>
+</li>
+<li><strong>14. 请说明您的推荐理由。导致您给出该总分的主要因素是什么？</strong>
+<ul>
+<li>我这次的评分略显谨慎。临床直觉是好的，我能理解为何将领域知识与多视图精炼相结合的想法具有吸引力。但我未能完全信服实验支持：基线选择感觉有些不均衡，CAMUS 实验设置不完全标准，且难以将所提方法的效果与强大外部先验的增益分离开。我认为这个想法相当有趣，但证据感觉不如论文叙述的那样有力。</li>
+</ul>
+</li>
+<li><strong>16. 鉴于您以上的回答及您的整体经验，您如何评价您对本次审稿的信心程度？</strong>
+<ul>
+<li>有信心但不完全确定 (3)</li>
+</ul>
+</li>
+</ul>
+<p><strong>审稿人 #3</strong></p>
+<p><strong>问题</strong></p>
+<ul>
+<li><strong>3. 请对论文的相关性进行分类（可多选）。请注意不同论文类别的评估标准，详见审稿指南：<a target="_blank" rel="noopener" href="https://conferences.miccai.org/2026/en/REVIEWER-GUIDELINES.html">https://conferences.miccai.org/2026/en/REVIEWER-GUIDELINES.html</a></strong>
+<ul>
+<li>MIC</li>
+</ul>
+</li>
+<li><strong>4. 您如何描述这篇论文？</strong>
+<ul>
+<li>方法论贡献</li>
+</ul>
+</li>
+<li><strong>5. 请描述论文的主要贡献。</strong>
+<ul>
+<li>本文提出了一种用于心肌梗死（MI）诊断的领域知识精炼状态空间模型，主要包含三个贡献。首先，将专家级临床先验知识融入 Mamba 架构，以提高低信噪比超声图像中病理特征提取的鲁棒性。其次，引入双重精炼机制：语义知识向量首先修正 Mamba 选择性状态中的偏差以实现精准的心梗定位，随后来自 A2C 通路的跨视图解剖学共识进一步校准 A4C 动态特征。这种双路径策略有效防止关键病理特征被忽略。</li>
+</ul>
+</li>
+<li><strong>6. 请列出论文的主要优点。例如，您可以强调新颖的公式化表述、独特的数据使用方式、临床可行性的展示、新颖的应用、特别有力的评估，或任何其他体现本工作优势的方面。请提供细节，例如，如果方法新颖，请解释哪方面新颖及其为何有趣。</strong>
+<ul>
+<li>本文的主要优点如下：</li>
+<li>
+<ol>
+<li>将专家级临床先验知识融入 Mamba 架构的动机明确，且直接针对现有纯视觉模型在医学超声分析中的实际局限性。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>两阶段双重精炼机制通过结合语义知识引导的精炼与跨视图解剖信息，有效降低了在低信噪比条件下遗漏细微病理特征的风险。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>7. 请列出论文的主要缺点。请提供细节：例如，如果您指出某种公式化表述、数据使用方式、临床可行性展示或应用不具备新颖性，则必须提供先前工作的具体参考文献。</strong>
+<ul>
+<li>本文的主要缺点如下：</li>
+<li>
+<ol>
+<li>论文的整体方法论新颖性有限。其骨干网络依赖于现有的 U 型 Mamba 架构，而所提出的新增部分，包括 A2C/A4C 交互权重和文本特征融合，涉及的是相对简单的操作，如简单的特征拼接，缺乏足够的技术新颖性。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>如图 1 和数据集描述所示，文本数据包含了超越图像输入的丰富语义信息。然而，所有对比的多视图基线仅接受图像作为输入，造成了不公平的比较。由于所提方法受益于额外的文本模态，应与同样接受图像和文本输入的多模态方法进行比较。</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>若干对比方法，如 LoG-VMamba 和 LKM-UNet，主要设计用于分割任务且仅接受图像输入，不适合作为此分类任务的基线。鉴于近年来基于 Mamba 的多模态分类研究日益增多，论文应包含更多相关且任务对齐的比较，以更好地确立其贡献的定位。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>8. 请评价论文的清晰度和组织结构。</strong>
+<ul>
+<li>满意</li>
+</ul>
+</li>
+<li><strong>9. 请评价论文的可复现性。请注意，提供代码和数据是加分项，但并非接收的必要条件。</strong>
+<ul>
+<li>投稿已提供源代码、数据集或任何其他依赖项的匿名链接。</li>
+</ul>
+</li>
+<li><strong>10. 科研道德检查。基于您的审稿以及您对 MICCAI 科研道德规范的理解，您认为此投稿是否可能涉及潜在的道德问题或违规？审稿人应在完成此评估前熟悉 MICCAI 科研道德规范：<a target="_blank" rel="noopener" href="https://miccai.org/index.php/about-miccai/policies/scientific-code-of-ethics/">https://miccai.org/index.php/about-miccai/policies/scientific-code-of-ethics/</a></strong>
+<ul>
+<li>否</li>
+</ul>
+</li>
+<li><strong>13. 请按 1-6 分给论文打分，6 分为最高分（6-4 分：接收；3-1 分：拒稿）。请充分利用整个分数范围。分数的分布有助于决策。</strong>
+<ul>
+<li><strong>3. 弱拒绝</strong> —— 略低于接收阈值，但不介意被接收，取决于 rebuttal 表现</li>
+</ul>
+</li>
+<li><strong>14. 请说明您的推荐理由。导致您给出该总分的主要因素是什么？</strong>
+<ul>
+<li>总体评分主要基于两大关切。首先，本文的方法论新颖性不足。所提出的框架本质上是将现有的 Mamba 编码器与解码过程中的文本特征集成相结合，这并未构成实质性的技术贡献。其次，实验对比不完整且可能不公平，因为所提方法利用了额外的文本模态，而所有基线均为仅图像方法，且若干对比方法是为分割而非分类设计的。这些关切已在上文的主要缺点部分详述。</li>
+</ul>
+</li>
+<li><strong>16. 鉴于您以上的回答及您的整体经验，您如何评价您对本次审稿的信心程度？</strong>
+<ul>
+<li>非常自信 (4)</li>
+</ul>
+</li>
+</ul>
 
               
             </div>
@@ -8466,9 +9190,9 @@
       
         <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
       
-        <a href="/tags/%E8%AE%BA%E6%96%87/">#论文</a>
-      
         <a href="/tags/%E5%88%86%E7%B1%BB/">#分类</a>
+      
+        <a href="/tags/%E8%AE%BA%E6%96%87/">#论文</a>
       
         <a href="/tags/mamba/">#mamba</a>
       
